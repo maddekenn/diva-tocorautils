@@ -33,7 +33,7 @@ import se.uu.ub.cora.tocorautils.convert.FromDbToCoraConverter;
 
 public class SubjectCategoryFromDbToCoraConverter implements FromDbToCoraConverter {
 
-	private static final String SUBJECT_CATEGORY_COLLECTION_ITEM = "subjectCategoryCollectionItem";
+	private static final String NATIONAL_SUBJECT_CATEGORY = "nationalSubjectCategory";
 	protected JsonBuilderFactory jsonFactory;
 	protected DataToJsonConverterFactory dataToJsonConverterFactory;
 	protected List<RecordIdentifier> collectionItems;
@@ -66,23 +66,20 @@ public class SubjectCategoryFromDbToCoraConverter implements FromDbToCoraConvert
 
 		ClientDataGroup nationalSubjectCategory = createDataGroupWithRecordInfo(rowFromDb);
 
-		nationalSubjectCategory.addChild(ClientDataAtomic.withNameInDataAndValue(
-				"nationalSubjectCategoryName", rowFromDb.get("default_name")));
-		nationalSubjectCategory.addChild(ClientDataAtomic.withNameInDataAndValue("subjectCode",
-				rowFromDb.get("subject_code")));
+		addMandatoryChildren(rowFromDb, nationalSubjectCategory);
 		DataToJsonConverter converter = getDataToJsonConverterFactory()
 				.createForClientDataElement(jsonFactory, nationalSubjectCategory);
 		String json = converter.toJson();
 
 		CoraJsonRecord subjectCategoryRecord = CoraJsonRecord
-				.withRecordTypeAndJson("nationalSubjectCategory", json);
+				.withRecordTypeAndJson(NATIONAL_SUBJECT_CATEGORY, json);
 		subjectCatagoryList.add(subjectCategoryRecord);
 		return subjectCatagoryList;
 	}
 
 	private ClientDataGroup createDataGroupWithRecordInfo(Map<String, String> rowFromDb) {
 		ClientDataGroup nationalSubjectCategory = ClientDataGroup
-				.withNameInData("nationalSubjectCategory");
+				.withNameInData(NATIONAL_SUBJECT_CATEGORY);
 		ClientDataGroup recordInfo = createRecordInfo(rowFromDb);
 
 		nationalSubjectCategory.addChild(recordInfo);
@@ -104,101 +101,27 @@ public class SubjectCategoryFromDbToCoraConverter implements FromDbToCoraConvert
 		return dataDivider;
 	}
 
-	// protected void handleRow(List<List<CoraJsonRecord>> convertedRows,
-	// Map<String, String> rowFromDb) {
-	// convertToJsonFromRow(convertedRows, rowFromDb);
-	// }
-	//
-	// protected void convertToJsonFromRow(List<List<CoraJsonRecord>> convertedRows,
-	// Map<String, String> rowFromDb) {
-	// collectionItems = new ArrayList<>();
-	// List<CoraJsonRecord> convertedRow = new ArrayList<>();
-	// convertTexts(rowFromDb, convertedRow);
-	// convertItem(rowFromDb, convertedRow);
-	// convertedRows.add(convertedRow);
-	// }
-
-	// private void convertTexts(Map<String, String> rowFromDb, List<CoraJsonRecord>
-	// convertedRow) {
-	// List<ClientDataGroup> texts =
-	// getConstructedTextDataGroupsToCreate(rowFromDb);
-	// for (ClientDataGroup text : texts) {
-	// String json = convertText(text);
-	// convertedRow.add(CoraJsonRecord.withRecordTypeAndJson("coraText", json));
-	// }
-	// }
-
-	protected List<ClientDataGroup> getConstructedTextDataGroupsToCreate(
-			Map<String, String> rowFromDb) {
-		// TextFromCountryConstructor textConstructor = new
-		// TextFromCountryConstructor();
-		// return textConstructor.constructFromDbRow(rowFromDb);
-		List<ClientDataGroup> texts = new ArrayList<>();
-		ClientDataGroup text = ClientDataGroup.withNameInData("text");
-		texts.add(text);
-		ClientDataGroup defText = ClientDataGroup.withNameInData("text");
-		texts.add(defText);
-		return texts;
-
+	private void addMandatoryChildren(Map<String, String> rowFromDb,
+			ClientDataGroup nationalSubjectCategory) {
+		nationalSubjectCategory.addChild(createDefaultNameChild(rowFromDb));
+		nationalSubjectCategory.addChild(createAlternativeNameChild(rowFromDb));
+		nationalSubjectCategory.addChild(createSubjectCodeChild(rowFromDb));
 	}
 
-	private String convertText(ClientDataGroup text) {
-		DataToJsonConverter converter = getDataToJsonConverterFactory()
-				.createForClientDataElement(jsonFactory, text);
-		return converter.toJson();
+	private ClientDataAtomic createDefaultNameChild(Map<String, String> rowFromDb) {
+		return ClientDataAtomic.withNameInDataAndValue("nationalSubjectCategoryName",
+				rowFromDb.get("default_name"));
 	}
 
-	// protected ClientDataGroup getConstructedItemToCreate(Map<String, String>
-	// rowFromDb) {
-	// CollectionItemConstructor itemConstructor = new
-	// CountryCollectionItemConstructor();
-	// return itemConstructor.convert(rowFromDb);
-	// }
-	//
-	// private void convertItem(Map<String, String> rowFromDb, List<CoraJsonRecord>
-	// convertedRow) {
-	// ClientDataGroup itemDataGroup = getConstructedItemToCreate(rowFromDb);
-	// String id = itemDataGroup.getFirstGroupWithNameInData("recordInfo")
-	// .getFirstAtomicValueWithNameInData("id");
-	// collectionItems.add(RecordIdentifier.usingTypeAndId(getItemType(), id));
-	// DataToJsonConverter converter = getDataToJsonConverterFactory()
-	// .createForClientDataElement(jsonFactory, itemDataGroup);
-	// String json = converter.toJson();
-	// convertedRow.add(CoraJsonRecord.withRecordTypeAndJson(getItemType(), json));
-	// }
-	//
-	// protected String getItemType() {
-	// return SUBJECT_CATEGORY_COLLECTION_ITEM;
-	// }
-	//
-	// private List<CoraJsonRecord> createItemCollectionForCreatedCollectionItems()
-	// {
-	// List<CoraJsonRecord> itemCollectionHolderList = new ArrayList<>();
-	// String itemCollectionJson = createItemCollectionAsJson();
-	//
-	// CoraJsonRecord coraRecordJsonItemCollection = CoraJsonRecord
-	// .withRecordTypeAndJson("metadataItemCollection", itemCollectionJson);
-	// itemCollectionHolderList.add(coraRecordJsonItemCollection);
-	// return itemCollectionHolderList;
-	// }
-	//
-	// private String createItemCollectionAsJson() {
-	// ItemCollectionConstructor itemCollectionConstructor =
-	// ItemCollectionConstructor
-	// .withDataDivider("cora");
-	// ClientDataGroup itemCollectionDataGroup = createItemCollectionDataGroup(
-	// itemCollectionConstructor);
-	// DataToJsonConverter converter = dataToJsonConverterFactory
-	// .createForClientDataElement(jsonFactory, itemCollectionDataGroup);
-	// return converter.toJson();
-	// }
-	//
-	// protected ClientDataGroup createItemCollectionDataGroup(
-	// ItemCollectionConstructor itemCollectionConstructor) {
-	// return
-	// itemCollectionConstructor.constructUsingIdAndNameInDataAndCollectionItems(
-	// "completeCountryCollection", "completeCountry", collectionItems);
-	// }
+	private ClientDataAtomic createAlternativeNameChild(Map<String, String> rowFromDb) {
+		return ClientDataAtomic.withNameInDataAndValue("nationalSubjectCategoryAlternativeName",
+				rowFromDb.get("alternative_name"));
+	}
+
+	private ClientDataAtomic createSubjectCodeChild(Map<String, String> rowFromDb) {
+		return ClientDataAtomic.withNameInDataAndValue("subjectCode",
+				rowFromDb.get("subject_code"));
+	}
 
 	public DataToJsonConverterFactory getDataToJsonConverterFactory() {
 		return dataToJsonConverterFactory;

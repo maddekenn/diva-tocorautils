@@ -48,6 +48,7 @@ public class SubjectCategoryFromDbToCoraConverterTest {
 		rowFromDb.put("id", "406");
 		rowFromDb.put("default_name", "Some subject category");
 		rowFromDb.put("subject_code", "someSubjectCode");
+		rowFromDb.put("alternative_name", "Some alternative name");
 
 		rowsFromDb.add(rowFromDb);
 
@@ -60,7 +61,7 @@ public class SubjectCategoryFromDbToCoraConverterTest {
 	}
 
 	@Test
-	public void testConvertsubjectCategoryOneRowMinimalRequiredValues() {
+	public void testConvertSubjectCategoryOneRowMinimalRequiredValues() {
 		List<List<CoraJsonRecord>> convertedRows = subjectCategoryFromDbToCoraConverter
 				.convertToJsonFromRowsFromDb(rowsFromDb);
 
@@ -77,6 +78,8 @@ public class SubjectCategoryFromDbToCoraConverterTest {
 		assertEquals(groupSentToConverter.getNameInData(), "nationalSubjectCategory");
 		assertEquals(groupSentToConverter.getFirstAtomicValueWithNameInData(
 				"nationalSubjectCategoryName"), "Some subject category");
+		assertEquals(groupSentToConverter.getFirstAtomicValueWithNameInData(
+				"nationalSubjectCategoryAlternativeName"), "Some alternative name");
 		assertEquals(groupSentToConverter.getFirstAtomicValueWithNameInData("subjectCode"),
 				"someSubjectCode");
 
@@ -96,6 +99,7 @@ public class SubjectCategoryFromDbToCoraConverterTest {
 		rowFromDb.put("id", "400");
 		rowFromDb.put("default_name", "Some other subject category");
 		rowFromDb.put("subject_code", "someOtherSubjectCode");
+		rowFromDb.put("alternative_name", "Some other alternative name");
 
 		rowsFromDb.add(rowFromDb);
 
@@ -110,6 +114,8 @@ public class SubjectCategoryFromDbToCoraConverterTest {
 		assertEquals(groupSentToConverter.getNameInData(), "nationalSubjectCategory");
 		assertEquals(groupSentToConverter.getFirstAtomicValueWithNameInData(
 				"nationalSubjectCategoryName"), "Some subject category");
+		assertEquals(groupSentToConverter.getFirstAtomicValueWithNameInData(
+				"nationalSubjectCategoryAlternativeName"), "Some alternative name");
 		assertEquals(groupSentToConverter.getFirstAtomicValueWithNameInData("subjectCode"),
 				"someSubjectCode");
 
@@ -119,6 +125,9 @@ public class SubjectCategoryFromDbToCoraConverterTest {
 		assertEquals(groupSentToConverter2.getNameInData(), "nationalSubjectCategory");
 		assertEquals(groupSentToConverter2.getFirstAtomicValueWithNameInData(
 				"nationalSubjectCategoryName"), "Some other subject category");
+		assertEquals(groupSentToConverter2.getFirstAtomicValueWithNameInData(
+				"nationalSubjectCategoryAlternativeName"), "Some other alternative name");
+
 		assertEquals(groupSentToConverter2.getFirstAtomicValueWithNameInData("subjectCode"),
 				"someOtherSubjectCode");
 
