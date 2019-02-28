@@ -1,5 +1,5 @@
 /*
- * Copyright 2018 Uppsala University Library
+ * Copyright 2019 Uppsala University Library
  *
  * This file is part of Cora.
  *
@@ -67,14 +67,20 @@ public class SubjectCategoryFromDbToCoraConverter implements FromDbToCoraConvert
 		ClientDataGroup nationalSubjectCategory = createDataGroupWithRecordInfo(rowFromDb);
 
 		addMandatoryChildren(rowFromDb, nationalSubjectCategory);
-		DataToJsonConverter converter = getDataToJsonConverterFactory()
-				.createForClientDataElement(jsonFactory, nationalSubjectCategory);
-		String json = converter.toJson();
+
+		possiblyAddParentGroup(rowFromDb, nationalSubjectCategory);
+		String json = convertToJson(nationalSubjectCategory);
 
 		CoraJsonRecord subjectCategoryRecord = CoraJsonRecord
 				.withRecordTypeAndJson(NATIONAL_SUBJECT_CATEGORY, json);
 		subjectCatagoryList.add(subjectCategoryRecord);
 		return subjectCatagoryList;
+	}
+
+	private String convertToJson(ClientDataGroup nationalSubjectCategory) {
+		DataToJsonConverter converter = getDataToJsonConverterFactory()
+				.createForClientDataElement(jsonFactory, nationalSubjectCategory);
+		return converter.toJson();
 	}
 
 	private ClientDataGroup createDataGroupWithRecordInfo(Map<String, String> rowFromDb) {
@@ -106,6 +112,31 @@ public class SubjectCategoryFromDbToCoraConverter implements FromDbToCoraConvert
 		nationalSubjectCategory.addChild(createDefaultNameChild(rowFromDb));
 		nationalSubjectCategory.addChild(createAlternativeNameChild(rowFromDb));
 		nationalSubjectCategory.addChild(createSubjectCodeChild(rowFromDb));
+	}
+
+	private void possiblyAddParentGroup(Map<String, String> rowFromDb,
+			ClientDataGroup nationalSubjectCategory) {
+		if (rowFromDb.containsKey("parent_id")) {
+			addParentGroup(rowFromDb, nationalSubjectCategory);
+		}
+	}
+
+	private void addParentGroup(Map<String, String> rowFromDb,
+			ClientDataGroup nationalSubjectCategory) {
+		ClientDataGroup parentGroup = ClientDataGroup
+				.withNameInData("nationalSubjectCategoryParent");
+		createAndAddParentLink(rowFromDb, parentGroup);
+		nationalSubjectCategory.addChild(parentGroup);
+	}
+
+	private void createAndAddParentLink(Map<String, String> rowFromDb,
+			ClientDataGroup parentGroup) {
+		ClientDataGroup parentLink = ClientDataGroup.withNameInData("nationalSubjectCategoryLink");
+		parentLink.addChild(ClientDataAtomic.withNameInDataAndValue("linkedRecordType",
+				NATIONAL_SUBJECT_CATEGORY));
+		parentLink.addChild(ClientDataAtomic.withNameInDataAndValue("linkedRecordId",
+				rowFromDb.get("parent_id")));
+		parentGroup.addChild(parentLink);
 	}
 
 	private ClientDataAtomic createDefaultNameChild(Map<String, String> rowFromDb) {
