@@ -20,19 +20,19 @@ package se.uu.ub.cora.diva.tocorautils;
 
 import se.uu.ub.cora.clientdata.converter.javatojson.DataToJsonConverterFactory;
 import se.uu.ub.cora.clientdata.converter.javatojson.DataToJsonConverterFactoryImp;
-import se.uu.ub.cora.diva.tocorautils.convert.SubjectCategoryFromDbToCoraConverter;
+import se.uu.ub.cora.diva.tocorautils.convert.SubjectCategoryListFromDbToCoraConverter;
 import se.uu.ub.cora.json.builder.JsonBuilderFactory;
 import se.uu.ub.cora.tocorautils.FromDbToCoraFactory;
 import se.uu.ub.cora.tocorautils.FromDbToCoraFactoryImp;
-import se.uu.ub.cora.tocorautils.convert.FromDbToCoraConverter;
+import se.uu.ub.cora.tocorautils.convert.ListFromDbToCoraConverter;
 
 public class SubjectCategoryFromDbToCoraFactory extends FromDbToCoraFactoryImp
 		implements FromDbToCoraFactory {
 
 	@Override
-	protected FromDbToCoraConverter createConverter(JsonBuilderFactory jsonFactory) {
+	protected ListFromDbToCoraConverter createConverter(JsonBuilderFactory jsonFactory) {
 		DataToJsonConverterFactory dataToJsonConverterFactory = new DataToJsonConverterFactoryImp();
-		return SubjectCategoryFromDbToCoraConverter.usingJsonFactoryAndConverterFactory(jsonFactory,
+		return SubjectCategoryListFromDbToCoraConverter.usingJsonFactoryAndConverterFactory(jsonFactory,
 				dataToJsonConverterFactory);
 	}
 

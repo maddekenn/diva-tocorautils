@@ -1,5 +1,5 @@
 /*
- * Copyright 2018 Uppsala University Library
+ * Copyright 2018, 2019 Uppsala University Library
  *
  * This file is part of Cora.
  *
@@ -23,25 +23,24 @@ import java.util.List;
 import java.util.Map;
 
 import se.uu.ub.cora.tocorautils.CoraJsonRecord;
-import se.uu.ub.cora.tocorautils.convert.FromDbToCoraConverter;
+import se.uu.ub.cora.tocorautils.convert.ListFromDbToCoraConverter;
 
-public class FromDbToCoraConverterSpy implements FromDbToCoraConverter {
+public class FromDbToCoraConverterSpy implements ListFromDbToCoraConverter {
 
 	public List<Map<String, String>> rowsFromDb;
-	public List<Map<String, String>> returnedList;
-	public List<List<CoraJsonRecord>> returnedList2;
+	public List<List<CoraJsonRecord>> returnedList;
 
 	@Override
 	public List<List<CoraJsonRecord>> convertToJsonFromRowsFromDb(
 			List<Map<String, String>> rowsFromDb) {
 		this.rowsFromDb = rowsFromDb;
 
-		returnedList2 = new ArrayList<>();
+		returnedList = new ArrayList<>();
 		List<CoraJsonRecord> returnedInnerList = new ArrayList<>();
 		returnedInnerList.add(CoraJsonRecord.withRecordTypeAndJson(
 				"recordTypeFromDbToCoraConverterSpy", "jsonFromDbToCoraConverterSpy"));
-		returnedList2.add(returnedInnerList);
-		return returnedList2;
+		returnedList.add(returnedInnerList);
+		return returnedList;
 	}
 
 }

@@ -1,5 +1,5 @@
 /*
- * Copyright 2018 Uppsala University Library
+ * Copyright 2018, 2019 Uppsala University Library
  *
  * This file is part of Cora.
  *
@@ -25,7 +25,7 @@ import se.uu.ub.cora.tocorautils.CoraJsonRecord;
 import se.uu.ub.cora.tocorautils.importing.ImportResult;
 import se.uu.ub.cora.tocorautils.importing.Importer;
 
-public class ListImporterSpy implements Importer {
+public class CoraImporterSpy implements Importer {
 
 	public List<Map<String, String>> convertedRows;
 	public List<List<CoraJsonRecord>> listOfConvertedRows;
@@ -35,7 +35,7 @@ public class ListImporterSpy implements Importer {
 	public ImportResult createInCora(List<List<CoraJsonRecord>> listOfConvertedRows) {
 		this.listOfConvertedRows = listOfConvertedRows;
 		importResult = new ImportResult();
-		importResult.listOfFails.add("failure from ListImporterSpy");
+		importResult.listOfFails.add("failure from CoraImporterSpy");
 		return importResult;
 	}
 

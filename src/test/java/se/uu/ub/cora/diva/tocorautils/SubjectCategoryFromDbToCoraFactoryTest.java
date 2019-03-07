@@ -34,7 +34,7 @@ import se.uu.ub.cora.clientdata.converter.javatojson.DataToJsonConverterFactory;
 import se.uu.ub.cora.clientdata.converter.javatojson.DataToJsonConverterFactoryImp;
 import se.uu.ub.cora.connection.ParameterConnectionProviderImp;
 import se.uu.ub.cora.connection.SqlConnectionProvider;
-import se.uu.ub.cora.diva.tocorautils.convert.SubjectCategoryFromDbToCoraConverter;
+import se.uu.ub.cora.diva.tocorautils.convert.SubjectCategoryListFromDbToCoraConverter;
 import se.uu.ub.cora.diva.tocorautils.doubles.CoraClientFactorySpy;
 import se.uu.ub.cora.json.builder.JsonBuilderFactory;
 import se.uu.ub.cora.json.builder.org.OrgJsonBuilderFactoryAdapter;
@@ -42,7 +42,7 @@ import se.uu.ub.cora.sqldatabase.RecordReaderFactoryImp;
 import se.uu.ub.cora.tocorautils.DbConfig;
 import se.uu.ub.cora.tocorautils.FromDbToCoraFactoryImp;
 import se.uu.ub.cora.tocorautils.FromDbToCoraImp;
-import se.uu.ub.cora.tocorautils.convert.FromDbToCoraConverter;
+import se.uu.ub.cora.tocorautils.convert.ListFromDbToCoraConverter;
 import se.uu.ub.cora.tocorautils.importing.CoraImporter;
 
 public class SubjectCategoryFromDbToCoraFactoryTest {
@@ -99,10 +99,10 @@ public class SubjectCategoryFromDbToCoraFactoryTest {
 
 	@Test
 	public void testInitFromDbToCoraConverter() throws Exception {
-		FromDbToCoraConverter createdConverter = subjectCategoryToCora.getFromDbToCoraConverter();
-		assertTrue(createdConverter instanceof SubjectCategoryFromDbToCoraConverter);
+		ListFromDbToCoraConverter createdConverter = subjectCategoryToCora.getFromDbToCoraConverter();
+		assertTrue(createdConverter instanceof SubjectCategoryListFromDbToCoraConverter);
 
-		SubjectCategoryFromDbToCoraConverter subjectCategoryConverter = (SubjectCategoryFromDbToCoraConverter) createdConverter;
+		SubjectCategoryListFromDbToCoraConverter subjectCategoryConverter = (SubjectCategoryListFromDbToCoraConverter) createdConverter;
 
 		JsonBuilderFactory jsonBuilderFactory = subjectCategoryConverter.getJsonBuilderFactory();
 		assertTrue(jsonBuilderFactory instanceof OrgJsonBuilderFactoryAdapter);

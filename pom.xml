@@ -33,7 +33,7 @@
 
 	<properties>
 		<clientdata.version>0.3.0</clientdata.version>
-		<sqldatabase.version>0.3.1</sqldatabase.version>
+		<sqldatabase.version>0.4.0</sqldatabase.version>
 		<json.version>0.5.7</json.version>
 		<javaclient.version>0.3.0</javaclient.version>
 		<tocorautils.version>0.1-SNAPSHOT</tocorautils.version>
