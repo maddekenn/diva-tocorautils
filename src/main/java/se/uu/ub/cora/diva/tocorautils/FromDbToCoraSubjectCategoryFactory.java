@@ -54,10 +54,8 @@ public class FromDbToCoraSubjectCategoryFactory implements FromDbToCoraFactory {
 		CoraClient coraClient = createCoraClient(coraClientFactory, coraClientConfig);
 		Importer importer = createImporter(coraClient);
 
-		// return
 		return FromDbToCoraSubjectCategory.usingRecordReaderFactoryAndDbToCoraConverterAndImporter(
 				recordReaderFactory, fromDbToCoraConverter, importer);
-		// return null;
 	}
 
 	private FromDbToCoraConverter createConverter(JsonBuilderFactory jsonFactory,

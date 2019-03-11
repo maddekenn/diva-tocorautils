@@ -46,7 +46,8 @@ public class SubjectCategoryListFromDbToCoraConverter implements ListFromDbToCor
 
 	public static SubjectCategoryListFromDbToCoraConverter usingJsonFactoryAndConverterFactory(
 			JsonBuilderFactory jsonFactory, DataToJsonConverterFactory dataToJsonConverterFactory) {
-		return new SubjectCategoryListFromDbToCoraConverter(jsonFactory, dataToJsonConverterFactory);
+		return new SubjectCategoryListFromDbToCoraConverter(jsonFactory,
+				dataToJsonConverterFactory);
 	}
 
 	@Override
@@ -116,7 +117,7 @@ public class SubjectCategoryListFromDbToCoraConverter implements ListFromDbToCor
 
 	private void possiblyAddParentGroup(Map<String, String> rowFromDb,
 			ClientDataGroup nationalSubjectCategory) {
-		if (rowFromDb.containsKey("parent_id")) {
+		if (rowFromDb.containsKey("parent_subject_id")) {
 			addParentGroup(rowFromDb, nationalSubjectCategory);
 		}
 	}
@@ -136,7 +137,7 @@ public class SubjectCategoryListFromDbToCoraConverter implements ListFromDbToCor
 		parentLink.addChild(ClientDataAtomic.withNameInDataAndValue("linkedRecordType",
 				NATIONAL_SUBJECT_CATEGORY));
 		parentLink.addChild(ClientDataAtomic.withNameInDataAndValue("linkedRecordId",
-				rowFromDb.get("parent_id")));
+				rowFromDb.get("parent_subject_id")));
 		parentGroup.addChild(parentLink);
 	}
 

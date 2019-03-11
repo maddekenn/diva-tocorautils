@@ -20,7 +20,6 @@ package se.uu.ub.cora.diva.tocorautils;
 
 import se.uu.ub.cora.client.CoraClientConfig;
 import se.uu.ub.cora.client.CoraClientFactory;
-import se.uu.ub.cora.diva.tocorautils.country.CountryFromDbToCoraSpy;
 import se.uu.ub.cora.tocorautils.DbConfig;
 import se.uu.ub.cora.tocorautils.FromDbToCora;
 import se.uu.ub.cora.tocorautils.FromDbToCoraFactory;
@@ -30,7 +29,7 @@ public class FromDbToCoraFactoryReturningErrorsSpy implements FromDbToCoraFactor
 	public String coraClientFactoryClassName;
 	public CoraClientConfig coraClientConfig;
 	public DbConfig dbConfig;
-	public CountryFromDbToCoraSpy factored;
+	public FromDbToCoraSpy factored;
 	public CoraClientFactory coraClientFactory;
 
 	@Override
@@ -39,7 +38,7 @@ public class FromDbToCoraFactoryReturningErrorsSpy implements FromDbToCoraFactor
 		this.coraClientFactory = coraClientFactory;
 		this.coraClientConfig = coraClientConfig;
 		this.dbConfig = dbConfig;
-		factored = new CountryFromDbToCoraSpy();
+		factored = new FromDbToCoraSpy();
 		factored.returnErrors = true;
 		return factored;
 	}

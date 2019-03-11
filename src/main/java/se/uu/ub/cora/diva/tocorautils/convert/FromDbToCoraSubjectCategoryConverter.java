@@ -117,7 +117,7 @@ public class FromDbToCoraSubjectCategoryConverter implements FromDbToCoraConvert
 		Map<String, String> conditions = new HashMap<>();
 		String subjectId = rowFromDb.get(SUBJECT_ID);
 		conditions.put(SUBJECT_ID, subjectId);
-		return recordReader.readFromTableUsingConditions("subject_parent", conditions);
+		return recordReader.readFromTableUsingConditions("subject_parent_view", conditions);
 	}
 
 	private boolean subjectHasParents(List<Map<String, String>> parents) {
@@ -148,7 +148,7 @@ public class FromDbToCoraSubjectCategoryConverter implements FromDbToCoraConvert
 		parentLink.addChild(ClientDataAtomic.withNameInDataAndValue("linkedRecordType",
 				NATIONAL_SUBJECT_CATEGORY));
 		parentLink.addChild(ClientDataAtomic.withNameInDataAndValue("linkedRecordId",
-				parentRowFromDb.get("parent_id")));
+				parentRowFromDb.get("parent_subject_id")));
 		parentGroup.addChild(parentLink);
 	}
 

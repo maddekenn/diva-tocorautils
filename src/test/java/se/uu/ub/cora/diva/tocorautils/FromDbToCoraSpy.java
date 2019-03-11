@@ -16,12 +16,12 @@
  *     You should have received a copy of the GNU General Public License
  *     along with Cora.  If not, see <http://www.gnu.org/licenses/>.
  */
-package se.uu.ub.cora.diva.tocorautils.country;
+package se.uu.ub.cora.diva.tocorautils;
 
 import se.uu.ub.cora.tocorautils.FromDbToCora;
 import se.uu.ub.cora.tocorautils.importing.ImportResult;
 
-public class CountryFromDbToCoraSpy implements FromDbToCora {
+public class FromDbToCoraSpy implements FromDbToCora {
 
 	public boolean importCountriesHasBeenCalled = false;
 	public boolean returnErrors = false;

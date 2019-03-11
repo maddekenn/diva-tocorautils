@@ -57,7 +57,7 @@ public class RecordReaderSpy implements RecordReader {
 			for (int i = 0; i < noOfParentsToReturn; i++) {
 				Map<String, String> map = new HashMap<>();
 				map.put("subject_id", "someSubjectId" + i);
-				map.put("parent_id", "someParent" + i);
+				map.put("parent_subject_id", "someParent" + i);
 				returnedListForReadAllWithConditions.add(map);
 			}
 		}

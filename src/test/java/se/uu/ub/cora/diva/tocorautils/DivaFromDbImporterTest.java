@@ -27,7 +27,6 @@ import org.testng.annotations.Test;
 
 import se.uu.ub.cora.client.CoraClientConfig;
 import se.uu.ub.cora.client.CoraClientFactoryImp;
-import se.uu.ub.cora.diva.tocorautils.country.CountryFromDbToCoraSpy;
 import se.uu.ub.cora.tocorautils.DbConfig;
 
 public class DivaFromDbImporterTest {
@@ -41,13 +40,6 @@ public class DivaFromDbImporterTest {
 				"dbUser", "dbPassword", "dbUrl", "tableName",
 				"se.uu.ub.cora.diva.tocorautils.FromDbToCoraFactorySpy" };
 	}
-
-	/**
-	 * create view completelanguage as select l.alpha3code, l.alpha2code,
-	 * l.defaultname as "svText", ll.name as "enText" from language l left join
-	 * language_localisednames ll on l.alpha3code=ll.language_alpha3code where
-	 * l.alpha3code='9ft';
-	 */
 
 	@Test
 	public void testMainFactorsCorrectly() throws Exception {
@@ -75,14 +67,14 @@ public class DivaFromDbImporterTest {
 	}
 
 	@Test
-	public void testCallingImportCountries() throws Exception {
+	public void testCallingImport() throws Exception {
 		DivaFromDbImporter.main(args);
 		FromDbToCoraFactorySpy fromDbToCoraFactory = (FromDbToCoraFactorySpy) DivaFromDbImporter
 				.getInstance();
-		CountryFromDbToCoraSpy countryFromDbToCoraSpy = fromDbToCoraFactory.factored;
+		FromDbToCoraSpy fromDbToCoraSpy = fromDbToCoraFactory.factored;
 
-		assertTrue(countryFromDbToCoraSpy.importCountriesHasBeenCalled);
-		assertEquals(countryFromDbToCoraSpy.usedTableName, "tableName");
+		assertTrue(fromDbToCoraSpy.importCountriesHasBeenCalled);
+		assertEquals(fromDbToCoraSpy.usedTableName, "tableName");
 	}
 
 	@Test(expectedExceptions = RuntimeException.class, expectedExceptionsMessageRegExp = "failed during import in CountryFromDbToCoraSpy\n"
