@@ -35,6 +35,7 @@ public class CoraImporterSpy implements Importer {
 	public ImportResult createInCora(List<List<CoraJsonRecord>> listOfConvertedRows) {
 		this.listOfConvertedRows = listOfConvertedRows;
 		importResult = new ImportResult();
+		importResult.noOfImportedOk = listOfConvertedRows.get(0).size();
 		importResult.listOfFails.add("failure from CoraImporterSpy");
 		return importResult;
 	}

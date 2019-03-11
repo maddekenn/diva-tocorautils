@@ -11,6 +11,7 @@ public class RecordReaderFactorySpy implements RecordReaderFactory {
 	public boolean factorWasCalled = false;
 	public RecordReaderSpy factored;
 	public int noOfRecordsToReturn = 1;
+	public int noOfParentsToReturn = 1;
 	public List<String> idsToReturnParent = new ArrayList<>();
 
 	@Override
@@ -19,6 +20,7 @@ public class RecordReaderFactorySpy implements RecordReaderFactory {
 		factored = new RecordReaderSpy();
 		factored.idsToReturnParent.addAll(idsToReturnParent);
 		factored.noOfRecordsToReturn = noOfRecordsToReturn;
+		factored.noOfParentsToReturn = noOfParentsToReturn;
 		return factored;
 	}
 

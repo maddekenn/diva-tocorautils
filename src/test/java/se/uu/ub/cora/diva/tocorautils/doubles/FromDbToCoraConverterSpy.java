@@ -22,25 +22,23 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import se.uu.ub.cora.diva.tocorautils.convert.FromDbToCoraConverter;
 import se.uu.ub.cora.tocorautils.CoraJsonRecord;
-import se.uu.ub.cora.tocorautils.convert.ListFromDbToCoraConverter;
 
-public class FromDbToCoraConverterSpy implements ListFromDbToCoraConverter {
+public class FromDbToCoraConverterSpy implements FromDbToCoraConverter {
 
-	public List<Map<String, String>> rowsFromDb;
+	public List<Map<String, String>> rowsFromDb = new ArrayList<>();
 	public List<List<CoraJsonRecord>> returnedList;
+	public List<CoraJsonRecord> returnedJsonRecords = new ArrayList<>();
 
 	@Override
-	public List<List<CoraJsonRecord>> convertToJsonFromRowsFromDb(
-			List<Map<String, String>> rowsFromDb) {
-		this.rowsFromDb = rowsFromDb;
+	public CoraJsonRecord convertToJsonFromRowFromDb(Map<String, String> rowFromDb) {
+		rowsFromDb.add(rowFromDb);
+		CoraJsonRecord jsonRecord = CoraJsonRecord.withRecordTypeAndJson(
+				"recordTypeFromDbToCoraConverterSpy", "jsonFromDbToCoraConverterSpy");
+		returnedJsonRecords.add(jsonRecord);
 
-		returnedList = new ArrayList<>();
-		List<CoraJsonRecord> returnedInnerList = new ArrayList<>();
-		returnedInnerList.add(CoraJsonRecord.withRecordTypeAndJson(
-				"recordTypeFromDbToCoraConverterSpy", "jsonFromDbToCoraConverterSpy"));
-		returnedList.add(returnedInnerList);
-		return returnedList;
+		return jsonRecord;
 	}
 
 }

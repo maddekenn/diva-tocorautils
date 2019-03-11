@@ -34,21 +34,19 @@ import se.uu.ub.cora.clientdata.converter.javatojson.DataToJsonConverterFactory;
 import se.uu.ub.cora.clientdata.converter.javatojson.DataToJsonConverterFactoryImp;
 import se.uu.ub.cora.connection.ParameterConnectionProviderImp;
 import se.uu.ub.cora.connection.SqlConnectionProvider;
-import se.uu.ub.cora.diva.tocorautils.convert.SubjectCategoryListFromDbToCoraConverter;
+import se.uu.ub.cora.diva.tocorautils.convert.FromDbToCoraConverter;
+import se.uu.ub.cora.diva.tocorautils.convert.FromDbToCoraSubjectCategoryConverter;
 import se.uu.ub.cora.diva.tocorautils.doubles.CoraClientFactorySpy;
 import se.uu.ub.cora.json.builder.JsonBuilderFactory;
 import se.uu.ub.cora.json.builder.org.OrgJsonBuilderFactoryAdapter;
 import se.uu.ub.cora.sqldatabase.RecordReaderFactoryImp;
 import se.uu.ub.cora.tocorautils.DbConfig;
-import se.uu.ub.cora.tocorautils.FromDbToCoraFactoryImp;
-import se.uu.ub.cora.tocorautils.FromDbToCoraImp;
-import se.uu.ub.cora.tocorautils.convert.ListFromDbToCoraConverter;
 import se.uu.ub.cora.tocorautils.importing.CoraImporter;
 
-public class SubjectCategoryFromDbToCoraFactoryTest {
+public class FromDbToCoraSubjectCategoryFactoryTest {
 
-	private FromDbToCoraImp subjectCategoryToCora;
-	private FromDbToCoraFactoryImp subjectCategoryToCoraFactory = new SubjectCategoryFromDbToCoraFactory();
+	private FromDbToCoraSubjectCategory fromDbToCora;
+	private FromDbToCoraSubjectCategoryFactory toCoraSubjectCategoryFactory;
 	private CoraClientConfig coraClientConfig;
 	private DbConfig dbConfig;
 
@@ -67,13 +65,15 @@ public class SubjectCategoryFromDbToCoraFactoryTest {
 		dbConfig = new DbConfig(dbUserId, password, url);
 
 		CoraClientFactory coraClientFactory = new CoraClientFactorySpy();
-		subjectCategoryToCora = (FromDbToCoraImp) subjectCategoryToCoraFactory
+
+		toCoraSubjectCategoryFactory = new FromDbToCoraSubjectCategoryFactory();
+		fromDbToCora = (FromDbToCoraSubjectCategory) toCoraSubjectCategoryFactory
 				.factorFromDbToCora(coraClientFactory, coraClientConfig, dbConfig);
 	}
 
 	@Test
 	public void testInitCreatedRecordReaderFactory() throws Exception {
-		RecordReaderFactoryImp createdRecordReaderFactory = (RecordReaderFactoryImp) subjectCategoryToCora
+		RecordReaderFactoryImp createdRecordReaderFactory = (RecordReaderFactoryImp) fromDbToCora
 				.getRecordReaderFactory();
 		assertTrue(createdRecordReaderFactory instanceof RecordReaderFactoryImp);
 
@@ -99,10 +99,10 @@ public class SubjectCategoryFromDbToCoraFactoryTest {
 
 	@Test
 	public void testInitFromDbToCoraConverter() throws Exception {
-		ListFromDbToCoraConverter createdConverter = subjectCategoryToCora.getFromDbToCoraConverter();
-		assertTrue(createdConverter instanceof SubjectCategoryListFromDbToCoraConverter);
+		FromDbToCoraConverter createdConverter = fromDbToCora.getFromDbToCoraConverter();
+		assertTrue(createdConverter instanceof FromDbToCoraSubjectCategoryConverter);
 
-		SubjectCategoryListFromDbToCoraConverter subjectCategoryConverter = (SubjectCategoryListFromDbToCoraConverter) createdConverter;
+		FromDbToCoraSubjectCategoryConverter subjectCategoryConverter = (FromDbToCoraSubjectCategoryConverter) createdConverter;
 
 		JsonBuilderFactory jsonBuilderFactory = subjectCategoryConverter.getJsonBuilderFactory();
 		assertTrue(jsonBuilderFactory instanceof OrgJsonBuilderFactoryAdapter);
@@ -114,13 +114,13 @@ public class SubjectCategoryFromDbToCoraFactoryTest {
 	}
 
 	@Test
-	public void testInitListImporter() throws Exception {
-		CoraImporter importer = (CoraImporter) subjectCategoryToCora.getImporter();
+	public void testInitCoraImporter() throws Exception {
+		CoraImporter importer = (CoraImporter) fromDbToCora.getImporter();
 		assertTrue(importer instanceof CoraImporter);
 
 		CoraClient coraClient = importer.getCoraClient();
 
-		CoraClientFactorySpy coraClientFactory = (CoraClientFactorySpy) subjectCategoryToCoraFactory
+		CoraClientFactorySpy coraClientFactory = (CoraClientFactorySpy) toCoraSubjectCategoryFactory
 				.getCoraClientFactory();
 		assertTrue(coraClientFactory instanceof CoraClientFactorySpy);
 

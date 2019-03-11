@@ -17,6 +17,7 @@ public class RecordReaderSpy implements RecordReader {
 	public Map<String, String> usedConditions = new HashMap<>();
 	public List<String> usedTableNames = new ArrayList<>();
 	public List<String> idsToReturnParent = new ArrayList<>();
+	public int noOfParentsToReturn = 1;
 
 	@Override
 	public List<Map<String, String>> readAllFromTable(String tableName) {
@@ -53,7 +54,7 @@ public class RecordReaderSpy implements RecordReader {
 		usedTableNames.add(tableName);
 		returnedListForReadAllWithConditions = new ArrayList<>();
 		if (idsToReturnParent.contains(conditions.get("subject_id"))) {
-			for (int i = 0; i < noOfRecordsToReturn; i++) {
+			for (int i = 0; i < noOfParentsToReturn; i++) {
 				Map<String, String> map = new HashMap<>();
 				map.put("subject_id", "someSubjectId" + i);
 				map.put("parent_id", "someParent" + i);

@@ -20,9 +20,6 @@ package se.uu.ub.cora.diva.tocorautils;
 
 import static org.testng.Assert.assertEquals;
 
-import java.util.List;
-import java.util.Map;
-
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
@@ -57,80 +54,44 @@ public class FromDbToCoraSubjectCategoryTest {
 	}
 
 	@Test
-	public void testImportFromTableOneRowNoParent() {
+	public void testImportFromTableOneRow() {
 		ImportResult importResult = fromDbToCora.importFromTable("someTableName");
 
 		RecordReaderSpy factoredReader = recordReaderFactory.factored;
 		assertEquals(factoredReader.usedTableNames.get(0), "someTableName");
-		assertEquals(factoredReader.usedTableNames.get(1), "subject_parent");
+		assertEquals(factoredReader.usedTableNames.size(), 1);
 
-		List<Map<String, String>> returnedList = factoredReader.returnedListForReadAll;
-		Map<String, String> map = returnedList.get(0);
+		assertEquals(toCoraConverter.returnedJsonRecords.size(), 1);
+		assertAllRecordsInReadListAreSentToConverter(factoredReader);
+		assertAllConvertedRecordsAreSentToImporter();
 
-		Map<String, String> usedConditions = factoredReader.usedConditions;
-		assertEquals(usedConditions.size(), 1);
-		assertEquals(usedConditions.get("subject_id"), map.get("subject_id"));
-
-		assertEquals(factoredReader.returnedListForReadAll, toCoraConverter.rowsFromDb);
-		assertEquals(toCoraConverter.rowsFromDb.size(), 1);
-		assertEquals(toCoraConverter.returnedList, importer.listOfConvertedRows);
+		assertEquals(importResult.noOfImportedOk, 1);
 
 		assertEquals(importResult.listOfFails.get(0), "failure from CoraImporterSpy");
 	}
 
-	@Test
-	public void testImportFromTableOneRowWithOneParent() {
-		recordReaderFactory.idsToReturnParent.add("someId0");
-		ImportResult importResult = fromDbToCora.importFromTable("someTableName");
-
-		RecordReaderSpy factoredReader = recordReaderFactory.factored;
-		assertEquals(factoredReader.usedTableNames.get(0), "someTableName");
-		assertEquals(factoredReader.usedTableNames.get(1), "subject_parent");
-
-		List<Map<String, String>> returnedList = factoredReader.returnedListForReadAll;
-		Map<String, String> map = returnedList.get(0);
-
-		Map<String, String> usedConditions = factoredReader.usedConditions;
-		assertEquals(usedConditions.size(), 1);
-		assertEquals(usedConditions.get("subject_id"), map.get("subject_id"));
-
-		assertEquals(factoredReader.returnedListForReadAllWithConditions.size(), 1);
-
+	private void assertAllRecordsInReadListAreSentToConverter(RecordReaderSpy factoredReader) {
 		assertEquals(factoredReader.returnedListForReadAll, toCoraConverter.rowsFromDb);
-		assertEquals(toCoraConverter.rowsFromDb.size(), 1);
-		assertEquals(toCoraConverter.returnedList, importer.listOfConvertedRows);
+	}
 
-		assertEquals(importResult.listOfFails.get(0), "failure from CoraImporterSpy");
+	private void assertAllConvertedRecordsAreSentToImporter() {
+		assertEquals(toCoraConverter.returnedJsonRecords, importer.listOfConvertedRows.get(0));
 	}
 
 	@Test
-	public void testImportFromTableTwoRowsWithOneParent() {
+	public void testImportFromTableTwoRows() {
 		recordReaderFactory.noOfRecordsToReturn = 2;
-		recordReaderFactory.idsToReturnParent.add("someValue0");
-		recordReaderFactory.idsToReturnParent.add("someValue1");
 		ImportResult importResult = fromDbToCora.importFromTable("someTableName");
 
 		RecordReaderSpy factoredReader = recordReaderFactory.factored;
 		assertEquals(factoredReader.usedTableNames.get(0), "someTableName");
-		assertEquals(factoredReader.usedTableNames.get(1), "subject_parent");
-		assertEquals(factoredReader.usedTableNames.get(2), "subject_parent");
+		assertEquals(factoredReader.usedTableNames.size(), 1);
 
-		// List<Map<String, String>> returnedList =
-		// factoredReader.returnedListForReadAll;
-		// Map<String, String> map = returnedList.get(0);
-		// Entry<String, String> onlyEntryInMap = map.entrySet().iterator().next();
-		//
-		// Map<String, String> usedConditions = factoredReader.usedConditions;
-		// assertEquals(usedConditions.size(), 1);
-		// assertEquals(usedConditions.get("subject_id"), onlyEntryInMap.getValue());
-		//
-		// assertEquals(factoredReader.returnedListForReadAll,
-		// toCoraConverter.rowsFromDb);
-		// assertEquals(toCoraConverter.rowsFromDb.size(), 1);
-		// assertEquals(toCoraConverter.returnedList, importer.listOfConvertedRows);
-		//
-		// assertEquals(importResult.listOfFails.get(0), "failure from
-		// CoraImporterSpy");
+		assertEquals(toCoraConverter.returnedJsonRecords.size(), 2);
+		assertAllRecordsInReadListAreSentToConverter(factoredReader);
+		assertAllConvertedRecordsAreSentToImporter();
+
+		assertEquals(importResult.noOfImportedOk, 2);
 	}
 
 }

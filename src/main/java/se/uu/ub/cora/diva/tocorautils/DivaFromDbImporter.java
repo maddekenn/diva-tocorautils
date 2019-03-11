@@ -84,8 +84,10 @@ public final class DivaFromDbImporter {
 				.usingAppTokenVerifierUrlAndBaseUrl(coraClientConfig.appTokenVerifierUrl,
 						coraClientConfig.coraUrl);
 
-		return fromDbToCoraFactory.factorFromDbToCora(coraClientFactory, coraClientConfig,
-				dbConfig);
+		// return fromDbToCoraFactory.factormFromDbToCora(coraClientFactory,
+		// coraClientConfig,
+		// dbConfig);
+		return null;
 	}
 
 	private CoraClientConfig createCoraClientConfig(String[] args) {

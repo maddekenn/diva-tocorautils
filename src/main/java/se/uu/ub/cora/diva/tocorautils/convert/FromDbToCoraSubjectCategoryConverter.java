@@ -32,15 +32,16 @@ import se.uu.ub.cora.sqldatabase.RecordReader;
 import se.uu.ub.cora.sqldatabase.RecordReaderFactory;
 import se.uu.ub.cora.tocorautils.CoraJsonRecord;
 
-public class SubjectCategoryFromDbToCoraConverter {
+public class FromDbToCoraSubjectCategoryConverter implements FromDbToCoraConverter {
 
+	private static final String SUBJECT_ID = "subject_id";
 	private static final String NATIONAL_SUBJECT_CATEGORY = "nationalSubjectCategory";
 	protected JsonBuilderFactory jsonFactory;
 	protected DataToJsonConverterFactory dataToJsonConverterFactory;
 	protected List<RecordIdentifier> collectionItems;
 	private RecordReaderFactory recordReaderFactory;
 
-	protected SubjectCategoryFromDbToCoraConverter(JsonBuilderFactory jsonFactory,
+	protected FromDbToCoraSubjectCategoryConverter(JsonBuilderFactory jsonFactory,
 			DataToJsonConverterFactory dataToJsonConverterFactory,
 			RecordReaderFactory recordReaderFactory) {
 		this.jsonFactory = jsonFactory;
@@ -48,23 +49,19 @@ public class SubjectCategoryFromDbToCoraConverter {
 		this.recordReaderFactory = recordReaderFactory;
 	}
 
-	public static SubjectCategoryFromDbToCoraConverter usingJsonFactoryConverterFactoryAndReaderFactory(
+	public static FromDbToCoraSubjectCategoryConverter usingJsonFactoryConverterFactoryAndReaderFactory(
 			JsonBuilderFactory jsonFactory, DataToJsonConverterFactory dataToJsonConverterFactory,
 			RecordReaderFactory recordReaderFactory) {
-		return new SubjectCategoryFromDbToCoraConverter(jsonFactory, dataToJsonConverterFactory,
+		return new FromDbToCoraSubjectCategoryConverter(jsonFactory, dataToJsonConverterFactory,
 				recordReaderFactory);
 	}
 
-	// @Override
+	@Override
 	public CoraJsonRecord convertToJsonFromRowFromDb(Map<String, String> rowFromDb) {
-
 		ClientDataGroup nationalSubjectCategory = createDataGroupWithRecordInfo(rowFromDb);
-
 		addMandatoryChildren(rowFromDb, nationalSubjectCategory);
-
-		possiblyAddParentGroup(rowFromDb, nationalSubjectCategory);
+		possiblyAddParentGroups(rowFromDb, nationalSubjectCategory);
 		String json = convertToJson(nationalSubjectCategory);
-
 		return CoraJsonRecord.withRecordTypeAndJson(NATIONAL_SUBJECT_CATEGORY, json);
 	}
 
@@ -85,8 +82,8 @@ public class SubjectCategoryFromDbToCoraConverter {
 
 	private ClientDataGroup createRecordInfo(Map<String, String> rowFromDb) {
 		ClientDataGroup recordInfo = ClientDataGroup.withNameInData("recordInfo");
-		recordInfo.addChild(
-				ClientDataAtomic.withNameInDataAndValue("id", rowFromDb.get("subject_id")));
+		recordInfo
+				.addChild(ClientDataAtomic.withNameInDataAndValue("id", rowFromDb.get(SUBJECT_ID)));
 		ClientDataGroup dataDivider = createDataDivider();
 		recordInfo.addChild(dataDivider);
 		return recordInfo;
@@ -106,36 +103,48 @@ public class SubjectCategoryFromDbToCoraConverter {
 		nationalSubjectCategory.addChild(createSubjectCodeChild(rowFromDb));
 	}
 
-	private void possiblyAddParentGroup(Map<String, String> rowFromDb,
+	private void possiblyAddParentGroups(Map<String, String> rowFromDb,
 			ClientDataGroup nationalSubjectCategory) {
+		List<Map<String, String>> parents = readParentsFromDb(rowFromDb);
 
+		if (subjectHasParents(parents)) {
+			addParentGroups(nationalSubjectCategory, parents);
+		}
+	}
+
+	private List<Map<String, String>> readParentsFromDb(Map<String, String> rowFromDb) {
 		RecordReader recordReader = recordReaderFactory.factor();
 		Map<String, String> conditions = new HashMap<>();
-		String subjectId = rowFromDb.get("subject_id");
-		conditions.put("subject_id", subjectId);
+		String subjectId = rowFromDb.get(SUBJECT_ID);
+		conditions.put(SUBJECT_ID, subjectId);
+		return recordReader.readFromTableUsingConditions("subject_parent", conditions);
+	}
 
-		List<Map<String, String>> readFromTableUsingConditions = recordReader
-				.readFromTableUsingConditions("subject_parent", conditions);
+	private boolean subjectHasParents(List<Map<String, String>> parents) {
+		return !parents.isEmpty();
+	}
 
-		if (!readFromTableUsingConditions.isEmpty()) {
-			for (Map<String, String> map : readFromTableUsingConditions) {
-				addParentGroup(map, nationalSubjectCategory);
-			}
+	private void addParentGroups(ClientDataGroup nationalSubjectCategory,
+			List<Map<String, String>> parents) {
+		int repeatId = 0;
+		for (Map<String, String> map : parents) {
+			addParentGroup(map, nationalSubjectCategory, repeatId);
+			repeatId++;
 		}
 	}
 
 	private void addParentGroup(Map<String, String> parentRowFromDb,
-			ClientDataGroup nationalSubjectCategory) {
+			ClientDataGroup nationalSubjectCategory, int repeatId) {
 		ClientDataGroup parentGroup = ClientDataGroup
 				.withNameInData("nationalSubjectCategoryParent");
 		createAndAddParentLink(parentRowFromDb, parentGroup);
 		nationalSubjectCategory.addChild(parentGroup);
-		parentGroup.setRepeatId("0");
+		parentGroup.setRepeatId(String.valueOf(repeatId));
 	}
 
 	private void createAndAddParentLink(Map<String, String> parentRowFromDb,
 			ClientDataGroup parentGroup) {
-		ClientDataGroup parentLink = ClientDataGroup.withNameInData("nationalSubjectCategory");
+		ClientDataGroup parentLink = ClientDataGroup.withNameInData(NATIONAL_SUBJECT_CATEGORY);
 		parentLink.addChild(ClientDataAtomic.withNameInDataAndValue("linkedRecordType",
 				NATIONAL_SUBJECT_CATEGORY));
 		parentLink.addChild(ClientDataAtomic.withNameInDataAndValue("linkedRecordId",
