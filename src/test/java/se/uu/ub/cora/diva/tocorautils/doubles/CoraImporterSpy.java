@@ -40,4 +40,12 @@ public class CoraImporterSpy implements Importer {
 		return importResult;
 	}
 
+	@Override
+	public ImportResult updateInCora(List<CoraJsonRecord> listOfConvertedRows) {
+		// this.listOfConvertedRows = listOfConvertedRows;
+		importResult = new ImportResult();
+		importResult.noOfUpdatedOk = listOfConvertedRows.size();
+		return importResult;
+	}
+
 }

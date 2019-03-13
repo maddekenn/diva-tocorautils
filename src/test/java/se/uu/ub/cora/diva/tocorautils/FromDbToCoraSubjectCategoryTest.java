@@ -23,11 +23,11 @@ import static org.testng.Assert.assertEquals;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-import se.uu.ub.cora.diva.tocorautils.convert.RecordCompleter;
 import se.uu.ub.cora.diva.tocorautils.doubles.CoraImporterSpy;
 import se.uu.ub.cora.diva.tocorautils.doubles.FromDbToCoraConverterSpy;
 import se.uu.ub.cora.diva.tocorautils.doubles.RecordReaderFactorySpy;
 import se.uu.ub.cora.diva.tocorautils.doubles.RecordReaderSpy;
+import se.uu.ub.cora.tocorautils.CoraJsonRecord;
 import se.uu.ub.cora.tocorautils.importing.ImportResult;
 
 public class FromDbToCoraSubjectCategoryTest {
@@ -36,7 +36,8 @@ public class FromDbToCoraSubjectCategoryTest {
 	private RecordReaderFactorySpy recordReaderFactory;
 	private CoraImporterSpy importer;
 	private FromDbToCoraSubjectCategory fromDbToCora;
-	private RecordCompleter recordCompleter;
+	private RecordCompleterSpy recordCompleter;
+	private JsonToDataConverterFactorySpy jsonToDataConverterFactory;
 
 	@BeforeMethod
 	public void setUp() {
@@ -44,9 +45,11 @@ public class FromDbToCoraSubjectCategoryTest {
 		recordReaderFactory = new RecordReaderFactorySpy();
 		importer = new CoraImporterSpy();
 		recordCompleter = new RecordCompleterSpy();
+		jsonToDataConverterFactory = new JsonToDataConverterFactorySpy();
 		fromDbToCora = (FromDbToCoraSubjectCategory) FromDbToCoraSubjectCategory
-				.usingRecordReaderFactoryAndDbToCoraConverterAndImporter(recordReaderFactory,
-						toCoraConverter, importer);
+				.usingRecordReaderFactoryDbToCoraConverterRecordCompleterJsonToDataConverterFactoryAndImporter(
+						recordReaderFactory, toCoraConverter, recordCompleter,
+						jsonToDataConverterFactory, importer);
 	}
 
 	@Test
@@ -54,6 +57,7 @@ public class FromDbToCoraSubjectCategoryTest {
 		assertEquals(fromDbToCora.getRecordReaderFactory(), recordReaderFactory);
 		assertEquals(fromDbToCora.getFromDbToCoraConverter(), toCoraConverter);
 		assertEquals(fromDbToCora.getImporter(), importer);
+		assertEquals(fromDbToCora.getRecordCompleter(), recordCompleter);
 	}
 
 	@Test
@@ -68,9 +72,21 @@ public class FromDbToCoraSubjectCategoryTest {
 		assertAllRecordsInReadListAreSentToConverter(factoredReader);
 		assertAllConvertedRecordsAreSentToImporter();
 
-		assertEquals(importResult.noOfImportedOk, 1);
-
 		assertEquals(importResult.listOfFails.get(0), "failure from CoraImporterSpy");
+		assertEquals(recordCompleter.completeMetadataCalledNumOfTimes, 1);
+
+		assertCorrectDataIsSentFromReadRowToConverterToCopmleterUsingIndex(0);
+
+		assertEquals(importResult.noOfImportedOk, 1);
+		assertEquals(importResult.noOfUpdatedOk, 1);
+	}
+
+	private void assertCorrectDataIsSentFromReadRowToConverterToCopmleterUsingIndex(int index) {
+		CoraJsonRecord firstCoraJsonRecord = toCoraConverter.returnedJsonRecords.get(index);
+		assertEquals(firstCoraJsonRecord.json, jsonToDataConverterFactory.jsonStrings.get(index));
+		JsonToDataConverterSpy factoredConverter = jsonToDataConverterFactory.factoredConverters
+				.get(index);
+		assertEquals(factoredConverter.dataGroup, recordCompleter.dataGroups.get(index));
 	}
 
 	private void assertAllRecordsInReadListAreSentToConverter(RecordReaderSpy factoredReader) {
@@ -94,7 +110,10 @@ public class FromDbToCoraSubjectCategoryTest {
 		assertAllRecordsInReadListAreSentToConverter(factoredReader);
 		assertAllConvertedRecordsAreSentToImporter();
 
+		assertCorrectDataIsSentFromReadRowToConverterToCopmleterUsingIndex(0);
+		assertCorrectDataIsSentFromReadRowToConverterToCopmleterUsingIndex(1);
 		assertEquals(importResult.noOfImportedOk, 2);
+		assertEquals(importResult.noOfUpdatedOk, 2);
 	}
 
 }

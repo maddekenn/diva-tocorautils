@@ -30,12 +30,13 @@ public class FromDbToCoraConverterSpy implements FromDbToCoraConverter {
 	public List<Map<String, String>> rowsFromDb = new ArrayList<>();
 	public List<List<CoraJsonRecord>> returnedList;
 	public List<CoraJsonRecord> returnedJsonRecords = new ArrayList<>();
+	String json = "{\"name\":\"groupNameInData\", \"children\":[]}";
 
 	@Override
 	public CoraJsonRecord convertToJsonFromRowFromDb(Map<String, String> rowFromDb) {
 		rowsFromDb.add(rowFromDb);
-		CoraJsonRecord jsonRecord = CoraJsonRecord.withRecordTypeAndJson(
-				"recordTypeFromDbToCoraConverterSpy", "jsonFromDbToCoraConverterSpy");
+		CoraJsonRecord jsonRecord = CoraJsonRecord
+				.withRecordTypeAndJson("recordTypeFromDbToCoraConverterSpy", json);
 		returnedJsonRecords.add(jsonRecord);
 
 		return jsonRecord;

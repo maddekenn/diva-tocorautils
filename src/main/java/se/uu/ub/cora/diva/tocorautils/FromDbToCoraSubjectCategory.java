@@ -22,7 +22,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import se.uu.ub.cora.clientdata.ClientDataGroup;
+import se.uu.ub.cora.clientdata.converter.jsontojava.JsonToDataConverter;
+import se.uu.ub.cora.clientdata.converter.jsontojava.JsonToDataConverterFactory;
 import se.uu.ub.cora.diva.tocorautils.convert.FromDbToCoraConverter;
+import se.uu.ub.cora.diva.tocorautils.convert.RecordCompleter;
 import se.uu.ub.cora.sqldatabase.RecordReader;
 import se.uu.ub.cora.sqldatabase.RecordReaderFactory;
 import se.uu.ub.cora.tocorautils.CoraJsonRecord;
@@ -35,18 +39,24 @@ public class FromDbToCoraSubjectCategory implements FromDbToCora {
 	private FromDbToCoraConverter fromDbToCoraConverter;
 	private RecordReaderFactory recordReaderFactory;
 	private Importer importer;
+	private RecordCompleter recordCompleter;
+	private JsonToDataConverterFactory jsonToDataConverterFactory;
 
-	public static FromDbToCora usingRecordReaderFactoryAndDbToCoraConverterAndImporter(
+	public static FromDbToCora usingRecordReaderFactoryDbToCoraConverterRecordCompleterJsonToDataConverterFactoryAndImporter(
 			RecordReaderFactory recordReaderFactory, FromDbToCoraConverter fromDbToCoraConverter,
+			RecordCompleter recordCompleter, JsonToDataConverterFactory jsonToDataConverterFactory,
 			Importer importer) {
 		return new FromDbToCoraSubjectCategory(recordReaderFactory, fromDbToCoraConverter,
-				importer);
+				recordCompleter, jsonToDataConverterFactory, importer);
 	}
 
 	private FromDbToCoraSubjectCategory(RecordReaderFactory recordReaderFactory,
-			FromDbToCoraConverter fromDbToCoraConverter, Importer importer) {
+			FromDbToCoraConverter fromDbToCoraConverter, RecordCompleter recordCompleter,
+			JsonToDataConverterFactory jsonToDataConverterFactory, Importer importer) {
 		this.recordReaderFactory = recordReaderFactory;
 		this.fromDbToCoraConverter = fromDbToCoraConverter;
+		this.recordCompleter = recordCompleter;
+		this.jsonToDataConverterFactory = jsonToDataConverterFactory;
 		this.importer = importer;
 	}
 
@@ -55,7 +65,26 @@ public class FromDbToCoraSubjectCategory implements FromDbToCora {
 		List<Map<String, String>> readRows = readFromTable(tableName);
 
 		List<List<CoraJsonRecord>> convertedRows = convertReadRows(readRows);
-		return importer.createInCora(convertedRows);
+		ImportResult importResult = importer.createInCora(convertedRows);
+
+		List<ClientDataGroup> completedDataGroups = new ArrayList<>();
+		for (CoraJsonRecord coraJsonRecord : convertedRows.get(0)) {
+			String json = coraJsonRecord.json;
+			JsonToDataConverter jsonToDataConverter = jsonToDataConverterFactory
+					.createForJsonString(json);
+			ClientDataGroup dataGroup = (ClientDataGroup) jsonToDataConverter.toInstance();
+
+			// ClientDataGroup completedMetadata =
+			recordCompleter.completeMetadata(dataGroup);
+			// completedDataGroups.add(completedMetadata);
+
+		}
+		// TODO: convert to json and create list of CoraJsonRecord
+		ImportResult importResultForUpdate = importer.updateInCora(null);
+		importResult.listOfFails.addAll(importResultForUpdate.listOfFails);
+		importResult.noOfUpdatedOk = importResultForUpdate.noOfUpdatedOk;
+
+		return importResult;
 	}
 
 	private List<Map<String, String>> readFromTable(String tableName) {
@@ -93,6 +122,11 @@ public class FromDbToCoraSubjectCategory implements FromDbToCora {
 	public Importer getImporter() {
 		// needed for test
 		return importer;
+	}
+
+	public RecordCompleter getRecordCompleter() {
+		// needed for test
+		return recordCompleter;
 	}
 
 }

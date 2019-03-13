@@ -6,6 +6,10 @@ import java.util.Map;
 
 import se.uu.ub.cora.clientdata.ClientDataAtomic;
 import se.uu.ub.cora.clientdata.ClientDataGroup;
+import se.uu.ub.cora.clientdata.converter.javatojson.DataToJsonConverter;
+import se.uu.ub.cora.clientdata.converter.javatojson.DataToJsonConverterFactory;
+import se.uu.ub.cora.clientdata.converter.javatojson.DataToJsonConverterFactoryImp;
+import se.uu.ub.cora.json.builder.org.OrgJsonBuilderFactoryAdapter;
 import se.uu.ub.cora.sqldatabase.RecordReader;
 import se.uu.ub.cora.sqldatabase.RecordReaderFactory;
 
@@ -23,14 +27,14 @@ public class RecordCompleterSubjectCategory implements RecordCompleter {
 	}
 
 	@Override
-	public ClientDataGroup completeMetadata(ClientDataGroup dataGroup) {
+	public String completeMetadata(ClientDataGroup dataGroup) {
 		List<Map<String, String>> readParents = readParents(dataGroup);
 		int repeatId = 0;
 		for (Map<String, String> parentRow : readParents) {
 			createAndAddParentToDataGroupUsingRepeatIdAndRowFromDb(dataGroup, repeatId, parentRow);
 			repeatId++;
 		}
-		return dataGroup;
+		return convertToJson(dataGroup);
 	}
 
 	private List<Map<String, String>> readParents(ClientDataGroup dataGroup) {
@@ -65,4 +69,12 @@ public class RecordCompleterSubjectCategory implements RecordCompleter {
 		parentGroup.addChild(parentLink);
 	}
 
+	private String convertToJson(ClientDataGroup nationalSubjectCategory) {
+		DataToJsonConverterFactory dataToJsonConverterFactory = new DataToJsonConverterFactoryImp();
+		OrgJsonBuilderFactoryAdapter jsonBuilderFactory = new OrgJsonBuilderFactoryAdapter();
+		DataToJsonConverter converter = dataToJsonConverterFactory
+				.createForClientDataElement(jsonBuilderFactory, nationalSubjectCategory);
+		return converter.toJson();
+
+	}
 }

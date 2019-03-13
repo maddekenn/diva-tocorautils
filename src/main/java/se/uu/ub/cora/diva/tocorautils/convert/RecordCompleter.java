@@ -4,5 +4,5 @@ import se.uu.ub.cora.clientdata.ClientDataGroup;
 
 public interface RecordCompleter {
 
-	ClientDataGroup completeMetadata(ClientDataGroup dataGroup);
+	String completeMetadata(ClientDataGroup dataGroup);
 }
