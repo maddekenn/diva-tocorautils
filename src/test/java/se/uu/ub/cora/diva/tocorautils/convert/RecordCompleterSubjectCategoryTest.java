@@ -7,22 +7,16 @@ import org.testng.annotations.Test;
 
 import se.uu.ub.cora.clientdata.ClientDataAtomic;
 import se.uu.ub.cora.clientdata.ClientDataGroup;
-import se.uu.ub.cora.clientdata.converter.javatojson.DataToJsonConverterFactory;
 import se.uu.ub.cora.diva.tocorautils.doubles.RecordReaderFactorySpy;
 import se.uu.ub.cora.diva.tocorautils.doubles.RecordReaderSpy;
-import se.uu.ub.cora.json.builder.JsonBuilderFactory;
 
 public class RecordCompleterSubjectCategoryTest {
 
 	private RecordReaderFactorySpy recordReaderFactory;
-	private DataToJsonConverterFactory dataToJsonConverterFactory;
-	private JsonBuilderFactory jsonBuilderFactory;
 
 	@BeforeMethod
 	public void setUp() {
 		recordReaderFactory = new RecordReaderFactorySpy();
-		jsonBuilderFactory = new JsonBuilderFactorySpy();
-		dataToJsonConverterFactory = new DataToJsonConverterFactorySpy();
 	}
 
 	@Test
@@ -34,7 +28,7 @@ public class RecordCompleterSubjectCategoryTest {
 		String completedMetadataJson = recordCompleter.completeMetadata(dataGroup);
 
 		RecordReaderSpy factoredReader = recordReaderFactory.factored;
-		assertEquals(factoredReader.usedTableNames.get(0), "subject_parent");
+		assertEquals(factoredReader.usedTableNames.get(0), "subject_parent_view");
 		assertEquals(factoredReader.usedConditions.get("subject_id"), "someSubjectId");
 
 		assertEquals(completedMetadataJson,
@@ -53,25 +47,12 @@ public class RecordCompleterSubjectCategoryTest {
 		String completedMetadataJson = recordCompleter.completeMetadata(dataGroup);
 
 		RecordReaderSpy factoredReader = recordReaderFactory.factored;
-		assertEquals(factoredReader.usedTableNames.get(0), "subject_parent");
+		assertEquals(factoredReader.usedTableNames.get(0), "subject_parent_view");
 		assertEquals(factoredReader.usedConditions.get("subject_id"), "someSubjectWithParentId");
 
 		assertEquals(completedMetadataJson,
 				"{\"children\":[{\"children\":[{\"name\":\"id\",\"value\":\"someSubjectWithParentId\"}],\"name\":\"recordInfo\"},{\"repeatId\":\"0\",\"children\":[{\"children\":[{\"name\":\"linkedRecordType\",\"value\":\"nationalSubjectCategory\"},{\"name\":\"linkedRecordId\",\"value\":\"someParent0\"}],\"name\":\"nationalSubjectCategory\"}],\"name\":\"nationalSubjectCategoryParent\"}],\"name\":\"nationalSubjectCategory\"}");
 	}
-	//
-	// private void assertOkParentInDataGroupByIndex(ClientDataGroup
-	// completedMetadata, int index) {
-	// ClientDataGroup parentGroup = completedMetadata
-	// .getAllGroupsWithNameInData("nationalSubjectCategoryParent").get(index);
-	// assertEquals(parentGroup.getRepeatId(), String.valueOf(index));
-	// ClientDataGroup parentLink = parentGroup
-	// .getFirstGroupWithNameInData("nationalSubjectCategory");
-	// assertEquals(parentLink.getFirstAtomicValueWithNameInData("linkedRecordType"),
-	// "nationalSubjectCategory");
-	// assertEquals(parentLink.getFirstAtomicValueWithNameInData("linkedRecordId"),
-	// "someParent" + String.valueOf(index));
-	// }
 
 	@Test
 	public void testTwoParents() {
@@ -85,7 +66,7 @@ public class RecordCompleterSubjectCategoryTest {
 		String completedMetadataJson = recordCompleter.completeMetadata(dataGroup);
 
 		RecordReaderSpy factoredReader = recordReaderFactory.factored;
-		assertEquals(factoredReader.usedTableNames.get(0), "subject_parent");
+		assertEquals(factoredReader.usedTableNames.get(0), "subject_parent_view");
 		assertEquals(factoredReader.usedConditions.get("subject_id"), "someSubjectWithParentId");
 
 		assertEquals(completedMetadataJson,

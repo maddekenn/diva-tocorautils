@@ -32,10 +32,13 @@ import se.uu.ub.cora.client.CoraClientConfig;
 import se.uu.ub.cora.client.CoraClientFactory;
 import se.uu.ub.cora.clientdata.converter.javatojson.DataToJsonConverterFactory;
 import se.uu.ub.cora.clientdata.converter.javatojson.DataToJsonConverterFactoryImp;
+import se.uu.ub.cora.clientdata.converter.jsontojava.JsonToDataConverterFactory;
+import se.uu.ub.cora.clientdata.converter.jsontojava.JsonToDataConverterFactoryImp;
 import se.uu.ub.cora.connection.ParameterConnectionProviderImp;
 import se.uu.ub.cora.connection.SqlConnectionProvider;
 import se.uu.ub.cora.diva.tocorautils.convert.FromDbToCoraConverter;
 import se.uu.ub.cora.diva.tocorautils.convert.FromDbToCoraSubjectCategoryConverter;
+import se.uu.ub.cora.diva.tocorautils.convert.RecordCompleterSubjectCategory;
 import se.uu.ub.cora.diva.tocorautils.doubles.CoraClientFactorySpy;
 import se.uu.ub.cora.json.builder.JsonBuilderFactory;
 import se.uu.ub.cora.json.builder.org.OrgJsonBuilderFactoryAdapter;
@@ -45,7 +48,7 @@ import se.uu.ub.cora.tocorautils.importing.CoraImporter;
 
 public class FromDbToCoraSubjectCategoryFactoryTest {
 
-	private FromDbToCoraSubjectCategory fromDbToCora;
+	private FromDbToCoraSubjectCategory fromDbToCoraSubjectCategory;
 	private FromDbToCoraSubjectCategoryFactory toCoraSubjectCategoryFactory;
 	private CoraClientConfig coraClientConfig;
 	private DbConfig dbConfig;
@@ -67,13 +70,13 @@ public class FromDbToCoraSubjectCategoryFactoryTest {
 		CoraClientFactory coraClientFactory = new CoraClientFactorySpy();
 
 		toCoraSubjectCategoryFactory = new FromDbToCoraSubjectCategoryFactory();
-		fromDbToCora = (FromDbToCoraSubjectCategory) toCoraSubjectCategoryFactory
+		fromDbToCoraSubjectCategory = (FromDbToCoraSubjectCategory) toCoraSubjectCategoryFactory
 				.factorFromDbToCora(coraClientFactory, coraClientConfig, dbConfig);
 	}
 
 	@Test
 	public void testInitCreatedRecordReaderFactory() throws Exception {
-		RecordReaderFactoryImp createdRecordReaderFactory = (RecordReaderFactoryImp) fromDbToCora
+		RecordReaderFactoryImp createdRecordReaderFactory = (RecordReaderFactoryImp) fromDbToCoraSubjectCategory
 				.getRecordReaderFactory();
 		assertTrue(createdRecordReaderFactory instanceof RecordReaderFactoryImp);
 
@@ -99,7 +102,8 @@ public class FromDbToCoraSubjectCategoryFactoryTest {
 
 	@Test
 	public void testInitFromDbToCoraConverter() throws Exception {
-		FromDbToCoraConverter createdConverter = fromDbToCora.getFromDbToCoraConverter();
+		FromDbToCoraConverter createdConverter = fromDbToCoraSubjectCategory
+				.getFromDbToCoraConverter();
 		assertTrue(createdConverter instanceof FromDbToCoraSubjectCategoryConverter);
 
 		FromDbToCoraSubjectCategoryConverter subjectCategoryConverter = (FromDbToCoraSubjectCategoryConverter) createdConverter;
@@ -115,7 +119,7 @@ public class FromDbToCoraSubjectCategoryFactoryTest {
 
 	@Test
 	public void testInitCoraImporter() throws Exception {
-		CoraImporter importer = (CoraImporter) fromDbToCora.getImporter();
+		CoraImporter importer = (CoraImporter) fromDbToCoraSubjectCategory.getImporter();
 		assertTrue(importer instanceof CoraImporter);
 
 		CoraClient coraClient = importer.getCoraClient();
@@ -127,5 +131,20 @@ public class FromDbToCoraSubjectCategoryFactoryTest {
 		assertEquals(coraClient, coraClientFactory.factored);
 		assertEquals(coraClientFactory.userId, coraClientConfig.userId);
 		assertEquals(coraClientFactory.appToken, coraClientConfig.appToken);
+	}
+
+	@Test
+	public void testInitRecordCompleter() throws Exception {
+		RecordCompleterSubjectCategory recordCompleter = (RecordCompleterSubjectCategory) fromDbToCoraSubjectCategory
+				.getRecordCompleter();
+		assertTrue(recordCompleter.getRecordReaderFactory() instanceof RecordReaderFactoryImp);
+
+	}
+
+	@Test
+	public void testInitJsonToDataConverterFactory() throws Exception {
+		JsonToDataConverterFactory jsonToDataConverterFactory = fromDbToCoraSubjectCategory
+				.getJsonToDataConverterFactory();
+		assertTrue(jsonToDataConverterFactory instanceof JsonToDataConverterFactoryImp);
 	}
 }

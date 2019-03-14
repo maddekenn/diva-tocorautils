@@ -29,7 +29,10 @@ public class CoraImporterSpy implements Importer {
 
 	public List<Map<String, String>> convertedRows;
 	public List<List<CoraJsonRecord>> listOfConvertedRows;
+	public List<CoraJsonRecord> listOfUpdatedRows;
 	private ImportResult importResult;
+
+	private String jsonRecord = "{\"record\":{\"data\":{\"name\":\"groupNameInData\",\"children\":[]},\"actionLinks\":{\"read\":{\"requestMethod\":\"GET\",\"rel\":\"read\",\"url\":\"http://localhost:8082/therest/rest/record/nationalSubjectCategory/1042\",\"accept\":\"application/vnd.uub.record+json\"}}}}";
 
 	@Override
 	public ImportResult createInCora(List<List<CoraJsonRecord>> listOfConvertedRows) {
@@ -37,14 +40,20 @@ public class CoraImporterSpy implements Importer {
 		importResult = new ImportResult();
 		importResult.noOfImportedOk = listOfConvertedRows.get(0).size();
 		importResult.listOfFails.add("failure from CoraImporterSpy");
+		for (CoraJsonRecord coraJsonRecord : listOfConvertedRows.get(0)) {
+			CoraJsonRecord updatedJsonRecord = CoraJsonRecord.withRecordTypeAndIdAndJson(
+					coraJsonRecord.recordType, coraJsonRecord.recordId, jsonRecord);
+			importResult.returnedJsonRecords.add(updatedJsonRecord);
+		}
+
 		return importResult;
 	}
 
 	@Override
-	public ImportResult updateInCora(List<CoraJsonRecord> listOfConvertedRows) {
-		// this.listOfConvertedRows = listOfConvertedRows;
+	public ImportResult updateInCora(List<CoraJsonRecord> listOfUpdatedRows) {
+		this.listOfUpdatedRows = listOfUpdatedRows;
 		importResult = new ImportResult();
-		importResult.noOfUpdatedOk = listOfConvertedRows.size();
+		importResult.noOfUpdatedOk = listOfUpdatedRows.size();
 		return importResult;
 	}
 

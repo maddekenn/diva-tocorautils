@@ -10,12 +10,13 @@ public class RecordCompleterSpy implements RecordCompleter {
 
 	public int completeMetadataCalledNumOfTimes = 0;
 	public List<ClientDataGroup> dataGroups = new ArrayList<>();
+	public String jsonToReturn = "some dummy json from recordCompleterSpy";
 
 	@Override
 	public String completeMetadata(ClientDataGroup dataGroup) {
 		completeMetadataCalledNumOfTimes++;
 		dataGroups.add(dataGroup);
-		return null;
+		return jsonToReturn;
 	}
 
 }

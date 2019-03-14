@@ -15,8 +15,9 @@ public class JsonToDataConverterFactorySpy implements JsonToDataConverterFactory
 
 	@Override
 	public JsonToDataConverter createForJsonObject(JsonValue jsonValue) {
-		// TODO Auto-generated method stub
-		return null;
+		JsonToDataConverterSpy factoredConverter = new JsonToDataConverterSpy("");
+		factoredConverters.add(factoredConverter);
+		return factoredConverter;
 	}
 
 	@Override
@@ -35,8 +36,8 @@ public class JsonToDataConverterFactorySpy implements JsonToDataConverterFactory
 	@Override
 	public JsonToDataActionLinkConverter createJsonToDataActionLinkConverterForJsonObject(
 			JsonValue jsonValue) {
-		// TODO Auto-generated method stub
-		return null;
+		JsonToDataActionLinkConverter factoredConverter = new JsonToDataActionLinkConverterSpy();
+		return factoredConverter;
 	}
 
 }

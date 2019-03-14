@@ -23,10 +23,13 @@ import java.util.List;
 import java.util.Map;
 
 import se.uu.ub.cora.clientdata.ClientDataGroup;
-import se.uu.ub.cora.clientdata.converter.jsontojava.JsonToDataConverter;
+import se.uu.ub.cora.clientdata.ClientDataRecord;
 import se.uu.ub.cora.clientdata.converter.jsontojava.JsonToDataConverterFactory;
+import se.uu.ub.cora.clientdata.converter.jsontojava.JsonToDataRecordConverter;
 import se.uu.ub.cora.diva.tocorautils.convert.FromDbToCoraConverter;
 import se.uu.ub.cora.diva.tocorautils.convert.RecordCompleter;
+import se.uu.ub.cora.json.parser.JsonObject;
+import se.uu.ub.cora.json.parser.org.OrgJsonParser;
 import se.uu.ub.cora.sqldatabase.RecordReader;
 import se.uu.ub.cora.sqldatabase.RecordReaderFactory;
 import se.uu.ub.cora.tocorautils.CoraJsonRecord;
@@ -67,24 +70,11 @@ public class FromDbToCoraSubjectCategory implements FromDbToCora {
 		List<List<CoraJsonRecord>> convertedRows = convertReadRows(readRows);
 		ImportResult importResult = importer.createInCora(convertedRows);
 
-		List<ClientDataGroup> completedDataGroups = new ArrayList<>();
-		for (CoraJsonRecord coraJsonRecord : convertedRows.get(0)) {
-			String json = coraJsonRecord.json;
-			JsonToDataConverter jsonToDataConverter = jsonToDataConverterFactory
-					.createForJsonString(json);
-			ClientDataGroup dataGroup = (ClientDataGroup) jsonToDataConverter.toInstance();
+		List<CoraJsonRecord> completedData = completeCreatedRecords(
+				importResult.returnedJsonRecords);
+		ImportResult importResultForUpdate = importer.updateInCora(completedData);
 
-			// ClientDataGroup completedMetadata =
-			recordCompleter.completeMetadata(dataGroup);
-			// completedDataGroups.add(completedMetadata);
-
-		}
-		// TODO: convert to json and create list of CoraJsonRecord
-		ImportResult importResultForUpdate = importer.updateInCora(null);
-		importResult.listOfFails.addAll(importResultForUpdate.listOfFails);
-		importResult.noOfUpdatedOk = importResultForUpdate.noOfUpdatedOk;
-
-		return importResult;
+		return updateImportResult(importResult, importResultForUpdate);
 	}
 
 	private List<Map<String, String>> readFromTable(String tableName) {
@@ -109,6 +99,52 @@ public class FromDbToCoraSubjectCategory implements FromDbToCora {
 		convertedInnerRows.add(converterRecord);
 	}
 
+	private List<CoraJsonRecord> completeCreatedRecords(List<CoraJsonRecord> returnedJsonRecords) {
+		List<CoraJsonRecord> completedData = new ArrayList<>();
+		for (CoraJsonRecord jsonRecord : returnedJsonRecords) {
+			CoraJsonRecord completedJsonRecord = completeCreatedRecord(jsonRecord.recordType,
+					jsonRecord.json);
+			completedData.add(completedJsonRecord);
+		}
+		return completedData;
+	}
+
+	private CoraJsonRecord completeCreatedRecord(String recordType, String jsonString) {
+		ClientDataGroup dataGroup = convertJsonToDataGroup(jsonString);
+		String recordId = getRecordId(dataGroup);
+		return completeDataAndCreateJsonRecordForUpdate(recordType, dataGroup, recordId);
+	}
+
+	private ClientDataGroup convertJsonToDataGroup(String json) {
+		OrgJsonParser jsonParser = new OrgJsonParser();
+		JsonObject jsonObject = (JsonObject) jsonParser.parseString(json);
+
+		JsonToDataRecordConverter recordConverter = JsonToDataRecordConverter
+				.forJsonObjectUsingConverterFactory(jsonObject, jsonToDataConverterFactory);
+		ClientDataRecord record = recordConverter.toInstance();
+		return record.getClientDataGroup();
+	}
+
+	private ImportResult updateImportResult(ImportResult importResult,
+			ImportResult importResultForUpdate) {
+		importResult.listOfFails.addAll(importResultForUpdate.listOfFails);
+		importResult.noOfUpdatedOk = importResultForUpdate.noOfUpdatedOk;
+
+		return importResult;
+	}
+
+	private CoraJsonRecord completeDataAndCreateJsonRecordForUpdate(String recordType,
+			ClientDataGroup dataGroup, String recordId) {
+		String completedMetadataJson = recordCompleter.completeMetadata(dataGroup);
+		return CoraJsonRecord.withRecordTypeAndIdAndJson(recordType, recordId,
+				completedMetadataJson);
+	}
+
+	private String getRecordId(ClientDataGroup dataGroup) {
+		ClientDataGroup recordInfo = dataGroup.getFirstGroupWithNameInData("recordInfo");
+		return recordInfo.getFirstAtomicValueWithNameInData("id");
+	}
+
 	public RecordReaderFactory getRecordReaderFactory() {
 		// needed for test
 		return recordReaderFactory;
@@ -129,4 +165,8 @@ public class FromDbToCoraSubjectCategory implements FromDbToCora {
 		return recordCompleter;
 	}
 
+	public JsonToDataConverterFactory getJsonToDataConverterFactory() {
+		// needed for test
+		return jsonToDataConverterFactory;
+	}
 }

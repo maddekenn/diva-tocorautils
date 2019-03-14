@@ -8,7 +8,7 @@ import se.uu.ub.cora.clientdata.ClientDataAtomic;
 import se.uu.ub.cora.clientdata.ClientDataGroup;
 import se.uu.ub.cora.clientdata.converter.javatojson.DataToJsonConverter;
 import se.uu.ub.cora.clientdata.converter.javatojson.DataToJsonConverterFactory;
-import se.uu.ub.cora.clientdata.converter.javatojson.DataToJsonConverterFactoryImp;
+import se.uu.ub.cora.clientdata.converter.javatojson.DataToJsonWithoutActionLinksForLinksConverterFactory;
 import se.uu.ub.cora.json.builder.org.OrgJsonBuilderFactoryAdapter;
 import se.uu.ub.cora.sqldatabase.RecordReader;
 import se.uu.ub.cora.sqldatabase.RecordReaderFactory;
@@ -42,7 +42,7 @@ public class RecordCompleterSubjectCategory implements RecordCompleter {
 		RecordReader factoredReader = recordReaderFactory.factor();
 		Map<String, String> conditions = new HashMap<>();
 		conditions.put("subject_id", subjectId);
-		return factoredReader.readFromTableUsingConditions("subject_parent", conditions);
+		return factoredReader.readFromTableUsingConditions("subject_parent_view", conditions);
 	}
 
 	private String getSubjectIdFromDataGroup(ClientDataGroup dataGroup) {
@@ -70,11 +70,16 @@ public class RecordCompleterSubjectCategory implements RecordCompleter {
 	}
 
 	private String convertToJson(ClientDataGroup nationalSubjectCategory) {
-		DataToJsonConverterFactory dataToJsonConverterFactory = new DataToJsonConverterFactoryImp();
+		DataToJsonConverterFactory dataToJsonConverterFactory = new DataToJsonWithoutActionLinksForLinksConverterFactory();
 		OrgJsonBuilderFactoryAdapter jsonBuilderFactory = new OrgJsonBuilderFactoryAdapter();
 		DataToJsonConverter converter = dataToJsonConverterFactory
 				.createForClientDataElement(jsonBuilderFactory, nationalSubjectCategory);
 		return converter.toJson();
 
+	}
+
+	public RecordReaderFactory getRecordReaderFactory() {
+		// needed for test
+		return recordReaderFactory;
 	}
 }

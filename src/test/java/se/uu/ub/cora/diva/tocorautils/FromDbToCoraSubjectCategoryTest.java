@@ -20,6 +20,8 @@ package se.uu.ub.cora.diva.tocorautils;
 
 import static org.testng.Assert.assertEquals;
 
+import java.util.List;
+
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
@@ -75,15 +77,27 @@ public class FromDbToCoraSubjectCategoryTest {
 		assertEquals(importResult.listOfFails.get(0), "failure from CoraImporterSpy");
 		assertEquals(recordCompleter.completeMetadataCalledNumOfTimes, 1);
 
-		assertCorrectDataIsSentFromReadRowToConverterToCopmleterUsingIndex(0);
+		assertCorrectDataIsSentFromReadRowToConverterToCompleterUsingIndex(0);
+
+		List<CoraJsonRecord> listSentToConverter = importer.listOfConvertedRows.get(0);
+		assertEquals(listSentToConverter.size(), 1);
+		assertCorrectJsonRecordSentToUpdateUsingIndex(listSentToConverter, 0);
 
 		assertEquals(importResult.noOfImportedOk, 1);
 		assertEquals(importResult.noOfUpdatedOk, 1);
 	}
 
-	private void assertCorrectDataIsSentFromReadRowToConverterToCopmleterUsingIndex(int index) {
-		CoraJsonRecord firstCoraJsonRecord = toCoraConverter.returnedJsonRecords.get(index);
-		assertEquals(firstCoraJsonRecord.json, jsonToDataConverterFactory.jsonStrings.get(index));
+	private void assertCorrectJsonRecordSentToUpdateUsingIndex(
+			List<CoraJsonRecord> listSentToConverter, int index) {
+		CoraJsonRecord coraJsonRecordSentToCreate = listSentToConverter.get(index);
+		CoraJsonRecord coraJsonRecordSentToUpdate = importer.listOfUpdatedRows.get(index);
+
+		assertEquals(coraJsonRecordSentToUpdate.recordType, coraJsonRecordSentToCreate.recordType);
+		assertEquals(coraJsonRecordSentToUpdate.json, "some dummy json from recordCompleterSpy");
+		assertEquals(coraJsonRecordSentToUpdate.recordId, "someRecordId");
+	}
+
+	private void assertCorrectDataIsSentFromReadRowToConverterToCompleterUsingIndex(int index) {
 		JsonToDataConverterSpy factoredConverter = jsonToDataConverterFactory.factoredConverters
 				.get(index);
 		assertEquals(factoredConverter.dataGroup, recordCompleter.dataGroups.get(index));
@@ -110,8 +124,13 @@ public class FromDbToCoraSubjectCategoryTest {
 		assertAllRecordsInReadListAreSentToConverter(factoredReader);
 		assertAllConvertedRecordsAreSentToImporter();
 
-		assertCorrectDataIsSentFromReadRowToConverterToCopmleterUsingIndex(0);
-		assertCorrectDataIsSentFromReadRowToConverterToCopmleterUsingIndex(1);
+		assertCorrectDataIsSentFromReadRowToConverterToCompleterUsingIndex(0);
+		assertCorrectDataIsSentFromReadRowToConverterToCompleterUsingIndex(1);
+
+		List<CoraJsonRecord> listSentToConverter = importer.listOfConvertedRows.get(0);
+		assertEquals(listSentToConverter.size(), 2);
+		assertCorrectJsonRecordSentToUpdateUsingIndex(listSentToConverter, 0);
+		assertCorrectJsonRecordSentToUpdateUsingIndex(listSentToConverter, 1);
 		assertEquals(importResult.noOfImportedOk, 2);
 		assertEquals(importResult.noOfUpdatedOk, 2);
 	}
