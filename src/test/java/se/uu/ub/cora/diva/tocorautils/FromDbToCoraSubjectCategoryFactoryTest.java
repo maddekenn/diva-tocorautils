@@ -27,6 +27,7 @@ import java.lang.reflect.Field;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
+import importing.CoraImporter;
 import se.uu.ub.cora.client.CoraClient;
 import se.uu.ub.cora.client.CoraClientConfig;
 import se.uu.ub.cora.client.CoraClientFactory;
@@ -43,8 +44,6 @@ import se.uu.ub.cora.diva.tocorautils.doubles.CoraClientFactorySpy;
 import se.uu.ub.cora.json.builder.JsonBuilderFactory;
 import se.uu.ub.cora.json.builder.org.OrgJsonBuilderFactoryAdapter;
 import se.uu.ub.cora.sqldatabase.RecordReaderFactoryImp;
-import se.uu.ub.cora.tocorautils.DbConfig;
-import se.uu.ub.cora.tocorautils.importing.CoraImporter;
 
 public class FromDbToCoraSubjectCategoryFactoryTest {
 

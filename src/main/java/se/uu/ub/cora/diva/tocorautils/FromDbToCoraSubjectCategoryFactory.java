@@ -18,6 +18,8 @@
  */
 package se.uu.ub.cora.diva.tocorautils;
 
+import importing.CoraImporter;
+import importing.Importer;
 import se.uu.ub.cora.client.CoraClient;
 import se.uu.ub.cora.client.CoraClientConfig;
 import se.uu.ub.cora.client.CoraClientFactory;
@@ -34,11 +36,6 @@ import se.uu.ub.cora.json.builder.JsonBuilderFactory;
 import se.uu.ub.cora.json.builder.org.OrgJsonBuilderFactoryAdapter;
 import se.uu.ub.cora.sqldatabase.RecordReaderFactory;
 import se.uu.ub.cora.sqldatabase.RecordReaderFactoryImp;
-import se.uu.ub.cora.tocorautils.DbConfig;
-import se.uu.ub.cora.tocorautils.FromDbToCora;
-import se.uu.ub.cora.tocorautils.FromDbToCoraFactory;
-import se.uu.ub.cora.tocorautils.importing.CoraImporter;
-import se.uu.ub.cora.tocorautils.importing.Importer;
 
 public class FromDbToCoraSubjectCategoryFactory implements FromDbToCoraFactory {
 
@@ -49,11 +46,12 @@ public class FromDbToCoraSubjectCategoryFactory implements FromDbToCoraFactory {
 			CoraClientConfig coraClientConfig, DbConfig dbConfig) {
 		this.coraClientFactory = coraClientFactory;
 
-		RecordReaderFactory recordReaderFactory = createRecordReaderFactory(dbConfig);
-		FromDbToCoraConverter fromDbToCoraConverter = createConverter(recordReaderFactory);
+		FromDbToCoraConverter fromDbToCoraConverter = createConverter();
 
+		RecordReaderFactory recordReaderFactory = createRecordReaderFactory(dbConfig);
 		RecordCompleterSubjectCategory recordCompleter = RecordCompleterSubjectCategory
 				.usingRecordReaderFactory(recordReaderFactory);
+
 		JsonToDataConverterFactory jsonToDataConverterFactory = new JsonToDataConverterFactoryImp();
 		Importer importer = createImporter(coraClientConfig);
 
@@ -63,12 +61,11 @@ public class FromDbToCoraSubjectCategoryFactory implements FromDbToCoraFactory {
 						jsonToDataConverterFactory, importer);
 	}
 
-	private FromDbToCoraConverter createConverter(RecordReaderFactory recordReaderFactory) {
+	private FromDbToCoraConverter createConverter() {
 		DataToJsonConverterFactory dataToJsonConverterFactory = new DataToJsonConverterFactoryImp();
 		JsonBuilderFactory jsonFactory = createJsonBuilderFactory();
-		return FromDbToCoraSubjectCategoryConverter
-				.usingJsonFactoryConverterFactoryAndReaderFactory(jsonFactory,
-						dataToJsonConverterFactory, recordReaderFactory);
+		return FromDbToCoraSubjectCategoryConverter.usingJsonFactoryAndConverterFactory(jsonFactory,
+				dataToJsonConverterFactory);
 	}
 
 	protected final RecordReaderFactory createRecordReaderFactory(DbConfig dbConfig) {

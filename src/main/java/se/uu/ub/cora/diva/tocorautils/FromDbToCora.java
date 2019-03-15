@@ -1,5 +1,5 @@
 /*
- * Copyright 2019 Uppsala University Library
+ * Copyright 2018 Uppsala University Library
  *
  * This file is part of Cora.
  *
@@ -16,10 +16,12 @@
  *     You should have received a copy of the GNU General Public License
  *     along with Cora.  If not, see <http://www.gnu.org/licenses/>.
  */
-package se.uu.ub.cora.diva.tocorautils.convert;
+package se.uu.ub.cora.diva.tocorautils;
 
-public interface FromDbToCoraConverterFactory {
+import importing.ImportResult;
 
-	FromDbToCoraConverter createConverter();
+public interface FromDbToCora {
+
+	ImportResult importFromTable(String tableName);
 
 }

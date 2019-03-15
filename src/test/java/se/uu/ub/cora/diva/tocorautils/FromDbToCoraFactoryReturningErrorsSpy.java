@@ -20,9 +20,6 @@ package se.uu.ub.cora.diva.tocorautils;
 
 import se.uu.ub.cora.client.CoraClientConfig;
 import se.uu.ub.cora.client.CoraClientFactory;
-import se.uu.ub.cora.tocorautils.DbConfig;
-import se.uu.ub.cora.tocorautils.FromDbToCora;
-import se.uu.ub.cora.tocorautils.FromDbToCoraFactory;
 
 public class FromDbToCoraFactoryReturningErrorsSpy implements FromDbToCoraFactory {
 

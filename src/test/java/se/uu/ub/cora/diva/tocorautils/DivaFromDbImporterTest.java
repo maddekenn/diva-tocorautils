@@ -27,7 +27,6 @@ import org.testng.annotations.Test;
 
 import se.uu.ub.cora.client.CoraClientConfig;
 import se.uu.ub.cora.client.CoraClientFactoryImp;
-import se.uu.ub.cora.tocorautils.DbConfig;
 
 public class DivaFromDbImporterTest {
 

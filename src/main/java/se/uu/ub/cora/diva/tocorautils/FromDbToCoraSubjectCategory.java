@@ -22,6 +22,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import importing.ImportResult;
+import importing.Importer;
 import se.uu.ub.cora.clientdata.ClientDataGroup;
 import se.uu.ub.cora.clientdata.ClientDataRecord;
 import se.uu.ub.cora.clientdata.converter.jsontojava.JsonToDataConverterFactory;
@@ -32,10 +34,6 @@ import se.uu.ub.cora.json.parser.JsonObject;
 import se.uu.ub.cora.json.parser.org.OrgJsonParser;
 import se.uu.ub.cora.sqldatabase.RecordReader;
 import se.uu.ub.cora.sqldatabase.RecordReaderFactory;
-import se.uu.ub.cora.tocorautils.CoraJsonRecord;
-import se.uu.ub.cora.tocorautils.FromDbToCora;
-import se.uu.ub.cora.tocorautils.importing.ImportResult;
-import se.uu.ub.cora.tocorautils.importing.Importer;
 
 public class FromDbToCoraSubjectCategory implements FromDbToCora {
 

@@ -29,18 +29,16 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import se.uu.ub.cora.clientdata.ClientDataGroup;
+import se.uu.ub.cora.diva.tocorautils.CoraJsonRecord;
 import se.uu.ub.cora.diva.tocorautils.doubles.CoraClientSpy;
-import se.uu.ub.cora.diva.tocorautils.doubles.RecordReaderFactorySpy;
 import se.uu.ub.cora.json.builder.JsonBuilderFactory;
 import se.uu.ub.cora.json.builder.org.OrgJsonBuilderFactoryAdapter;
-import se.uu.ub.cora.tocorautils.CoraJsonRecord;
 
 public class FromDbToCoraSubjectCategoryConverterTest {
-	CoraClientSpy coraClient;
+	se.uu.ub.cora.diva.tocorautils.doubles.CoraClientSpy coraClient;
 	private JsonBuilderFactory jsonFactory;
 	private FromDbToCoraSubjectCategoryConverter fromDbToCoraSubjectCategoryConverter;
 	private DataToJsonConverterFactorySpy dataToJsonConverterFactory;
-	private RecordReaderFactorySpy recordReaderFactory;
 
 	private Map<String, String> rowFromDb = new HashMap<>();
 
@@ -54,10 +52,8 @@ public class FromDbToCoraSubjectCategoryConverterTest {
 		coraClient = new CoraClientSpy();
 		jsonFactory = new OrgJsonBuilderFactoryAdapter();
 		dataToJsonConverterFactory = new DataToJsonConverterFactorySpy();
-		recordReaderFactory = new RecordReaderFactorySpy();
 		fromDbToCoraSubjectCategoryConverter = FromDbToCoraSubjectCategoryConverter
-				.usingJsonFactoryConverterFactoryAndReaderFactory(jsonFactory,
-						dataToJsonConverterFactory, recordReaderFactory);
+				.usingJsonFactoryAndConverterFactory(jsonFactory, dataToJsonConverterFactory);
 
 	}
 

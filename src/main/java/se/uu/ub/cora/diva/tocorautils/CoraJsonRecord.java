@@ -18,24 +18,29 @@
  */
 package se.uu.ub.cora.diva.tocorautils;
 
-import se.uu.ub.cora.client.CoraClientConfig;
-import se.uu.ub.cora.client.CoraClientFactory;
+public final class CoraJsonRecord {
 
-public class FromDbToCoraFactorySpy implements FromDbToCoraFactory {
+	public final String recordType;
+	public final String json;
+	public String recordId = null;
 
-	public String coraClientFactoryClassName;
-	public CoraClientConfig coraClientConfig;
-	public DbConfig dbConfig;
-	public FromDbToCoraSpy factored;
-	public CoraClientFactory coraClientFactory;
+	public static CoraJsonRecord withRecordTypeAndJson(String recordType, String json) {
+		return new CoraJsonRecord(recordType, json);
+	}
 
-	@Override
-	public FromDbToCora factorFromDbToCora(CoraClientFactory coraClientFactory,
-			CoraClientConfig coraClientConfig, DbConfig dbConfig) {
-		this.coraClientFactory = coraClientFactory;
-		this.coraClientConfig = coraClientConfig;
-		this.dbConfig = dbConfig;
-		factored = new FromDbToCoraSpy();
-		return factored;
+	private CoraJsonRecord(String recordType, String json) {
+		this.recordType = recordType;
+		this.json = json;
+	}
+
+	public CoraJsonRecord(String recordType, String recordId, String json) {
+		this.recordType = recordType;
+		this.recordId = recordId;
+		this.json = json;
+	}
+
+	public static CoraJsonRecord withRecordTypeAndIdAndJson(String recordType, String recordId,
+			String json) {
+		return new CoraJsonRecord(recordType, recordId, json);
 	}
 }

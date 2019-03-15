@@ -1,5 +1,5 @@
 /*
- * Copyright 2018 Uppsala University Library
+ * Copyright 2019 Uppsala University Library
  *
  * This file is part of Cora.
  *
@@ -24,13 +24,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.StringJoiner;
 
+import importing.ImportResult;
 import se.uu.ub.cora.client.CoraClientConfig;
 import se.uu.ub.cora.client.CoraClientFactory;
 import se.uu.ub.cora.client.CoraClientFactoryImp;
-import se.uu.ub.cora.tocorautils.DbConfig;
-import se.uu.ub.cora.tocorautils.FromDbToCora;
-import se.uu.ub.cora.tocorautils.FromDbToCoraFactory;
-import se.uu.ub.cora.tocorautils.importing.ImportResult;
 
 public final class DivaFromDbImporter {
 	private static List<DivaFromDbImporter> instances = new ArrayList<>();

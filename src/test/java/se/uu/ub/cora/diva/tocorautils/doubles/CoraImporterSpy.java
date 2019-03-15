@@ -21,9 +21,9 @@ package se.uu.ub.cora.diva.tocorautils.doubles;
 import java.util.List;
 import java.util.Map;
 
-import se.uu.ub.cora.tocorautils.CoraJsonRecord;
-import se.uu.ub.cora.tocorautils.importing.ImportResult;
-import se.uu.ub.cora.tocorautils.importing.Importer;
+import importing.ImportResult;
+import importing.Importer;
+import se.uu.ub.cora.diva.tocorautils.CoraJsonRecord;
 
 public class CoraImporterSpy implements Importer {
 

@@ -16,30 +16,18 @@
  *     You should have received a copy of the GNU General Public License
  *     along with Cora.  If not, see <http://www.gnu.org/licenses/>.
  */
-package se.uu.ub.cora.diva.tocorautils.doubles;
+package importing;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 import se.uu.ub.cora.diva.tocorautils.CoraJsonRecord;
-import se.uu.ub.cora.diva.tocorautils.convert.FromDbToCoraConverter;
 
-public class FromDbToCoraConverterSpy implements FromDbToCoraConverter {
+public class ImportResult {
 
-	public List<Map<String, String>> rowsFromDb = new ArrayList<>();
-	public List<List<CoraJsonRecord>> returnedList;
+	public int noOfImportedOk = 0;
+	public int noOfUpdatedOk = 0;
+	public List<String> listOfFails = new ArrayList<>();
 	public List<CoraJsonRecord> returnedJsonRecords = new ArrayList<>();
-	String json = "{\"name\":\"groupNameInData\", \"children\":[]}";
-
-	@Override
-	public CoraJsonRecord convertToJsonFromRowFromDb(Map<String, String> rowFromDb) {
-		rowsFromDb.add(rowFromDb);
-		CoraJsonRecord jsonRecord = CoraJsonRecord
-				.withRecordTypeAndJson("recordTypeFromDbToCoraConverterSpy", json);
-		returnedJsonRecords.add(jsonRecord);
-
-		return jsonRecord;
-	}
 
 }
