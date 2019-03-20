@@ -41,7 +41,7 @@ public class RecordCompleterSubjectCategory implements RecordCompleter {
 		String subjectId = getSubjectIdFromDataGroup(dataGroup);
 		RecordReader factoredReader = recordReaderFactory.factor();
 		Map<String, String> conditions = new HashMap<>();
-		conditions.put("subject_id", subjectId);
+		conditions.put("parent_subject_id", subjectId);
 		return factoredReader.readFromTableUsingConditions("subject_parent_view", conditions);
 	}
 
@@ -65,7 +65,7 @@ public class RecordCompleterSubjectCategory implements RecordCompleter {
 		parentLink.addChild(ClientDataAtomic.withNameInDataAndValue("linkedRecordType",
 				NATIONAL_SUBJECT_CATEGORY));
 		parentLink.addChild(ClientDataAtomic.withNameInDataAndValue("linkedRecordId",
-				parentRowFromDb.get("parent_subject_id")));
+				parentRowFromDb.get("subject_id")));
 		parentGroup.addChild(parentLink);
 	}
 

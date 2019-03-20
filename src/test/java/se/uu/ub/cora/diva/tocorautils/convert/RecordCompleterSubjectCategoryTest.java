@@ -29,7 +29,7 @@ public class RecordCompleterSubjectCategoryTest {
 
 		RecordReaderSpy factoredReader = recordReaderFactory.factored;
 		assertEquals(factoredReader.usedTableNames.get(0), "subject_parent_view");
-		assertEquals(factoredReader.usedConditions.get("subject_id"), "someSubjectId");
+		assertEquals(factoredReader.usedConditions.get("parent_subject_id"), "someSubjectId");
 
 		assertEquals(completedMetadataJson,
 				"{\"children\":[{\"children\":[{\"name\":\"id\",\"value\":\"someSubjectId\"}],\"name\":\"recordInfo\"}],\"name\":\"nationalSubjectCategory\"}");
@@ -48,7 +48,8 @@ public class RecordCompleterSubjectCategoryTest {
 
 		RecordReaderSpy factoredReader = recordReaderFactory.factored;
 		assertEquals(factoredReader.usedTableNames.get(0), "subject_parent_view");
-		assertEquals(factoredReader.usedConditions.get("subject_id"), "someSubjectWithParentId");
+		assertEquals(factoredReader.usedConditions.get("parent_subject_id"),
+				"someSubjectWithParentId");
 
 		assertEquals(completedMetadataJson,
 				"{\"children\":[{\"children\":[{\"name\":\"id\",\"value\":\"someSubjectWithParentId\"}],\"name\":\"recordInfo\"},{\"repeatId\":\"0\",\"children\":[{\"children\":[{\"name\":\"linkedRecordType\",\"value\":\"nationalSubjectCategory\"},{\"name\":\"linkedRecordId\",\"value\":\"someParent0\"}],\"name\":\"nationalSubjectCategory\"}],\"name\":\"nationalSubjectCategoryParent\"}],\"name\":\"nationalSubjectCategory\"}");
@@ -67,7 +68,8 @@ public class RecordCompleterSubjectCategoryTest {
 
 		RecordReaderSpy factoredReader = recordReaderFactory.factored;
 		assertEquals(factoredReader.usedTableNames.get(0), "subject_parent_view");
-		assertEquals(factoredReader.usedConditions.get("subject_id"), "someSubjectWithParentId");
+		assertEquals(factoredReader.usedConditions.get("parent_subject_id"),
+				"someSubjectWithParentId");
 
 		assertEquals(completedMetadataJson,
 				"{\"children\":[{\"children\":[{\"name\":\"id\",\"value\":\"someSubjectWithParentId\"}],\"name\":\"recordInfo\"},{\"repeatId\":\"0\",\"children\":[{\"children\":[{\"name\":\"linkedRecordType\",\"value\":\"nationalSubjectCategory\"},{\"name\":\"linkedRecordId\",\"value\":\"someParent0\"}],\"name\":\"nationalSubjectCategory\"}],\"name\":\"nationalSubjectCategoryParent\"},{\"repeatId\":\"1\",\"children\":[{\"children\":[{\"name\":\"linkedRecordType\",\"value\":\"nationalSubjectCategory\"},{\"name\":\"linkedRecordId\",\"value\":\"someParent1\"}],\"name\":\"nationalSubjectCategory\"}],\"name\":\"nationalSubjectCategoryParent\"}],\"name\":\"nationalSubjectCategory\"}");

@@ -53,11 +53,11 @@ public class RecordReaderSpy implements RecordReader {
 		usedConditions = conditions;
 		usedTableNames.add(tableName);
 		returnedListForReadAllWithConditions = new ArrayList<>();
-		if (idsToReturnParent.contains(conditions.get("subject_id"))) {
+		if (idsToReturnParent.contains(conditions.get("parent_subject_id"))) {
 			for (int i = 0; i < noOfParentsToReturn; i++) {
 				Map<String, String> map = new HashMap<>();
-				map.put("subject_id", "someSubjectId" + i);
-				map.put("parent_subject_id", "someParent" + i);
+				map.put("subject_id", "someParent" + i);
+				map.put("parent_subject_id", "someSubjectId" + i);
 				returnedListForReadAllWithConditions.add(map);
 			}
 		}
