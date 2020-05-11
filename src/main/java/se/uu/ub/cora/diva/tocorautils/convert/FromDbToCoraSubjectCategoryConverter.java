@@ -73,8 +73,8 @@ public class FromDbToCoraSubjectCategoryConverter implements FromDbToCoraConvert
 
 	private ClientDataGroup createRecordInfo(Map<String, Object> rowFromDb) {
 		ClientDataGroup recordInfo = ClientDataGroup.withNameInData("recordInfo");
-		recordInfo.addChild(
-				ClientDataAtomic.withNameInDataAndValue("id", (String) rowFromDb.get(SUBJECT_ID)));
+		recordInfo.addChild(ClientDataAtomic.withNameInDataAndValue("id",
+				String.valueOf(rowFromDb.get(SUBJECT_ID))));
 		ClientDataGroup dataDivider = createDataDivider();
 		recordInfo.addChild(dataDivider);
 		return recordInfo;
@@ -94,14 +94,23 @@ public class FromDbToCoraSubjectCategoryConverter implements FromDbToCoraConvert
 		nationalSubjectCategory.addChild(createSubjectCodeChild(rowFromDb));
 	}
 
-	private ClientDataAtomic createDefaultNameChild(Map<String, Object> rowFromDb) {
-		return ClientDataAtomic.withNameInDataAndValue("nationalSubjectCategoryName",
-				(String) rowFromDb.get("default_name"));
+	private ClientDataGroup createDefaultNameChild(Map<String, Object> rowFromDb) {
+		ClientDataGroup nameGroup = ClientDataGroup.withNameInData("name");
+		ClientDataAtomic name = ClientDataAtomic.withNameInDataAndValue(
+				"nationalSubjectCategoryName", (String) rowFromDb.get("default_name"));
+		nameGroup.addChild(ClientDataAtomic.withNameInDataAndValue("language", "sv"));
+		nameGroup.addChild(name);
+		return nameGroup;
 	}
 
-	private ClientDataAtomic createAlternativeNameChild(Map<String, Object> rowFromDb) {
-		return ClientDataAtomic.withNameInDataAndValue("nationalSubjectCategoryAlternativeName",
+	private ClientDataGroup createAlternativeNameChild(Map<String, Object> rowFromDb) {
+		ClientDataGroup alternativeNameGroup = ClientDataGroup.withNameInData("alternativeName");
+		ClientDataAtomic alternativeName = ClientDataAtomic.withNameInDataAndValue(
+				"nationalSubjectCategoryAlternativeName",
 				(String) rowFromDb.get("alternative_name"));
+		alternativeNameGroup.addChild(alternativeName);
+		alternativeNameGroup.addChild(ClientDataAtomic.withNameInDataAndValue("language", "en"));
+		return alternativeNameGroup;
 	}
 
 	private ClientDataAtomic createSubjectCodeChild(Map<String, Object> rowFromDb) {

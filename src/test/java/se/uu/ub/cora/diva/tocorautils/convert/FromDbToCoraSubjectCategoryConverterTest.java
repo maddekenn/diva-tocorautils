@@ -44,7 +44,7 @@ public class FromDbToCoraSubjectCategoryConverterTest {
 
 	@BeforeMethod
 	public void beforeMethod() {
-		rowFromDb.put("subject_id", "406");
+		rowFromDb.put("subject_id", 406);
 		rowFromDb.put("default_name", "Some subject category");
 		rowFromDb.put("subject_code", "someSubjectCode");
 		rowFromDb.put("alternative_name", "Some alternative name");
@@ -67,7 +67,6 @@ public class FromDbToCoraSubjectCategoryConverterTest {
 
 		assertEquals(dataToJsonConverterFactory.calledNumOfTimes, 1);
 		assertCorrectConversion(coraJsonRecord);
-		// assertParentTableWasReadCorrectly();
 		assertFalse(
 				groupSentToConverter.containsChildWithNameInData("nationalSubjectCategoryParent"));
 
@@ -91,21 +90,22 @@ public class FromDbToCoraSubjectCategoryConverterTest {
 				dataToJsonConverterSpy.jsonObjectBuilder.toJsonFormattedString());
 	}
 
-	// private void assertParentTableWasReadCorrectly() {
-	// RecordReaderSpy factored = recordReaderFactory.factored;
-	// Map<String, String> usedConditions = factored.usedConditions;
-	// assertEquals(usedConditions.size(), 1);
-	// assertEquals(usedConditions.get("subject_id"), rowFromDb.get("subject_id"));
-	// }
-
 	private void assertCorrectGroupSentToConverterUsingGroupNameAlternativeNameAndCode(
 			ClientDataGroup groupSentToConverter, String name, String alternativeName,
 			String expected) {
 		assertEquals(groupSentToConverter.getNameInData(), "nationalSubjectCategory");
-		assertEquals(groupSentToConverter
-				.getFirstAtomicValueWithNameInData("nationalSubjectCategoryName"), name);
-		assertEquals(groupSentToConverter.getFirstAtomicValueWithNameInData(
+
+		ClientDataGroup nameGroup = groupSentToConverter.getFirstGroupWithNameInData("name");
+		assertEquals(nameGroup.getFirstAtomicValueWithNameInData("nationalSubjectCategoryName"),
+				name);
+		assertEquals(nameGroup.getFirstAtomicValueWithNameInData("language"), "sv");
+
+		ClientDataGroup alternativeNameGroup = groupSentToConverter
+				.getFirstGroupWithNameInData("alternativeName");
+		assertEquals(alternativeNameGroup.getFirstAtomicValueWithNameInData(
 				"nationalSubjectCategoryAlternativeName"), alternativeName);
+		assertEquals(alternativeNameGroup.getFirstAtomicValueWithNameInData("language"), "en");
+
 		assertEquals(groupSentToConverter.getFirstAtomicValueWithNameInData("subjectCode"),
 				expected);
 	}
