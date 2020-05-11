@@ -49,7 +49,7 @@ public class FromDbToCoraSubjectCategoryConverter implements FromDbToCoraConvert
 	}
 
 	@Override
-	public CoraJsonRecord convertToJsonFromRowFromDb(Map<String, String> rowFromDb) {
+	public CoraJsonRecord convertToJsonFromRowFromDb(Map<String, Object> rowFromDb) {
 		ClientDataGroup nationalSubjectCategory = createDataGroupWithRecordInfo(rowFromDb);
 		addMandatoryChildren(rowFromDb, nationalSubjectCategory);
 		String json = convertToJson(nationalSubjectCategory);
@@ -62,7 +62,7 @@ public class FromDbToCoraSubjectCategoryConverter implements FromDbToCoraConvert
 		return converter.toJson();
 	}
 
-	private ClientDataGroup createDataGroupWithRecordInfo(Map<String, String> rowFromDb) {
+	private ClientDataGroup createDataGroupWithRecordInfo(Map<String, Object> rowFromDb) {
 		ClientDataGroup nationalSubjectCategory = ClientDataGroup
 				.withNameInData(NATIONAL_SUBJECT_CATEGORY);
 		ClientDataGroup recordInfo = createRecordInfo(rowFromDb);
@@ -71,10 +71,10 @@ public class FromDbToCoraSubjectCategoryConverter implements FromDbToCoraConvert
 		return nationalSubjectCategory;
 	}
 
-	private ClientDataGroup createRecordInfo(Map<String, String> rowFromDb) {
+	private ClientDataGroup createRecordInfo(Map<String, Object> rowFromDb) {
 		ClientDataGroup recordInfo = ClientDataGroup.withNameInData("recordInfo");
-		recordInfo
-				.addChild(ClientDataAtomic.withNameInDataAndValue("id", rowFromDb.get(SUBJECT_ID)));
+		recordInfo.addChild(
+				ClientDataAtomic.withNameInDataAndValue("id", (String) rowFromDb.get(SUBJECT_ID)));
 		ClientDataGroup dataDivider = createDataDivider();
 		recordInfo.addChild(dataDivider);
 		return recordInfo;
@@ -87,26 +87,26 @@ public class FromDbToCoraSubjectCategoryConverter implements FromDbToCoraConvert
 		return dataDivider;
 	}
 
-	private void addMandatoryChildren(Map<String, String> rowFromDb,
+	private void addMandatoryChildren(Map<String, Object> rowFromDb,
 			ClientDataGroup nationalSubjectCategory) {
 		nationalSubjectCategory.addChild(createDefaultNameChild(rowFromDb));
 		nationalSubjectCategory.addChild(createAlternativeNameChild(rowFromDb));
 		nationalSubjectCategory.addChild(createSubjectCodeChild(rowFromDb));
 	}
 
-	private ClientDataAtomic createDefaultNameChild(Map<String, String> rowFromDb) {
+	private ClientDataAtomic createDefaultNameChild(Map<String, Object> rowFromDb) {
 		return ClientDataAtomic.withNameInDataAndValue("nationalSubjectCategoryName",
-				rowFromDb.get("default_name"));
+				(String) rowFromDb.get("default_name"));
 	}
 
-	private ClientDataAtomic createAlternativeNameChild(Map<String, String> rowFromDb) {
+	private ClientDataAtomic createAlternativeNameChild(Map<String, Object> rowFromDb) {
 		return ClientDataAtomic.withNameInDataAndValue("nationalSubjectCategoryAlternativeName",
-				rowFromDb.get("alternative_name"));
+				(String) rowFromDb.get("alternative_name"));
 	}
 
-	private ClientDataAtomic createSubjectCodeChild(Map<String, String> rowFromDb) {
+	private ClientDataAtomic createSubjectCodeChild(Map<String, Object> rowFromDb) {
 		return ClientDataAtomic.withNameInDataAndValue("subjectCode",
-				rowFromDb.get("subject_code"));
+				(String) rowFromDb.get("subject_code"));
 	}
 
 	public DataToJsonConverterFactory getDataToJsonConverterFactory() {

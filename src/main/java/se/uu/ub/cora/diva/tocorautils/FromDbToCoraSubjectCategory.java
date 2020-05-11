@@ -28,6 +28,7 @@ import se.uu.ub.cora.clientdata.ClientDataGroup;
 import se.uu.ub.cora.clientdata.ClientDataRecord;
 import se.uu.ub.cora.clientdata.converter.jsontojava.JsonToDataConverterFactory;
 import se.uu.ub.cora.clientdata.converter.jsontojava.JsonToDataRecordConverter;
+import se.uu.ub.cora.clientdata.converter.jsontojava.JsonToDataRecordConverterImp;
 import se.uu.ub.cora.diva.tocorautils.convert.FromDbToCoraConverter;
 import se.uu.ub.cora.diva.tocorautils.convert.RecordCompleter;
 import se.uu.ub.cora.json.parser.JsonObject;
@@ -63,7 +64,7 @@ public class FromDbToCoraSubjectCategory implements FromDbToCora {
 
 	@Override
 	public ImportResult importFromTable(String tableName) {
-		List<Map<String, String>> readRows = readFromTable(tableName);
+		List<Map<String, Object>> readRows = readFromTable(tableName);
 
 		List<List<CoraJsonRecord>> convertedRows = convertReadRows(readRows);
 		ImportResult importResult = importer.createInCora(convertedRows);
@@ -75,15 +76,15 @@ public class FromDbToCoraSubjectCategory implements FromDbToCora {
 		return updateImportResult(importResult, importResultForUpdate);
 	}
 
-	private List<Map<String, String>> readFromTable(String tableName) {
+	private List<Map<String, Object>> readFromTable(String tableName) {
 		RecordReader recordReader = recordReaderFactory.factor();
 		return recordReader.readAllFromTable(tableName);
 	}
 
-	private List<List<CoraJsonRecord>> convertReadRows(List<Map<String, String>> readAllFromTable) {
+	private List<List<CoraJsonRecord>> convertReadRows(List<Map<String, Object>> readAllFromTable) {
 		List<List<CoraJsonRecord>> convertedRows = new ArrayList<>();
 		List<CoraJsonRecord> convertedInnerRows = new ArrayList<>();
-		for (Map<String, String> rowFromDb : readAllFromTable) {
+		for (Map<String, Object> rowFromDb : readAllFromTable) {
 			convertRow(convertedInnerRows, rowFromDb);
 		}
 		convertedRows.add(convertedInnerRows);
@@ -91,7 +92,7 @@ public class FromDbToCoraSubjectCategory implements FromDbToCora {
 	}
 
 	private void convertRow(List<CoraJsonRecord> convertedInnerRows,
-			Map<String, String> rowFromDb) {
+			Map<String, Object> rowFromDb) {
 		CoraJsonRecord converterRecord = fromDbToCoraConverter
 				.convertToJsonFromRowFromDb(rowFromDb);
 		convertedInnerRows.add(converterRecord);
@@ -117,9 +118,9 @@ public class FromDbToCoraSubjectCategory implements FromDbToCora {
 		OrgJsonParser jsonParser = new OrgJsonParser();
 		JsonObject jsonObject = (JsonObject) jsonParser.parseString(json);
 
-		JsonToDataRecordConverter recordConverter = JsonToDataRecordConverter
-				.forJsonObjectUsingConverterFactory(jsonObject, jsonToDataConverterFactory);
-		ClientDataRecord record = recordConverter.toInstance();
+		JsonToDataRecordConverter recordConverter = JsonToDataRecordConverterImp
+				.usingConverterFactory(jsonToDataConverterFactory);
+		ClientDataRecord record = (ClientDataRecord) recordConverter.toInstance(jsonObject);
 		return record.getClientDataGroup();
 	}
 

@@ -24,6 +24,6 @@ import se.uu.ub.cora.diva.tocorautils.CoraJsonRecord;
 
 public interface FromDbToCoraConverter {
 
-	CoraJsonRecord convertToJsonFromRowFromDb(Map<String, String> rowFromDb);
+	CoraJsonRecord convertToJsonFromRowFromDb(Map<String, Object> rowFromDb);
 
 }

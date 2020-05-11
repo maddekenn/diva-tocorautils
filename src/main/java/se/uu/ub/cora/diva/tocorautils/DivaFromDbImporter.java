@@ -25,9 +25,9 @@ import java.util.List;
 import java.util.StringJoiner;
 
 import importing.ImportResult;
-import se.uu.ub.cora.client.CoraClientConfig;
-import se.uu.ub.cora.client.CoraClientFactory;
-import se.uu.ub.cora.client.CoraClientFactoryImp;
+import se.uu.ub.cora.javaclient.CoraClientConfig;
+import se.uu.ub.cora.javaclient.cora.CoraClientFactory;
+import se.uu.ub.cora.javaclient.cora.CoraClientFactoryImp;
 
 public final class DivaFromDbImporter {
 	private static List<DivaFromDbImporter> instances = new ArrayList<>();

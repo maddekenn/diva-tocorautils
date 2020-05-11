@@ -8,7 +8,7 @@ import se.uu.ub.cora.clientdata.ClientDataAtomic;
 import se.uu.ub.cora.clientdata.ClientDataGroup;
 import se.uu.ub.cora.clientdata.converter.javatojson.DataToJsonConverter;
 import se.uu.ub.cora.clientdata.converter.javatojson.DataToJsonConverterFactory;
-import se.uu.ub.cora.clientdata.converter.javatojson.DataToJsonWithoutActionLinksForLinksConverterFactory;
+import se.uu.ub.cora.clientdata.converter.javatojson.DataToJsonConverterFactoryImp;
 import se.uu.ub.cora.json.builder.org.OrgJsonBuilderFactoryAdapter;
 import se.uu.ub.cora.sqldatabase.RecordReader;
 import se.uu.ub.cora.sqldatabase.RecordReaderFactory;
@@ -28,19 +28,19 @@ public class RecordCompleterSubjectCategory implements RecordCompleter {
 
 	@Override
 	public String completeMetadata(ClientDataGroup dataGroup) {
-		List<Map<String, String>> readParents = readParents(dataGroup);
+		List<Map<String, Object>> readParents = readParents(dataGroup);
 		int repeatId = 0;
-		for (Map<String, String> parentRow : readParents) {
+		for (Map<String, Object> parentRow : readParents) {
 			createAndAddParentToDataGroupUsingRepeatIdAndRowFromDb(dataGroup, repeatId, parentRow);
 			repeatId++;
 		}
 		return convertToJson(dataGroup);
 	}
 
-	private List<Map<String, String>> readParents(ClientDataGroup dataGroup) {
+	private List<Map<String, Object>> readParents(ClientDataGroup dataGroup) {
 		String subjectId = getSubjectIdFromDataGroup(dataGroup);
 		RecordReader factoredReader = recordReaderFactory.factor();
-		Map<String, String> conditions = new HashMap<>();
+		Map<String, Object> conditions = new HashMap<>();
 		conditions.put("parent_subject_id", subjectId);
 		return factoredReader.readFromTableUsingConditions("subject_parent_view", conditions);
 	}
@@ -51,7 +51,7 @@ public class RecordCompleterSubjectCategory implements RecordCompleter {
 	}
 
 	private void createAndAddParentToDataGroupUsingRepeatIdAndRowFromDb(ClientDataGroup dataGroup,
-			int repeatId, Map<String, String> parentRow) {
+			int repeatId, Map<String, Object> parentRow) {
 		ClientDataGroup parentGroup = ClientDataGroup
 				.withNameInData("nationalSubjectCategoryParent");
 		createAndAddParentLink(parentRow, parentGroup);
@@ -59,21 +59,22 @@ public class RecordCompleterSubjectCategory implements RecordCompleter {
 		dataGroup.addChild(parentGroup);
 	}
 
-	private void createAndAddParentLink(Map<String, String> parentRowFromDb,
+	private void createAndAddParentLink(Map<String, Object> parentRowFromDb,
 			ClientDataGroup parentGroup) {
 		ClientDataGroup parentLink = ClientDataGroup.withNameInData(NATIONAL_SUBJECT_CATEGORY);
 		parentLink.addChild(ClientDataAtomic.withNameInDataAndValue("linkedRecordType",
 				NATIONAL_SUBJECT_CATEGORY));
 		parentLink.addChild(ClientDataAtomic.withNameInDataAndValue("linkedRecordId",
-				parentRowFromDb.get("subject_id")));
+				(String) parentRowFromDb.get("subject_id")));
 		parentGroup.addChild(parentLink);
 	}
 
 	private String convertToJson(ClientDataGroup nationalSubjectCategory) {
-		DataToJsonConverterFactory dataToJsonConverterFactory = new DataToJsonWithoutActionLinksForLinksConverterFactory();
+		DataToJsonConverterFactory dataToJsonConverterFactory = new DataToJsonConverterFactoryImp();
 		OrgJsonBuilderFactoryAdapter jsonBuilderFactory = new OrgJsonBuilderFactoryAdapter();
 		DataToJsonConverter converter = dataToJsonConverterFactory
-				.createForClientDataElement(jsonBuilderFactory, nationalSubjectCategory);
+				.createForClientDataElementIncludingActionLinks(jsonBuilderFactory,
+						nationalSubjectCategory, false);
 		return converter.toJson();
 
 	}

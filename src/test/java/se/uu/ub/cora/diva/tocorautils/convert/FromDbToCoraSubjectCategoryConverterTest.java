@@ -40,7 +40,7 @@ public class FromDbToCoraSubjectCategoryConverterTest {
 	private FromDbToCoraSubjectCategoryConverter fromDbToCoraSubjectCategoryConverter;
 	private DataToJsonConverterFactorySpy dataToJsonConverterFactory;
 
-	private Map<String, String> rowFromDb = new HashMap<>();
+	private Map<String, Object> rowFromDb = new HashMap<>();
 
 	@BeforeMethod
 	public void beforeMethod() {

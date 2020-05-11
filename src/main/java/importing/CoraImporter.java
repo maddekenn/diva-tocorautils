@@ -20,8 +20,8 @@ package importing;
 
 import java.util.List;
 
-import se.uu.ub.cora.client.CoraClient;
 import se.uu.ub.cora.diva.tocorautils.CoraJsonRecord;
+import se.uu.ub.cora.javaclient.cora.CoraClient;
 
 public final class CoraImporter implements Importer {
 

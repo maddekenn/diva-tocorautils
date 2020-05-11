@@ -27,13 +27,13 @@ import se.uu.ub.cora.diva.tocorautils.convert.FromDbToCoraConverter;
 
 public class FromDbToCoraConverterSpy implements FromDbToCoraConverter {
 
-	public List<Map<String, String>> rowsFromDb = new ArrayList<>();
+	public List<Map<String, Object>> rowsFromDb = new ArrayList<>();
 	public List<List<CoraJsonRecord>> returnedList;
 	public List<CoraJsonRecord> returnedJsonRecords = new ArrayList<>();
 	String json = "{\"name\":\"groupNameInData\", \"children\":[]}";
 
 	@Override
-	public CoraJsonRecord convertToJsonFromRowFromDb(Map<String, String> rowFromDb) {
+	public CoraJsonRecord convertToJsonFromRowFromDb(Map<String, Object> rowFromDb) {
 		rowsFromDb.add(rowFromDb);
 		CoraJsonRecord jsonRecord = CoraJsonRecord
 				.withRecordTypeAndJson("recordTypeFromDbToCoraConverterSpy", json);
