@@ -25,11 +25,11 @@ import java.util.List;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-import importing.ImportResult;
 import se.uu.ub.cora.diva.tocorautils.doubles.CoraImporterSpy;
 import se.uu.ub.cora.diva.tocorautils.doubles.FromDbToCoraConverterSpy;
 import se.uu.ub.cora.diva.tocorautils.doubles.RecordReaderFactorySpy;
 import se.uu.ub.cora.diva.tocorautils.doubles.RecordReaderSpy;
+import se.uu.ub.cora.diva.tocorautils.importing.ImportResult;
 
 public class FromDbToCoraSubjectCategoryTest {
 

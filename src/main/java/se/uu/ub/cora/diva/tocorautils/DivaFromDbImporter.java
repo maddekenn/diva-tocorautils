@@ -24,7 +24,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.StringJoiner;
 
-import importing.ImportResult;
+import se.uu.ub.cora.diva.tocorautils.importing.ImportResult;
 import se.uu.ub.cora.javaclient.CoraClientConfig;
 import se.uu.ub.cora.javaclient.cora.CoraClientFactory;
 import se.uu.ub.cora.javaclient.cora.CoraClientFactoryImp;

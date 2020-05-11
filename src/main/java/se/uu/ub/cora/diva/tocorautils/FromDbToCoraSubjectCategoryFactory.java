@@ -18,8 +18,6 @@
  */
 package se.uu.ub.cora.diva.tocorautils;
 
-import importing.CoraImporter;
-import importing.Importer;
 import se.uu.ub.cora.clientdata.converter.javatojson.DataToJsonConverterFactory;
 import se.uu.ub.cora.clientdata.converter.javatojson.DataToJsonConverterFactoryImp;
 import se.uu.ub.cora.clientdata.converter.jsontojava.JsonToDataConverterFactory;
@@ -29,6 +27,8 @@ import se.uu.ub.cora.connection.SqlConnectionProvider;
 import se.uu.ub.cora.diva.tocorautils.convert.FromDbToCoraConverter;
 import se.uu.ub.cora.diva.tocorautils.convert.FromDbToCoraSubjectCategoryConverter;
 import se.uu.ub.cora.diva.tocorautils.convert.RecordCompleterSubjectCategory;
+import se.uu.ub.cora.diva.tocorautils.importing.CoraImporter;
+import se.uu.ub.cora.diva.tocorautils.importing.Importer;
 import se.uu.ub.cora.javaclient.CoraClientConfig;
 import se.uu.ub.cora.javaclient.cora.CoraClient;
 import se.uu.ub.cora.javaclient.cora.CoraClientFactory;

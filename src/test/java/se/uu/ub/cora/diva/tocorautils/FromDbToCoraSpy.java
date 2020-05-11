@@ -18,7 +18,7 @@
  */
 package se.uu.ub.cora.diva.tocorautils;
 
-import importing.ImportResult;
+import se.uu.ub.cora.diva.tocorautils.importing.ImportResult;
 
 public class FromDbToCoraSpy implements FromDbToCora {
 

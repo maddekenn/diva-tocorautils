@@ -16,7 +16,7 @@
  *     You should have received a copy of the GNU General Public License
  *     along with Cora.  If not, see <http://www.gnu.org/licenses/>.
  */
-package importing;
+package se.uu.ub.cora.diva.tocorautils.importing;
 
 import static org.testng.Assert.assertEquals;
 
@@ -28,6 +28,8 @@ import org.testng.annotations.Test;
 
 import se.uu.ub.cora.diva.tocorautils.CoraJsonRecord;
 import se.uu.ub.cora.diva.tocorautils.doubles.CoraClientSpy;
+import se.uu.ub.cora.diva.tocorautils.importing.CoraImporter;
+import se.uu.ub.cora.diva.tocorautils.importing.ImportResult;
 
 public class CoraImporterTest {
 

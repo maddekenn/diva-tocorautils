@@ -17,7 +17,7 @@
  *     You should have received a copy of the GNU General Public License
  *     along with Cora.  If not, see <http://www.gnu.org/licenses/>.
  */
-package importing;
+package se.uu.ub.cora.diva.tocorautils.importing;
 
 import java.util.List;
 
