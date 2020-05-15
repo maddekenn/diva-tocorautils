@@ -28,10 +28,13 @@ import se.uu.ub.cora.javaclient.cora.CoraClientException;
 
 public class CoraClientSpy implements CoraClient {
 
+	public List<String> readRecordTypes = new ArrayList<>();
 	public List<String> createdRecordTypes = new ArrayList<>();
 	public List<String> updatedRecordTypes = new ArrayList<>();
 	public List<String> updatedRecordIds = new ArrayList<>();
 	public List<String> jsonStrings = new ArrayList<>();
+	public List<ClientDataGroup> updatedDataGroups = new ArrayList<>();
+	public String jsonToReturn;
 
 	@Override
 	public String create(String recordType, String json) {
@@ -67,8 +70,9 @@ public class CoraClientSpy implements CoraClient {
 
 	@Override
 	public String readList(String recordType) {
-		// TODO Auto-generated method stub
-		return null;
+		readRecordTypes.add(recordType);
+		jsonToReturn = "some json string with list from spy";
+		return jsonToReturn;
 	}
 
 	@Override
@@ -91,7 +95,9 @@ public class CoraClientSpy implements CoraClient {
 
 	@Override
 	public String update(String recordType, String recordId, ClientDataGroup dataGroup) {
-		// TODO Auto-generated method stub
+		updatedRecordTypes.add(recordType);
+		updatedRecordIds.add(recordId);
+		updatedDataGroups.add(dataGroup);
 		return null;
 	}
 

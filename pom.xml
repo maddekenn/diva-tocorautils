@@ -38,6 +38,7 @@
 		<sqldatabase.version>2.3.1</sqldatabase.version>
 		<json.version>2.0.1</json.version>
 		<javaclient.version>1.6.0</javaclient.version>
+		<batchrunner.version>0.1-SNAPSHOT</batchrunner.version>
 	</properties>
 
 	<scm>
@@ -82,6 +83,12 @@
 			<groupId>se.uu.ub.cora</groupId>
 			<artifactId>javaclient</artifactId>
 			<version>${javaclient.version}</version>
+			<scope>compile</scope>
+		</dependency>
+		<dependency>
+			<groupId>se.uu.ub.cora</groupId>
+			<artifactId>batchrunner</artifactId>
+			<version>${batchrunner.version}</version>
 			<scope>compile</scope>
 		</dependency>
 		<dependency>
