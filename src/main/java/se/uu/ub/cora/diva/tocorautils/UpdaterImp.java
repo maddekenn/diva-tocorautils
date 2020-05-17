@@ -31,12 +31,16 @@ public class UpdaterImp implements Updater {
 	private JsonToClientData jsonToClientData;
 	private DataGroupChangerFactory changerFactory;
 
-	public UpdaterImp(CoraClient coraClient, JsonToClientData jsonToClientData,
+	public static UpdaterImp usingCoraClientJsonToClientDataAndChangerFactory(CoraClient coraClient,
+			JsonToClientData jsonToClientData, DataGroupChangerFactory changerFactory) {
+		return new UpdaterImp(coraClient, jsonToClientData, changerFactory);
+	}
+
+	private UpdaterImp(CoraClient coraClient, JsonToClientData jsonToClientData,
 			DataGroupChangerFactory changerFactory) {
 		this.coraClient = coraClient;
 		this.jsonToClientData = jsonToClientData;
 		this.changerFactory = changerFactory;
-
 	}
 
 	@Override
@@ -63,8 +67,7 @@ public class UpdaterImp implements Updater {
 
 	private ClientDataGroup getDataGroup(ClientData clientData) {
 		ClientDataRecord clientDataRecord = (ClientDataRecord) clientData;
-		ClientDataGroup clientDataGroup = clientDataRecord.getClientDataGroup();
-		return clientDataGroup;
+		return clientDataRecord.getClientDataGroup();
 	}
 
 	private String extractId(ClientDataGroup clientDataGroup) {

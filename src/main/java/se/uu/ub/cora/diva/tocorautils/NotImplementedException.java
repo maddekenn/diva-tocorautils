@@ -1,5 +1,5 @@
 /*
- * Copyright 2020 Uppsala University Library
+ * Copyright 2018 Uppsala University Library
  *
  * This file is part of Cora.
  *
@@ -18,8 +18,16 @@
  */
 package se.uu.ub.cora.diva.tocorautils;
 
-public interface Updater {
+public final class NotImplementedException extends RuntimeException {
 
-	void update(String type);
+	private static final long serialVersionUID = 1L;
+
+	public static NotImplementedException withMessage(String message) {
+		return new NotImplementedException(message);
+	}
+
+	private NotImplementedException(String message) {
+		super(message);
+	}
 
 }

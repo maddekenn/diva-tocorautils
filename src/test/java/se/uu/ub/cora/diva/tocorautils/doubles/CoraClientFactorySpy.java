@@ -26,12 +26,21 @@ public class CoraClientFactorySpy implements CoraClientFactory {
 	public CoraClientSpy factored;
 	public String userId;
 	public String appToken;
+	public String appTokenVerifierUrl;
+	public String baseUrl;
 
-	public CoraClientFactorySpy() {
-		// TODO Auto-generated constructor stub
+	public static CoraClientFactory usingAppTokenVerifierUrlAndBaseUrl(String appTokenVerifierUrl,
+			String baseUrl) {
+		// TODO Auto-generated method stub
+		return new CoraClientFactorySpy(appTokenVerifierUrl, baseUrl);
 	}
 
 	public CoraClientFactorySpy(String appTokenVerifierUrl, String baseUrl) {
+		this.appTokenVerifierUrl = appTokenVerifierUrl;
+		this.baseUrl = baseUrl;
+	}
+
+	public CoraClientFactorySpy() {
 		// TODO Auto-generated constructor stub
 	}
 
@@ -41,12 +50,6 @@ public class CoraClientFactorySpy implements CoraClientFactory {
 		this.appToken = appToken;
 		factored = new CoraClientSpy();
 		return factored;
-	}
-
-	public static CoraClientFactory usingAppTokenVerifierUrlAndBaseUrl(String appTokenVerifierUrl,
-			String baseUrl) {
-		// TODO Auto-generated method stub
-		return new CoraClientFactorySpy(appTokenVerifierUrl, baseUrl);
 	}
 
 }

@@ -18,8 +18,14 @@
  */
 package se.uu.ub.cora.diva.tocorautils;
 
-public interface Updater {
+public class DataGroupChangerFactoryImp implements DataGroupChangerFactory {
 
-	void update(String type);
+	@Override
+	public DataGroupChanger factor(String type) {
+		if ("nationalSubjectCategory".equals(type)) {
+			return new NationalSubjectChanger();
+		}
+		throw NotImplementedException.withMessage("No changer implemented for: " + type);
+	}
 
 }

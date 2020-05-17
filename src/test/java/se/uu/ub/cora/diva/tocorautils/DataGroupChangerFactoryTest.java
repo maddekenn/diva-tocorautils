@@ -18,8 +18,23 @@
  */
 package se.uu.ub.cora.diva.tocorautils;
 
-public interface Updater {
+import static org.testng.Assert.assertTrue;
 
-	void update(String type);
+import org.testng.annotations.Test;
 
+public class DataGroupChangerFactoryTest {
+
+	@Test
+	public void testFactorNationalSubject() {
+		DataGroupChangerFactory factory = new DataGroupChangerFactoryImp();
+		DataGroupChanger changer = factory.factor("nationalSubjectCategory");
+		assertTrue(changer instanceof NationalSubjectChanger);
+	}
+
+	@Test(expectedExceptions = NotImplementedException.class, expectedExceptionsMessageRegExp = ""
+			+ "No changer implemented for: nonExistingType")
+	public void testNotImplemented() {
+		DataGroupChangerFactory factory = new DataGroupChangerFactoryImp();
+		factory.factor("nonExistingType");
+	}
 }

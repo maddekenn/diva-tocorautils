@@ -29,7 +29,7 @@ public class UpdaterTest {
 
 	@Test
 	public void testInit() {
-		Updater updater = new UpdaterImp(coraClient, jsonToClientData, changerFactory);
+		Updater updater = UpdaterImp.usingCoraClientJsonToClientDataAndChangerFactory(coraClient, jsonToClientData, changerFactory);
 
 		String type = "nationalSubjectCategory";
 		updater.update(type);
