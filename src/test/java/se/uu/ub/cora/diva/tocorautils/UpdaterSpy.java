@@ -19,6 +19,7 @@
 package se.uu.ub.cora.diva.tocorautils;
 
 import se.uu.ub.cora.batchrunner.JsonToClientData;
+import se.uu.ub.cora.clientdata.converter.jsontojava.JsonToDataConverterFactory;
 import se.uu.ub.cora.javaclient.cora.CoraClient;
 
 public class UpdaterSpy implements Updater {
@@ -28,17 +29,20 @@ public class UpdaterSpy implements Updater {
 	public JsonToClientData jsonToClientData;
 	public DataGroupChangerFactory changerFactory;
 	public boolean updateRecordsCalled = false;
+	public JsonToDataConverterFactory jsonToDataFactory;
 
-	public static UpdaterSpy usingCoraClientJsonToClientDataAndChangerFactory(CoraClient coraClient,
-			JsonToClientData jsonToClientData, DataGroupChangerFactory changerFactory) {
-		return new UpdaterSpy(coraClient, jsonToClientData, changerFactory);
+	public static UpdaterSpy usingCoraClientJsonToClientDataChangerFactoryAndConverterFactory(
+			CoraClient coraClient, JsonToClientData jsonToClientData,
+			DataGroupChangerFactory changerFactory, JsonToDataConverterFactory jsonToDataFactory) {
+		return new UpdaterSpy(coraClient, jsonToClientData, changerFactory, jsonToDataFactory);
 	}
 
 	public UpdaterSpy(CoraClient coraClient, JsonToClientData jsonToClientData,
-			DataGroupChangerFactory changerFactory) {
+			DataGroupChangerFactory changerFactory, JsonToDataConverterFactory jsonToDataFactory) {
 		this.coraClient = coraClient;
 		this.jsonToClientData = jsonToClientData;
 		this.changerFactory = changerFactory;
+		this.jsonToDataFactory = jsonToDataFactory;
 	}
 
 	@Override

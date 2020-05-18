@@ -11,6 +11,8 @@ import org.testng.annotations.Test;
 import se.uu.ub.cora.clientdata.ClientData;
 import se.uu.ub.cora.clientdata.ClientDataGroup;
 import se.uu.ub.cora.clientdata.ClientDataRecord;
+import se.uu.ub.cora.clientdata.converter.jsontojava.JsonToDataConverterFactory;
+import se.uu.ub.cora.clientdata.converter.jsontojava.JsonToDataRecordConverterImp;
 import se.uu.ub.cora.diva.tocorautils.doubles.CoraClientSpy;
 
 public class UpdaterTest {
@@ -18,18 +20,22 @@ public class UpdaterTest {
 	private CoraClientSpy coraClient;
 	private JsonToClientDataSpy jsonToClientData;
 	private DataGroupChangerFactorySpy changerFactory;
+	private JsonToDataConverterFactory jsonToDataFactory;
 
 	@BeforeMethod
 	public void setUp() {
 		coraClient = new CoraClientSpy();
 		jsonToClientData = new JsonToClientDataSpy();
 		changerFactory = new DataGroupChangerFactorySpy();
+		jsonToDataFactory = new JsonToDataConverterFactorySpy();
 
 	}
 
 	@Test
 	public void testInit() {
-		Updater updater = UpdaterImp.usingCoraClientJsonToClientDataAndChangerFactory(coraClient, jsonToClientData, changerFactory);
+		Updater updater = UpdaterImp
+				.usingCoraClientJsonToClientDataChangerFactoryAndConverterFactory(coraClient,
+						jsonToClientData, changerFactory, jsonToDataFactory);
 
 		String type = "nationalSubjectCategory";
 		updater.update(type);
@@ -37,6 +43,9 @@ public class UpdaterTest {
 		assertEquals(coraClient.readRecordTypes.get(0), type);
 		assertEquals(coraClient.jsonToReturn, jsonToClientData.jsonListToConvert);
 		assertEquals(changerFactory.type, type);
+
+		JsonToDataRecordConverterImp converterImp = (JsonToDataRecordConverterImp) jsonToClientData.jsonToDataRecordConverter;
+		assertSame(converterImp.getConverterFactory(), jsonToDataFactory);
 
 		List<ClientData> dataList = jsonToClientData.dataList.getDataList();
 		assertRecordIsReadConvertedAndUpdatedCorrectly(type, dataList, 0);

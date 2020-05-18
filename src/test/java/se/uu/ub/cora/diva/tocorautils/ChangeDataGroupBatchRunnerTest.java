@@ -48,49 +48,49 @@ public class ChangeDataGroupBatchRunnerTest {
 	@Test
 	public void testMainMethod() throws ClassNotFoundException, NoSuchMethodException,
 			InvocationTargetException, InstantiationException, IllegalAccessException {
-		String args[] = new String[] { "apptokenVerifierUrl", "baseUrl", "userId", "appToken",
-				"se.uu.ub.cora.diva.tocorautils.doubles.CoraClientFactorySpy",
-				"changerFactoryClassName", "se.uu.ub.cora.diva.tocorautils.JsonToClientDataSpy",
-				"se.uu.ub.cora.diva.tocorautils.UpdaterSpy" };
+		String args[] = new String[] { "someUserId", "someAppToken", "apptokenVerifierUrl",
+				"baseUrl", "se.uu.ub.cora.diva.tocorautils.doubles.CoraClientFactorySpy",
+				"se.uu.ub.cora.diva.tocorautils.JsonToClientDataSpy",
+				"se.uu.ub.cora.diva.tocorautils.UpdaterSpy", "someRecordType" };
 		ChangeDataGroupBatchRunner.main(args);
 		UpdaterSpy updaterSpy = (UpdaterSpy) ChangeDataGroupBatchRunner.updater;
 
 		CoraClientFactorySpy clientFactorySpy = (CoraClientFactorySpy) ChangeDataGroupBatchRunner.coraClientFactory;
 		assertEquals(clientFactorySpy.appTokenVerifierUrl, "apptokenVerifierUrl");
 		assertEquals(clientFactorySpy.baseUrl, "baseUrl");
+		assertEquals(clientFactorySpy.userId, "someUserId");
+		assertEquals(clientFactorySpy.appToken, "someAppToken");
 
 		CoraClientSpy factoredCoraClient = clientFactorySpy.factored;
 		assertSame(updaterSpy.coraClient, factoredCoraClient);
 
 		JsonToClientDataSpy jsonToClientData = (JsonToClientDataSpy) ChangeDataGroupBatchRunner.jsonToClientData;
 		assertTrue(jsonToClientData.jsonParser instanceof OrgJsonParser);
-		assertTrue(jsonToClientData.converterFactory instanceof JsonToDataConverterFactoryImp);
+		// assertTrue(jsonToClientData.converterFactory instanceof JsonToDataConverterFactoryImp);
 
 		assertSame(updaterSpy.jsonToClientData, jsonToClientData);
+		assertTrue(updaterSpy.changerFactory instanceof DataGroupChangerFactoryImp);
+		assertTrue(updaterSpy.jsonToDataFactory instanceof JsonToDataConverterFactoryImp);
 
-		// assertTrue(updaterSpy.updateRecordsCalled);
-		// assertEquals(finderSpy.url, "http://localhost:8080/therest/rest/record/recordType");
-		//
-		// ModifierSpy modifierSpy = (ModifierSpy) RecordTypePGroupIdsModifierBatchRunner.modifier;
-		// assertEquals(modifierSpy.recordTypes.get(0), "someId");
-		//
-		// }
-		//
-		// @Test
-		// public void testMainMethodErrorWhenModifyingFound()
-		// throws ClassNotFoundException, NoSuchMethodException, InvocationTargetException,
-		// InstantiationException, IllegalAccessException {
-		//
-		// String args[] = new String[] { "http://localhost:8080/therest/rest/record/",
-		// "se.uu.ub.cora.batchrunner.find.HttpHandlerFactorySpy",
-		// "se.uu.ub.cora.batchrunner.find.FinderSpy",
-		// "se.uu.ub.cora.batchrunner.change.ModifierWithErrorSpy" };
-		//
-		// RecordTypePGroupIdsModifierBatchRunner.main(args);
-		// FinderSpy finderSpy = (FinderSpy) RecordTypePGroupIdsModifierBatchRunner.finder;
-		// assertTrue(finderSpy.findRecordsCalled);
-		// assertEquals(finderSpy.url, "http://localhost:8080/therest/rest/record/recordType");
-		//
+		assertEquals(updaterSpy.type, "someRecordType");
+
 	}
+	//
+	// @Test
+	// public void testMainMethodErrorWhenModifyingFound()
+	// throws ClassNotFoundException, NoSuchMethodException, InvocationTargetException,
+	// InstantiationException, IllegalAccessException {
+	//
+	// String args[] = new String[] { "http://localhost:8080/therest/rest/record/",
+	// "se.uu.ub.cora.batchrunner.find.HttpHandlerFactorySpy",
+	// "se.uu.ub.cora.batchrunner.find.FinderSpy",
+	// "se.uu.ub.cora.batchrunner.change.ModifierWithErrorSpy" };
+	//
+	// RecordTypePGroupIdsModifierBatchRunner.main(args);
+	// FinderSpy finderSpy = (FinderSpy) RecordTypePGroupIdsModifierBatchRunner.finder;
+	// assertTrue(finderSpy.findRecordsCalled);
+	// assertEquals(finderSpy.url, "http://localhost:8080/therest/rest/record/recordType");
+	//
+	// }
 
 }

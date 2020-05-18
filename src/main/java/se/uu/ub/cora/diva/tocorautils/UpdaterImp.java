@@ -23,6 +23,8 @@ import se.uu.ub.cora.clientdata.ClientData;
 import se.uu.ub.cora.clientdata.ClientDataGroup;
 import se.uu.ub.cora.clientdata.ClientDataList;
 import se.uu.ub.cora.clientdata.ClientDataRecord;
+import se.uu.ub.cora.clientdata.converter.jsontojava.JsonToDataConverterFactory;
+import se.uu.ub.cora.clientdata.converter.jsontojava.JsonToDataRecordConverterImp;
 import se.uu.ub.cora.javaclient.cora.CoraClient;
 
 public class UpdaterImp implements Updater {
@@ -30,24 +32,30 @@ public class UpdaterImp implements Updater {
 	private CoraClient coraClient;
 	private JsonToClientData jsonToClientData;
 	private DataGroupChangerFactory changerFactory;
+	private JsonToDataConverterFactory jsonToDataFactory;
 
-	public static UpdaterImp usingCoraClientJsonToClientDataAndChangerFactory(CoraClient coraClient,
-			JsonToClientData jsonToClientData, DataGroupChangerFactory changerFactory) {
-		return new UpdaterImp(coraClient, jsonToClientData, changerFactory);
+	public static UpdaterImp usingCoraClientJsonToClientDataChangerFactoryAndConverterFactory(
+			CoraClient coraClient, JsonToClientData jsonToClientData,
+			DataGroupChangerFactory changerFactory, JsonToDataConverterFactory jsonToDataFactory) {
+		return new UpdaterImp(coraClient, jsonToClientData, changerFactory, jsonToDataFactory);
 	}
 
 	private UpdaterImp(CoraClient coraClient, JsonToClientData jsonToClientData,
-			DataGroupChangerFactory changerFactory) {
+			DataGroupChangerFactory changerFactory, JsonToDataConverterFactory jsonToDataFactory) {
 		this.coraClient = coraClient;
 		this.jsonToClientData = jsonToClientData;
 		this.changerFactory = changerFactory;
+		this.jsonToDataFactory = jsonToDataFactory;
 	}
 
 	@Override
 	public void update(String type) {
 		String jsonListToConvert = coraClient.readList(type);
+		JsonToDataRecordConverterImp jsonToDataRecordConverter = new JsonToDataRecordConverterImp(
+				jsonToDataFactory);
+
 		ClientDataList dataList = jsonToClientData
-				.getJsonStringAsClientDataRecordList(jsonListToConvert);
+				.getJsonStringAsClientDataRecordList(jsonToDataRecordConverter, jsonListToConvert);
 		updateDataGroups(type, dataList);
 	}
 
