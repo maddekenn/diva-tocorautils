@@ -27,7 +27,7 @@ import se.uu.ub.cora.clientdata.ClientDataRecord;
 import se.uu.ub.cora.clientdata.converter.jsontojava.JsonToDataConverterFactory;
 import se.uu.ub.cora.clientdata.converter.jsontojava.JsonToDataRecordConverter;
 import se.uu.ub.cora.clientdata.converter.jsontojava.JsonToDataRecordConverterImp;
-import se.uu.ub.cora.diva.tocorautils.convert.FromDbToCoraConverter;
+import se.uu.ub.cora.diva.tocorautils.convert.FromDbToCoraJsonConverter;
 import se.uu.ub.cora.diva.tocorautils.convert.RecordCompleter;
 import se.uu.ub.cora.diva.tocorautils.importing.ImportResult;
 import se.uu.ub.cora.diva.tocorautils.importing.Importer;
@@ -38,14 +38,14 @@ import se.uu.ub.cora.sqldatabase.RecordReaderFactory;
 
 public class FromDbToCoraSubjectCategory implements FromDbToCora {
 
-	private FromDbToCoraConverter fromDbToCoraConverter;
+	private FromDbToCoraJsonConverter fromDbToCoraConverter;
 	private RecordReaderFactory recordReaderFactory;
 	private Importer importer;
 	private RecordCompleter recordCompleter;
 	private JsonToDataConverterFactory jsonToDataConverterFactory;
 
 	public static FromDbToCora usingRecordReaderFactoryDbToCoraConverterRecordCompleterJsonToDataConverterFactoryAndImporter(
-			RecordReaderFactory recordReaderFactory, FromDbToCoraConverter fromDbToCoraConverter,
+			RecordReaderFactory recordReaderFactory, FromDbToCoraJsonConverter fromDbToCoraConverter,
 			RecordCompleter recordCompleter, JsonToDataConverterFactory jsonToDataConverterFactory,
 			Importer importer) {
 		return new FromDbToCoraSubjectCategory(recordReaderFactory, fromDbToCoraConverter,
@@ -53,7 +53,7 @@ public class FromDbToCoraSubjectCategory implements FromDbToCora {
 	}
 
 	private FromDbToCoraSubjectCategory(RecordReaderFactory recordReaderFactory,
-			FromDbToCoraConverter fromDbToCoraConverter, RecordCompleter recordCompleter,
+			FromDbToCoraJsonConverter fromDbToCoraConverter, RecordCompleter recordCompleter,
 			JsonToDataConverterFactory jsonToDataConverterFactory, Importer importer) {
 		this.recordReaderFactory = recordReaderFactory;
 		this.fromDbToCoraConverter = fromDbToCoraConverter;
@@ -149,7 +149,7 @@ public class FromDbToCoraSubjectCategory implements FromDbToCora {
 		return recordReaderFactory;
 	}
 
-	public FromDbToCoraConverter getFromDbToCoraConverter() {
+	public FromDbToCoraJsonConverter getFromDbToCoraConverter() {
 		// needed for test
 		return fromDbToCoraConverter;
 	}

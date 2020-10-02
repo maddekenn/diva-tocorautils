@@ -23,9 +23,9 @@ import java.util.List;
 import java.util.Map;
 
 import se.uu.ub.cora.diva.tocorautils.CoraJsonRecord;
-import se.uu.ub.cora.diva.tocorautils.convert.FromDbToCoraConverter;
+import se.uu.ub.cora.diva.tocorautils.convert.FromDbToCoraJsonConverter;
 
-public class FromDbToCoraConverterSpy implements FromDbToCoraConverter {
+public class FromDbToCoraConverterSpy implements FromDbToCoraJsonConverter {
 
 	public List<Map<String, Object>> rowsFromDb = new ArrayList<>();
 	public List<List<CoraJsonRecord>> returnedList;

@@ -24,7 +24,7 @@ import se.uu.ub.cora.clientdata.converter.jsontojava.JsonToDataConverterFactory;
 import se.uu.ub.cora.clientdata.converter.jsontojava.JsonToDataConverterFactoryImp;
 import se.uu.ub.cora.connection.ParameterConnectionProviderImp;
 import se.uu.ub.cora.connection.SqlConnectionProvider;
-import se.uu.ub.cora.diva.tocorautils.convert.FromDbToCoraConverter;
+import se.uu.ub.cora.diva.tocorautils.convert.FromDbToCoraJsonConverter;
 import se.uu.ub.cora.diva.tocorautils.convert.FromDbToCoraSubjectCategoryConverter;
 import se.uu.ub.cora.diva.tocorautils.convert.RecordCompleterSubjectCategory;
 import se.uu.ub.cora.diva.tocorautils.importing.CoraImporter;
@@ -46,7 +46,7 @@ public class FromDbToCoraSubjectCategoryFactory implements FromDbToCoraFactory {
 			CoraClientConfig coraClientConfig, DbConfig dbConfig) {
 		this.coraClientFactory = coraClientFactory;
 
-		FromDbToCoraConverter fromDbToCoraConverter = createConverter();
+		FromDbToCoraJsonConverter fromDbToCoraConverter = createConverter();
 
 		RecordReaderFactory recordReaderFactory = createRecordReaderFactory(dbConfig);
 		RecordCompleterSubjectCategory recordCompleter = RecordCompleterSubjectCategory
@@ -61,7 +61,7 @@ public class FromDbToCoraSubjectCategoryFactory implements FromDbToCoraFactory {
 						jsonToDataConverterFactory, importer);
 	}
 
-	private FromDbToCoraConverter createConverter() {
+	private FromDbToCoraJsonConverter createConverter() {
 		DataToJsonConverterFactory dataToJsonConverterFactory = new DataToJsonConverterFactoryImp();
 		JsonBuilderFactory jsonFactory = createJsonBuilderFactory();
 		return FromDbToCoraSubjectCategoryConverter.usingJsonFactoryAndConverterFactory(jsonFactory,

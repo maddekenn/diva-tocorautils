@@ -29,7 +29,7 @@ import se.uu.ub.cora.clientdata.converter.javatojson.DataToJsonConverterFactory;
 import se.uu.ub.cora.diva.tocorautils.CoraJsonRecord;
 import se.uu.ub.cora.json.builder.JsonBuilderFactory;
 
-public class FromDbToCoraSubjectCategoryConverter implements FromDbToCoraConverter {
+public class FromDbToCoraSubjectCategoryConverter implements FromDbToCoraJsonConverter {
 
 	private static final String SUBJECT_ID = "subject_id";
 	private static final String NATIONAL_SUBJECT_CATEGORY = "nationalSubjectCategory";

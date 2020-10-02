@@ -1,5 +1,5 @@
 /*
- * Copyright 2019 Uppsala University Library
+ * Copyright 2020 Uppsala University Library
  *
  * This file is part of Cora.
  *
@@ -16,14 +16,31 @@
  *     You should have received a copy of the GNU General Public License
  *     along with Cora.  If not, see <http://www.gnu.org/licenses/>.
  */
-package se.uu.ub.cora.diva.tocorautils.convert;
+package se.uu.ub.cora.diva.tocorautils.importing;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
-import se.uu.ub.cora.diva.tocorautils.CoraJsonRecord;
+import se.uu.ub.cora.sqldatabase.DataUpdater;
+import se.uu.ub.cora.sqldatabase.RecordCreator;
 
-public interface FromDbToCoraConverter {
+public class RecordCreatorSpy implements RecordCreator {
 
-	CoraJsonRecord convertToJsonFromRowFromDb(Map<String, Object> rowFromDb);
+	public List<String> usedTableNames = new ArrayList<>();
+	public List<Map<String, Object>> usedValues = new ArrayList<>();
+
+	@Override
+	public DataUpdater getDataUpdater() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void insertIntoTableUsingNameAndColumnsWithValues(String tableName,
+			Map<String, Object> values) {
+		usedTableNames.add(tableName);
+		usedValues.add(values);
+	}
 
 }

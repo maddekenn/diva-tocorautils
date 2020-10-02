@@ -33,7 +33,7 @@ import se.uu.ub.cora.clientdata.converter.jsontojava.JsonToDataConverterFactory;
 import se.uu.ub.cora.clientdata.converter.jsontojava.JsonToDataConverterFactoryImp;
 import se.uu.ub.cora.connection.ParameterConnectionProviderImp;
 import se.uu.ub.cora.connection.SqlConnectionProvider;
-import se.uu.ub.cora.diva.tocorautils.convert.FromDbToCoraConverter;
+import se.uu.ub.cora.diva.tocorautils.convert.FromDbToCoraJsonConverter;
 import se.uu.ub.cora.diva.tocorautils.convert.FromDbToCoraSubjectCategoryConverter;
 import se.uu.ub.cora.diva.tocorautils.convert.RecordCompleterSubjectCategory;
 import se.uu.ub.cora.diva.tocorautils.doubles.CoraClientFactorySpy;
@@ -101,7 +101,7 @@ public class FromDbToCoraSubjectCategoryFactoryTest {
 
 	@Test
 	public void testInitFromDbToCoraConverter() throws Exception {
-		FromDbToCoraConverter createdConverter = fromDbToCoraSubjectCategory
+		FromDbToCoraJsonConverter createdConverter = fromDbToCoraSubjectCategory
 				.getFromDbToCoraConverter();
 		assertTrue(createdConverter instanceof FromDbToCoraSubjectCategoryConverter);
 

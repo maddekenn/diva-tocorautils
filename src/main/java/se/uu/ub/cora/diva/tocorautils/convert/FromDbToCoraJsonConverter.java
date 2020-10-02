@@ -18,8 +18,12 @@
  */
 package se.uu.ub.cora.diva.tocorautils.convert;
 
-public interface FromDbToCoraConverterFactory {
+import java.util.Map;
 
-	FromDbToCoraJsonConverter factor(String type);
+import se.uu.ub.cora.diva.tocorautils.CoraJsonRecord;
+
+public interface FromDbToCoraJsonConverter {
+
+	CoraJsonRecord convertToJsonFromRowFromDb(Map<String, Object> rowFromDb);
 
 }
