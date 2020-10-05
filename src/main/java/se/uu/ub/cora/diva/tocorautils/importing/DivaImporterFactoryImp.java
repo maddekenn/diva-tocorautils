@@ -19,7 +19,6 @@
 package se.uu.ub.cora.diva.tocorautils.importing;
 
 import se.uu.ub.cora.diva.tocorautils.NotImplementedException;
-import se.uu.ub.cora.diva.tocorautils.convert.FromDbToCoraJsonConverter;
 import se.uu.ub.cora.diva.tocorautils.convert.FromDbToCoraConverterFactory;
 import se.uu.ub.cora.sqldatabase.RecordCreator;
 import se.uu.ub.cora.sqldatabase.RecordCreatorFactory;
@@ -43,9 +42,10 @@ public class DivaImporterFactoryImp implements DivaImporterFactory {
 	public DivaImporter factor(String type) {
 		if ("educationalProgram".equals(type)) {
 			RecordReader recordReader = recordReaderFactory.factor();
-			FromDbToCoraJsonConverter converter = converterFactory.factor("educationalProgram");
+			FromDbToCoraConverter converter = converterFactory.factor("educationalProgram");
 			RecordCreator recordCreator = recordCreatorFactory.factor();
-			return new EducationalProgramImporter(recordReader, converter, recordCreator);
+			// TODO: not ready
+			return new EducationalProgramImporter(recordReader, converter, recordCreator, null);
 		}
 		throw NotImplementedException.withMessage("No importer implemented for: " + type);
 	}

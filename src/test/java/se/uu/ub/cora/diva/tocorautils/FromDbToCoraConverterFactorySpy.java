@@ -18,9 +18,9 @@
  */
 package se.uu.ub.cora.diva.tocorautils;
 
-import se.uu.ub.cora.diva.tocorautils.convert.FromDbToCoraJsonConverter;
 import se.uu.ub.cora.diva.tocorautils.convert.FromDbToCoraConverterFactory;
-import se.uu.ub.cora.diva.tocorautils.doubles.FromDbToCoraConverterSpy;
+import se.uu.ub.cora.diva.tocorautils.importing.FromDbToCoraConverter;
+import se.uu.ub.cora.diva.tocorautils.importing.FromDbToCoraConverterSpy;
 
 public class FromDbToCoraConverterFactorySpy implements FromDbToCoraConverterFactory {
 
@@ -28,7 +28,7 @@ public class FromDbToCoraConverterFactorySpy implements FromDbToCoraConverterFac
 	public String type;
 
 	@Override
-	public FromDbToCoraJsonConverter factor(String type) {
+	public FromDbToCoraConverter factor(String type) {
 		this.type = type;
 		factored = new FromDbToCoraConverterSpy();
 		return factored;

@@ -22,8 +22,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import se.uu.ub.cora.diva.tocorautils.CoraJsonRecord;
-import se.uu.ub.cora.diva.tocorautils.convert.FromDbToCoraJsonConverter;
+import se.uu.ub.cora.clientdata.ClientDataGroup;
+import se.uu.ub.cora.clientdata.converter.javatojson.DataToJsonConverterFactory;
+import se.uu.ub.cora.json.builder.JsonBuilderFactory;
+import se.uu.ub.cora.json.builder.org.OrgJsonBuilderFactoryAdapter;
 import se.uu.ub.cora.sqldatabase.RecordCreator;
 import se.uu.ub.cora.sqldatabase.RecordReader;
 
@@ -31,21 +33,25 @@ public class EducationalProgramImporter implements DivaImporter {
 
 	private static final int EDUCATIONAL_PROGRAM_TYPE_CODE = 56;
 	private RecordReader recordReader;
-	private FromDbToCoraJsonConverter converter;
+	private FromDbToCoraConverter toCoraDataConverter;
 	private RecordCreator recordCreator;
+	private DataToJsonConverterFactory toJsonConverterFactory;
 
-	public EducationalProgramImporter(RecordReader recordReader, FromDbToCoraJsonConverter converter,
-			RecordCreator recordCreator) {
+	public EducationalProgramImporter(RecordReader recordReader,
+			FromDbToCoraConverter toCoraDataConverter, RecordCreator recordCreator,
+			DataToJsonConverterFactory toJsonConverterFactory) {
 		this.recordReader = recordReader;
-		this.converter = converter;
+		this.toCoraDataConverter = toCoraDataConverter;
 		this.recordCreator = recordCreator;
+		this.toJsonConverterFactory = toJsonConverterFactory;
 	}
 
 	@Override
 	public void importData() {
 		List<Map<String, Object>> rowsFromDb = readRowsFromDb();
+		JsonBuilderFactory jsonBuilderFactory = new OrgJsonBuilderFactoryAdapter();
 		for (Map<String, Object> rowFromDb : rowsFromDb) {
-			Map<String, Object> values = createValuesForInsert(rowFromDb);
+			Map<String, Object> values = createValuesForInsert(rowFromDb, jsonBuilderFactory);
 			recordCreator.insertIntoTableUsingNameAndColumnsWithValues("educationalProgram",
 					values);
 		}
@@ -57,12 +63,17 @@ public class EducationalProgramImporter implements DivaImporter {
 		return recordReader.readFromTableUsingConditions("subjectview", conditions);
 	}
 
-	private Map<String, Object> createValuesForInsert(Map<String, Object> rowFromDb) {
-		CoraJsonRecord jsonRecord = converter.convertToJsonFromRowFromDb(rowFromDb);
+	private Map<String, Object> createValuesForInsert(Map<String, Object> rowFromDb,
+			JsonBuilderFactory jsonBuilderFactory) {
+		// CoraJsonRecord jsonRecord =
+		ClientDataGroup dataGroup = toCoraDataConverter.convertToDataGroupFromRowFromDb(rowFromDb);
+		toJsonConverterFactory.createForClientDataElement(jsonBuilderFactory, dataGroup);
+
+		// send dataGroup to tojsonconverter
 		Map<String, Object> values = new HashMap<>();
-		values.put("record_type", "educationalProgram");
-		values.put("record_id", "educationalProgram:" + rowFromDb.get("subject_id"));
-		values.put("record", jsonRecord.json);
+		// values.put("record_type", "educationalProgram");
+		// values.put("record_id", "educationalProgram:" + rowFromDb.get("subject_id"));
+		// values.put("record", jsonRecord.json);
 		return values;
 	}
 
@@ -71,9 +82,9 @@ public class EducationalProgramImporter implements DivaImporter {
 		return recordReader;
 	}
 
-	public FromDbToCoraJsonConverter getFromDbToCoraConverter() {
+	public FromDbToCoraConverter getFromDbToCoraConverter() {
 		// needed for test
-		return converter;
+		return toCoraDataConverter;
 	}
 
 	public RecordCreator getRecordCreator() {

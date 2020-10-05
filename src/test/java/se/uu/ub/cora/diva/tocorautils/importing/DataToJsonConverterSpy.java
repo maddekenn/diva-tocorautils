@@ -1,5 +1,5 @@
 /*
- * Copyright 2019 Uppsala University Library
+ * Copyright 2020 Uppsala University Library
  *
  * This file is part of Cora.
  *
@@ -16,12 +16,17 @@
  *     You should have received a copy of the GNU General Public License
  *     along with Cora.  If not, see <http://www.gnu.org/licenses/>.
  */
-package se.uu.ub.cora.diva.tocorautils.convert;
+package se.uu.ub.cora.diva.tocorautils.importing;
 
-import se.uu.ub.cora.diva.tocorautils.importing.FromDbToCoraConverter;
+import se.uu.ub.cora.clientdata.converter.javatojson.DataToJsonConverter;
+import se.uu.ub.cora.json.builder.JsonObjectBuilder;
 
-public interface FromDbToCoraConverterFactory {
+public class DataToJsonConverterSpy extends DataToJsonConverter {
 
-	FromDbToCoraConverter factor(String type);
+	@Override
+	protected JsonObjectBuilder toJsonObjectBuilder() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 
 }

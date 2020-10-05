@@ -26,14 +26,14 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import se.uu.ub.cora.diva.tocorautils.doubles.CoraImporterSpy;
-import se.uu.ub.cora.diva.tocorautils.doubles.FromDbToCoraConverterSpy;
+import se.uu.ub.cora.diva.tocorautils.doubles.FromDbToCoraJsonConverterSpy;
 import se.uu.ub.cora.diva.tocorautils.doubles.RecordReaderFactorySpy;
 import se.uu.ub.cora.diva.tocorautils.doubles.RecordReaderSpy;
 import se.uu.ub.cora.diva.tocorautils.importing.ImportResult;
 
 public class FromDbToCoraSubjectCategoryTest {
 
-	private FromDbToCoraConverterSpy toCoraConverter;
+	private FromDbToCoraJsonConverterSpy toCoraConverter;
 	private RecordReaderFactorySpy recordReaderFactory;
 	private CoraImporterSpy importer;
 	private FromDbToCoraSubjectCategory fromDbToCora;
@@ -42,7 +42,7 @@ public class FromDbToCoraSubjectCategoryTest {
 
 	@BeforeMethod
 	public void setUp() {
-		toCoraConverter = new FromDbToCoraConverterSpy();
+		toCoraConverter = new FromDbToCoraJsonConverterSpy();
 		recordReaderFactory = new RecordReaderFactorySpy();
 		importer = new CoraImporterSpy();
 		recordCompleter = new RecordCompleterSpy();

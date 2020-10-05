@@ -1,5 +1,5 @@
 /*
- * Copyright 2018, 2019 Uppsala University Library
+ * Copyright 2020 Uppsala University Library
  *
  * This file is part of Cora.
  *
@@ -16,30 +16,25 @@
  *     You should have received a copy of the GNU General Public License
  *     along with Cora.  If not, see <http://www.gnu.org/licenses/>.
  */
-package se.uu.ub.cora.diva.tocorautils.doubles;
+package se.uu.ub.cora.diva.tocorautils.importing;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-import se.uu.ub.cora.diva.tocorautils.CoraJsonRecord;
-import se.uu.ub.cora.diva.tocorautils.convert.FromDbToCoraJsonConverter;
+import se.uu.ub.cora.clientdata.ClientDataGroup;
 
-public class FromDbToCoraConverterSpy implements FromDbToCoraJsonConverter {
+public class FromDbToCoraConverterSpy implements FromDbToCoraConverter {
 
 	public List<Map<String, Object>> rowsFromDb = new ArrayList<>();
-	public List<List<CoraJsonRecord>> returnedList;
-	public List<CoraJsonRecord> returnedJsonRecords = new ArrayList<>();
-	String json = "{\"name\":\"groupNameInData\", \"children\":[]}";
+	public List<ClientDataGroup> returnedDataGroups = new ArrayList<>();
 
 	@Override
-	public CoraJsonRecord convertToJsonFromRowFromDb(Map<String, Object> rowFromDb) {
+	public ClientDataGroup convertToDataGroupFromRowFromDb(Map<String, Object> rowFromDb) {
 		rowsFromDb.add(rowFromDb);
-		CoraJsonRecord jsonRecord = CoraJsonRecord
-				.withRecordTypeAndJson("recordTypeFromDbToCoraConverterSpy", json);
-		returnedJsonRecords.add(jsonRecord);
-
-		return jsonRecord;
+		ClientDataGroup returnedDataGroup = ClientDataGroup.withNameInData("spyNameInData");
+		returnedDataGroups.add(returnedDataGroup);
+		return returnedDataGroup;
 	}
 
 }

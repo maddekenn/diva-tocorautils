@@ -27,7 +27,6 @@ import org.testng.annotations.Test;
 
 import se.uu.ub.cora.diva.tocorautils.FromDbToCoraConverterFactorySpy;
 import se.uu.ub.cora.diva.tocorautils.NotImplementedException;
-import se.uu.ub.cora.diva.tocorautils.doubles.FromDbToCoraConverterSpy;
 import se.uu.ub.cora.diva.tocorautils.doubles.RecordReaderFactorySpy;
 import se.uu.ub.cora.diva.tocorautils.doubles.RecordReaderSpy;
 
