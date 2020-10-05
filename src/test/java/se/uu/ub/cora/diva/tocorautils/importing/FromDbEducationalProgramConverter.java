@@ -29,37 +29,57 @@ public class FromDbEducationalProgramConverter implements FromDbToCoraConverter 
 
 	@Override
 	public ClientDataGroup convertToDataGroupFromRowFromDb(Map<String, Object> rowFromDb) {
-		int subjectId = (int) rowFromDb.get("subject_id");
-		// return new CoraJsonRecord("educationalProgram",
-		// "educationalProgram:" + String.valueOf(subjectId), "");
 		ClientDataGroup dataGroup = ClientDataGroup.withNameInData("educationalProgram");
-		createRecordInfo(subjectId, dataGroup);
+		createAndAddRecordInfo(rowFromDb, dataGroup);
+		createAndAddName(rowFromDb, dataGroup);
+		createAndAddDomain(rowFromDb, dataGroup);
+		createAndAddEligible(rowFromDb, dataGroup);
 		return dataGroup;
 	}
 
-	private void createRecordInfo(int subjectId, ClientDataGroup dataGroup) {
+	private void createAndAddRecordInfo(Map<String, Object> rowFromDb, ClientDataGroup dataGroup) {
+		int subjectId = (int) rowFromDb.get("subject_id");
+		ClientDataGroup recordInfo = createBasicRecordInfo(subjectId);
+		addCreateInfo(recordInfo);
+		addUpdatedInfo(recordInfo);
+		dataGroup.addChild(recordInfo);
+	}
+
+	private ClientDataGroup createBasicRecordInfo(int subjectId) {
 		ClientDataGroup recordInfo = ClientDataGroup.withNameInData("recordInfo");
+		createAndAddId(subjectId, recordInfo);
+		createAndAddType(recordInfo);
+		createAndAddDataDivider(recordInfo);
+		return recordInfo;
+	}
+
+	private void createAndAddId(int subjectId, ClientDataGroup recordInfo) {
 		ClientDataAtomic id = ClientDataAtomic.withNameInDataAndValue("id",
 				"educationalProgram:" + String.valueOf(subjectId));
 		recordInfo.addChild(id);
+	}
 
+	private void createAndAddType(ClientDataGroup recordInfo) {
 		ClientDataGroup type = ClientDataGroup.asLinkWithNameInDataAndTypeAndId("type",
 				"recordType", "educationalProgram");
 		recordInfo.addChild(type);
+	}
 
+	private void createAndAddDataDivider(ClientDataGroup recordInfo) {
 		ClientDataGroup dataDivider = ClientDataGroup
 				.asLinkWithNameInDataAndTypeAndId("dataDivider", "system", "diva");
+		recordInfo.addChild(dataDivider);
+	}
+
+	private void addCreateInfo(ClientDataGroup recordInfo) {
 		ClientDataGroup createdBy = createCreatedByUsingUserId();
 		recordInfo.addChild(createdBy);
-		recordInfo.addChild(dataDivider);
 		recordInfo.addChild(createTsCreated());
-		recordInfo.addChild(createUpdatedInfoUsingUserId());
-		dataGroup.addChild(recordInfo);
 	}
 
 	private static ClientDataGroup createCreatedByUsingUserId() {
 		return ClientDataGroup.asLinkWithNameInDataAndTypeAndId("createdBy", "user",
-				"coraUser:44129824028536262");
+				"coraUser:4412982402853626");
 	}
 
 	public static ClientDataAtomic createTsCreated() {
@@ -73,14 +93,53 @@ public class FromDbEducationalProgramConverter implements FromDbToCoraConverter 
 		return localDateTime.format(formatter);
 	}
 
-	public static ClientDataGroup createUpdatedInfoUsingUserId() {
+	public static void addUpdatedInfo(ClientDataGroup recordInfo) {
 		ClientDataGroup updated = ClientDataGroup.withNameInData("updated");
 		updated.setRepeatId("0");
-		ClientDataGroup updatedBy = ClientDataGroup.asLinkWithNameInDataAndTypeAndId("updatedBy",
-				"user", "coraUser:44129824028536262");
-		updated.addChild(updatedBy);
+		createAndAddUpdatedBy(updated);
 		updated.addChild(ClientDataAtomic.withNameInDataAndValue("tsUpdated",
 				getPredefinedTimestampAsString()));
-		return updated;
+		recordInfo.addChild(updated);
 	}
+
+	private static void createAndAddUpdatedBy(ClientDataGroup updated) {
+		ClientDataGroup updatedBy = ClientDataGroup.asLinkWithNameInDataAndTypeAndId("updatedBy",
+				"user", "coraUser:4412982402853626");
+		updated.addChild(updatedBy);
+	}
+
+	private void createAndAddDomain(Map<String, Object> rowFromDb, ClientDataGroup dataGroup) {
+		dataGroup.addChild(ClientDataAtomic.withNameInDataAndValue("domain",
+				(String) rowFromDb.get("domain")));
+	}
+
+	private void createAndAddName(Map<String, Object> rowFromDb, ClientDataGroup dataGroup) {
+		createAndAddDefaultNameGroup(rowFromDb, dataGroup);
+		createAndAddAlternativeNameGroup(rowFromDb, dataGroup);
+	}
+
+	private void createAndAddEligible(Map<String, Object> rowFromDb, ClientDataGroup dataGroup) {
+		boolean invertedNotEligible = "false".equals(rowFromDb.get("not_eligible")) ? true : false;
+		dataGroup.addChild(ClientDataAtomic.withNameInDataAndValue("eligible",
+				String.valueOf(invertedNotEligible)));
+	}
+
+	private void createAndAddDefaultNameGroup(Map<String, Object> rowFromDb,
+			ClientDataGroup dataGroup) {
+		ClientDataGroup nameGroup = ClientDataGroup.withNameInData("name");
+		nameGroup.addChild(ClientDataAtomic.withNameInDataAndValue("language", "sv"));
+		String name = (String) rowFromDb.get("defaultname");
+		nameGroup.addChild(ClientDataAtomic.withNameInDataAndValue("educationalProgramName", name));
+		dataGroup.addChild(nameGroup);
+	}
+
+	private void createAndAddAlternativeNameGroup(Map<String, Object> rowFromDb,
+			ClientDataGroup dataGroup) {
+		ClientDataGroup nameGroup = ClientDataGroup.withNameInData("alternativeName");
+		nameGroup.addChild(ClientDataAtomic.withNameInDataAndValue("language", "en"));
+		String name = (String) rowFromDb.get("alternativename");
+		nameGroup.addChild(ClientDataAtomic.withNameInDataAndValue("educationalProgramName", name));
+		dataGroup.addChild(nameGroup);
+	}
+
 }
