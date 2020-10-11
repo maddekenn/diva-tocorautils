@@ -62,8 +62,9 @@ public class FromDbToCoraSubjectCategoryFactory implements FromDbToCoraFactory {
 	}
 
 	private FromDbToCoraJsonConverter createConverter() {
-		DataToJsonConverterFactory dataToJsonConverterFactory = new DataToJsonConverterFactoryImp();
 		JsonBuilderFactory jsonFactory = createJsonBuilderFactory();
+		DataToJsonConverterFactory dataToJsonConverterFactory = new DataToJsonConverterFactoryImp(
+				jsonFactory);
 		return FromDbToCoraSubjectCategoryConverter.usingJsonFactoryAndConverterFactory(jsonFactory,
 				dataToJsonConverterFactory);
 	}

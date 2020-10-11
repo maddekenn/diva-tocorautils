@@ -23,10 +23,12 @@ import se.uu.ub.cora.json.builder.JsonObjectBuilder;
 
 public class DataToJsonConverterSpy extends DataToJsonConverter {
 
+	public JsonObjectBuilderSpy returnedJsonObjectBuilderSpy;
+
 	@Override
-	protected JsonObjectBuilder toJsonObjectBuilder() {
-		// TODO Auto-generated method stub
-		return null;
+	public JsonObjectBuilder toJsonObjectBuilder() {
+		returnedJsonObjectBuilderSpy = new JsonObjectBuilderSpy();
+		return returnedJsonObjectBuilderSpy;
 	}
 
 }

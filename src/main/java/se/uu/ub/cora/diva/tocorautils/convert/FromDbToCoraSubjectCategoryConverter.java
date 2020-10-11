@@ -58,7 +58,7 @@ public class FromDbToCoraSubjectCategoryConverter implements FromDbToCoraJsonCon
 
 	private String convertToJson(ClientDataGroup nationalSubjectCategory) {
 		DataToJsonConverter converter = getDataToJsonConverterFactory()
-				.createForClientDataElement(jsonFactory, nationalSubjectCategory);
+				.createForClientDataElement(nationalSubjectCategory);
 		return converter.toJson();
 	}
 

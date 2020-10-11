@@ -27,7 +27,6 @@ import java.lang.reflect.Field;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-import se.uu.ub.cora.clientdata.converter.javatojson.DataToJsonConverterFactory;
 import se.uu.ub.cora.clientdata.converter.javatojson.DataToJsonConverterFactoryImp;
 import se.uu.ub.cora.clientdata.converter.jsontojava.JsonToDataConverterFactory;
 import se.uu.ub.cora.clientdata.converter.jsontojava.JsonToDataConverterFactoryImp;
@@ -110,10 +109,11 @@ public class FromDbToCoraSubjectCategoryFactoryTest {
 		JsonBuilderFactory jsonBuilderFactory = subjectCategoryConverter.getJsonBuilderFactory();
 		assertTrue(jsonBuilderFactory instanceof OrgJsonBuilderFactoryAdapter);
 		assertNotNull(jsonBuilderFactory);
-		DataToJsonConverterFactory dataToJsonConverterFactory = subjectCategoryConverter
+		DataToJsonConverterFactoryImp dataToJsonConverterFactory = (DataToJsonConverterFactoryImp) subjectCategoryConverter
 				.getDataToJsonConverterFactory();
-		assertTrue(dataToJsonConverterFactory instanceof DataToJsonConverterFactoryImp);
-		assertNotNull(dataToJsonConverterFactory);
+
+		assertTrue(dataToJsonConverterFactory
+				.getJsonBuilderFactory() instanceof OrgJsonBuilderFactoryAdapter);
 	}
 
 	@Test

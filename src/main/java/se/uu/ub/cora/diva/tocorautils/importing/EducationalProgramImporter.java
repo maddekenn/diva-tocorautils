@@ -23,9 +23,10 @@ import java.util.List;
 import java.util.Map;
 
 import se.uu.ub.cora.clientdata.ClientDataGroup;
+import se.uu.ub.cora.clientdata.converter.javatojson.DataToJsonConverter;
 import se.uu.ub.cora.clientdata.converter.javatojson.DataToJsonConverterFactory;
-import se.uu.ub.cora.json.builder.JsonBuilderFactory;
-import se.uu.ub.cora.json.builder.org.OrgJsonBuilderFactoryAdapter;
+import se.uu.ub.cora.json.builder.JsonObjectBuilder;
+import se.uu.ub.cora.json.parser.JsonObject;
 import se.uu.ub.cora.sqldatabase.RecordCreator;
 import se.uu.ub.cora.sqldatabase.RecordReader;
 
@@ -49,11 +50,8 @@ public class EducationalProgramImporter implements DivaImporter {
 	@Override
 	public void importData() {
 		List<Map<String, Object>> rowsFromDb = readRowsFromDb();
-		JsonBuilderFactory jsonBuilderFactory = new OrgJsonBuilderFactoryAdapter();
 		for (Map<String, Object> rowFromDb : rowsFromDb) {
-			Map<String, Object> values = createValuesForInsert(rowFromDb, jsonBuilderFactory);
-			recordCreator.insertIntoTableUsingNameAndColumnsWithValues("educationalProgram",
-					values);
+			convertRowAndCreate(rowFromDb);
 		}
 	}
 
@@ -63,17 +61,28 @@ public class EducationalProgramImporter implements DivaImporter {
 		return recordReader.readFromTableUsingConditions("subjectview", conditions);
 	}
 
-	private Map<String, Object> createValuesForInsert(Map<String, Object> rowFromDb,
-			JsonBuilderFactory jsonBuilderFactory) {
-		// CoraJsonRecord jsonRecord =
-		ClientDataGroup dataGroup = toCoraDataConverter.convertToDataGroupFromRowFromDb(rowFromDb);
-		toJsonConverterFactory.createForClientDataElement(jsonBuilderFactory, dataGroup);
+	private void convertRowAndCreate(Map<String, Object> rowFromDb) {
+		JsonObject jsonObject = convertRowToJson(rowFromDb);
+		Map<String, Object> values = createValuesForInsert(rowFromDb, jsonObject);
+		recordCreator.insertIntoTableUsingNameAndColumnsWithValues("educationalProgram", values);
+	}
 
-		// send dataGroup to tojsonconverter
+	private JsonObject convertRowToJson(Map<String, Object> rowFromDb) {
+		ClientDataGroup dataGroup = toCoraDataConverter.convertToDataGroupFromRowFromDb(rowFromDb);
+		DataToJsonConverter converter = toJsonConverterFactory
+				.createForClientDataElement(dataGroup);
+		JsonObjectBuilder jsonObjectBuilder = converter.toJsonObjectBuilder();
+		return jsonObjectBuilder.toJsonObject();
+
+	}
+
+	private Map<String, Object> createValuesForInsert(Map<String, Object> rowFromDb,
+			JsonObject jsonObject) {
+
 		Map<String, Object> values = new HashMap<>();
-		// values.put("record_type", "educationalProgram");
-		// values.put("record_id", "educationalProgram:" + rowFromDb.get("subject_id"));
-		// values.put("record", jsonRecord.json);
+		values.put("record_type", "educationalProgram");
+		values.put("record_id", "educationalProgram:" + rowFromDb.get("subject_id"));
+		values.put("record", jsonObject);
 		return values;
 	}
 

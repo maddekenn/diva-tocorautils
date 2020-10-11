@@ -70,11 +70,11 @@ public class RecordCompleterSubjectCategory implements RecordCompleter {
 	}
 
 	private String convertToJson(ClientDataGroup nationalSubjectCategory) {
-		DataToJsonConverterFactory dataToJsonConverterFactory = new DataToJsonConverterFactoryImp();
 		OrgJsonBuilderFactoryAdapter jsonBuilderFactory = new OrgJsonBuilderFactoryAdapter();
+		DataToJsonConverterFactory dataToJsonConverterFactory = new DataToJsonConverterFactoryImp(
+				jsonBuilderFactory);
 		DataToJsonConverter converter = dataToJsonConverterFactory
-				.createForClientDataElementIncludingActionLinks(jsonBuilderFactory,
-						nationalSubjectCategory, false);
+				.createForClientDataElementIncludingActionLinks(nationalSubjectCategory, false);
 		return converter.toJson();
 
 	}

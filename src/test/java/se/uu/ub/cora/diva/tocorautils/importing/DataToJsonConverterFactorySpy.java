@@ -24,28 +24,23 @@ import java.util.List;
 import se.uu.ub.cora.clientdata.ClientDataElement;
 import se.uu.ub.cora.clientdata.converter.javatojson.DataToJsonConverter;
 import se.uu.ub.cora.clientdata.converter.javatojson.DataToJsonConverterFactory;
-import se.uu.ub.cora.json.builder.JsonBuilderFactory;
 
 public class DataToJsonConverterFactorySpy implements DataToJsonConverterFactory {
 
 	public List<ClientDataElement> clientDataElements = new ArrayList<>();
 	public List<DataToJsonConverter> factoredConverters = new ArrayList<>();
-	public List<JsonBuilderFactory> factories = new ArrayList<>();
 
 	@Override
-	public DataToJsonConverter createForClientDataElement(JsonBuilderFactory factory,
-			ClientDataElement clientDataElement) {
-		factories.add(factory);
+	public DataToJsonConverter createForClientDataElement(ClientDataElement clientDataElement) {
 		clientDataElements.add(clientDataElement);
-		DataToJsonConverterSpy factored = new DataToJsonConverterSpy();
+		DataToJsonConverter factored = new DataToJsonConverterSpy();
 		factoredConverters.add(factored);
 		return factored;
 	}
 
 	@Override
 	public DataToJsonConverter createForClientDataElementIncludingActionLinks(
-			JsonBuilderFactory factory, ClientDataElement clientDataElement,
-			boolean includeActionLinks) {
+			ClientDataElement clientDataElement, boolean includeActionLinks) {
 		// TODO Auto-generated method stub
 		return null;
 	}

@@ -16,7 +16,7 @@ public class DataToJsonConverterSpy extends DataToJsonConverter {
 	}
 
 	@Override
-	protected JsonObjectBuilder toJsonObjectBuilder() {
+	public JsonObjectBuilder toJsonObjectBuilder() {
 		toJsonObjectBuilderWasCalled = true;
 		JsonBuilderFactory jsonBuilderFactory = new OrgJsonBuilderFactoryAdapter();
 		jsonObjectBuilder = jsonBuilderFactory.createObjectBuilder();
