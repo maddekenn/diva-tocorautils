@@ -78,7 +78,6 @@ public class EducationalProgramImporter implements DivaImporter {
 
 	private Map<String, Object> createValuesForInsert(Map<String, Object> rowFromDb,
 			JsonObject jsonObject) {
-
 		Map<String, Object> values = new HashMap<>();
 		values.put("record_type", "educationalProgram");
 		values.put("record_id", "educationalProgram:" + rowFromDb.get("subject_id"));

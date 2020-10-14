@@ -30,8 +30,6 @@ import org.testng.annotations.Test;
 
 import se.uu.ub.cora.clientdata.ClientDataElement;
 import se.uu.ub.cora.clientdata.ClientDataGroup;
-import se.uu.ub.cora.diva.tocorautils.convert.JsonBuilderFactorySpy;
-import se.uu.ub.cora.json.builder.JsonBuilderFactory;
 
 public class EducationalProgramImporterTest {
 
@@ -40,24 +38,17 @@ public class EducationalProgramImporterTest {
 	private FromDbToCoraConverterSpy fromClassicToCoraConverter;
 	private RecordCreatorSpy recordCreator;
 	private DataToJsonConverterFactorySpy toJsonConverterFactory;
-	private JsonBuilderFactory jsonBuilderFactory;
 
 	@BeforeMethod
 	public void setUp() {
 		recordReader = new RecordReaderSubjectSpy();
 		fromClassicToCoraConverter = new FromDbToCoraConverterSpy();
 		recordCreator = new RecordCreatorSpy();
-		jsonBuilderFactory = new JsonBuilderFactorySpy();
 		toJsonConverterFactory = new DataToJsonConverterFactorySpy();
 		divaImporter = new EducationalProgramImporter(recordReader, fromClassicToCoraConverter,
 				recordCreator, toJsonConverterFactory);
 
 	}
-
-	// @Test
-	// public void init() {
-	// assert
-	// }
 
 	@Test
 	public void testCorrectReadFromDb() {

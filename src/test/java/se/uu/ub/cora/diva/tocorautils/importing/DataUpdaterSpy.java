@@ -18,38 +18,16 @@
  */
 package se.uu.ub.cora.diva.tocorautils.importing;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 import se.uu.ub.cora.sqldatabase.DataUpdater;
-import se.uu.ub.cora.sqldatabase.RecordCreator;
 
-public class RecordCreatorSpy implements RecordCreator {
-
-	public List<String> usedTableNames = new ArrayList<>();
-	public List<Map<String, Object>> usedValues = new ArrayList<>();
-	public DataUpdater dataUpdater;
-
-	public RecordCreatorSpy(DataUpdater dataUpdater) {
-		this.dataUpdater = dataUpdater;
-	}
-
-	public static RecordCreator usingDataUpdater(DataUpdater dataUpdater) {
-		return new RecordCreatorSpy(dataUpdater);
-	}
+public class DataUpdaterSpy implements DataUpdater {
 
 	@Override
-	public DataUpdater getDataUpdater() {
-
-		return dataUpdater;
-	}
-
-	@Override
-	public void insertIntoTableUsingNameAndColumnsWithValues(String tableName,
-			Map<String, Object> values) {
-		usedTableNames.add(tableName);
-		usedValues.add(values);
+	public int executeUsingSqlAndValues(String sql, List<Object> values) {
+		// TODO Auto-generated method stub
+		return 0;
 	}
 
 }

@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import se.uu.ub.cora.sqldatabase.DataReader;
 import se.uu.ub.cora.sqldatabase.RecordReader;
 
 public class RecordReaderSpy implements RecordReader {
@@ -18,6 +19,18 @@ public class RecordReaderSpy implements RecordReader {
 	public List<String> usedTableNames = new ArrayList<>();
 	public List<String> idsToReturnParent = new ArrayList<>();
 	public int noOfParentsToReturn = 1;
+	public DataReader dataReader;
+
+	public RecordReaderSpy() {
+	}
+
+	public RecordReaderSpy(DataReader dataReader) {
+		this.dataReader = dataReader;
+	}
+
+	public static RecordReader usingDataReader(DataReader dataReader) {
+		return new RecordReaderSpy(dataReader);
+	}
 
 	@Override
 	public List<Map<String, Object>> readAllFromTable(String tableName) {
