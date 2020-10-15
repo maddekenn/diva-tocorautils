@@ -35,7 +35,7 @@
 		<logger.version>2.1.0</logger.version>
 		<coralog4j.version>2.1.0</coralog4j.version>
 		<clientdata.version>3.6-SNAPSHOT</clientdata.version>
-		<sqldatabase.version>2.5.0</sqldatabase.version>
+		<sqldatabase.version>2.6-SNAPSHOT</sqldatabase.version>
 		<json.version>2.1.0</json.version>
 <!-- 		<javaclient.version>1.7.0</javaclient.version> -->
 		<batchrunner.version>0.1-SNAPSHOT</batchrunner.version>

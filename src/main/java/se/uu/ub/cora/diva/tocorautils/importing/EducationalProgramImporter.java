@@ -57,7 +57,7 @@ public class EducationalProgramImporter implements DivaImporter {
 
 	private List<Map<String, Object>> readRowsFromDb() {
 		Map<String, Object> conditions = new HashMap<>();
-		conditions.put("subject_type", EDUCATIONAL_PROGRAM_TYPE_CODE);
+		conditions.put("subject_type_id", EDUCATIONAL_PROGRAM_TYPE_CODE);
 		return recordReader.readFromTableUsingConditions("subjectview", conditions);
 	}
 

@@ -30,20 +30,20 @@ public class DivaImporterSpy implements DivaImporter {
 	public RecordReader recordReader;
 	public FromDbToCoraConverterSpy fromDbCoraDataConverter;
 	public RecordCreator recordCreator;
-	public DataToJsonConverterFactory toJsonConverterFactory;
+	public DataToJsonConverterFactory dataToJsonConverterFactory;
+	public boolean importDataWasCalled = false;
 
 	public DivaImporterSpy(RecordReader recordReader, FromDbToCoraConverter toCoraDataConverter,
-			RecordCreator recordCreator, DataToJsonConverterFactory toJsonConverterFactory) {
+			RecordCreator recordCreator, DataToJsonConverterFactory dataToJsonConverterFactory) {
 		this.recordReader = recordReader;
 		this.fromDbCoraDataConverter = (FromDbToCoraConverterSpy) toCoraDataConverter;
 		this.recordCreator = recordCreator;
-		this.toJsonConverterFactory = toJsonConverterFactory;
+		this.dataToJsonConverterFactory = dataToJsonConverterFactory;
 	}
 
 	@Override
 	public void importData() {
-		// TODO Auto-generated method stub
-
+		importDataWasCalled = true;
 	}
 
 }

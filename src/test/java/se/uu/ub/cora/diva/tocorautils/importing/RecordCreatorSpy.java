@@ -31,6 +31,9 @@ public class RecordCreatorSpy implements RecordCreator {
 	public List<Map<String, Object>> usedValues = new ArrayList<>();
 	public DataUpdater dataUpdater;
 
+	public RecordCreatorSpy() {
+	}
+
 	public RecordCreatorSpy(DataUpdater dataUpdater) {
 		this.dataUpdater = dataUpdater;
 	}

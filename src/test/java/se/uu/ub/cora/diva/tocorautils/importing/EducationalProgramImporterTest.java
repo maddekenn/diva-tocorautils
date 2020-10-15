@@ -55,7 +55,7 @@ public class EducationalProgramImporterTest {
 		divaImporter.importData();
 		assertTrue(recordReader.readFromTableUsingConditionsWasCalled);
 		assertEquals(recordReader.usedTableName, "subjectview");
-		int subjectTypeUsedToSelect = (int) recordReader.usedConditions.get("subject_type");
+		int subjectTypeUsedToSelect = (int) recordReader.usedConditions.get("subject_type_id");
 		assertEquals(subjectTypeUsedToSelect, 56);
 	}
 

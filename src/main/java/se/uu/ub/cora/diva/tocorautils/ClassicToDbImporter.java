@@ -23,11 +23,16 @@ import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
 import se.uu.ub.cora.clientdata.converter.javatojson.DataToJsonConverterFactory;
+import se.uu.ub.cora.clientdata.converter.javatojson.DataToJsonConverterFactoryImp;
 import se.uu.ub.cora.connection.ParameterConnectionProviderImp;
 import se.uu.ub.cora.diva.tocorautils.importing.DivaImporter;
 import se.uu.ub.cora.diva.tocorautils.importing.FromDbToCoraConverter;
+import se.uu.ub.cora.json.builder.JsonBuilderFactory;
+import se.uu.ub.cora.json.builder.org.OrgJsonBuilderFactoryAdapter;
 import se.uu.ub.cora.sqldatabase.DataReader;
 import se.uu.ub.cora.sqldatabase.DataReaderImp;
+import se.uu.ub.cora.sqldatabase.DataUpdater;
+import se.uu.ub.cora.sqldatabase.DataUpdaterImp;
 import se.uu.ub.cora.sqldatabase.RecordCreator;
 import se.uu.ub.cora.sqldatabase.RecordReader;
 
@@ -37,24 +42,16 @@ public class ClassicToDbImporter {
 
 	public static void main(String[] args) throws InstantiationException, IllegalAccessException,
 			InvocationTargetException, NoSuchMethodException, ClassNotFoundException {
-		String importerClassName = args[0];
 		RecordReader recordReader = createRecordReader(args);
+		FromDbToCoraConverter fromDbToCoraConverter = createFromDbToCoraConverter(args);
+		RecordCreator recordCreator = createRecordCreator(args);
+		DataToJsonConverterFactoryImp dataToJsonConverterFactory = createDataToJsonConverterFactory();
 
-		String fromDbToCoraConverterClassName = args[5];
-		FromDbToCoraConverter fromDbToCoraConverter = createFromDbToCoraConverter(
-				fromDbToCoraConverterClassName);
-		divaImporter = createDivaImporter(importerClassName, recordReader, fromDbToCoraConverter);
-
-	}
-
-	private static FromDbToCoraConverter createFromDbToCoraConverter(
-			String fromDbToCoraConverterClassName)
-			throws InstantiationException, IllegalAccessException, InvocationTargetException,
-			NoSuchMethodException, ClassNotFoundException {
-		Class<?>[] cArg = new Class[1];
-		cArg[0] = DataReader.class;
-		Constructor<?> constructor = Class.forName(fromDbToCoraConverterClassName).getConstructor();
-		return (FromDbToCoraConverter) constructor.newInstance();
+		divaImporter = createDivaImporter(args, recordReader, fromDbToCoraConverter, recordCreator,
+				dataToJsonConverterFactory);
+		System.out.println("before import");
+		divaImporter.importData();
+		System.out.println("after import");
 
 	}
 
@@ -63,6 +60,18 @@ public class ClassicToDbImporter {
 		DataReader dataReader = createDataReader(args);
 		String recordReaderClassName = args[1];
 		return createRecordReaderUsingClassNameAndDataReader(recordReaderClassName, dataReader);
+	}
+
+	private static DataReader createDataReader(String[] args) {
+		ParameterConnectionProviderImp connectionProvider = cretateConnectionProvider(args[2],
+				args[3], args[4]);
+		return DataReaderImp.usingSqlConnectionProvider(connectionProvider);
+	}
+
+	private static ParameterConnectionProviderImp cretateConnectionProvider(String dbToReadFromUrl,
+			String dbToReadFromUserId, String dbToReadFromPassword) {
+		return ParameterConnectionProviderImp.usingUriAndUserAndPassword(dbToReadFromUrl,
+				dbToReadFromUserId, dbToReadFromPassword);
 	}
 
 	private static RecordReader createRecordReaderUsingClassNameAndDataReader(
@@ -75,38 +84,68 @@ public class ClassicToDbImporter {
 		return (RecordReader) constructor.invoke(null, dataReader);
 	}
 
-	private static DataReader createDataReader(String[] args) {
-		String dbToReadFromUrl = args[2];
-		String dbToReadFromUserId = args[3];
-		String dbToReadFromPassword = args[4];
-
-		ParameterConnectionProviderImp connectionProvider = ParameterConnectionProviderImp
-				.usingUriAndUserAndPassword(dbToReadFromUrl, dbToReadFromUserId,
-						dbToReadFromPassword);
-		return DataReaderImp.usingSqlConnectionProvider(connectionProvider);
-	}
-
-	private static DivaImporter createDivaImporter(String importerClassName,
-			RecordReader recordReader, FromDbToCoraConverter fromDbToCoraConverter)
+	private static FromDbToCoraConverter createFromDbToCoraConverter(String[] args)
 			throws InstantiationException, IllegalAccessException, InvocationTargetException,
 			NoSuchMethodException, ClassNotFoundException {
+		String fromDbToCoraConverterClassName = args[5];
+		Class<?>[] cArg = new Class[1];
+		cArg[0] = DataReader.class;
+		Constructor<?> constructor = Class.forName(fromDbToCoraConverterClassName).getConstructor();
+		return (FromDbToCoraConverter) constructor.newInstance();
+
+	}
+
+	private static RecordCreator createRecordCreator(String[] args)
+			throws NoSuchMethodException, ClassNotFoundException, IllegalAccessException,
+			InvocationTargetException, InstantiationException {
+		DataUpdater dataUpdater = createDataUpdater(args);
+		String recordCreatorClassName = args[6];
+		return createRecordCreatorUsingClassNameAndDataReader(recordCreatorClassName, dataUpdater);
+	}
+
+	private static DataUpdater createDataUpdater(String[] args) {
+		ParameterConnectionProviderImp connectionProvider = cretateConnectionProvider(args[7],
+				args[8], args[9]);
+
+		return DataUpdaterImp.usingSqlConnectionProvider(connectionProvider);
+	}
+
+	private static RecordCreator createRecordCreatorUsingClassNameAndDataReader(
+			String recordReaderClassName, DataUpdater dataUpdater)
+			throws NoSuchMethodException, ClassNotFoundException, IllegalAccessException,
+			InvocationTargetException, InstantiationException {
+		Class<?>[] cArg = new Class[1];
+		cArg[0] = DataUpdater.class;
+		Constructor<?> constructor = Class.forName(recordReaderClassName).getConstructor(cArg);
+		return (RecordCreator) constructor.newInstance(dataUpdater);
+	}
+
+	private static DataToJsonConverterFactoryImp createDataToJsonConverterFactory() {
+		JsonBuilderFactory orgJsonBuilderFactoryAdapter = new OrgJsonBuilderFactoryAdapter();
+		return new DataToJsonConverterFactoryImp(orgJsonBuilderFactoryAdapter);
+	}
+
+	private static DivaImporter createDivaImporter(String[] args, RecordReader recordReader,
+			FromDbToCoraConverter fromDbToCoraConverter, RecordCreator recordCreator,
+			DataToJsonConverterFactory dataToJsonConverterFactory)
+			throws InstantiationException, IllegalAccessException, InvocationTargetException,
+			NoSuchMethodException, ClassNotFoundException {
+		Class<?>[] cArg = setUpDbImporterArguments();
+
+		String importerClassName = args[0];
+		Constructor<?> constructor = Class.forName(importerClassName).getConstructor(cArg);
+		return (DivaImporter) constructor.newInstance(recordReader, fromDbToCoraConverter,
+				recordCreator, dataToJsonConverterFactory);
+
+	}
+
+	private static Class<?>[] setUpDbImporterArguments() {
 		Class<?>[] cArg = new Class[4];
 		cArg[0] = RecordReader.class;
 		cArg[1] = FromDbToCoraConverter.class;
 		cArg[2] = RecordCreator.class;
 		cArg[3] = DataToJsonConverterFactory.class;
-		Constructor<?> constructor = Class.forName(importerClassName).getConstructor(cArg);
-		return (DivaImporter) constructor.newInstance(recordReader, fromDbToCoraConverter, null,
-				null);
-
+		return cArg;
 	}
-
-	// static void createCoraClientConfig(String[] args) {
-	// String userId = args[0];
-	// String appToken = args[1];
-	// String appTokenVerifierUrl = args[2];
-	// String coraUrl = args[3];
-	// coraClientConfig = new CoraClientConfig(userId, appToken, appTokenVerifierUrl, coraUrl);
-	// }
 
 }
