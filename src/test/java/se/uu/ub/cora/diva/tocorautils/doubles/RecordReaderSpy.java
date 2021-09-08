@@ -83,4 +83,10 @@ public class RecordReaderSpy implements RecordReader {
 		return null;
 	}
 
+	@Override
+	public DataReader getDataReader() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

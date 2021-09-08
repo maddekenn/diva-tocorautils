@@ -23,6 +23,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import se.uu.ub.cora.sqldatabase.DataReader;
 import se.uu.ub.cora.sqldatabase.RecordReader;
 
 public class RecordReaderSubjectSpy implements RecordReader {
@@ -60,6 +61,12 @@ public class RecordReaderSubjectSpy implements RecordReader {
 
 	@Override
 	public Map<String, Object> readNextValueFromSequence(String sequenceName) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public DataReader getDataReader() {
 		// TODO Auto-generated method stub
 		return null;
 	}

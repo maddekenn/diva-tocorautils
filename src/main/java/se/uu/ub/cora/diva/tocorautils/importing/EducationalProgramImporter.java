@@ -30,10 +30,9 @@ import se.uu.ub.cora.json.parser.JsonObject;
 import se.uu.ub.cora.sqldatabase.RecordCreator;
 import se.uu.ub.cora.sqldatabase.RecordReader;
 
-public class EducationalProgramImporter implements DivaImporter {
+public class EducationalProgramImporter extends SubjectImporter implements DivaImporter {
 
 	private static final int EDUCATIONAL_PROGRAM_TYPE_CODE = 56;
-	private RecordReader recordReader;
 	private FromDbToCoraConverter toCoraDataConverter;
 	private RecordCreator recordCreator;
 	private DataToJsonConverterFactory toJsonConverterFactory;
@@ -55,10 +54,9 @@ public class EducationalProgramImporter implements DivaImporter {
 		}
 	}
 
-	private List<Map<String, Object>> readRowsFromDb() {
-		Map<String, Object> conditions = new HashMap<>();
-		conditions.put("subject_type_id", EDUCATIONAL_PROGRAM_TYPE_CODE);
-		return recordReader.readFromTableUsingConditions("subjectview", conditions);
+	@Override
+	protected int getSubjectCode() {
+		return EDUCATIONAL_PROGRAM_TYPE_CODE;
 	}
 
 	private void convertRowAndCreate(Map<String, Object> rowFromDb) {
