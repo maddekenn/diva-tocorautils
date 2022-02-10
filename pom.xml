@@ -22,7 +22,7 @@
 	<parent>
 		<groupId>se.uu.ub.cora</groupId>
 		<artifactId>cora-parent</artifactId>
-		<version>0.8.6</version>
+		<version>1.4.1</version>
 	</parent>
 
 	<artifactId>divatocorautils</artifactId>
@@ -32,12 +32,12 @@
 	<name>Diva to Cora utils</name>
 
 	<properties>
-		<logger.version>2.0.0</logger.version>
+		<logger.version>2.3.0</logger.version>
 		<coralog4j.version>2.0.0</coralog4j.version>
-		<clientdata.version>3.4.0</clientdata.version>
-		<sqldatabase.version>2.3.1</sqldatabase.version>
-		<json.version>2.0.1</json.version>
-		<javaclient.version>1.6.0</javaclient.version>
+		<clientdata.version>3.10.0</clientdata.version>
+		<sqldatabase.version>4.1.0</sqldatabase.version>
+		<json.version>2.5.0</json.version>
+		<javaclient.version>1.10.0</javaclient.version>
 		<batchrunner.version>0.1-SNAPSHOT</batchrunner.version>
 	</properties>
 

@@ -101,4 +101,28 @@ public class CoraClientSpy implements CoraClient {
 		return null;
 	}
 
+	@Override
+	public String indexData(ClientDataRecord arg0) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public String indexData(String arg0, String arg1) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<ClientDataRecord> readListAsDataRecords(String arg0) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public String removeFromIndex(String arg0, String arg1) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

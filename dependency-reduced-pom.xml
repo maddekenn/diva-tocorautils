@@ -3,7 +3,7 @@
   <parent>
     <artifactId>cora-parent</artifactId>
     <groupId>se.uu.ub.cora</groupId>
-    <version>0.8.6</version>
+    <version>1.4.1</version>
     <relativePath>../pom.xml/pom.xml</relativePath>
   </parent>
   <modelVersion>4.0.0</modelVersion>
@@ -42,24 +42,23 @@
     <dependency>
       <groupId>org.testng</groupId>
       <artifactId>testng</artifactId>
-      <version>6.14.3</version>
+      <version>7.0.0</version>
       <scope>test</scope>
       <exclusions>
         <exclusion>
           <artifactId>jcommander</artifactId>
           <groupId>com.beust</groupId>
         </exclusion>
-        <exclusion>
-          <artifactId>bsh</artifactId>
-          <groupId>org.apache-extras.beanshell</groupId>
-        </exclusion>
       </exclusions>
     </dependency>
   </dependencies>
   <properties>
-    <javaclient.version>0.3.0</javaclient.version>
-    <json.version>0.5.7</json.version>
-    <clientdata.version>0.3.0</clientdata.version>
-    <sqldatabase.version>0.3.1</sqldatabase.version>
+    <javaclient.version>1.10.0</javaclient.version>
+    <coralog4j.version>2.0.0</coralog4j.version>
+    <logger.version>2.3.0</logger.version>
+    <batchrunner.version>0.1-SNAPSHOT</batchrunner.version>
+    <json.version>2.5.0</json.version>
+    <clientdata.version>3.10.0</clientdata.version>
+    <sqldatabase.version>4.1.0</sqldatabase.version>
   </properties>
 </project>

@@ -52,4 +52,10 @@ public class CoraClientFactorySpy implements CoraClientFactory {
 		return factored;
 	}
 
+	@Override
+	public CoraClient factorUsingAuthToken(String arg0) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }
