@@ -28,8 +28,6 @@ import org.testng.annotations.Test;
 
 import se.uu.ub.cora.diva.tocorautils.CoraJsonRecord;
 import se.uu.ub.cora.diva.tocorautils.doubles.CoraClientSpy;
-import se.uu.ub.cora.diva.tocorautils.importing.CoraImporter;
-import se.uu.ub.cora.diva.tocorautils.importing.ImportResult;
 
 public class CoraImporterTest {
 

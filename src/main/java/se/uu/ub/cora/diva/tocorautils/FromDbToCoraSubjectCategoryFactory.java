@@ -29,8 +29,8 @@ import se.uu.ub.cora.diva.tocorautils.convert.FromDbToCoraSubjectCategoryConvert
 import se.uu.ub.cora.diva.tocorautils.convert.RecordCompleterSubjectCategory;
 import se.uu.ub.cora.diva.tocorautils.importing.CoraImporter;
 import se.uu.ub.cora.diva.tocorautils.importing.Importer;
-import se.uu.ub.cora.javaclient.CoraClientConfig;
 import se.uu.ub.cora.javaclient.cora.CoraClient;
+import se.uu.ub.cora.javaclient.cora.CoraClientConfig;
 import se.uu.ub.cora.javaclient.cora.CoraClientFactory;
 import se.uu.ub.cora.json.builder.JsonBuilderFactory;
 import se.uu.ub.cora.json.builder.org.OrgJsonBuilderFactoryAdapter;

@@ -10,7 +10,8 @@
  *
  *     Cora is distributed in the hope that it will be useful,
  *     but WITHOUT ANY WARRANTY; without even the implied warranty of
- *     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *     MERCHANTABILITY or @Override
+	FITNESS FOR A PARTICULAR PURPOSE.  See the
  *     GNU General Public License for more details.
  *
  *     You should have received a copy of the GNU General Public License
@@ -20,10 +21,19 @@ package se.uu.ub.cora.diva.tocorautils.convert;
 
 import java.util.Map;
 
+import se.uu.ub.cora.clientdata.ClientDataGroup;
 import se.uu.ub.cora.diva.tocorautils.CoraJsonRecord;
 
+/**
+ * FromDbToCoraConverter convertes a row from db to a Cora representation of the data. An instance
+ * of FromDbToCoraConverter is expected to only handle one row from database. If multiple rows are
+ * to be converted, multiple FromDbToCoraConverters should be used.
+ * 
+ */
 public interface FromDbToCoraConverter {
 
 	CoraJsonRecord convertToJsonFromRowFromDb(Map<String, Object> rowFromDb);
+
+	ClientDataGroup convertToClientDataGroupFromRowFromDb(Map<String, Object> rowFromDb);
 
 }
