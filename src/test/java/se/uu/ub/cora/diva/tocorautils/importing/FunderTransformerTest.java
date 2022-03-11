@@ -43,7 +43,7 @@ public class FunderTransformerTest {
 	public void setUp() {
 		databaseFacade = new DatabaseFacadeSpy();
 		converterFactory = new FromDbToCoraConverterFactorySpy();
-		transformer = new FunderTransformer(databaseFacade, converterFactory);
+		transformer = FunderTransformer.usingDatabaseFacadeAndFromDbConverterFactory(databaseFacade, converterFactory);
 	}
 
 	@Test
@@ -74,7 +74,6 @@ public class FunderTransformerTest {
 		assertEquals(returnedConverterSpies.size(), 3);
 
 		assertSame(returnedConverterSpies.get(0).row, rowsToReturn.get(0));
-
 	}
 
 	private List<Row> createListOfRows() {
@@ -96,7 +95,6 @@ public class FunderTransformerTest {
 		assertSame(converted.get(0), converterSpies.get(0).dataGroupToReturn);
 		assertSame(converted.get(1), converterSpies.get(1).dataGroupToReturn);
 		assertSame(converted.get(2), converterSpies.get(2).dataGroupToReturn);
-
 	}
 
 }

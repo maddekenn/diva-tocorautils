@@ -30,28 +30,46 @@ import se.uu.ub.cora.sqldatabase.Row;
 
 public class FunderTransformer implements DbToCoraTransformer {
 
+	public static FunderTransformer usingDatabaseFacadeAndFromDbConverterFactory(
+			DatabaseFacade databaseFacade, FromDbToCoraConverterFactory converterFactory) {
+		return new FunderTransformer(databaseFacade, converterFactory);
+	}
+
 	private DatabaseFacade databaseFacade;
 	private FromDbToCoraConverterFactory converterFactory;
 
-	public FunderTransformer(DatabaseFacade databaseFacade,
+	private FunderTransformer(DatabaseFacade databaseFacade,
 			FromDbToCoraConverterFactory converterFactory) {
 		this.databaseFacade = databaseFacade;
 		this.converterFactory = converterFactory;
 	}
 
+	@Override
 	public List<ClientDataGroup> getConverted() {
-		String sql = "select f.funder_id, f.closed_date, f.funder_name, f.funder_name_locale, "
+		String sql = createSqlForFindingFunders();
+		List<Row> rows = databaseFacade.readUsingSqlAndValues(sql, Collections.emptyList());
+		return convertGroups(rows);
+	}
+
+	private String createSqlForFindingFunders() {
+		return "select f.funder_id, f.closed_date, f.funder_name, f.funder_name_locale, "
 				+ "f.acronym, f.orgnumber, f.doi, fn.funder_name as alternative_name, fn.locale "
 				+ "as alternative_name_locale from funder f left join funder_name fn "
 				+ "on f.funder_id = fn.funder_id";
-		List<Row> rows = databaseFacade.readUsingSqlAndValues(sql, Collections.emptyList());
+	}
+
+	private List<ClientDataGroup> convertGroups(List<Row> rows) {
 		List<ClientDataGroup> convertedGroups = new ArrayList<>();
 		for (Row row : rows) {
-			FromDbToCoraConverter converter = converterFactory.factor("funder");
-			ClientDataGroup converted = converter.convertToClientDataGroupFromRowFromDb(row);
-			convertedGroups.add(converted);
+			convertAndAddGroup(convertedGroups, row);
 		}
 		return convertedGroups;
+	}
+
+	private void convertAndAddGroup(List<ClientDataGroup> convertedGroups, Row row) {
+		FromDbToCoraConverter converter = converterFactory.factor("funder");
+		ClientDataGroup converted = converter.convertToClientDataGroupFromRowFromDb(row);
+		convertedGroups.add(converted);
 	}
 
 	public DatabaseFacade getDatabaseFacade() {

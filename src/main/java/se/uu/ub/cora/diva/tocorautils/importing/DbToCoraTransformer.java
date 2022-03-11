@@ -18,6 +18,10 @@
  */
 package se.uu.ub.cora.diva.tocorautils.importing;
 
-public interface DbToCoraTransformer {
+import java.util.List;
 
+import se.uu.ub.cora.clientdata.ClientDataGroup;
+
+public interface DbToCoraTransformer {
+	List<ClientDataGroup> getConverted();
 }

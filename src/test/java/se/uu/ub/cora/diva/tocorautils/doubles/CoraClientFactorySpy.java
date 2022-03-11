@@ -28,6 +28,7 @@ public class CoraClientFactorySpy implements CoraClientFactory {
 	public String appToken;
 	public String appTokenVerifierUrl;
 	public String baseUrl;
+	public String authToken;
 
 	public static CoraClientFactory usingAppTokenVerifierUrlAndBaseUrl(String appTokenVerifierUrl,
 			String baseUrl) {
@@ -53,9 +54,10 @@ public class CoraClientFactorySpy implements CoraClientFactory {
 	}
 
 	@Override
-	public CoraClient factorUsingAuthToken(String arg0) {
-		// TODO Auto-generated method stub
-		return null;
+	public CoraClient factorUsingAuthToken(String authToken) {
+		this.authToken = authToken;
+		factored = new CoraClientSpy();
+		return factored;
 	}
 
 }

@@ -34,6 +34,7 @@ public class CoraClientSpy implements CoraClient {
 	public List<String> updatedRecordIds = new ArrayList<>();
 	public List<String> jsonStrings = new ArrayList<>();
 	public List<ClientDataGroup> updatedDataGroups = new ArrayList<>();
+	public List<ClientDataGroup> dataGroupsSentToCreate = new ArrayList<>();
 	public String jsonToReturn;
 
 	@Override
@@ -83,7 +84,9 @@ public class CoraClientSpy implements CoraClient {
 
 	@Override
 	public String create(String recordType, ClientDataGroup dataGroup) {
-		// TODO Auto-generated method stub
+		createdRecordTypes.add(recordType);
+		dataGroupsSentToCreate.add(dataGroup);
+
 		return null;
 	}
 
@@ -121,6 +124,18 @@ public class CoraClientSpy implements CoraClient {
 
 	@Override
 	public String removeFromIndex(String arg0, String arg1) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public String indexDataWithoutExplicitCommit(String recordType, String recordId) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public String indexRecordsOfType(String recordType, String settingsAsJson) {
 		// TODO Auto-generated method stub
 		return null;
 	}
