@@ -23,6 +23,7 @@ import java.util.Map;
 
 import se.uu.ub.cora.clientdata.ClientDataGroup;
 import se.uu.ub.cora.diva.tocorautils.CoraJsonRecord;
+import se.uu.ub.cora.sqldatabase.Row;
 
 /**
  * FromDbToCoraConverter convertes a row from db to a Cora representation of the data. An instance
@@ -34,6 +35,6 @@ public interface FromDbToCoraConverter {
 
 	CoraJsonRecord convertToJsonFromRowFromDb(Map<String, Object> rowFromDb);
 
-	ClientDataGroup convertToClientDataGroupFromRowFromDb(Map<String, Object> rowFromDb);
+	ClientDataGroup convertToClientDataGroupFromRowFromDb(Row row);
 
 }

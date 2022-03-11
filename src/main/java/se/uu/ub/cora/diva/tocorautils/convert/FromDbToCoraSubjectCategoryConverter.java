@@ -28,6 +28,7 @@ import se.uu.ub.cora.clientdata.converter.javatojson.DataToJsonConverter;
 import se.uu.ub.cora.clientdata.converter.javatojson.DataToJsonConverterFactory;
 import se.uu.ub.cora.diva.tocorautils.CoraJsonRecord;
 import se.uu.ub.cora.json.builder.JsonBuilderFactory;
+import se.uu.ub.cora.sqldatabase.Row;
 
 public class FromDbToCoraSubjectCategoryConverter implements FromDbToCoraConverter {
 
@@ -125,6 +126,12 @@ public class FromDbToCoraSubjectCategoryConverter implements FromDbToCoraConvert
 	public JsonBuilderFactory getJsonBuilderFactory() {
 		// needed for tests
 		return jsonFactory;
+	}
+
+	@Override
+	public ClientDataGroup convertToClientDataGroupFromRowFromDb(Row row) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

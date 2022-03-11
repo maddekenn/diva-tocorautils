@@ -1,5 +1,5 @@
 /*
- * Copyright 2019 Uppsala University Library
+ * Copyright 2022 Uppsala University Library
  *
  * This file is part of Cora.
  *
@@ -18,8 +18,16 @@
  */
 package se.uu.ub.cora.diva.tocorautils.convert;
 
-public interface FromDbToCoraConverterFactory {
+import se.uu.ub.cora.diva.tocorautils.NotImplementedException;
 
-	FromDbToCoraConverter factor(String type);
+public class FromDbToCoraConverterFactoryImp implements FromDbToCoraConverterFactory {
+
+	@Override
+	public FromDbToCoraConverter factor(String type) {
+		if ("funder".equals(type)) {
+			return new FromDbToCoraFunderConverter();
+		}
+		throw NotImplementedException.withMessage("Converter not implemented for " + type);
+	}
 
 }

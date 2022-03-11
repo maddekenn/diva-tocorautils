@@ -6,11 +6,13 @@ import se.uu.ub.cora.clientdata.ClientDataAtomic;
 import se.uu.ub.cora.clientdata.ClientDataGroup;
 import se.uu.ub.cora.diva.tocorautils.CoraJsonRecord;
 import se.uu.ub.cora.diva.tocorautils.NotImplementedException;
+import se.uu.ub.cora.sqldatabase.Row;
 
 public class FromDbToCoraFunderConverter implements FromDbToCoraConverter {
 
 	private Map<String, Object> rowFromDb;
 	private ClientDataGroup funder;
+	private Row row;
 
 	@Override
 	public CoraJsonRecord convertToJsonFromRowFromDb(Map<String, Object> rowFromDb) {
@@ -18,8 +20,8 @@ public class FromDbToCoraFunderConverter implements FromDbToCoraConverter {
 	}
 
 	@Override
-	public ClientDataGroup convertToClientDataGroupFromRowFromDb(Map<String, Object> rowFromDb) {
-		this.rowFromDb = rowFromDb;
+	public ClientDataGroup convertToClientDataGroupFromRowFromDb(Row row) {
+		this.row = row;
 		funder = ClientDataGroup.withNameInData("funder");
 		funder.addChild(createRecordInfo());
 
@@ -30,7 +32,7 @@ public class FromDbToCoraFunderConverter implements FromDbToCoraConverter {
 	}
 
 	private ClientDataGroup createRecordInfo() {
-		int funderId = (int) rowFromDb.get("funder_id");
+		int funderId = (int) row.getValueByColumn("funder_id");
 		ClientDataGroup recordInfo = ClientDataGroup.withNameInData("recordInfo");
 		recordInfo.addChild(ClientDataAtomic.withNameInDataAndValue("id", "funder:" + funderId));
 		addDataDivider(recordInfo);
@@ -44,11 +46,11 @@ public class FromDbToCoraFunderConverter implements FromDbToCoraConverter {
 	}
 
 	private void createAndAddName(String key, String nameInData) {
-		String funderName = (String) rowFromDb.get(key);
+		String funderName = (String) row.getValueByColumn(key);
 		ClientDataGroup name = ClientDataGroup.withNameInData(nameInData);
 		name.addChild(ClientDataAtomic.withNameInDataAndValue("funderName", funderName));
 
-		String funderNameLocale = (String) rowFromDb.get(key + "_locale");
+		String funderNameLocale = (String) row.getValueByColumn(key + "_locale");
 		name.addChild(ClientDataAtomic.withNameInDataAndValue("language", funderNameLocale));
 		funder.addChild(name);
 	}
@@ -61,8 +63,8 @@ public class FromDbToCoraFunderConverter implements FromDbToCoraConverter {
 	}
 
 	private void possiblyAddValueForKey(String key, String nameInData) {
-		if (rowFromDb.containsKey(key)) {
-			String value = (String) rowFromDb.get(key);
+		if (row.hasColumnWithNonEmptyValue(key)) {
+			String value = (String) row.getValueByColumn(key);
 			funder.addChild(ClientDataAtomic.withNameInDataAndValue(nameInData, value));
 		}
 	}

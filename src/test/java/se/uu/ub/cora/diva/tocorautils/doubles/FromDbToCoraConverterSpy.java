@@ -22,8 +22,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import se.uu.ub.cora.clientdata.ClientDataGroup;
 import se.uu.ub.cora.diva.tocorautils.CoraJsonRecord;
 import se.uu.ub.cora.diva.tocorautils.convert.FromDbToCoraConverter;
+import se.uu.ub.cora.sqldatabase.Row;
 
 public class FromDbToCoraConverterSpy implements FromDbToCoraConverter {
 
@@ -31,6 +33,8 @@ public class FromDbToCoraConverterSpy implements FromDbToCoraConverter {
 	public List<List<CoraJsonRecord>> returnedList;
 	public List<CoraJsonRecord> returnedJsonRecords = new ArrayList<>();
 	String json = "{\"name\":\"groupNameInData\", \"children\":[]}";
+	public Row row;
+	public ClientDataGroup dataGroupToReturn;
 
 	@Override
 	public CoraJsonRecord convertToJsonFromRowFromDb(Map<String, Object> rowFromDb) {
@@ -40,6 +44,13 @@ public class FromDbToCoraConverterSpy implements FromDbToCoraConverter {
 		returnedJsonRecords.add(jsonRecord);
 
 		return jsonRecord;
+	}
+
+	@Override
+	public ClientDataGroup convertToClientDataGroupFromRowFromDb(Row row) {
+		this.row = row;
+		dataGroupToReturn = ClientDataGroup.withNameInData("someNameInData");
+		return dataGroupToReturn;
 	}
 
 }
