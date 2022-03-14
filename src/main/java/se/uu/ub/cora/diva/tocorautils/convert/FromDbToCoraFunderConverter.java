@@ -10,7 +10,6 @@ import se.uu.ub.cora.sqldatabase.Row;
 
 public class FromDbToCoraFunderConverter implements FromDbToCoraConverter {
 
-	private Map<String, Object> rowFromDb;
 	private ClientDataGroup funder;
 	private Row row;
 
@@ -46,13 +45,15 @@ public class FromDbToCoraFunderConverter implements FromDbToCoraConverter {
 	}
 
 	private void createAndAddName(String key, String nameInData) {
-		String funderName = (String) row.getValueByColumn(key);
-		ClientDataGroup name = ClientDataGroup.withNameInData(nameInData);
-		name.addChild(ClientDataAtomic.withNameInDataAndValue("funderName", funderName));
+		if (row.hasColumnWithNonEmptyValue(key)) {
+			String funderName = (String) row.getValueByColumn(key);
+			ClientDataGroup name = ClientDataGroup.withNameInData(nameInData);
+			name.addChild(ClientDataAtomic.withNameInDataAndValue("funderName", funderName));
 
-		String funderNameLocale = (String) row.getValueByColumn(key + "_locale");
-		name.addChild(ClientDataAtomic.withNameInDataAndValue("language", funderNameLocale));
-		funder.addChild(name);
+			String funderNameLocale = (String) row.getValueByColumn(key + "_locale");
+			name.addChild(ClientDataAtomic.withNameInDataAndValue("language", funderNameLocale));
+			funder.addChild(name);
+		}
 	}
 
 	private void possiblyAddNonMandatoryValues() {

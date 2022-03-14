@@ -26,6 +26,19 @@ public class FunderImporterRunnerTest {
 	// "se.uu.ub.cora.sqldatabase.SqlDatabaseFactoryImp"
 	// "se.uu.ub.cora.diva.tocorautils.convert.FromDbToCoraConverterFactoryImp"
 	// "jdbc:postgresql://dev-diva-postgresql:5432/diva" "diva" "diva"
+	// "se.uu.ub.cora.javaclient.cora.CoraClientFactoryImp"
+	// "http://ipnummer:38082/apptokenverifier/" "http://ipnummer:38082/diva/rest/" ""
+
+	// [0] transformerClassName
+	// [1] sqlDatabaseFactoryName
+	// [2] FromDbToCoraConverterFactory
+	// [3] dburl
+	// [4] dbUser
+	// [5] dbPssword
+	// [6] coraClientFactoryClassName
+	// [7] apptokenVerifierUrl
+	// [8] baseUrl
+	// [9] authToken
 
 	@Test
 	public void testConstructorIsPrivate() throws NoSuchMethodException, IllegalAccessException,
@@ -72,8 +85,12 @@ public class FunderImporterRunnerTest {
 		assertEquals(coraClientFactory.appTokenVerifierUrl, "someApptokenVerifierUrl");
 		assertEquals(coraClientFactory.baseUrl, "someBaseUrl");
 		assertEquals(coraClientFactory.authToken, "someAuthtoken");
+
+		DbToCoraTransformerSpy transformer = (DbToCoraTransformerSpy) FunderImporterRunner.coraTransformer;
 		CoraClientSpy coraClient = coraClientFactory.factored;
 		assertEquals(coraClient.dataGroupsSentToCreate.size(), 1);
+		assertSame(coraClient.dataGroupsSentToCreate.get(0), transformer.listOfConverted.get(0));
+		assertEquals(coraClient.createdRecordTypes.get(0), "funder");
 	}
 
 	@Test

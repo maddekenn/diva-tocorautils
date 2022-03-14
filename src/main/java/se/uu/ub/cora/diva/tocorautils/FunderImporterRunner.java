@@ -32,9 +32,15 @@ public class FunderImporterRunner {
 
 		createCoraClientFactory(args);
 		CoraClient coraClient = coraClientFactory.factorUsingAuthToken(args[9]);
+		int counter = 0;
 		for (ClientDataGroup dataGroup : converted) {
-			coraClient.create("", dataGroup);
+			ClientDataGroup recordInfo = dataGroup.getFirstGroupWithNameInData("recordInfo");
+			System.out.println("Id: " + recordInfo.getFirstAtomicValueWithNameInData("id"));
+			coraClient.create("funder", dataGroup);
+			counter++;
 		}
+
+		System.out.println("Number of records imorted: " + counter);
 	}
 
 	private static void constructSqlDatabaseFactory(String[] args) throws NoSuchMethodException,
@@ -98,8 +104,9 @@ public class FunderImporterRunner {
 		Class<?>[] cArg = new Class[2];
 		cArg[0] = String.class;
 		cArg[1] = String.class;
-		Method constructor = Class.forName(args[6]).getMethod("usingAppTokenVerifierUrlAndBaseUrl",
-				cArg);
+		String coraClientFactoryClassName = args[6];
+		Method constructor = Class.forName(coraClientFactoryClassName)
+				.getMethod("usingAppTokenVerifierUrlAndBaseUrl", cArg);
 		coraClientFactory = (CoraClientFactory) constructor.invoke(null, args[7], args[8]);
 		// coraClientConfig.appTokenVerifierUrl, coraClientConfig.coraUrl);
 

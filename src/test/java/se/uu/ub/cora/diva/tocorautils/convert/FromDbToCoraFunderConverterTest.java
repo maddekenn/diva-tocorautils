@@ -12,6 +12,7 @@ import org.testng.annotations.Test;
 import se.uu.ub.cora.clientdata.ClientDataGroup;
 import se.uu.ub.cora.diva.tocorautils.NotImplementedException;
 import se.uu.ub.cora.diva.tocorautils.importing.RowSpy;
+import se.uu.ub.cora.sqldatabase.DatabaseValues;
 
 public class FromDbToCoraFunderConverterTest {
 	private Map<String, Object> rowFromDb = new HashMap<>();
@@ -66,6 +67,15 @@ public class FromDbToCoraFunderConverterTest {
 		assertEquals(alternativeName.getFirstAtomicValueWithNameInData("funderName"),
 				"A different name for RAA");
 		assertEquals(alternativeName.getFirstAtomicValueWithNameInData("language"), "en");
+	}
+
+	@Test
+	public void testConvertFunderWithAlternativeNameNull() {
+		rowFromDb.put("alternative_name", DatabaseValues.NULL);
+		rowFromDb.put("alternative_name_locale", "en");
+		ClientDataGroup funder = funderConverter.convertToClientDataGroupFromRowFromDb(row);
+
+		assertFalse(funder.containsChildWithNameInData("alternativeName"));
 	}
 
 	@Test
