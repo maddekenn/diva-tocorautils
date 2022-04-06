@@ -1,6 +1,7 @@
 package se.uu.ub.cora.diva.tocorautils.importing;
 
 import static org.testng.Assert.assertEquals;
+import static org.testng.Assert.assertFalse;
 import static org.testng.Assert.assertSame;
 
 import java.util.List;
@@ -43,7 +44,23 @@ public class FunderTransformerFromFileTest {
 
 		Map<String, Object> row = returnedConverterSpies.get(0).row;
 		assertEquals(row.get("funder_id"), 3);
+		assertEquals(row.get("funder_name"), "Formas");
+		assertFalse(row.containsKey("orgnumber"));
 
-		// assertSame(returnedConverterSpies.get(0).row, rowsToReturn.get(0));
+		Map<String, Object> row2 = returnedConverterSpies.get(7).row;
+		assertEquals(row2.get("funder_id"), 80);
+		assertEquals(row2.get("funder_name"), "The Middle East in the Contemporary World");
+		assertFalse(row2.containsKey("closed_date"));
+
+		Map<String, Object> row3 = returnedConverterSpies.get(18).row;
+		assertEquals(row3.get("funder_id"), 1);
+		assertEquals(row3.get("funder_name"), "EU, Europeiska forskningsrådet");
+		assertEquals(row3.get("closed_date"), "2021-09-01");
+		assertEquals(row3.get("funder_name_locale"), "sv");
+		assertEquals(row3.get("acronym"), "EUF");
+		assertEquals(row3.get("orgnumber"), "EU2020");
+		assertEquals(row3.get("doi"), "101.901.09");
+		assertEquals(row3.get("alternative_name"), "EU, European Research Council");
+		assertEquals(row3.get("alternative_name_locale"), "en");
 	}
 }

@@ -199,12 +199,12 @@
     },
     {
       "funder_id": 1,
-      "closed_date": null,
+      "closed_date": "2021-09-01",
       "funder_name": "EU, Europeiska forskningsrådet",
       "funder_name_locale": "sv",
-      "acronym": null,
+      "acronym": "EUF",
       "orgnumber": "EU2020",
-      "doi": null,
+      "doi": "101.901.09",
       "alternative_name": "EU, European Research Council",
       "alternative_name_locale": "en"
     },

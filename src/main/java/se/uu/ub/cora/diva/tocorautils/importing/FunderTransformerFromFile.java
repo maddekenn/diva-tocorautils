@@ -48,9 +48,8 @@ public class FunderTransformerFromFile implements DbToCoraTransformer {
 	@Override
 	public List<ClientDataGroup> getConverted() {
 
-		String jsonString;
 		try {
-			jsonString = Files.readString(Path.of(pathToFile));
+			String jsonString = Files.readString(Path.of(pathToFile));
 
 			JSONArray records = new JSONArray(jsonString);
 
@@ -60,9 +59,10 @@ public class FunderTransformerFromFile implements DbToCoraTransformer {
 				JSONObject jsonRow = (JSONObject) dataRecord;
 
 				for (String key : jsonRow.keySet()) {
-					Object value = jsonRow.get(key);
-
-					row.put(key, value);
+					if (!jsonRow.isNull(key)) {
+						Object value = jsonRow.get(key);
+						row.put(key, value);
+					}
 				}
 				FromDbToCoraConverter converter = converterFactory.factor("funder");
 				ClientDataGroup converted = converter.convertToClientDataGroupFromRowFromDb(row);
