@@ -25,12 +25,12 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Scanner;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
 
 import se.uu.ub.cora.clientdata.ClientDataGroup;
+import se.uu.ub.cora.diva.tocorautils.convert.ConverterException;
 import se.uu.ub.cora.diva.tocorautils.convert.FromDbToCoraConverter;
 import se.uu.ub.cora.diva.tocorautils.convert.FromDbToCoraConverterFactory;
 
@@ -47,59 +47,52 @@ public class FunderTransformerFromFile implements DbToCoraTransformer {
 
 	@Override
 	public List<ClientDataGroup> getConverted() {
-
-		try {
-			String jsonString = Files.readString(Path.of(pathToFile));
-
-			JSONArray records = new JSONArray(jsonString);
-
-			Map<String, Object> row;
-			for (Object dataRecord : records) {
-				row = new HashMap<>();
-				JSONObject jsonRow = (JSONObject) dataRecord;
-
-				for (String key : jsonRow.keySet()) {
-					if (!jsonRow.isNull(key)) {
-						Object value = jsonRow.get(key);
-						row.put(key, value);
-					}
-				}
-				FromDbToCoraConverter converter = converterFactory.factor("funder");
-				ClientDataGroup converted = converter.convertToClientDataGroupFromRowFromDb(row);
-			}
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-
-		// List<List<String>> records = new ArrayList<>();
-		// try (Scanner scanner = new Scanner(new File(pathToFile));) {
-		// while (scanner.hasNextLine()) {
-		// records.add(getRecordFromLine(scanner.nextLine()));
-		// }
-		// } catch (FileNotFoundException e) {
-		// // TODO Auto-generated catch block
-		// e.printStackTrace();
-		// }
-		//
-		// List<String> columnNames = records.get(0);
-		// // for (List<String> record : records) {
-		// for (String columnName : records.get(0)) {
-		//
-		// }
-		// // }
-		return null;
+		JSONArray records = getRecords();
+		return convertRecords(records);
 	}
 
-	private List<String> getRecordFromLine(String line) {
-		List<String> values = new ArrayList<String>();
-		try (Scanner rowScanner = new Scanner(line)) {
-			rowScanner.useDelimiter(",");
-			while (rowScanner.hasNext()) {
-				values.add(rowScanner.next());
+	private JSONArray getRecords() {
+		String jsonString = readJsonFromFile();
+		return new JSONArray(jsonString);
+	}
+
+	private String readJsonFromFile() {
+		try {
+			return Files.readString(Path.of(pathToFile));
+		} catch (IOException e) {
+			throw new ConverterException("Unable to parse json string using path: " + pathToFile);
+		}
+	}
+
+	private List<ClientDataGroup> convertRecords(JSONArray records) {
+		List<ClientDataGroup> convertedGroups = new ArrayList<>();
+		for (Object dataRecord : records) {
+			Map<String, Object> row = new HashMap<>();
+			JSONObject jsonRow = (JSONObject) dataRecord;
+
+			addColumnsToRow(row, jsonRow);
+			ClientDataGroup converted = convertRow(row);
+			convertedGroups.add(converted);
+		}
+		return convertedGroups;
+	}
+
+	private void addColumnsToRow(Map<String, Object> row, JSONObject jsonRow) {
+		for (String key : jsonRow.keySet()) {
+			if (nonNullValueForKey(jsonRow, key)) {
+				Object value = jsonRow.get(key);
+				row.put(key, value);
 			}
 		}
-		return values;
+	}
+
+	private boolean nonNullValueForKey(JSONObject jsonRow, String key) {
+		return !jsonRow.isNull(key);
+	}
+
+	private ClientDataGroup convertRow(Map<String, Object> row) {
+		FromDbToCoraConverter converter = converterFactory.factor("funder");
+		return converter.convertToClientDataGroupFromRowFromDb(row);
 	}
 
 	public FromDbToCoraConverterFactory getConverterFactory() {

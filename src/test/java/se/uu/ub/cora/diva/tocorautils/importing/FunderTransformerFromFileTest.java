@@ -10,7 +10,9 @@ import java.util.Map;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
+import se.uu.ub.cora.clientdata.ClientDataGroup;
 import se.uu.ub.cora.diva.tocorautils.FromDbToCoraConverterFactorySpy;
+import se.uu.ub.cora.diva.tocorautils.convert.ConverterException;
 import se.uu.ub.cora.diva.tocorautils.doubles.FromDbToCoraConverterSpy;
 
 public class FunderTransformerFromFileTest {
@@ -62,5 +64,22 @@ public class FunderTransformerFromFileTest {
 		assertEquals(row3.get("doi"), "101.901.09");
 		assertEquals(row3.get("alternative_name"), "EU, European Research Council");
 		assertEquals(row3.get("alternative_name_locale"), "en");
+	}
+
+	@Test
+	public void testConvertedGroupsAreReturned() {
+		List<ClientDataGroup> convertedFunders = transformer.getConverted();
+		List<FromDbToCoraConverterSpy> returnedConverterSpies = converterFactory.returnedConverterSpies;
+
+		assertSame(convertedFunders.get(0), returnedConverterSpies.get(0).dataGroupToReturn);
+		assertSame(convertedFunders.get(6), returnedConverterSpies.get(6).dataGroupToReturn);
+		assertSame(convertedFunders.get(19), returnedConverterSpies.get(19).dataGroupToReturn);
+	}
+
+	@Test(expectedExceptions = ConverterException.class, expectedExceptionsMessageRegExp = ""
+			+ "Unable to parse json string using path: someInvalidPath")
+	public void testErrorReadingFile() {
+		transformer = new FunderTransformerFromFile("someInvalidPath", converterFactory);
+		transformer.getConverted();
 	}
 }
