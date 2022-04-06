@@ -22,8 +22,7 @@ public class RowSpy implements Row {
 
 	@Override
 	public Set<String> columnSet() {
-		// TODO Auto-generated method stub
-		return null;
+		return columnValues.keySet();
 	}
 
 	@Override

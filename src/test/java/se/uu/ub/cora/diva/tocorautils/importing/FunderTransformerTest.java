@@ -23,7 +23,9 @@ import static org.testng.Assert.assertSame;
 import static org.testng.Assert.assertTrue;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
@@ -43,7 +45,8 @@ public class FunderTransformerTest {
 	public void setUp() {
 		databaseFacade = new DatabaseFacadeSpy();
 		converterFactory = new FromDbToCoraConverterFactorySpy();
-		transformer = FunderTransformer.usingDatabaseFacadeAndFromDbConverterFactory(databaseFacade, converterFactory);
+		transformer = FunderTransformer.usingDatabaseFacadeAndFromDbConverterFactory(databaseFacade,
+				converterFactory);
 	}
 
 	@Test
@@ -70,18 +73,39 @@ public class FunderTransformerTest {
 		databaseFacade.rowsToReturn = rowsToReturn;
 		transformer.getConverted();
 		assertEquals(converterFactory.type, "funder");
-		List<FromDbToCoraConverterSpy> returnedConverterSpies = converterFactory.returnedConverterSpies;
-		assertEquals(returnedConverterSpies.size(), 3);
+		List<FromDbToCoraConverterSpy> converterSpies = converterFactory.returnedConverterSpies;
+		assertEquals(converterSpies.size(), 3);
 
-		assertSame(returnedConverterSpies.get(0).row, rowsToReturn.get(0));
+		assertCorrectValuesAreSentToConverter(rowsToReturn, converterSpies, 0);
+		assertCorrectValuesAreSentToConverter(rowsToReturn, converterSpies, 1);
+		assertCorrectValuesAreSentToConverter(rowsToReturn, converterSpies, 2);
+	}
+
+	private void assertCorrectValuesAreSentToConverter(List<Row> rowsToReturn,
+			List<FromDbToCoraConverterSpy> converterSpies, int index) {
+		Map<String, Object> rowSentToConverter = converterSpies.get(index).row;
+		assertSame(rowSentToConverter.get("funder_id"),
+				rowsToReturn.get(index).getValueByColumn("funder_id"));
+		assertSame(rowSentToConverter.get("funder_name"),
+				rowsToReturn.get(index).getValueByColumn("funder_name"));
 	}
 
 	private List<Row> createListOfRows() {
 		List<Row> rowsToReturn = new ArrayList<>();
-		rowsToReturn.add(new RowSpy());
-		rowsToReturn.add(new RowSpy());
-		rowsToReturn.add(new RowSpy());
+		for (int i = 0; i < 3; i++) {
+			rowsToReturn.add(createRow(i));
+
+		}
 		return rowsToReturn;
+	}
+
+	private RowSpy createRow(int i) {
+		RowSpy row = new RowSpy();
+		Map<String, Object> columnValues = new HashMap<>();
+		columnValues.put("funder_id", i);
+		columnValues.put("funder_name", "someName" + i);
+		row.columnValues = columnValues;
+		return row;
 	}
 
 	@Test

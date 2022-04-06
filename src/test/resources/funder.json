@@ -1,0 +1,222 @@
+[
+    {
+      "funder_id": 3,
+      "closed_date": null,
+      "funder_name": "Formas",
+      "funder_name_locale": "sv",
+      "acronym": null,
+      "orgnumber": null,
+      "doi": null,
+      "alternative_name": "Formas",
+      "alternative_name_locale": "en"
+    },
+    {
+      "funder_id": 4,
+      "closed_date": null,
+      "funder_name": "Knut och Alice Wallenbergs Stiftelse",
+      "funder_name_locale": "sv",
+      "acronym": null,
+      "orgnumber": null,
+      "doi": null,
+      "alternative_name": "Knut and Alice Wallenberg Foundation",
+      "alternative_name_locale": "en"
+    },
+    {
+      "funder_id": 7,
+      "closed_date": null,
+      "funder_name": "Östersjöstiftelsen",
+      "funder_name_locale": "sv",
+      "acronym": null,
+      "orgnumber": null,
+      "doi": null,
+      "alternative_name": "The Foundation for Baltic and East European Studies",
+      "alternative_name_locale": "en"
+    },
+    {
+      "funder_id": 50,
+      "closed_date": null,
+      "funder_name": "Center for Integrated Cancer Studies at Karolinska Institutet - an environment for translational cancer research",
+      "funder_name_locale": "sv",
+      "acronym": null,
+      "orgnumber": null,
+      "doi": null,
+      "alternative_name": null,
+      "alternative_name_locale": null
+    },
+    {
+      "funder_id": 77,
+      "closed_date": null,
+      "funder_name": "The nanometer Structure Consortium at Lund University",
+      "funder_name_locale": "sv",
+      "acronym": null,
+      "orgnumber": null,
+      "doi": null,
+      "alternative_name": null,
+      "alternative_name_locale": null
+    },
+    {
+      "funder_id": 78,
+      "closed_date": null,
+      "funder_name": "Cognitive and Motor functions in Health and Disease during the Lifespan",
+      "funder_name_locale": "sv",
+      "acronym": null,
+      "orgnumber": null,
+      "doi": null,
+      "alternative_name": null,
+      "alternative_name_locale": null
+    },
+    {
+      "funder_id": 79,
+      "closed_date": null,
+      "funder_name": "Multidisciplinary research focused on Parkinson’s disease - MultiPark",
+      "funder_name_locale": "sv",
+      "acronym": null,
+      "orgnumber": null,
+      "doi": null,
+      "alternative_name": null,
+      "alternative_name_locale": null
+    },
+    {
+      "funder_id": 80,
+      "closed_date": null,
+      "funder_name": "The Middle East in the Contemporary World",
+      "funder_name_locale": "sv",
+      "acronym": null,
+      "orgnumber": null,
+      "doi": null,
+      "alternative_name": null,
+      "alternative_name_locale": null
+    },
+    {
+      "funder_id": 83,
+      "closed_date": null,
+      "funder_name": "XPRESS - Initiative for excellence in production research",
+      "funder_name_locale": "sv",
+      "acronym": null,
+      "orgnumber": null,
+      "doi": null,
+      "alternative_name": null,
+      "alternative_name_locale": null
+    },
+    {
+      "funder_id": 84,
+      "closed_date": null,
+      "funder_name": "National initiative on Stem Cells for Regenerative Therapy",
+      "funder_name_locale": "sv",
+      "acronym": null,
+      "orgnumber": null,
+      "doi": null,
+      "alternative_name": null,
+      "alternative_name_locale": null
+    },
+    {
+      "funder_id": 85,
+      "closed_date": null,
+      "funder_name": "Center for Regenerative Medicine",
+      "funder_name_locale": "sv",
+      "acronym": null,
+      "orgnumber": null,
+      "doi": null,
+      "alternative_name": null,
+      "alternative_name_locale": null
+    },
+    {
+      "funder_id": 86,
+      "closed_date": null,
+      "funder_name": "Natural‐Disaster Science",
+      "funder_name_locale": "sv",
+      "acronym": null,
+      "orgnumber": null,
+      "doi": null,
+      "alternative_name": null,
+      "alternative_name_locale": null
+    },
+    {
+      "funder_id": 87,
+      "closed_date": null,
+      "funder_name": "Security Link",
+      "funder_name_locale": "sv",
+      "acronym": null,
+      "orgnumber": null,
+      "doi": null,
+      "alternative_name": null,
+      "alternative_name_locale": null
+    },
+    {
+      "funder_id": 88,
+      "closed_date": null,
+      "funder_name": "Chalmers Sustainable Transport Initiative",
+      "funder_name_locale": "sv",
+      "acronym": null,
+      "orgnumber": null,
+      "doi": null,
+      "alternative_name": null,
+      "alternative_name_locale": null
+    },
+    {
+      "funder_id": 89,
+      "closed_date": null,
+      "funder_name": "TrenOp, Transport Research Environment with Novel Perspectives",
+      "funder_name_locale": "sv",
+      "acronym": null,
+      "orgnumber": null,
+      "doi": null,
+      "alternative_name": null,
+      "alternative_name_locale": null
+    },
+    {
+      "funder_id": 90,
+      "closed_date": null,
+      "funder_name": "Toward Person‐Centered Care in Long‐Term Illness: A Research Core Center",
+      "funder_name_locale": "sv",
+      "acronym": null,
+      "orgnumber": null,
+      "doi": null,
+      "alternative_name": null,
+      "alternative_name_locale": null
+    },
+    {
+      "funder_id": 91,
+      "closed_date": null,
+      "funder_name": "Bridging Research and Practice for Better Health: The Comprehensive Care Science Centre",
+      "funder_name_locale": "sv",
+      "acronym": null,
+      "orgnumber": null,
+      "doi": null,
+      "alternative_name": null,
+      "alternative_name_locale": null
+    },
+    {
+      "funder_id": 92,
+      "closed_date": null,
+      "funder_name": "U‐Care: Better Psychosocial Care at Lower Cost? Evidence-based assessment and Psychosocial Care via Internet, a Swedish Example",
+      "funder_name_locale": "sv",
+      "acronym": null,
+      "orgnumber": null,
+      "doi": null,
+      "alternative_name": null,
+      "alternative_name_locale": null
+    },
+    {
+      "funder_id": 1,
+      "closed_date": null,
+      "funder_name": "EU, Europeiska forskningsrådet",
+      "funder_name_locale": "sv",
+      "acronym": null,
+      "orgnumber": "EU2020",
+      "doi": null,
+      "alternative_name": "EU, European Research Council",
+      "alternative_name_locale": "en"
+    },
+    {
+      "funder_id": 2,
+      "closed_date": null,
+      "funder_name": "EU, FP7, Sjunde ramprogrammet",
+      "funder_name_locale": "sv",
+      "acronym": null,
+      "orgnumber": "EU2020FP7",
+      "doi": null,
+      "alternative_name": "EU, FP7, Seventh Framework Programme",
+      "alternative_name_locale": "en"
+    }
+  ]

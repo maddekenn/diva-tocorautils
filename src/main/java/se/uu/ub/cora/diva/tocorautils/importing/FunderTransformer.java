@@ -20,7 +20,10 @@ package se.uu.ub.cora.diva.tocorautils.importing;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 import se.uu.ub.cora.clientdata.ClientDataGroup;
 import se.uu.ub.cora.diva.tocorautils.convert.FromDbToCoraConverter;
@@ -30,13 +33,13 @@ import se.uu.ub.cora.sqldatabase.Row;
 
 public class FunderTransformer implements DbToCoraTransformer {
 
+	private DatabaseFacade databaseFacade;
+	private FromDbToCoraConverterFactory converterFactory;
+
 	public static FunderTransformer usingDatabaseFacadeAndFromDbConverterFactory(
 			DatabaseFacade databaseFacade, FromDbToCoraConverterFactory converterFactory) {
 		return new FunderTransformer(databaseFacade, converterFactory);
 	}
-
-	private DatabaseFacade databaseFacade;
-	private FromDbToCoraConverterFactory converterFactory;
 
 	private FunderTransformer(DatabaseFacade databaseFacade,
 			FromDbToCoraConverterFactory converterFactory) {
@@ -67,8 +70,14 @@ public class FunderTransformer implements DbToCoraTransformer {
 	}
 
 	private void convertAndAddGroup(List<ClientDataGroup> convertedGroups, Row row) {
+		Set<String> columnSet = row.columnSet();
+		Map<String, Object> columnValues = new HashMap<>();
+		for (String key : columnSet) {
+			columnValues.put(key, row.getValueByColumn(key));
+		}
+
 		FromDbToCoraConverter converter = converterFactory.factor("funder");
-		ClientDataGroup converted = converter.convertToClientDataGroupFromRowFromDb(row);
+		ClientDataGroup converted = converter.convertToClientDataGroupFromRowFromDb(columnValues);
 		convertedGroups.add(converted);
 	}
 

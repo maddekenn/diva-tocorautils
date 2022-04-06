@@ -37,7 +37,7 @@ public class FromDbToCoraFunderConverterTest {
 
 	@Test
 	public void testConvertFunderMinimal() {
-		ClientDataGroup funder = funderConverter.convertToClientDataGroupFromRowFromDb(row);
+		ClientDataGroup funder = funderConverter.convertToClientDataGroupFromRowFromDb(rowFromDb);
 		assertEquals(funder.getNameInData(), "funder");
 		assertCorrectRecordInfo(funder);
 		ClientDataGroup nameGroup = funder.getFirstGroupWithNameInData("name");
@@ -62,7 +62,7 @@ public class FromDbToCoraFunderConverterTest {
 	public void testConvertFunderWithAlternativeName() {
 		rowFromDb.put("alternative_name", "A different name for RAA");
 		rowFromDb.put("alternative_name_locale", "en");
-		ClientDataGroup funder = funderConverter.convertToClientDataGroupFromRowFromDb(row);
+		ClientDataGroup funder = funderConverter.convertToClientDataGroupFromRowFromDb(rowFromDb);
 		ClientDataGroup alternativeName = funder.getFirstGroupWithNameInData("alternativeName");
 		assertEquals(alternativeName.getFirstAtomicValueWithNameInData("funderName"),
 				"A different name for RAA");
@@ -73,7 +73,7 @@ public class FromDbToCoraFunderConverterTest {
 	public void testConvertFunderWithAlternativeNameNull() {
 		rowFromDb.put("alternative_name", DatabaseValues.NULL);
 		rowFromDb.put("alternative_name_locale", "en");
-		ClientDataGroup funder = funderConverter.convertToClientDataGroupFromRowFromDb(row);
+		ClientDataGroup funder = funderConverter.convertToClientDataGroupFromRowFromDb(rowFromDb);
 
 		assertFalse(funder.containsChildWithNameInData("alternativeName"));
 	}
@@ -85,7 +85,7 @@ public class FromDbToCoraFunderConverterTest {
 		rowFromDb.put("doi", "213.456546.574757");
 		rowFromDb.put("closed_date", "2022-01-01");
 
-		ClientDataGroup funder = funderConverter.convertToClientDataGroupFromRowFromDb(row);
+		ClientDataGroup funder = funderConverter.convertToClientDataGroupFromRowFromDb(rowFromDb);
 		assertEquals(funder.getFirstAtomicValueWithNameInData("funderAcronym"), "Also RAA");
 		assertEquals(funder.getFirstAtomicValueWithNameInData("funderRegistrationNumber"), "34567");
 		assertEquals(funder.getFirstAtomicValueWithNameInData("funderDOI"), "213.456546.574757");
