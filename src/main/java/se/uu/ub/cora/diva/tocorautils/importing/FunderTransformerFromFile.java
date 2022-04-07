@@ -39,7 +39,12 @@ public class FunderTransformerFromFile implements DbToCoraTransformer {
 	private String pathToFile;
 	private FromDbToCoraConverterFactory converterFactory;
 
-	public FunderTransformerFromFile(String pathToFile,
+	public static FunderTransformerFromFile usingFilePathAndConverterFactory(String pathToFile,
+			FromDbToCoraConverterFactory converterFactory) {
+		return new FunderTransformerFromFile(pathToFile, converterFactory);
+	}
+
+	private FunderTransformerFromFile(String pathToFile,
 			FromDbToCoraConverterFactory converterFactory) {
 		this.pathToFile = pathToFile;
 		this.converterFactory = converterFactory;
@@ -71,8 +76,7 @@ public class FunderTransformerFromFile implements DbToCoraTransformer {
 			JSONObject jsonRow = (JSONObject) dataRecord;
 
 			addColumnsToRow(row, jsonRow);
-			ClientDataGroup converted = convertRow(row);
-			convertedGroups.add(converted);
+			convertRowAndAddToList(row, convertedGroups);
 		}
 		return convertedGroups;
 	}
@@ -88,6 +92,13 @@ public class FunderTransformerFromFile implements DbToCoraTransformer {
 
 	private boolean nonNullValueForKey(JSONObject jsonRow, String key) {
 		return !jsonRow.isNull(key);
+	}
+
+	private void convertRowAndAddToList(Map<String, Object> row,
+			List<ClientDataGroup> convertedGroups) {
+		FromDbToCoraConverter converter = converterFactory.factor("funder");
+		ClientDataGroup converted = converter.convertToClientDataGroupFromRowFromDb(row);
+		convertedGroups.add(converted);
 	}
 
 	private ClientDataGroup convertRow(Map<String, Object> row) {

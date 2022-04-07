@@ -2,6 +2,7 @@ package se.uu.ub.cora.diva.tocorautils;
 
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertNotNull;
+import static org.testng.Assert.assertNull;
 import static org.testng.Assert.assertSame;
 import static org.testng.Assert.assertTrue;
 
@@ -67,7 +68,6 @@ public class FunderImporterRunnerTest {
 	public void testTransformer() throws ClassNotFoundException, NoSuchMethodException,
 			IllegalAccessException, InvocationTargetException, InstantiationException {
 		FunderImporterRunner.main(args);
-		FunderImporterRunner.main(args);
 
 		SqlDatabaseFactorySpy sqlDatabaseFactory = (SqlDatabaseFactorySpy) FunderImporterRunner.sqlDatabaseFactory;
 		DbToCoraTransformerSpy transformer = (DbToCoraTransformerSpy) FunderImporterRunner.coraTransformer;
@@ -99,6 +99,25 @@ public class FunderImporterRunnerTest {
 		FunderImporterRunner.main(args);
 		DbToCoraTransformerSpy transformer = (DbToCoraTransformerSpy) FunderImporterRunner.coraTransformer;
 		assertEquals(transformer.listOfConverted.size(), 1);
+	}
+
+	@Test
+	public void testTransformerWhenUsingFileName()
+			throws ClassNotFoundException, NoSuchMethodException, IllegalAccessException,
+			InvocationTargetException, InstantiationException {
+		args = new String[] { "se.uu.ub.cora.diva.tocorautils.DbToCoraTransformerSpy",
+				"se.uu.ub.cora.diva.tocorautils.SqlDatabaseFactorySpy",
+				"se.uu.ub.cora.diva.tocorautils.FromDbToCoraConverterFactorySpy",
+				"jdbc:postgresql://diva-cora-docker-postgresql:543200/diva", "diva", "diva",
+				"se.uu.ub.cora.diva.tocorautils.doubles.CoraClientFactorySpy",
+				"someApptokenVerifierUrl", "someBaseUrl", "someAuthtoken", "someFileName" };
+
+		FunderImporterRunner.main(args);
+
+		DbToCoraTransformerSpy transformer = (DbToCoraTransformerSpy) FunderImporterRunner.coraTransformer;
+		assertTrue(transformer.converterFactory instanceof FromDbToCoraConverterFactorySpy);
+		assertEquals(transformer.fileName, "someFileName");
+		assertNull(transformer.databaseFacade);
 	}
 
 }

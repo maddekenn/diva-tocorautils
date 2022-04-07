@@ -24,7 +24,7 @@ public class FunderTransformerFromFileTest {
 	@BeforeMethod
 	public void setUp() {
 		converterFactory = new FromDbToCoraConverterFactorySpy();
-		transformer = new FunderTransformerFromFile(pathToFile, converterFactory);
+		transformer = FunderTransformerFromFile.usingFilePathAndConverterFactory(pathToFile, converterFactory);
 	}
 
 	@Test
@@ -79,7 +79,7 @@ public class FunderTransformerFromFileTest {
 	@Test(expectedExceptions = ConverterException.class, expectedExceptionsMessageRegExp = ""
 			+ "Unable to parse json string using path: someInvalidPath")
 	public void testErrorReadingFile() {
-		transformer = new FunderTransformerFromFile("someInvalidPath", converterFactory);
+		transformer = FunderTransformerFromFile.usingFilePathAndConverterFactory("someInvalidPath", converterFactory);
 		transformer.getConverted();
 	}
 }
