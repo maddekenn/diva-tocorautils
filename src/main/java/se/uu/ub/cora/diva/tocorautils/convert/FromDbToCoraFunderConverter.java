@@ -23,17 +23,22 @@ public class FromDbToCoraFunderConverter implements FromDbToCoraConverter {
 		this.row = row;
 		funder = ClientDataGroup.withNameInData("funder");
 		funder.addChild(createRecordInfo());
+		addClassicId(row);
 
-		createAndAddName("funder_name", "name");
-		createAndAddName("alternative_name", "alternativeName");
+		createAndAddName("funder_name", "sv");
+		createAndAddName("alternative_name", "en");
 		possiblyAddNonMandatoryValues();
 		return funder;
 	}
 
-	private ClientDataGroup createRecordInfo() {
+	private void addClassicId(Map<String, Object> row) {
 		int funderId = (int) row.get("funder_id");
+		funder.addChild(
+				ClientDataAtomic.withNameInDataAndValue("classicId", String.valueOf(funderId)));
+	}
+
+	private ClientDataGroup createRecordInfo() {
 		ClientDataGroup recordInfo = ClientDataGroup.withNameInData("recordInfo");
-		recordInfo.addChild(ClientDataAtomic.withNameInDataAndValue("id", "funder:" + funderId));
 		addDataDivider(recordInfo);
 		return recordInfo;
 	}
@@ -44,15 +49,13 @@ public class FromDbToCoraFunderConverter implements FromDbToCoraConverter {
 		recordInfo.addChild(dataDivider);
 	}
 
-	private void createAndAddName(String key, String nameInData) {
+	private void createAndAddName(String key, String locale) {
 		if (row.containsKey(key) && row.get(key) != DatabaseValues.NULL) {
 			String funderName = (String) row.get(key);
-			ClientDataGroup name = ClientDataGroup.withNameInData(nameInData);
-			name.addChild(ClientDataAtomic.withNameInDataAndValue("funderName", funderName));
-
-			String funderNameLocale = (String) row.get(key + "_locale");
-			name.addChild(ClientDataAtomic.withNameInDataAndValue("language", funderNameLocale));
-			funder.addChild(name);
+			ClientDataAtomic funderVar = ClientDataAtomic.withNameInDataAndValue("funderName",
+					funderName);
+			funderVar.addAttributeByIdWithValue("language", locale);
+			funder.addChild(funderVar);
 		}
 	}
 

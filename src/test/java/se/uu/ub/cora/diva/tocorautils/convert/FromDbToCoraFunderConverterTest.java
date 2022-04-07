@@ -4,11 +4,14 @@ import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertFalse;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
+import se.uu.ub.cora.clientdata.ClientDataAtomic;
+import se.uu.ub.cora.clientdata.ClientDataAttribute;
 import se.uu.ub.cora.clientdata.ClientDataGroup;
 import se.uu.ub.cora.diva.tocorautils.NotImplementedException;
 import se.uu.ub.cora.diva.tocorautils.importing.RowSpy;
@@ -40,19 +43,31 @@ public class FromDbToCoraFunderConverterTest {
 		ClientDataGroup funder = funderConverter.convertToClientDataGroupFromRowFromDb(rowFromDb);
 		assertEquals(funder.getNameInData(), "funder");
 		assertCorrectRecordInfo(funder);
-		ClientDataGroup nameGroup = funder.getFirstGroupWithNameInData("name");
-		assertEquals(nameGroup.getFirstAtomicValueWithNameInData("funderName"), "RAA");
-		assertEquals(nameGroup.getFirstAtomicValueWithNameInData("language"), "sv");
+		assertEquals(funder.getFirstAtomicValueWithNameInData("classicId"), "123");
+		ClientDataAtomic name = getNameUsingLocale(funder, "sv");
+		assertEquals(name.getValue(), "RAA");
 
 		assertFalse(funder.containsChildWithNameInData("funderAcronym"));
 		assertFalse(funder.containsChildWithNameInData("funderRegistrationNumber"));
 		assertFalse(funder.containsChildWithNameInData("funderDOI"));
-		assertFalse(funder.containsChildWithNameInData("2010-01-01"));
+		assertFalse(funder.containsChildWithNameInData("funderClosed"));
+	}
+
+	private ClientDataAtomic getNameUsingLocale(ClientDataGroup funder, String locale) {
+		List<ClientDataAtomic> names = (List<ClientDataAtomic>) funder
+				.getAllDataAtomicsWithNameInDataAndAttributes("funderName",
+						createLanguageAttribute(locale));
+		ClientDataAtomic clientDataAtomic = names.get(0);
+		return clientDataAtomic;
+	}
+
+	private ClientDataAttribute createLanguageAttribute(String value) {
+		return ClientDataAttribute.withNameInDataAndValue("language", value);
 	}
 
 	private void assertCorrectRecordInfo(ClientDataGroup funder) {
 		ClientDataGroup recordInfo = funder.getFirstGroupWithNameInData("recordInfo");
-		assertEquals(recordInfo.getFirstAtomicValueWithNameInData("id"), "funder:123");
+		assertFalse(recordInfo.containsChildWithNameInData("id"));
 		ClientDataGroup dataDivider = recordInfo.getFirstGroupWithNameInData("dataDivider");
 		assertEquals(dataDivider.getFirstAtomicValueWithNameInData("linkedRecordType"), "system");
 		assertEquals(dataDivider.getFirstAtomicValueWithNameInData("linkedRecordId"), "diva");
@@ -63,10 +78,9 @@ public class FromDbToCoraFunderConverterTest {
 		rowFromDb.put("alternative_name", "A different name for RAA");
 		rowFromDb.put("alternative_name_locale", "en");
 		ClientDataGroup funder = funderConverter.convertToClientDataGroupFromRowFromDb(rowFromDb);
-		ClientDataGroup alternativeName = funder.getFirstGroupWithNameInData("alternativeName");
-		assertEquals(alternativeName.getFirstAtomicValueWithNameInData("funderName"),
-				"A different name for RAA");
-		assertEquals(alternativeName.getFirstAtomicValueWithNameInData("language"), "en");
+		ClientDataAtomic alternativeName = getNameUsingLocale(funder, "en");
+
+		assertEquals(alternativeName.getValue(), "A different name for RAA");
 	}
 
 	@Test
