@@ -40,6 +40,7 @@ public class FunderImporterRunnerTest {
 	// [7] apptokenVerifierUrl
 	// [8] baseUrl
 	// [9] authToken
+	// [10] filename (if to be used instead of db-connection
 
 	@Test
 	public void testConstructorIsPrivate() throws NoSuchMethodException, IllegalAccessException,

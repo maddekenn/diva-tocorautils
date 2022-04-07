@@ -15,6 +15,7 @@ import se.uu.ub.cora.sqldatabase.SqlDatabaseFactory;
 
 public class FunderImporterRunner {
 
+	private static final int NUM_OF_ARGS_WHEN_FILENAME_INCLUDED = 11;
 	public static SqlDatabaseFactory sqlDatabaseFactory;
 	public static DbToCoraTransformer coraTransformer;
 	public static CoraClientFactory coraClientFactory;
@@ -75,23 +76,39 @@ public class FunderImporterRunner {
 		String toCoraTransformerName = args[0];
 
 		FromDbToCoraConverterFactory constructConverterFactory = constructConverterFactory(args[2]);
-		if (args.length == 11) {
-			Class<?>[] cArg = new Class[2];
-			cArg[0] = String.class;
-			cArg[1] = FromDbToCoraConverterFactory.class;
-			String fileName = args[10];
-			Method constructor = Class.forName(toCoraTransformerName)
-					.getMethod("usingFilePathAndConverterFactory", cArg);
-			coraTransformer = (DbToCoraTransformer) constructor.invoke(null, fileName,
-					constructConverterFactory);
+		if (argsIncludeFileName(args)) {
+			createTransformerUsingFilename(args, toCoraTransformerName, constructConverterFactory);
 		} else {
-			Class<?>[] cArg = createArgumentsForCoraTransformer();
-			DatabaseFacade databaseFacade = sqlDatabaseFactory.factorDatabaseFacade();
-			Method constructor = Class.forName(toCoraTransformerName)
-					.getMethod("usingDatabaseFacadeAndFromDbConverterFactory", cArg);
-			coraTransformer = (DbToCoraTransformer) constructor.invoke(null, databaseFacade,
-					constructConverterFactory);
+			createTransformerUsingDBFacade(toCoraTransformerName, constructConverterFactory);
 		}
+	}
+
+	private static boolean argsIncludeFileName(String[] args) {
+		return args.length == NUM_OF_ARGS_WHEN_FILENAME_INCLUDED;
+	}
+
+	private static void createTransformerUsingFilename(String[] args, String toCoraTransformerName,
+			FromDbToCoraConverterFactory constructConverterFactory) throws NoSuchMethodException,
+			ClassNotFoundException, IllegalAccessException, InvocationTargetException {
+		Class<?>[] cArg = new Class[2];
+		cArg[0] = String.class;
+		cArg[1] = FromDbToCoraConverterFactory.class;
+		String fileName = args[10];
+		Method constructor = Class.forName(toCoraTransformerName)
+				.getMethod("usingFilePathAndConverterFactory", cArg);
+		coraTransformer = (DbToCoraTransformer) constructor.invoke(null, fileName,
+				constructConverterFactory);
+	}
+
+	private static void createTransformerUsingDBFacade(String toCoraTransformerName,
+			FromDbToCoraConverterFactory constructConverterFactory) throws NoSuchMethodException,
+			ClassNotFoundException, IllegalAccessException, InvocationTargetException {
+		Class<?>[] cArg = createArgumentsForCoraTransformer();
+		DatabaseFacade databaseFacade = sqlDatabaseFactory.factorDatabaseFacade();
+		Method constructor = Class.forName(toCoraTransformerName)
+				.getMethod("usingDatabaseFacadeAndFromDbConverterFactory", cArg);
+		coraTransformer = (DbToCoraTransformer) constructor.invoke(null, databaseFacade,
+				constructConverterFactory);
 	}
 
 	private static Class<?>[] createArgumentsForCoraTransformer() {
@@ -108,14 +125,6 @@ public class FunderImporterRunner {
 		return (FromDbToCoraConverterFactory) constructor.newInstance();
 	}
 
-	// private static void createCoraClientConfig(String[] args) {
-	// String userId = args[0];
-	// String appToken = args[1];
-	// String appTokenVerifierUrl = args[2];
-	// String coraUrl = args[3];
-	// coraClientConfig = new CoraClientConfig(userId, appToken, appTokenVerifierUrl, coraUrl);
-	// }
-	//
 	private static void createCoraClientFactory(String[] args) throws NoSuchMethodException,
 			ClassNotFoundException, IllegalAccessException, InvocationTargetException {
 		Class<?>[] cArg = new Class[2];
@@ -125,7 +134,6 @@ public class FunderImporterRunner {
 		Method constructor = Class.forName(coraClientFactoryClassName)
 				.getMethod("usingAppTokenVerifierUrlAndBaseUrl", cArg);
 		coraClientFactory = (CoraClientFactory) constructor.invoke(null, args[7], args[8]);
-		// coraClientConfig.appTokenVerifierUrl, coraClientConfig.coraUrl);
 
 	}
 }
