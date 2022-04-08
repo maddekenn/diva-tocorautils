@@ -20,7 +20,6 @@ package se.uu.ub.cora.diva.tocorautils.convert;
 
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertFalse;
-import static org.testng.Assert.assertTrue;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -29,7 +28,7 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import se.uu.ub.cora.clientdata.ClientDataGroup;
-import se.uu.ub.cora.diva.tocorautils.CoraJsonRecord;
+import se.uu.ub.cora.diva.tocorautils.NotImplementedException;
 import se.uu.ub.cora.diva.tocorautils.doubles.CoraClientSpy;
 import se.uu.ub.cora.json.builder.JsonBuilderFactory;
 import se.uu.ub.cora.json.builder.org.OrgJsonBuilderFactoryAdapter;
@@ -37,7 +36,7 @@ import se.uu.ub.cora.json.builder.org.OrgJsonBuilderFactoryAdapter;
 public class FromDbToCoraSubjectCategoryConverterTest {
 	se.uu.ub.cora.diva.tocorautils.doubles.CoraClientSpy coraClient;
 	private JsonBuilderFactory jsonFactory;
-	private FromDbToCoraSubjectCategoryConverter fromDbToCoraSubjectCategoryConverter;
+	private FromDbToCoraSubjectCategoryConverter subjectCategoryConverter;
 	private DataToJsonConverterFactorySpy dataToJsonConverterFactory;
 
 	private Map<String, Object> rowFromDb = new HashMap<>();
@@ -46,153 +45,51 @@ public class FromDbToCoraSubjectCategoryConverterTest {
 	public void beforeMethod() {
 		rowFromDb.put("subject_id", 406);
 		rowFromDb.put("default_name", "Some subject category");
-		rowFromDb.put("subject_code", "someSubjectCode");
+		rowFromDb.put("subject_code", "110022");
 		rowFromDb.put("alternative_name", "Some alternative name");
 
 		coraClient = new CoraClientSpy();
 		jsonFactory = new OrgJsonBuilderFactoryAdapter();
 		dataToJsonConverterFactory = new DataToJsonConverterFactorySpy();
-		fromDbToCoraSubjectCategoryConverter = FromDbToCoraSubjectCategoryConverter
+		subjectCategoryConverter = FromDbToCoraSubjectCategoryConverter
 				.usingJsonFactoryAndConverterFactory(jsonFactory, dataToJsonConverterFactory);
 
 	}
 
+	@Test(expectedExceptions = NotImplementedException.class, expectedExceptionsMessageRegExp = ""
+			+ "Convert to Json not implemented for subject category")
+	public void testConvertSubjectCategoryToJsonNotImplemented() {
+		subjectCategoryConverter.convertToJsonFromRowFromDb(rowFromDb);
+	}
+
 	@Test
-	public void testConvertSubjectCategoryOneRowMinimalRequiredValuesNoParent() {
-		CoraJsonRecord coraJsonRecord = fromDbToCoraSubjectCategoryConverter
-				.convertToJsonFromRowFromDb(rowFromDb);
-		assertEquals(coraJsonRecord.recordType, "nationalSubjectCategory");
+	public void testConvertSubjectCategoryOneRow() {
+		ClientDataGroup subjectCategory = subjectCategoryConverter
+				.convertToClientDataGroupFromRowFromDb(rowFromDb);
 
-		ClientDataGroup groupSentToConverter = assertCorrectGroupSentToConverter();
+		assertEquals(subjectCategory.getNameInData(), "nationalSubjectCategory");
 
-		assertEquals(dataToJsonConverterFactory.calledNumOfTimes, 1);
-		assertCorrectConversion(coraJsonRecord);
-		assertFalse(
-				groupSentToConverter.containsChildWithNameInData("nationalSubjectCategoryParent"));
+		assertCorrectRecordInfo(subjectCategory);
 
+		assertCorrectName(subjectCategory, "name", "Some subject category", "sv");
+		assertCorrectName(subjectCategory, "alternativeName", "Some alternative name", "en");
+		assertEquals(subjectCategory.getFirstAtomicValueWithNameInData("subjectCode"), "110022");
+		assertFalse(subjectCategory.containsChildWithNameInData("nationalSubjectCategoryParent"));
 	}
 
-	private ClientDataGroup assertCorrectGroupSentToConverter() {
-		ClientDataGroup groupSentToConverter = (ClientDataGroup) dataToJsonConverterFactory.dataElements
-				.get(0);
-		assertCorrectRecordInfo(groupSentToConverter, "406");
-		assertCorrectGroupSentToConverterUsingGroupNameAlternativeNameAndCode(groupSentToConverter,
-				"Some subject category", "Some alternative name", "someSubjectCode");
-		return groupSentToConverter;
-	}
-
-	private void assertCorrectConversion(CoraJsonRecord coraJsonRecord) {
-		DataToJsonConverterSpy dataToJsonConverterSpy = dataToJsonConverterFactory.dataToJsonConverterSpies
-				.get(0);
-		assertTrue(dataToJsonConverterSpy.toJsonObjectBuilderWasCalled);
-
-		assertEquals(coraJsonRecord.json,
-				dataToJsonConverterSpy.jsonObjectBuilder.toJsonFormattedString());
-	}
-
-	private void assertCorrectGroupSentToConverterUsingGroupNameAlternativeNameAndCode(
-			ClientDataGroup groupSentToConverter, String name, String alternativeName,
-			String expected) {
-		assertEquals(groupSentToConverter.getNameInData(), "nationalSubjectCategory");
-
-		ClientDataGroup nameGroup = groupSentToConverter.getFirstGroupWithNameInData("name");
-		assertEquals(nameGroup.getFirstAtomicValueWithNameInData("nationalSubjectCategoryName"),
-				name);
-		assertEquals(nameGroup.getFirstAtomicValueWithNameInData("language"), "sv");
-
-		ClientDataGroup alternativeNameGroup = groupSentToConverter
-				.getFirstGroupWithNameInData("alternativeName");
-		assertEquals(alternativeNameGroup.getFirstAtomicValueWithNameInData(
-				"nationalSubjectCategoryAlternativeName"), alternativeName);
-		assertEquals(alternativeNameGroup.getFirstAtomicValueWithNameInData("language"), "en");
-
-		assertEquals(groupSentToConverter.getFirstAtomicValueWithNameInData("subjectCode"),
-				expected);
-	}
-
-	private void assertCorrectRecordInfo(ClientDataGroup groupSentToConverter, String expectedId) {
-		ClientDataGroup recordInfo = groupSentToConverter.getFirstGroupWithNameInData("recordInfo");
-		String id = recordInfo.getFirstAtomicValueWithNameInData("id");
-		assertEquals(id, expectedId);
-
+	private void assertCorrectRecordInfo(ClientDataGroup subjectCategory) {
+		ClientDataGroup recordInfo = subjectCategory.getFirstGroupWithNameInData("recordInfo");
+		assertFalse(recordInfo.containsChildWithNameInData("id"));
 		ClientDataGroup dataDivider = recordInfo.getFirstGroupWithNameInData("dataDivider");
 		assertEquals(dataDivider.getFirstAtomicValueWithNameInData("linkedRecordType"), "system");
 		assertEquals(dataDivider.getFirstAtomicValueWithNameInData("linkedRecordId"), "diva");
 	}
 
-	// @Test
-	// public void
-	// testConvertSubjectCategoryOneRowMinimalRequiredValuesWithOneParent() {
-	// recordReaderFactory.idsToReturnParent.add("406");
-	// CoraJsonRecord coraJsonRecord = fromDbToCoraSubjectCategoryConverter
-	// .convertToJsonFromRowFromDb(rowFromDb);
-	//
-	// assertEquals(coraJsonRecord.recordType, "nationalSubjectCategory");
-	//
-	// ClientDataGroup groupSentToConverter = (ClientDataGroup)
-	// dataToJsonConverterFactory.dataElements
-	// .get(0);
-	// assertCorrectRecordInfo(groupSentToConverter, "406");
-	// assertCorrectGroupSentToConverterUsingGroupNameAlternativeNameAndCode(groupSentToConverter,
-	// "Some subject category", "Some alternative name", "someSubjectCode");
-	//
-	// assertEquals(dataToJsonConverterFactory.calledNumOfTimes, 1);
-	// assertCorrectConversion(coraJsonRecord);
-	//
-	// assertParentTableWasReadCorrectly();
-	//
-	// assertCorrectParentUsingSubjectParentIndexIdAndRepeatId(groupSentToConverter,
-	// 0,
-	// "someParent0", "0");
-	//
-	// }
-
-	// private void assertCorrectParentUsingSubjectParentIndexIdAndRepeatId(
-	// ClientDataGroup groupSentToConverter, int index, String linkedRecordId,
-	// String repeatId) {
-	// ClientDataGroup parentGroup = groupSentToConverter
-	// .getAllGroupsWithNameInData("nationalSubjectCategoryParent").get(index);
-	// ClientDataGroup parentLink = parentGroup
-	// .getFirstGroupWithNameInData("nationalSubjectCategory");
-	// assertEquals(parentLink.getFirstAtomicValueWithNameInData("linkedRecordType"),
-	// "nationalSubjectCategory");
-	// assertEquals(parentLink.getFirstAtomicValueWithNameInData("linkedRecordId"),
-	// linkedRecordId);
-	// assertEquals(parentGroup.getRepeatId(), repeatId);
-	// }
-
-	// @Test
-	// public void
-	// testConvertSubjectCategoryOneRowMinimalRequiredValuesWithTwoParents() {
-	// recordReaderFactory.noOfParentsToReturn = 2;
-	// recordReaderFactory.idsToReturnParent.add("406");
-	// CoraJsonRecord coraJsonRecord = fromDbToCoraSubjectCategoryConverter
-	// .convertToJsonFromRowFromDb(rowFromDb);
-	//
-	// assertEquals(coraJsonRecord.recordType, "nationalSubjectCategory");
-	//
-	// ClientDataGroup groupSentToConverter = (ClientDataGroup)
-	// dataToJsonConverterFactory.dataElements
-	// .get(0);
-	// assertCorrectRecordInfo(groupSentToConverter, "406");
-	// assertCorrectGroupSentToConverterUsingGroupNameAlternativeNameAndCode(groupSentToConverter,
-	// "Some subject category", "Some alternative name", "someSubjectCode");
-	//
-	// assertEquals(dataToJsonConverterFactory.calledNumOfTimes, 1);
-	// assertCorrectConversion(coraJsonRecord);
-	//
-	// assertParentTableWasReadCorrectly();
-	//
-	// assertEquals(groupSentToConverter
-	// .getAllGroupsWithNameInData("nationalSubjectCategoryParent").size(), 2);
-	//
-	// assertCorrectParentUsingSubjectParentIndexIdAndRepeatId(groupSentToConverter,
-	// 0,
-	// "someParent0", "0");
-	//
-	// assertCorrectParentUsingSubjectParentIndexIdAndRepeatId(groupSentToConverter,
-	// 1,
-	// "someParent1", "1");
-	// }
-
+	private void assertCorrectName(ClientDataGroup subjectCategory, String nameInData, String name,
+			String locale) {
+		ClientDataGroup nameGroup = subjectCategory.getFirstGroupWithNameInData(nameInData);
+		assertEquals(nameGroup.getFirstAtomicValueWithNameInData("nationalSubjectCategoryName"),
+				name);
+		assertEquals(nameGroup.getFirstAtomicValueWithNameInData("language"), locale);
+	}
 }

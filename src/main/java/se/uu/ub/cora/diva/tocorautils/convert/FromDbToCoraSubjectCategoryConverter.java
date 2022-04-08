@@ -24,15 +24,13 @@ import java.util.Map;
 import se.uu.ub.cora.clientdata.ClientDataAtomic;
 import se.uu.ub.cora.clientdata.ClientDataGroup;
 import se.uu.ub.cora.clientdata.RecordIdentifier;
-import se.uu.ub.cora.clientdata.converter.javatojson.DataToJsonConverter;
 import se.uu.ub.cora.clientdata.converter.javatojson.DataToJsonConverterFactory;
 import se.uu.ub.cora.diva.tocorautils.CoraJsonRecord;
+import se.uu.ub.cora.diva.tocorautils.NotImplementedException;
 import se.uu.ub.cora.json.builder.JsonBuilderFactory;
-import se.uu.ub.cora.sqldatabase.Row;
 
 public class FromDbToCoraSubjectCategoryConverter implements FromDbToCoraConverter {
 
-	private static final String SUBJECT_ID = "subject_id";
 	private static final String NATIONAL_SUBJECT_CATEGORY = "nationalSubjectCategory";
 	protected JsonBuilderFactory jsonFactory;
 	protected DataToJsonConverterFactory dataToJsonConverterFactory;
@@ -50,17 +48,17 @@ public class FromDbToCoraSubjectCategoryConverter implements FromDbToCoraConvert
 	}
 
 	@Override
-	public CoraJsonRecord convertToJsonFromRowFromDb(Map<String, Object> rowFromDb) {
-		ClientDataGroup nationalSubjectCategory = createDataGroupWithRecordInfo(rowFromDb);
-		addMandatoryChildren(rowFromDb, nationalSubjectCategory);
-		String json = convertToJson(nationalSubjectCategory);
-		return CoraJsonRecord.withRecordTypeAndJson(NATIONAL_SUBJECT_CATEGORY, json);
+	public ClientDataGroup convertToClientDataGroupFromRowFromDb(Map<String, Object> row) {
+		ClientDataGroup nationalSubjectCategory = createDataGroupWithRecordInfo(row);
+		addMandatoryChildren(row, nationalSubjectCategory);
+
+		return nationalSubjectCategory;
 	}
 
-	private String convertToJson(ClientDataGroup nationalSubjectCategory) {
-		DataToJsonConverter converter = getDataToJsonConverterFactory()
-				.createForClientDataElement(jsonFactory, nationalSubjectCategory);
-		return converter.toJson();
+	@Override
+	public CoraJsonRecord convertToJsonFromRowFromDb(Map<String, Object> rowFromDb) {
+		throw NotImplementedException
+				.withMessage("Convert to Json not implemented for subject category");
 	}
 
 	private ClientDataGroup createDataGroupWithRecordInfo(Map<String, Object> rowFromDb) {
@@ -74,8 +72,6 @@ public class FromDbToCoraSubjectCategoryConverter implements FromDbToCoraConvert
 
 	private ClientDataGroup createRecordInfo(Map<String, Object> rowFromDb) {
 		ClientDataGroup recordInfo = ClientDataGroup.withNameInData("recordInfo");
-		recordInfo.addChild(ClientDataAtomic.withNameInDataAndValue("id",
-				String.valueOf(rowFromDb.get(SUBJECT_ID))));
 		ClientDataGroup dataDivider = createDataDivider();
 		recordInfo.addChild(dataDivider);
 		return recordInfo;
@@ -107,8 +103,7 @@ public class FromDbToCoraSubjectCategoryConverter implements FromDbToCoraConvert
 	private ClientDataGroup createAlternativeNameChild(Map<String, Object> rowFromDb) {
 		ClientDataGroup alternativeNameGroup = ClientDataGroup.withNameInData("alternativeName");
 		ClientDataAtomic alternativeName = ClientDataAtomic.withNameInDataAndValue(
-				"nationalSubjectCategoryAlternativeName",
-				(String) rowFromDb.get("alternative_name"));
+				"nationalSubjectCategoryName", (String) rowFromDb.get("alternative_name"));
 		alternativeNameGroup.addChild(alternativeName);
 		alternativeNameGroup.addChild(ClientDataAtomic.withNameInDataAndValue("language", "en"));
 		return alternativeNameGroup;
@@ -126,12 +121,6 @@ public class FromDbToCoraSubjectCategoryConverter implements FromDbToCoraConvert
 	public JsonBuilderFactory getJsonBuilderFactory() {
 		// needed for tests
 		return jsonFactory;
-	}
-
-	@Override
-	public ClientDataGroup convertToClientDataGroupFromRowFromDb(Row row) {
-		// TODO Auto-generated method stub
-		return null;
 	}
 
 }
