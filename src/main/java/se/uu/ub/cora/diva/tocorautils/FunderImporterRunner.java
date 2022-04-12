@@ -40,8 +40,7 @@ public class FunderImporterRunner {
 			CoraClient coraClient) {
 		int counter = 0;
 		for (ClientDataGroup dataGroup : converted) {
-			ClientDataGroup recordInfo = dataGroup.getFirstGroupWithNameInData("recordInfo");
-			System.out.println("Id: " + recordInfo.getFirstAtomicValueWithNameInData("id"));
+			System.out.println("Id: " + dataGroup.getFirstAtomicValueWithNameInData("classicId"));
 			coraClient.create("funder", dataGroup);
 			counter++;
 		}

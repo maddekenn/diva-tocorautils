@@ -34,10 +34,10 @@
 	<properties>
 		<logger.version>2.3.0</logger.version>
 		<coralog4j.version>2.0.0</coralog4j.version>
-		<clientdata.version>5.1-SNAPSHOT</clientdata.version>
+		<clientdata.version>5.2-SNAPSHOT</clientdata.version>
 		<sqldatabase.version>6.1.0</sqldatabase.version>
 		<json.version>2.5.0</json.version>
-		<javaclient.version>1.12-SNAPSHOT</javaclient.version>
+		<javaclient.version>1.15.0</javaclient.version>
 		<batchrunner.version>0.1-SNAPSHOT</batchrunner.version>
 	</properties>
 
