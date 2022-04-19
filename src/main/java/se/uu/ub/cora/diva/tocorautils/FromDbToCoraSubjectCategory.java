@@ -28,38 +28,53 @@ import se.uu.ub.cora.clientdata.converter.jsontojava.JsonToDataConverterFactory;
 import se.uu.ub.cora.clientdata.converter.jsontojava.JsonToDataRecordConverter;
 import se.uu.ub.cora.clientdata.converter.jsontojava.JsonToDataRecordConverterImp;
 import se.uu.ub.cora.diva.tocorautils.convert.FromDbToCoraConverter;
+import se.uu.ub.cora.diva.tocorautils.convert.FromDbToCoraConverterFactory;
 import se.uu.ub.cora.diva.tocorautils.convert.RecordCompleter;
 import se.uu.ub.cora.diva.tocorautils.importing.ImportResult;
 import se.uu.ub.cora.diva.tocorautils.importing.Importer;
 import se.uu.ub.cora.json.parser.JsonObject;
 import se.uu.ub.cora.json.parser.org.OrgJsonParser;
-import se.uu.ub.cora.sqldatabase.RecordReader;
-import se.uu.ub.cora.sqldatabase.RecordReaderFactory;
+import se.uu.ub.cora.sqldatabase.DatabaseFacade;
 
 public class FromDbToCoraSubjectCategory implements FromDbToCora {
 
 	private FromDbToCoraConverter fromDbToCoraConverter;
-	private RecordReaderFactory recordReaderFactory;
+	// private RecordReaderFactory recordReaderFactory;
 	private Importer importer;
 	private RecordCompleter recordCompleter;
 	private JsonToDataConverterFactory jsonToDataConverterFactory;
+	private DatabaseFacade databaseFacade;
+	private FromDbToCoraConverterFactory toCoraConverterFactory;
 
-	public static FromDbToCora usingRecordReaderFactoryDbToCoraConverterRecordCompleterJsonToDataConverterFactoryAndImporter(
-			RecordReaderFactory recordReaderFactory, FromDbToCoraConverter fromDbToCoraConverter,
-			RecordCompleter recordCompleter, JsonToDataConverterFactory jsonToDataConverterFactory,
+	// public static FromDbToCora
+	// usingRecordReaderFactoryDbToCoraConverterRecordCompleterJsonToDataConverterFactoryAndImporter(
+	// RecordReaderFactory recordReaderFactory, FromDbToCoraConverter fromDbToCoraConverter,
+	// RecordCompleter recordCompleter, JsonToDataConverterFactory jsonToDataConverterFactory,
+	// Importer importer) {
+	// return new FromDbToCoraSubjectCategory(recordReaderFactory, fromDbToCoraConverter,
+	// recordCompleter, jsonToDataConverterFactory, importer);
+	// }
+	//
+	// private FromDbToCoraSubjectCategory(RecordReaderFactory recordReaderFactory,
+	// FromDbToCoraConverter fromDbToCoraConverter, RecordCompleter recordCompleter,
+	// JsonToDataConverterFactory jsonToDataConverterFactory, Importer importer) {
+	// this.recordReaderFactory = recordReaderFactory;
+	// this.fromDbToCoraConverter = fromDbToCoraConverter;
+	// this.recordCompleter = recordCompleter;
+	// this.jsonToDataConverterFactory = jsonToDataConverterFactory;
+	// this.importer = importer;
+	// }
+
+	public FromDbToCoraSubjectCategory(DatabaseFacade databaseFacade,
+			FromDbToCoraConverterFactory toCoraConverterFactory,
+			FromDbToCoraConverter toCoraConverter, RecordCompleter recordCompleter,
 			Importer importer) {
-		return new FromDbToCoraSubjectCategory(recordReaderFactory, fromDbToCoraConverter,
-				recordCompleter, jsonToDataConverterFactory, importer);
-	}
-
-	private FromDbToCoraSubjectCategory(RecordReaderFactory recordReaderFactory,
-			FromDbToCoraConverter fromDbToCoraConverter, RecordCompleter recordCompleter,
-			JsonToDataConverterFactory jsonToDataConverterFactory, Importer importer) {
-		this.recordReaderFactory = recordReaderFactory;
-		this.fromDbToCoraConverter = fromDbToCoraConverter;
+		this.databaseFacade = databaseFacade;
+		this.toCoraConverterFactory = toCoraConverterFactory;
+		this.fromDbToCoraConverter = toCoraConverter;
 		this.recordCompleter = recordCompleter;
-		this.jsonToDataConverterFactory = jsonToDataConverterFactory;
 		this.importer = importer;
+
 	}
 
 	@Override
@@ -77,8 +92,9 @@ public class FromDbToCoraSubjectCategory implements FromDbToCora {
 	}
 
 	private List<Map<String, Object>> readFromTable(String tableName) {
-		RecordReader recordReader = recordReaderFactory.factor();
-		return recordReader.readAllFromTable(tableName);
+		// RecordReader recordReader = recordReaderFactory.factor();
+		// return recordReader.readAllFromTable(tableName);
+		return null;
 	}
 
 	private List<List<CoraJsonRecord>> convertReadRows(List<Map<String, Object>> readAllFromTable) {
@@ -144,10 +160,10 @@ public class FromDbToCoraSubjectCategory implements FromDbToCora {
 		return recordInfo.getFirstAtomicValueWithNameInData("id");
 	}
 
-	public RecordReaderFactory getRecordReaderFactory() {
-		// needed for test
-		return recordReaderFactory;
-	}
+	// public RecordReaderFactory getRecordReaderFactory() {
+	// // needed for test
+	// return recordReaderFactory;
+	// }
 
 	public FromDbToCoraConverter getFromDbToCoraConverter() {
 		// needed for test
@@ -167,5 +183,13 @@ public class FromDbToCoraSubjectCategory implements FromDbToCora {
 	public JsonToDataConverterFactory getJsonToDataConverterFactory() {
 		// needed for test
 		return jsonToDataConverterFactory;
+	}
+
+	public DatabaseFacade getDatabaseFacade() {
+		return databaseFacade;
+	}
+
+	public FromDbToCoraConverterFactory getToCoraConverterFactory() {
+		return toCoraConverterFactory;
 	}
 }
