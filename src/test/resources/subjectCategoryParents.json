@@ -1,0 +1,66 @@
+[
+	{
+		"parent_subject_id" : 251,
+		"subject_id" : 250
+	},
+	{
+		"parent_subject_id" : 58,
+		"subject_id" : 59
+	},
+	{
+		"parent_subject_id" : 61,
+		"subject_id" : 59
+	},
+	{
+		"parent_subject_id" : 62,
+		"subject_id" : 58
+	},
+	{
+		"parent_subject_id" : 500,
+		"subject_id" : 62
+	},
+	{
+		"parent_subject_id" : 551,
+		"subject_id" : 550
+	},
+	{
+		"parent_subject_id" : 1001,
+		"subject_id" : 1000
+	},
+	{
+		"parent_subject_id" : 1002,
+		"subject_id" : 1001
+	},
+	{
+		"parent_subject_id" : 1003,
+		"subject_id" : 1001
+	},
+	{
+		"parent_subject_id" : 1004,
+		"subject_id" : 1001
+	},
+	{
+		"parent_subject_id" : 1005,
+		"subject_id" : 1001
+	},
+	{
+		"parent_subject_id" : 1006,
+		"subject_id" : 1001
+	},
+	{
+		"parent_subject_id" : 1007,
+		"subject_id" : 1001
+	},
+	{
+		"parent_subject_id" : 1008,
+		"subject_id" : 1001
+	},
+	{
+		"parent_subject_id" : 1009,
+		"subject_id" : 1000
+	},
+	{
+		"parent_subject_id" : 1010,
+		"subject_id" : 1009
+	}
+]

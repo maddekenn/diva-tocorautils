@@ -50,7 +50,7 @@ public class FromDbToCoraSubjectCategoryFactory implements FromDbToCoraFactory {
 
 		RecordReaderFactory recordReaderFactory = createRecordReaderFactory(dbConfig);
 		RecordCompleterSubjectCategory recordCompleter = RecordCompleterSubjectCategory
-				.usingRecordReaderFactory(recordReaderFactory);
+				.usingDatabaseFacade(recordReaderFactory);
 
 		JsonToDataConverterFactory jsonToDataConverterFactory = new JsonToDataConverterFactoryImp();
 		Importer importer = createImporter(coraClientConfig);

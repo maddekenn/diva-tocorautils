@@ -38,16 +38,18 @@ public class FunderTransformerFromFile implements DbToCoraTransformer {
 
 	private String pathToFile;
 	private FromDbToCoraConverterFactory converterFactory;
+	private String type;
 
-	public static FunderTransformerFromFile usingFilePathAndConverterFactory(String pathToFile,
-			FromDbToCoraConverterFactory converterFactory) {
-		return new FunderTransformerFromFile(pathToFile, converterFactory);
+	public static FunderTransformerFromFile usingFilePathConverterFactoryAndType(String pathToFile,
+			FromDbToCoraConverterFactory converterFactory, String type) {
+		return new FunderTransformerFromFile(pathToFile, converterFactory, type);
 	}
 
 	private FunderTransformerFromFile(String pathToFile,
-			FromDbToCoraConverterFactory converterFactory) {
+			FromDbToCoraConverterFactory converterFactory, String type) {
 		this.pathToFile = pathToFile;
 		this.converterFactory = converterFactory;
+		this.type = type;
 	}
 
 	@Override
@@ -96,14 +98,9 @@ public class FunderTransformerFromFile implements DbToCoraTransformer {
 
 	private void convertRowAndAddToList(Map<String, Object> row,
 			List<ClientDataGroup> convertedGroups) {
-		FromDbToCoraConverter converter = converterFactory.factor("funder");
+		FromDbToCoraConverter converter = converterFactory.factor(type);
 		ClientDataGroup converted = converter.convertToClientDataGroupFromRowFromDb(row);
 		convertedGroups.add(converted);
-	}
-
-	private ClientDataGroup convertRow(Map<String, Object> row) {
-		FromDbToCoraConverter converter = converterFactory.factor("funder");
-		return converter.convertToClientDataGroupFromRowFromDb(row);
 	}
 
 	public FromDbToCoraConverterFactory getConverterFactory() {

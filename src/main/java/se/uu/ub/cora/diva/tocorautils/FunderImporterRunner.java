@@ -33,10 +33,10 @@ public class FunderImporterRunner {
 
 		createCoraClientFactory(args);
 		CoraClient coraClient = coraClientFactory.factorUsingAuthToken(args[9]);
-		convertAndCreateRecords(converted, coraClient);
+		createRecords(converted, coraClient);
 	}
 
-	private static void convertAndCreateRecords(List<ClientDataGroup> converted,
+	private static void createRecords(List<ClientDataGroup> converted,
 			CoraClient coraClient) {
 		int counter = 0;
 		for (ClientDataGroup dataGroup : converted) {
