@@ -6,5 +6,5 @@ import se.uu.ub.cora.clientdata.ClientDataGroup;
 
 public interface RecordCompleter {
 
-	List<ClientDataGroup> completeMetadata(List<ClientDataGroup> dataGroups, String pathToFile);
+	List<ClientDataGroup> completeMetadata(List<ClientDataGroup> dataGroups);
 }

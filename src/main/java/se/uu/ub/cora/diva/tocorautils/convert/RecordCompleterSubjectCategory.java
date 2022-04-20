@@ -12,34 +12,36 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 import se.uu.ub.cora.clientdata.ClientDataGroup;
-import se.uu.ub.cora.sqldatabase.DatabaseFacade;
 
 public class RecordCompleterSubjectCategory implements RecordCompleter {
 	private static final String NATIONAL_SUBJECT_CATEGORY_PARENT = "nationalSubjectCategoryParent";
 	private static final String NATIONAL_SUBJECT_CATEGORY = "nationalSubjectCategory";
-	private DatabaseFacade recordReaderFactory;
+	private String pathToFile;
+	private List<ClientDataGroup> completedGroups;
 
-	public static RecordCompleterSubjectCategory usingDatabaseFacade(
-			DatabaseFacade recordReaderFactory) {
-		return new RecordCompleterSubjectCategory(recordReaderFactory);
+	public static RecordCompleterSubjectCategory usingPathToFile(String pathToFile) {
+		return new RecordCompleterSubjectCategory(pathToFile);
 	}
 
-	private RecordCompleterSubjectCategory(DatabaseFacade databaseFacade) {
-		this.recordReaderFactory = databaseFacade;
+	private RecordCompleterSubjectCategory(String pathToFile) {
+		this.pathToFile = pathToFile;
 	}
 
 	@Override
-	public List<ClientDataGroup> completeMetadata(List<ClientDataGroup> dataGroups,
-			String pathToFile) {
-		List<ClientDataGroup> completedGroups = new ArrayList();
-		String parentString = readJsonFromFile(pathToFile);
-		JSONArray parents = new JSONArray(parentString);
+	public List<ClientDataGroup> completeMetadata(List<ClientDataGroup> dataGroups) {
+		completedGroups = new ArrayList<>();
+		JSONArray parents = extractParentsFromFile();
 		Map<String, List<String>> sortedParents = sortParentsToSubjectId(parents);
 
 		for (ClientDataGroup dataGroup : dataGroups) {
-			possiblyAddParents(completedGroups, sortedParents, dataGroup);
+			possiblyAddParents(sortedParents, dataGroup);
 		}
 		return completedGroups;
+	}
+
+	private JSONArray extractParentsFromFile() {
+		String parentString = readJsonFromFile(pathToFile);
+		return new JSONArray(parentString);
 	}
 
 	private String readJsonFromFile(String pathToFile) {
@@ -80,11 +82,11 @@ public class RecordCompleterSubjectCategory implements RecordCompleter {
 		sortedParents.get(subjectId).add(String.valueOf(parentId));
 	}
 
-	private void possiblyAddParents(List<ClientDataGroup> completedGroups,
-			Map<String, List<String>> sortedParents, ClientDataGroup dataGroup) {
+	private void possiblyAddParents(Map<String, List<String>> sortedParents,
+			ClientDataGroup dataGroup) {
 		String id = extractId(dataGroup);
 		if (sortedParents.containsKey(id)) {
-			addParents(completedGroups, sortedParents, dataGroup, id);
+			addParents(sortedParents, dataGroup, id);
 		}
 	}
 
@@ -93,8 +95,8 @@ public class RecordCompleterSubjectCategory implements RecordCompleter {
 		return recordInfo.getFirstAtomicValueWithNameInData("id");
 	}
 
-	private void addParents(List<ClientDataGroup> completedGroups,
-			Map<String, List<String>> sortedParents, ClientDataGroup dataGroup, String id) {
+	private void addParents(Map<String, List<String>> sortedParents,
+			ClientDataGroup dataGroup, String id) {
 		List<String> list = sortedParents.get(id);
 		for (String parentId : list) {
 			createParent(dataGroup, parentId);

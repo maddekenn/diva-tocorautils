@@ -11,20 +11,15 @@ import org.testng.annotations.Test;
 
 import se.uu.ub.cora.clientdata.ClientDataAtomic;
 import se.uu.ub.cora.clientdata.ClientDataGroup;
-import se.uu.ub.cora.diva.tocorautils.doubles.RecordReaderFactorySpy;
-import se.uu.ub.cora.diva.tocorautils.importing.DatabaseFacadeSpy;
 
 public class RecordCompleterSubjectCategoryTest {
 
-	private RecordReaderFactorySpy recordReaderFactory;
-	private DatabaseFacadeSpy databaseFacade;
 	private String pathToFile = "src/test/resources/subjectCategoryParents.json";
 	private RecordCompleter recordCompleter;
 
 	@BeforeMethod
 	public void setUp() {
-		databaseFacade = new DatabaseFacadeSpy();
-		recordCompleter = RecordCompleterSubjectCategory.usingDatabaseFacade(databaseFacade);
+		recordCompleter = RecordCompleterSubjectCategory.usingPathToFile(pathToFile);
 	}
 
 	@Test
@@ -33,8 +28,7 @@ public class RecordCompleterSubjectCategoryTest {
 		ClientDataGroup dataGroup = createClientDataGroupWithRecordId("10011");
 		dataGroups.add(dataGroup);
 
-		List<ClientDataGroup> completedMetadata = recordCompleter.completeMetadata(dataGroups,
-				pathToFile);
+		List<ClientDataGroup> completedMetadata = recordCompleter.completeMetadata(dataGroups);
 
 		assertTrue(completedMetadata.isEmpty());
 
@@ -46,8 +40,7 @@ public class RecordCompleterSubjectCategoryTest {
 		dataGroups.add(createClientDataGroupWithRecordId("10011"));
 		dataGroups.add(createClientDataGroupWithRecordId("1001"));
 
-		List<ClientDataGroup> completedMetadata = recordCompleter.completeMetadata(dataGroups,
-				pathToFile);
+		List<ClientDataGroup> completedMetadata = recordCompleter.completeMetadata(dataGroups);
 		assertEquals(completedMetadata.size(), 1);
 		ClientDataGroup completedDataGroup = completedMetadata.get(0);
 		List<ClientDataGroup> parents = completedDataGroup
@@ -77,20 +70,34 @@ public class RecordCompleterSubjectCategoryTest {
 		dataGroups.add(createClientDataGroupWithRecordId("59"));
 		dataGroups.add(createClientDataGroupWithRecordId("1001"));
 		dataGroups.add(createClientDataGroupWithRecordId("550"));
+		dataGroups.add(createClientDataGroupWithRecordId("55000000"));
 
-		// RecordCompleter recordCompleter = RecordCompleterSubjectCategory
-		// .usingDatabaseFacade(recordReaderFactory);
-		//
-		// String completedMetadataJson = recordCompleter.completeMetadata(dataGroup);
-		//
-		// RecordReaderSpy factoredReader = recordReaderFactory.factored;
-		// assertEquals(factoredReader.usedTableNames.get(0), "subject_parent_view");
-		// assertEquals(factoredReader.usedConditions.get("parent_subject_id"),
-		// "someSubjectWithParentId");
-		//
-		// assertEquals(completedMetadataJson,
-		// "{\"children\":[{\"children\":[{\"name\":\"id\",\"value\":\"someSubjectWithParentId\"}],\"name\":\"recordInfo\"},{\"repeatId\":\"0\",\"children\":[{\"children\":[{\"name\":\"linkedRecordType\",\"value\":\"nationalSubjectCategory\"},{\"name\":\"linkedRecordId\",\"value\":\"someParent0\"}],\"name\":\"nationalSubjectCategory\"}],\"name\":\"nationalSubjectCategoryParent\"},{\"repeatId\":\"1\",\"children\":[{\"children\":[{\"name\":\"linkedRecordType\",\"value\":\"nationalSubjectCategory\"},{\"name\":\"linkedRecordId\",\"value\":\"someParent1\"}],\"name\":\"nationalSubjectCategory\"}],\"name\":\"nationalSubjectCategoryParent\"}],\"name\":\"nationalSubjectCategory\"}");
+		List<ClientDataGroup> completedDataGroups = recordCompleter.completeMetadata(dataGroups);
+		assertEquals(completedDataGroups.size(), 3);
 
+		List<ClientDataGroup> parents = extractParentsUsingIndex(completedDataGroups, 0);
+		assertEquals(parents.size(), 2);
+		assertCorrectParent(parents, 0, "58");
+		assertCorrectParent(parents, 1, "61");
+
+		List<ClientDataGroup> parents2 = extractParentsUsingIndex(completedDataGroups, 1);
+		assertEquals(parents2.size(), 4);
+		assertCorrectParent(parents2, 0, "1002");
+		assertCorrectParent(parents2, 1, "1003");
+		assertCorrectParent(parents2, 2, "1004");
+		assertCorrectParent(parents2, 3, "1005");
+
+		List<ClientDataGroup> parents3 = extractParentsUsingIndex(completedDataGroups, 2);
+		assertEquals(parents3.size(), 1);
+		assertCorrectParent(parents3, 0, "551");
+	}
+
+	private List<ClientDataGroup> extractParentsUsingIndex(
+			List<ClientDataGroup> completedDataGroups, int index) {
+		ClientDataGroup completedDataGroup = completedDataGroups.get(index);
+		List<ClientDataGroup> parents = completedDataGroup
+				.getAllGroupsWithNameInData("nationalSubjectCategoryParent");
+		return parents;
 	}
 
 	private ClientDataGroup createClientDataGroupWithRecordId(String id) {
