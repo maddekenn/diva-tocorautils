@@ -59,7 +59,7 @@ public class FunderImporterFromFileRunnerTest {
 
 		DbToCoraTransformerSpy transformer = (DbToCoraTransformerSpy) FunderImporterFromFileRunner.coraTransformer;
 		CoraClientSpy coraClient = coraClientFactory.factored;
-		assertEquals(coraClient.dataGroupsSentToCreate.size(), 1);
+		assertEquals(coraClient.dataGroupsSentToCreate.size(), 2);
 		assertSame(coraClient.dataGroupsSentToCreate.get(0), transformer.listOfConverted.get(0));
 		assertEquals(coraClient.createdRecordTypes.get(0), "someRecordType");
 	}
@@ -69,7 +69,7 @@ public class FunderImporterFromFileRunnerTest {
 			IllegalAccessException, InvocationTargetException, InstantiationException {
 		FunderImporterFromFileRunner.main(args);
 		DbToCoraTransformerSpy transformer = (DbToCoraTransformerSpy) FunderImporterFromFileRunner.coraTransformer;
-		assertEquals(transformer.listOfConverted.size(), 1);
+		assertEquals(transformer.listOfConverted.size(), 2);
 	}
 
 	@Test
