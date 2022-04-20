@@ -44,18 +44,6 @@
 		"subject_id" : 1001
 	},
 	{
-		"parent_subject_id" : 1006,
-		"subject_id" : 1001
-	},
-	{
-		"parent_subject_id" : 1007,
-		"subject_id" : 1001
-	},
-	{
-		"parent_subject_id" : 1008,
-		"subject_id" : 1001
-	},
-	{
 		"parent_subject_id" : 1009,
 		"subject_id" : 1000
 	},

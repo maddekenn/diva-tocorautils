@@ -38,17 +38,10 @@ public class RecordCompleterSubjectCategoryTest {
 
 		assertTrue(completedMetadata.isEmpty());
 
-		// RecordReaderSpy factoredReader = recordReaderFactory.factored;
-		// assertEquals(factoredReader.usedTableNames.get(0), "subject_parent_view");
-		// assertEquals(factoredReader.usedConditions.get("parent_subject_id"), "someSubjectId");
-		//
-		// assertEquals(completedMetadataJson,
-		// "{\"children\":[{\"children\":[{\"name\":\"id\",\"value\":\"someSubjectId\"}],\"name\":\"recordInfo\"}],\"name\":\"nationalSubjectCategory\"}");
-
 	}
 
 	@Test
-	public void testOneParent() {
+	public void testMultipleParentsForOneSubject() {
 		List<ClientDataGroup> dataGroups = new ArrayList<>();
 		dataGroups.add(createClientDataGroupWithRecordId("10011"));
 		dataGroups.add(createClientDataGroupWithRecordId("1001"));
@@ -60,30 +53,31 @@ public class RecordCompleterSubjectCategoryTest {
 		List<ClientDataGroup> parents = completedDataGroup
 				.getAllGroupsWithNameInData("nationalSubjectCategoryParent");
 
-		assertEquals(parents.size(), 7);
-		// ClientDataGroup dataGroup = createClientDataGroupWithRecordId(subjectId);
-		// ClientDataGroup completedGroup = completedMetadata.get(0);
-		// RecordCompleter recordCompleter = RecordCompleterSubjectCategory
-		// .usingDatabaseFacade(recordReaderFactory);
-		//
-		// String completedMetadataJson = recordCompleter.completeMetadata(dataGroup);
-		//
-		// RecordReaderSpy factoredReader = recordReaderFactory.factored;
-		// assertEquals(factoredReader.usedTableNames.get(0), "subject_parent_view");
-		// assertEquals(factoredReader.usedConditions.get("parent_subject_id"),
-		// "someSubjectWithParentId");
-		//
-		// assertEquals(completedMetadataJson,
-		// "{\"children\":[{\"children\":[{\"name\":\"id\",\"value\":\"someSubjectWithParentId\"}],\"name\":\"recordInfo\"},{\"repeatId\":\"0\",\"children\":[{\"children\":[{\"name\":\"linkedRecordType\",\"value\":\"nationalSubjectCategory\"},{\"name\":\"linkedRecordId\",\"value\":\"someParent0\"}],\"name\":\"nationalSubjectCategory\"}],\"name\":\"nationalSubjectCategoryParent\"}],\"name\":\"nationalSubjectCategory\"}");
+		assertEquals(parents.size(), 4);
+
+		assertCorrectParent(parents, 0, "1002");
+		assertCorrectParent(parents, 1, "1003");
+		assertCorrectParent(parents, 2, "1004");
+		assertCorrectParent(parents, 3, "1005");
 
 	}
 
+	private void assertCorrectParent(List<ClientDataGroup> parents, int index, String parentId) {
+		ClientDataGroup parent = parents.get(index);
+		ClientDataGroup parentLink = parent.getFirstGroupWithNameInData("nationalSubjectCategory");
+		assertEquals(parentLink.getFirstAtomicValueWithNameInData("linkedRecordType"),
+				"nationalSubjectCategory");
+		assertEquals(parentLink.getFirstAtomicValueWithNameInData("linkedRecordId"), parentId);
+		assertEquals(parent.getRepeatId(), String.valueOf(index));
+	}
+
 	@Test
-	public void testTwoParents() {
-		String subjectId = "someSubjectWithParentId";
-		recordReaderFactory.idsToReturnParent.add(subjectId);
-		recordReaderFactory.noOfParentsToReturn = 2;
-		ClientDataGroup dataGroup = createClientDataGroupWithRecordId(subjectId);
+	public void testMultipleParentsForMultipleSubjects() {
+		List<ClientDataGroup> dataGroups = new ArrayList<>();
+		dataGroups.add(createClientDataGroupWithRecordId("59"));
+		dataGroups.add(createClientDataGroupWithRecordId("1001"));
+		dataGroups.add(createClientDataGroupWithRecordId("550"));
+
 		// RecordCompleter recordCompleter = RecordCompleterSubjectCategory
 		// .usingDatabaseFacade(recordReaderFactory);
 		//
