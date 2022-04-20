@@ -15,17 +15,17 @@ import se.uu.ub.cora.diva.tocorautils.FromDbToCoraConverterFactorySpy;
 import se.uu.ub.cora.diva.tocorautils.convert.ConverterException;
 import se.uu.ub.cora.diva.tocorautils.doubles.FromDbToCoraConverterSpy;
 
-public class FunderTransformerFromFileTest {
+public class ToCoraTransformerFromFileTest {
 
 	private FromDbToCoraConverterFactorySpy converterFactory;
 	private String pathToFile = "src/test/resources/funder.json";
-	private FunderTransformerFromFile transformer;
+	private ToCoraTransformerFromFile transformer;
 	private String type = "funder";
 
 	@BeforeMethod
 	public void setUp() {
 		converterFactory = new FromDbToCoraConverterFactorySpy();
-		transformer = FunderTransformerFromFile.usingFilePathConverterFactoryAndType(pathToFile,
+		transformer = ToCoraTransformerFromFile.usingFilePathConverterFactoryAndType(pathToFile,
 				converterFactory, type);
 	}
 
@@ -81,14 +81,14 @@ public class FunderTransformerFromFileTest {
 	@Test(expectedExceptions = ConverterException.class, expectedExceptionsMessageRegExp = ""
 			+ "Unable to parse json string using path: someInvalidPath")
 	public void testErrorReadingFile() {
-		transformer = FunderTransformerFromFile.usingFilePathConverterFactoryAndType(
+		transformer = ToCoraTransformerFromFile.usingFilePathConverterFactoryAndType(
 				"someInvalidPath", converterFactory, "funder");
 		transformer.getConverted();
 	}
 
 	@Test
 	public void testTypeIsUsed() {
-		transformer = FunderTransformerFromFile.usingFilePathConverterFactoryAndType(pathToFile,
+		transformer = ToCoraTransformerFromFile.usingFilePathConverterFactoryAndType(pathToFile,
 				converterFactory, "otherType");
 		transformer.getConverted();
 		assertEquals(converterFactory.type, "otherType");

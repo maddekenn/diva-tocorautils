@@ -36,8 +36,7 @@ public class FunderImporterRunner {
 		createRecords(converted, coraClient);
 	}
 
-	private static void createRecords(List<ClientDataGroup> converted,
-			CoraClient coraClient) {
+	private static void createRecords(List<ClientDataGroup> converted, CoraClient coraClient) {
 		int counter = 0;
 		for (ClientDataGroup dataGroup : converted) {
 			System.out.println("Id: " + dataGroup.getFirstAtomicValueWithNameInData("classicId"));

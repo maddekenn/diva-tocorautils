@@ -34,18 +34,18 @@ import se.uu.ub.cora.diva.tocorautils.convert.ConverterException;
 import se.uu.ub.cora.diva.tocorautils.convert.FromDbToCoraConverter;
 import se.uu.ub.cora.diva.tocorautils.convert.FromDbToCoraConverterFactory;
 
-public class FunderTransformerFromFile implements DbToCoraTransformer {
+public class ToCoraTransformerFromFile implements DbToCoraTransformer {
 
 	private String pathToFile;
 	private FromDbToCoraConverterFactory converterFactory;
 	private String type;
 
-	public static FunderTransformerFromFile usingFilePathConverterFactoryAndType(String pathToFile,
+	public static ToCoraTransformerFromFile usingFilePathConverterFactoryAndType(String pathToFile,
 			FromDbToCoraConverterFactory converterFactory, String type) {
-		return new FunderTransformerFromFile(pathToFile, converterFactory, type);
+		return new ToCoraTransformerFromFile(pathToFile, converterFactory, type);
 	}
 
-	private FunderTransformerFromFile(String pathToFile,
+	private ToCoraTransformerFromFile(String pathToFile,
 			FromDbToCoraConverterFactory converterFactory, String type) {
 		this.pathToFile = pathToFile;
 		this.converterFactory = converterFactory;

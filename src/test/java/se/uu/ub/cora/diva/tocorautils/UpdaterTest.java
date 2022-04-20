@@ -64,7 +64,7 @@ public class UpdaterTest {
 		ClientDataGroup recordInfo = clientDataGroup.getFirstGroupWithNameInData("recordInfo");
 		String idInOriginalDataGroup = recordInfo.getFirstAtomicValueWithNameInData("id");
 
-		assertSame(coraClient.updatedDataGroups.get(index), changer.modifiedDataGroups.get(index));
+		assertSame(coraClient.dataGroupsSentToUpdate.get(index), changer.modifiedDataGroups.get(index));
 		assertEquals(coraClient.updatedRecordIds.get(index), idInOriginalDataGroup);
 		assertSame(coraClient.updatedRecordTypes.get(index), type);
 	}

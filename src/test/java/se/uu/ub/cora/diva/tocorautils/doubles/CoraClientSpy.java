@@ -33,7 +33,7 @@ public class CoraClientSpy implements CoraClient {
 	public List<String> updatedRecordTypes = new ArrayList<>();
 	public List<String> updatedRecordIds = new ArrayList<>();
 	public List<String> jsonStrings = new ArrayList<>();
-	public List<ClientDataGroup> updatedDataGroups = new ArrayList<>();
+	public List<ClientDataGroup> dataGroupsSentToUpdate = new ArrayList<>();
 	public List<ClientDataGroup> dataGroupsSentToCreate = new ArrayList<>();
 	public String jsonToReturn;
 
@@ -100,7 +100,7 @@ public class CoraClientSpy implements CoraClient {
 	public String update(String recordType, String recordId, ClientDataGroup dataGroup) {
 		updatedRecordTypes.add(recordType);
 		updatedRecordIds.add(recordId);
-		updatedDataGroups.add(dataGroup);
+		dataGroupsSentToUpdate.add(dataGroup);
 		return null;
 	}
 
