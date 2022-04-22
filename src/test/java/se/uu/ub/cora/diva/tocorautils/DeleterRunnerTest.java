@@ -1,7 +1,6 @@
 package se.uu.ub.cora.diva.tocorautils;
 
 import static org.testng.Assert.assertEquals;
-import static org.testng.Assert.assertNull;
 import static org.testng.Assert.assertSame;
 import static org.testng.Assert.assertTrue;
 
@@ -14,6 +13,8 @@ import org.testng.annotations.Test;
 
 import se.uu.ub.cora.clientdata.ClientDataGroup;
 import se.uu.ub.cora.clientdata.ClientDataRecord;
+import se.uu.ub.cora.diva.tocorautils.doubles.CoraClientExceptionSpy;
+import se.uu.ub.cora.diva.tocorautils.doubles.CoraClientFactoryExceptionClientSpy;
 import se.uu.ub.cora.diva.tocorautils.doubles.CoraClientFactorySpy;
 import se.uu.ub.cora.diva.tocorautils.doubles.CoraClientSpy;
 
@@ -57,12 +58,15 @@ public class DeleterRunnerTest {
 		CoraClientSpy coraClient = coraClientFactory.factored;
 		assertEquals(coraClient.recordTypeToList, "someRecordType");
 		List<ClientDataRecord> returnedList = coraClient.listToReturn;
-		int index = 0;
-		String id = extractId(returnedList, index);
 
 		assertSame(coraClient.deletedRecordTypes.get(0), "someRecordType");
-		assertSame(coraClient.deletedRecordIds.get(0), id);
-		// assertEquals(coraClient.createdRecordTypes.get(0), "funder");
+		assertEquals(coraClient.deletedRecordIds.get(0), extractId(returnedList, 0));
+		assertEquals(coraClient.deletedRecordIds.get(1), extractId(returnedList, 1));
+		assertEquals(coraClient.deletedRecordIds.get(2), extractId(returnedList, 2));
+		assertEquals(coraClient.deletedRecordIds.get(3), extractId(returnedList, 3));
+		assertEquals(coraClient.deletedRecordIds.get(4), extractId(returnedList, 4));
+		assertEquals(coraClient.deletedRecordTypes.size(), 5);
+
 	}
 
 	private String extractId(List<ClientDataRecord> returnedList, int index) {
@@ -73,30 +77,16 @@ public class DeleterRunnerTest {
 	}
 
 	@Test
-	public void testTransformerConvert() throws ClassNotFoundException, NoSuchMethodException,
-			IllegalAccessException, InvocationTargetException, InstantiationException {
-		FunderImporterRunner.main(args);
-		DbToCoraTransformerSpy transformer = (DbToCoraTransformerSpy) FunderImporterRunner.coraTransformer;
-		assertEquals(transformer.listOfConverted.size(), 1);
-	}
+	public void testUnableToDelete() throws NoSuchMethodException, ClassNotFoundException,
+			IllegalAccessException, InvocationTargetException {
+		args = new String[] {
+				"se.uu.ub.cora.diva.tocorautils.doubles.CoraClientFactoryExceptionClientSpy",
+				"someApptokenVerifierUrl", "someBaseUrl", "someAuthtoken", "someRecordType" };
+		DeleterRunner.main(args);
+		CoraClientFactoryExceptionClientSpy coraClientFactory = (CoraClientFactoryExceptionClientSpy) DeleterRunner.coraClientFactory;
+		CoraClientExceptionSpy coraClient = coraClientFactory.factored;
+		assertEquals(coraClient.deletedRecordTypes.size(), 5);
 
-	@Test
-	public void testTransformerWhenUsingFileName()
-			throws ClassNotFoundException, NoSuchMethodException, IllegalAccessException,
-			InvocationTargetException, InstantiationException {
-		args = new String[] { "se.uu.ub.cora.diva.tocorautils.DbToCoraTransformerSpy",
-				"se.uu.ub.cora.diva.tocorautils.SqlDatabaseFactorySpy",
-				"se.uu.ub.cora.diva.tocorautils.FromDbToCoraConverterFactorySpy",
-				"jdbc:postgresql://diva-cora-docker-postgresql:543200/diva", "diva", "diva",
-				"se.uu.ub.cora.diva.tocorautils.doubles.CoraClientFactorySpy",
-				"someApptokenVerifierUrl", "someBaseUrl", "someAuthtoken", "someFileName" };
-
-		FunderImporterRunner.main(args);
-
-		DbToCoraTransformerSpy transformer = (DbToCoraTransformerSpy) FunderImporterRunner.coraTransformer;
-		assertTrue(transformer.converterFactory instanceof FromDbToCoraConverterFactorySpy);
-		assertEquals(transformer.fileName, "someFileName");
-		assertNull(transformer.databaseFacade);
 	}
 
 }
