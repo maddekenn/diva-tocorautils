@@ -28,6 +28,7 @@ public class FromFileWithExtraTableImporterRunner {
 		constructCoraTransformer(args);
 
 		List<ClientDataGroup> converted = coraTransformer.getConverted();
+		System.out.println("Number converted: " + converted.size());
 
 		createCoraClientFactory(args);
 		CoraClient coraClient = coraClientFactory.factorUsingAuthToken(args[6]);
@@ -42,13 +43,12 @@ public class FromFileWithExtraTableImporterRunner {
 		int counter = 0;
 		String recordType = args[9];
 		for (ClientDataGroup dataGroup : converted) {
-			// System.out.println("Id: " +
-			// dataGroup.getFirstAtomicValueWithNameInData("classicId"));
 			coraClient.create(recordType, dataGroup);
 			counter++;
+			System.out.println("Number of records imported: " + counter);
 		}
 
-		System.out.println("Number of records imported: " + counter);
+		System.out.println("Finished creating records: " + counter);
 	}
 
 	private static void constructCoraTransformer(String[] args)
@@ -108,9 +108,11 @@ public class FromFileWithExtraTableImporterRunner {
 	private static void completeAndUpdateDataGroups(List<ClientDataGroup> converted,
 			CoraClient coraClient) {
 		List<ClientDataGroup> completedGroups = recordCompleter.completeMetadata(converted);
+		int counter = 0;
 		for (ClientDataGroup clientDataGroup : completedGroups) {
 			String recordId = extractRecordId(clientDataGroup);
 			coraClient.update(recordType, recordId, clientDataGroup);
+			System.out.println("Number of records updated: " + counter);
 		}
 	}
 
