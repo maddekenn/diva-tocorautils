@@ -33,6 +33,13 @@ public class FromDbToCoraConverterFactoryTest {
 		assertTrue(converter instanceof FromDbToCoraFunderConverter);
 	}
 
+	@Test
+	public void testFactorNationalSubjectCategoryConverter() {
+		FromDbToCoraConverterFactoryImp factory = new FromDbToCoraConverterFactoryImp();
+		FromDbToCoraConverter converter = factory.factor("nationalSubjectCategory");
+		assertTrue(converter instanceof FromDbToCoraSubjectCategoryConverter);
+	}
+
 	@Test(expectedExceptions = NotImplementedException.class, expectedExceptionsMessageRegExp = ""
 			+ "Converter not implemented for notImplementedType")
 	public void testTypeNotImplemented() {

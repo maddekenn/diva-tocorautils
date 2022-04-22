@@ -1,0 +1,1826 @@
+[
+	{
+		"subject_id" : 1273,
+		"subject_code" : "601",
+		"default_name" : "Historia och arkeologi",
+		"alternative_name" : "History and Archaeology"
+	},
+	{
+		"subject_id" : 1277,
+		"subject_code" : "602",
+		"default_name" : "Språk och litteratur",
+		"alternative_name" : "Languages and Literature"
+	},
+	{
+		"subject_id" : 1281,
+		"subject_code" : "60204",
+		"default_name" : "Litteraturstudier",
+		"alternative_name" : "Specific Literatures"
+	},
+	{
+		"subject_id" : 1285,
+		"subject_code" : "60303",
+		"default_name" : "Religionsvetenskap",
+		"alternative_name" : "Religious Studies"
+	},
+	{
+		"subject_id" : 1289,
+		"subject_code" : "60401",
+		"default_name" : "Bildkonst",
+		"alternative_name" : "Visual Arts"
+	},
+	{
+		"subject_id" : 1293,
+		"subject_code" : "60405",
+		"default_name" : "Arkitektur",
+		"alternative_name" : "Architecture"
+	},
+	{
+		"subject_id" : 1297,
+		"subject_code" : "60409",
+		"default_name" : "Teatervetenskap",
+		"alternative_name" : "Performing Art Studies"
+	},
+	{
+		"subject_id" : 1301,
+		"subject_code" : "60502",
+		"default_name" : "Kulturstudier",
+		"alternative_name" : "Cultural Studies"
+	},
+	{
+		"subject_id" : 1280,
+		"subject_code" : "60203",
+		"default_name" : "Litteraturvetenskap",
+		"alternative_name" : "General Literature Studies"
+	},
+	{
+		"subject_id" : 1284,
+		"subject_code" : "60302",
+		"default_name" : "Etik",
+		"alternative_name" : "Ethics"
+	},
+	{
+		"subject_id" : 1288,
+		"subject_code" : "604",
+		"default_name" : "Konst",
+		"alternative_name" : "Arts"
+	},
+	{
+		"subject_id" : 1292,
+		"subject_code" : "60404",
+		"default_name" : "Scenkonst",
+		"alternative_name" : "Performing Arts"
+	},
+	{
+		"subject_id" : 1296,
+		"subject_code" : "60408",
+		"default_name" : "Musikvetenskap",
+		"alternative_name" : "Musicology"
+	},
+	{
+		"subject_id" : 1300,
+		"subject_code" : "60501",
+		"default_name" : "Antikvetenskap",
+		"alternative_name" : "Classical Archaeology and Ancient History"
+	},
+	{
+		"subject_id" : 1282,
+		"subject_code" : "603",
+		"default_name" : "Filosofi, etik och religion",
+		"alternative_name" : "Philosophy, Ethics and Religion"
+	},
+	{
+		"subject_id" : 1286,
+		"subject_code" : "60304",
+		"default_name" : "Religionshistoria",
+		"alternative_name" : "History of Religions"
+	},
+	{
+		"subject_id" : 1290,
+		"subject_code" : "60402",
+		"default_name" : "Musik",
+		"alternative_name" : "Music"
+	},
+	{
+		"subject_id" : 1294,
+		"subject_code" : "60406",
+		"default_name" : "Design",
+		"alternative_name" : "Design"
+	},
+	{
+		"subject_id" : 1298,
+		"subject_code" : "60410",
+		"default_name" : "Filmvetenskap",
+		"alternative_name" : "Studies on Film"
+	},
+	{
+		"subject_id" : 1302,
+		"subject_code" : "60503",
+		"default_name" : "Etnologi",
+		"alternative_name" : "Ethnology"
+	},
+	{
+		"subject_id" : 1000,
+		"subject_code" : "1",
+		"default_name" : "Naturvetenskap",
+		"alternative_name" : "Natural Sciences"
+	},
+	{
+		"subject_id" : 1001,
+		"subject_code" : "101",
+		"default_name" : "Matematik",
+		"alternative_name" : "Mathematics"
+	},
+	{
+		"subject_id" : 1002,
+		"subject_code" : "10101",
+		"default_name" : "Matematisk analys",
+		"alternative_name" : "Mathematical Analysis"
+	},
+	{
+		"subject_id" : 1003,
+		"subject_code" : "10102",
+		"default_name" : "Geometri",
+		"alternative_name" : "Geometry"
+	},
+	{
+		"subject_id" : 1004,
+		"subject_code" : "10103",
+		"default_name" : "Algebra och logik",
+		"alternative_name" : "Algebra and Logic"
+	},
+	{
+		"subject_id" : 1005,
+		"subject_code" : "10104",
+		"default_name" : "Diskret matematik",
+		"alternative_name" : "Discrete Mathematics"
+	},
+	{
+		"subject_id" : 1006,
+		"subject_code" : "10105",
+		"default_name" : "Beräkningsmatematik",
+		"alternative_name" : "Computational Mathematics"
+	},
+	{
+		"subject_id" : 1007,
+		"subject_code" : "10106",
+		"default_name" : "Sannolikhetsteori och statistik",
+		"alternative_name" : "Probability Theory and Statistics"
+	},
+	{
+		"subject_id" : 1008,
+		"subject_code" : "10199",
+		"default_name" : "Annan matematik",
+		"alternative_name" : "Other Mathematics"
+	},
+	{
+		"subject_id" : 1009,
+		"subject_code" : "102",
+		"default_name" : "Data- och informationsvetenskap",
+		"alternative_name" : "Computer and Information Science"
+	},
+	{
+		"subject_id" : 1010,
+		"subject_code" : "10201",
+		"default_name" : "Datavetenskap (datalogi)",
+		"alternative_name" : "Computer Science"
+	},
+	{
+		"subject_id" : 1011,
+		"subject_code" : "10202",
+		"default_name" : "Systemvetenskap",
+		"alternative_name" : "Information Science"
+	},
+	{
+		"subject_id" : 1012,
+		"subject_code" : "10203",
+		"default_name" : "Bioinformatik (beräkningsbiologi)",
+		"alternative_name" : "Bioinformatics (Computational Biology)"
+	},
+	{
+		"subject_id" : 1013,
+		"subject_code" : "10204",
+		"default_name" : "Människa-datorinteraktion (interaktionsdesign)",
+		"alternative_name" : "Human Computer Interaction"
+	},
+	{
+		"subject_id" : 1291,
+		"subject_code" : "60403",
+		"default_name" : "Litterär gestaltning",
+		"alternative_name" : "Literary Composition"
+	},
+	{
+		"subject_id" : 1295,
+		"subject_code" : "60407",
+		"default_name" : "Konstvetenskap",
+		"alternative_name" : "Art History"
+	},
+	{
+		"subject_id" : 1299,
+		"subject_code" : "605",
+		"default_name" : "Annan humaniora",
+		"alternative_name" : "Other Humanities"
+	},
+	{
+		"subject_id" : 1014,
+		"subject_code" : "10205",
+		"default_name" : "Programvaruteknik",
+		"alternative_name" : "Software Engineering"
+	},
+	{
+		"subject_id" : 1015,
+		"subject_code" : "10206",
+		"default_name" : "Datorteknik",
+		"alternative_name" : "Computer Engineering"
+	},
+	{
+		"subject_id" : 1016,
+		"subject_code" : "10207",
+		"default_name" : "Datorseende och robotik (autonoma system)",
+		"alternative_name" : "Computer Vision and Robotics (Autonomous Systems)"
+	},
+	{
+		"subject_id" : 1017,
+		"subject_code" : "10208",
+		"default_name" : "Språkteknologi (språkvetenskaplig databehandling)",
+		"alternative_name" : "Language Technology (Computational Linguistics)"
+	},
+	{
+		"subject_id" : 1018,
+		"subject_code" : "10209",
+		"default_name" : "Medieteknik",
+		"alternative_name" : "Media and Communication Technology"
+	},
+	{
+		"subject_id" : 1019,
+		"subject_code" : "10299",
+		"default_name" : "Annan data- och informationsvetenskap",
+		"alternative_name" : "Other Computer and Information Science"
+	},
+	{
+		"subject_id" : 1020,
+		"subject_code" : "103",
+		"default_name" : "Fysik",
+		"alternative_name" : "Physical Sciences"
+	},
+	{
+		"subject_id" : 1021,
+		"subject_code" : "10301",
+		"default_name" : "Subatomär fysik",
+		"alternative_name" : "Subatomic Physics"
+	},
+	{
+		"subject_id" : 1022,
+		"subject_code" : "10302",
+		"default_name" : "Atom- och molekylfysik och optik",
+		"alternative_name" : "Atom and Molecular Physics and Optics"
+	},
+	{
+		"subject_id" : 1023,
+		"subject_code" : "10303",
+		"default_name" : "Fusion, plasma och rymdfysik",
+		"alternative_name" : "Fusion, Plasma and Space Physics"
+	},
+	{
+		"subject_id" : 1024,
+		"subject_code" : "10304",
+		"default_name" : "Den kondenserade materiens fysik",
+		"alternative_name" : "Condensed Matter Physics"
+	},
+	{
+		"subject_id" : 1025,
+		"subject_code" : "10305",
+		"default_name" : "Astronomi, astrofysik och kosmologi",
+		"alternative_name" : "Astronomy, Astrophysics and Cosmology"
+	},
+	{
+		"subject_id" : 1026,
+		"subject_code" : "10306",
+		"default_name" : "Acceleratorfysik och instrumentering",
+		"alternative_name" : "Accelerator Physics and Instrumentation"
+	},
+	{
+		"subject_id" : 1027,
+		"subject_code" : "10399",
+		"default_name" : "Annan fysik",
+		"alternative_name" : "Other Physics Topics"
+	},
+	{
+		"subject_id" : 1028,
+		"subject_code" : "104",
+		"default_name" : "Kemi",
+		"alternative_name" : "Chemical Sciences"
+	},
+	{
+		"subject_id" : 1029,
+		"subject_code" : "10401",
+		"default_name" : "Analytisk kemi",
+		"alternative_name" : "Analytical Chemistry"
+	},
+	{
+		"subject_id" : 1030,
+		"subject_code" : "10402",
+		"default_name" : "Fysikalisk kemi",
+		"alternative_name" : "Physical Chemistry"
+	},
+	{
+		"subject_id" : 1031,
+		"subject_code" : "10403",
+		"default_name" : "Materialkemi",
+		"alternative_name" : "Materials Chemistry"
+	},
+	{
+		"subject_id" : 1032,
+		"subject_code" : "10404",
+		"default_name" : "Oorganisk kemi",
+		"alternative_name" : "Inorganic Chemistry"
+	},
+	{
+		"subject_id" : 1033,
+		"subject_code" : "10405",
+		"default_name" : "Organisk kemi",
+		"alternative_name" : "Organic Chemistry"
+	},
+	{
+		"subject_id" : 1034,
+		"subject_code" : "10406",
+		"default_name" : "Polymerkemi",
+		"alternative_name" : "Polymer Chemistry"
+	},
+	{
+		"subject_id" : 1035,
+		"subject_code" : "10407",
+		"default_name" : "Teoretisk kemi",
+		"alternative_name" : "Theoretical Chemistry"
+	},
+	{
+		"subject_id" : 1036,
+		"subject_code" : "10499",
+		"default_name" : "Annan kemi",
+		"alternative_name" : "Other Chemistry Topics"
+	},
+	{
+		"subject_id" : 1040,
+		"subject_code" : "10503",
+		"default_name" : "Multidisciplinär geovetenskap",
+		"alternative_name" : "Geosciences, Multidisciplinary"
+	},
+	{
+		"subject_id" : 1044,
+		"subject_code" : "10507",
+		"default_name" : "Fysisk geografi",
+		"alternative_name" : "Physical Geography"
+	},
+	{
+		"subject_id" : 1048,
+		"subject_code" : "106",
+		"default_name" : "Biologiska vetenskaper",
+		"alternative_name" : "Biological Sciences"
+	},
+	{
+		"subject_id" : 1052,
+		"subject_code" : "10604",
+		"default_name" : "Cellbiologi",
+		"alternative_name" : "Cell Biology"
+	},
+	{
+		"subject_id" : 1056,
+		"subject_code" : "10608",
+		"default_name" : "Zoologi",
+		"alternative_name" : "Zoology"
+	},
+	{
+		"subject_id" : 1060,
+		"subject_code" : "10612",
+		"default_name" : "Biologisk systematik",
+		"alternative_name" : "Biological Systematics"
+	},
+	{
+		"subject_id" : 1064,
+		"subject_code" : "10699",
+		"default_name" : "Annan biologi",
+		"alternative_name" : "Other Biological Topics"
+	},
+	{
+		"subject_id" : 1068,
+		"subject_code" : "20101",
+		"default_name" : "Arkitekturteknik",
+		"alternative_name" : "Architectural Engineering"
+	},
+	{
+		"subject_id" : 1072,
+		"subject_code" : "20105",
+		"default_name" : "Transportteknik och logistik",
+		"alternative_name" : "Transport Systems and Logistics"
+	},
+	{
+		"subject_id" : 1076,
+		"subject_code" : "20199",
+		"default_name" : "Annan samhällsbyggnadsteknik",
+		"alternative_name" : "Other Civil Engineering"
+	},
+	{
+		"subject_id" : 1080,
+		"subject_code" : "20203",
+		"default_name" : "Kommunikationssystem",
+		"alternative_name" : "Communication Systems"
+	},
+	{
+		"subject_id" : 1084,
+		"subject_code" : "20207",
+		"default_name" : "Inbäddad systemteknik",
+		"alternative_name" : "Embedded Systems"
+	},
+	{
+		"subject_id" : 1088,
+		"subject_code" : "20302",
+		"default_name" : "Rymd- och flygteknik",
+		"alternative_name" : "Aerospace Engineering"
+	},
+	{
+		"subject_id" : 1092,
+		"subject_code" : "20306",
+		"default_name" : "Strömningsmekanik och akustik",
+		"alternative_name" : "Fluid Mechanics and Acoustics"
+	},
+	{
+		"subject_id" : 1096,
+		"subject_code" : "20399",
+		"default_name" : "Annan maskinteknik",
+		"alternative_name" : "Other Mechanical Engineering"
+	},
+	{
+		"subject_id" : 1100,
+		"subject_code" : "20403",
+		"default_name" : "Polymerteknologi",
+		"alternative_name" : "Polymer Technologies"
+	},
+	{
+		"subject_id" : 1104,
+		"subject_code" : "20501",
+		"default_name" : "Keramteknik",
+		"alternative_name" : "Ceramics"
+	},
+	{
+		"subject_id" : 1108,
+		"subject_code" : "20505",
+		"default_name" : "Bearbetnings-, yt- och fogningsteknik",
+		"alternative_name" : "Manufacturing, Surface and Joining Technology"
+	},
+	{
+		"subject_id" : 1112,
+		"subject_code" : "20601",
+		"default_name" : "Medicinsk laboratorie- och mätteknik",
+		"alternative_name" : "Medical Laboratory and Measurements Technologies"
+	},
+	{
+		"subject_id" : 1116,
+		"subject_code" : "20605",
+		"default_name" : "Medicinsk ergonomi",
+		"alternative_name" : "Medical Ergonomics"
+	},
+	{
+		"subject_id" : 1120,
+		"subject_code" : "20702",
+		"default_name" : "Energisystem",
+		"alternative_name" : "Energy Systems"
+	},
+	{
+		"subject_id" : 1124,
+		"subject_code" : "20706",
+		"default_name" : "Havs- och vattendragsteknik",
+		"alternative_name" : "Ocean and River Engineering"
+	},
+	{
+		"subject_id" : 1128,
+		"subject_code" : "20801",
+		"default_name" : "Biosanering",
+		"alternative_name" : "Bioremediation"
+	},
+	{
+		"subject_id" : 1132,
+		"subject_code" : "20899",
+		"default_name" : "Annan miljöbioteknik",
+		"alternative_name" : "Other Environmental Biotechnology"
+	},
+	{
+		"subject_id" : 1136,
+		"subject_code" : "20903",
+		"default_name" : "Biomaterial",
+		"alternative_name" : "Bio Materials"
+	},
+	{
+		"subject_id" : 1140,
+		"subject_code" : "20907",
+		"default_name" : "Bioteknisk apparatteknik",
+		"alternative_name" : "Bioengineering Equipment"
+	},
+	{
+		"subject_id" : 1144,
+		"subject_code" : "211",
+		"default_name" : "Annan teknik",
+		"alternative_name" : "Other Engineering and Technologies"
+	},
+	{
+		"subject_id" : 1148,
+		"subject_code" : "21199",
+		"default_name" : "Övrig annan teknik",
+		"alternative_name" : "Other Engineering and Technologies not elsewhere specified"
+	},
+	{
+		"subject_id" : 1152,
+		"subject_code" : "30102",
+		"default_name" : "Farmakologi och toxikologi",
+		"alternative_name" : "Pharmacology and Toxicology"
+	},
+	{
+		"subject_id" : 1156,
+		"subject_code" : "30106",
+		"default_name" : "Fysiologi",
+		"alternative_name" : "Physiology"
+	},
+	{
+		"subject_id" : 1160,
+		"subject_code" : "30110",
+		"default_name" : "Immunologi inom det medicinska området",
+		"alternative_name" : "Immunology in the medical area"
+	},
+	{
+		"subject_id" : 1164,
+		"subject_code" : "30202",
+		"default_name" : "Hematologi",
+		"alternative_name" : "Hematology"
+	},
+	{
+		"subject_id" : 1168,
+		"subject_code" : "30206",
+		"default_name" : "Kardiologi",
+		"alternative_name" : "Cardiac and Cardiovascular Systems"
+	},
+	{
+		"subject_id" : 1172,
+		"subject_code" : "30210",
+		"default_name" : "Reumatologi och inflammation",
+		"alternative_name" : "Rheumatology and Autoimmunity"
+	},
+	{
+		"subject_id" : 1176,
+		"subject_code" : "30214",
+		"default_name" : "Urologi och njurmedicin",
+		"alternative_name" : "Urology and Nephrology"
+	},
+	{
+		"subject_id" : 1180,
+		"subject_code" : "30218",
+		"default_name" : "Oto-rino-laryngologi",
+		"alternative_name" : "Otorhinolaryngology"
+	},
+	{
+		"subject_id" : 1184,
+		"subject_code" : "30222",
+		"default_name" : "Geriatrik",
+		"alternative_name" : "Geriatrics"
+	},
+	{
+		"subject_id" : 1188,
+		"subject_code" : "303",
+		"default_name" : "Hälsovetenskaper",
+		"alternative_name" : "Health Sciences"
+	},
+	{
+		"subject_id" : 1192,
+		"subject_code" : "30304",
+		"default_name" : "Näringslära",
+		"alternative_name" : "Nutrition and Dietetics"
+	},
+	{
+		"subject_id" : 1196,
+		"subject_code" : "30308",
+		"default_name" : "Idrottsvetenskap",
+		"alternative_name" : "Sport and Fitness Sciences"
+	},
+	{
+		"subject_id" : 1200,
+		"subject_code" : "304",
+		"default_name" : "Medicinsk bioteknologi",
+		"alternative_name" : "Medical Biotechnology"
+	},
+	{
+		"subject_id" : 1204,
+		"subject_code" : "30499",
+		"default_name" : "Annan medicinsk bioteknologi",
+		"alternative_name" : "Other Medical Biotechnology"
+	},
+	{
+		"subject_id" : 1208,
+		"subject_code" : "30599",
+		"default_name" : "Övrig annan medicin och hälsovetenskap",
+		"alternative_name" : "Other Medical Sciences not elsewhere specified"
+	},
+	{
+		"subject_id" : 1212,
+		"subject_code" : "40102",
+		"default_name" : "Trädgårdsvetenskap\/hortikultur",
+		"alternative_name" : "Horticulture"
+	},
+	{
+		"subject_id" : 1216,
+		"subject_code" : "40106",
+		"default_name" : "Markvetenskap",
+		"alternative_name" : "Soil Science"
+	},
+	{
+		"subject_id" : 1220,
+		"subject_code" : "403",
+		"default_name" : "Veterinärmedicin",
+		"alternative_name" : "Veterinary Science"
+	},
+	{
+		"subject_id" : 1224,
+		"subject_code" : "40304",
+		"default_name" : "Annan veterinärmedicin",
+		"alternative_name" : "Other Veterinary Science"
+	},
+	{
+		"subject_id" : 1228,
+		"subject_code" : "405",
+		"default_name" : "Andra lantbruksrelaterade vetenskaper",
+		"alternative_name" : "Other Agricultural Sciences"
+	},
+	{
+		"subject_id" : 1232,
+		"subject_code" : "40504",
+		"default_name" : "Miljö- och naturvårdsvetenskap",
+		"alternative_name" : "Environmental Sciences related to Agriculture and Land-use"
+	},
+	{
+		"subject_id" : 1236,
+		"subject_code" : "50101",
+		"default_name" : "Psykologi (exklusive tillämpad psykologi)",
+		"alternative_name" : "Psychology (excluding Applied Psychology)"
+	},
+	{
+		"subject_id" : 1240,
+		"subject_code" : "50202",
+		"default_name" : "Företagsekonomi",
+		"alternative_name" : "Business Administration"
+	},
+	{
+		"subject_id" : 1244,
+		"subject_code" : "50302",
+		"default_name" : "Didaktik",
+		"alternative_name" : "Didactics"
+	},
+	{
+		"subject_id" : 1248,
+		"subject_code" : "50401",
+		"default_name" : "Sociologi (exklusive socialt arbete, socialpsykologi och socialantropologi)",
+		"alternative_name" : "Sociology (excluding Social work, Social Psychology and Social Anthropology)"
+	},
+	{
+		"subject_id" : 1252,
+		"subject_code" : "505",
+		"default_name" : "Juridik",
+		"alternative_name" : "Law"
+	},
+	{
+		"subject_id" : 1256,
+		"subject_code" : "50601",
+		"default_name" : "Statsvetenskap (exklusive studier av offentlig förvaltning och globaliseringsstudier)",
+		"alternative_name" : "Political Science (excluding Public Administration Studies and Globalization Studies)"
+	},
+	{
+		"subject_id" : 1260,
+		"subject_code" : "50701",
+		"default_name" : "Kulturgeografi",
+		"alternative_name" : "Human Geography"
+	},
+	{
+		"subject_id" : 1264,
+		"subject_code" : "50802",
+		"default_name" : "Kommunikationsvetenskap",
+		"alternative_name" : "Communication Studies"
+	},
+	{
+		"subject_id" : 1268,
+		"subject_code" : "50902",
+		"default_name" : "Genusstudier",
+		"alternative_name" : "Gender Studies"
+	},
+	{
+		"subject_id" : 1272,
+		"subject_code" : "6",
+		"default_name" : "Humaniora",
+		"alternative_name" : "Humanities"
+	},
+	{
+		"subject_id" : 1276,
+		"subject_code" : "60103",
+		"default_name" : "Arkeologi",
+		"alternative_name" : "Archaeology"
+	},
+	{
+		"subject_id" : 1037,
+		"subject_code" : "105",
+		"default_name" : "Geovetenskap och miljövetenskap",
+		"alternative_name" : "Earth and Related Environmental Sciences"
+	},
+	{
+		"subject_id" : 1041,
+		"subject_code" : "10504",
+		"default_name" : "Geologi",
+		"alternative_name" : "Geology"
+	},
+	{
+		"subject_id" : 1045,
+		"subject_code" : "10508",
+		"default_name" : "Meteorologi och atmosfärforskning",
+		"alternative_name" : "Meteorology and Atmospheric Sciences"
+	},
+	{
+		"subject_id" : 1049,
+		"subject_code" : "10601",
+		"default_name" : "Strukturbiologi",
+		"alternative_name" : "Structural Biology"
+	},
+	{
+		"subject_id" : 1053,
+		"subject_code" : "10605",
+		"default_name" : "Immunologi",
+		"alternative_name" : "Immunology"
+	},
+	{
+		"subject_id" : 1057,
+		"subject_code" : "10609",
+		"default_name" : "Genetik",
+		"alternative_name" : "Genetics"
+	},
+	{
+		"subject_id" : 1061,
+		"subject_code" : "10613",
+		"default_name" : "Etologi",
+		"alternative_name" : "Behavioral Sciences Biology"
+	},
+	{
+		"subject_id" : 1065,
+		"subject_code" : "107",
+		"default_name" : "Annan naturvetenskap",
+		"alternative_name" : "Other Natural Sciences"
+	},
+	{
+		"subject_id" : 1069,
+		"subject_code" : "20102",
+		"default_name" : "Byggproduktion",
+		"alternative_name" : "Construction Management"
+	},
+	{
+		"subject_id" : 1073,
+		"subject_code" : "20106",
+		"default_name" : "Geoteknik",
+		"alternative_name" : "Geotechnical Engineering"
+	},
+	{
+		"subject_id" : 1077,
+		"subject_code" : "202",
+		"default_name" : "Elektroteknik och elektronik",
+		"alternative_name" : "Electrical Engineering, Electronic Engineering, Information Engineering"
+	},
+	{
+		"subject_id" : 1081,
+		"subject_code" : "20204",
+		"default_name" : "Telekommunikation",
+		"alternative_name" : "Telecommunications"
+	},
+	{
+		"subject_id" : 1085,
+		"subject_code" : "20299",
+		"default_name" : "Annan elektroteknik och elektronik",
+		"alternative_name" : "Other Electrical Engineering, Electronic Engineering, Information Engineering"
+	},
+	{
+		"subject_id" : 1089,
+		"subject_code" : "20303",
+		"default_name" : "Farkostteknik",
+		"alternative_name" : "Vehicle Engineering"
+	},
+	{
+		"subject_id" : 1093,
+		"subject_code" : "20307",
+		"default_name" : "Produktionsteknik, arbetsvetenskap och ergonomi",
+		"alternative_name" : "Production Engineering, Human Work Science and Ergonomics"
+	},
+	{
+		"subject_id" : 1097,
+		"subject_code" : "204",
+		"default_name" : "Kemiteknik",
+		"alternative_name" : "Chemical Engineering"
+	},
+	{
+		"subject_id" : 1101,
+		"subject_code" : "20404",
+		"default_name" : "Farmaceutisk synteskemi",
+		"alternative_name" : "Pharmaceutical Chemistry"
+	},
+	{
+		"subject_id" : 1105,
+		"subject_code" : "20502",
+		"default_name" : "Kompositmaterial och -teknik",
+		"alternative_name" : "Composite Science and Engineering"
+	},
+	{
+		"subject_id" : 1109,
+		"subject_code" : "20506",
+		"default_name" : "Metallurgi och metalliska material",
+		"alternative_name" : "Metallurgy and Metallic Materials"
+	},
+	{
+		"subject_id" : 1113,
+		"subject_code" : "20602",
+		"default_name" : "Medicinska material och protesteknik",
+		"alternative_name" : "Medical Materials"
+	},
+	{
+		"subject_id" : 1117,
+		"subject_code" : "20699",
+		"default_name" : "Annan medicinteknik",
+		"alternative_name" : "Other Medical Engineering"
+	},
+	{
+		"subject_id" : 1121,
+		"subject_code" : "20703",
+		"default_name" : "Fjärranalysteknik",
+		"alternative_name" : "Remote Sensing"
+	},
+	{
+		"subject_id" : 1125,
+		"subject_code" : "20707",
+		"default_name" : "Miljöledning",
+		"alternative_name" : "Environmental Management"
+	},
+	{
+		"subject_id" : 1129,
+		"subject_code" : "20802",
+		"default_name" : "Diagnostisk bioteknologi",
+		"alternative_name" : "Diagnostic Biotechnology"
+	},
+	{
+		"subject_id" : 1133,
+		"subject_code" : "209",
+		"default_name" : "Industriell bioteknik",
+		"alternative_name" : "Industrial Biotechnology"
+	},
+	{
+		"subject_id" : 1137,
+		"subject_code" : "20904",
+		"default_name" : "Bioenergi",
+		"alternative_name" : "Bioenergy"
+	},
+	{
+		"subject_id" : 1141,
+		"subject_code" : "20908",
+		"default_name" : "Medicinsk bioteknik",
+		"alternative_name" : "Medical Biotechnology"
+	},
+	{
+		"subject_id" : 1145,
+		"subject_code" : "21101",
+		"default_name" : "Livsmedelsteknik",
+		"alternative_name" : "Food Engineering"
+	},
+	{
+		"subject_id" : 1149,
+		"subject_code" : "3",
+		"default_name" : "Medicin och hälsovetenskap",
+		"alternative_name" : "Medical and Health Sciences"
+	},
+	{
+		"subject_id" : 1153,
+		"subject_code" : "30103",
+		"default_name" : "Läkemedelskemi",
+		"alternative_name" : "Medicinal Chemistry"
+	},
+	{
+		"subject_id" : 1157,
+		"subject_code" : "30107",
+		"default_name" : "Medicinsk genetik",
+		"alternative_name" : "Medical Genetics"
+	},
+	{
+		"subject_id" : 1161,
+		"subject_code" : "30199",
+		"default_name" : "Annan medicinsk grundvetenskap",
+		"alternative_name" : "Other Basic Medicine"
+	},
+	{
+		"subject_id" : 1165,
+		"subject_code" : "30203",
+		"default_name" : "Cancer och onkologi",
+		"alternative_name" : "Cancer and Oncology"
+	},
+	{
+		"subject_id" : 1169,
+		"subject_code" : "30207",
+		"default_name" : "Neurologi",
+		"alternative_name" : "Neurology"
+	},
+	{
+		"subject_id" : 1173,
+		"subject_code" : "30211",
+		"default_name" : "Ortopedi",
+		"alternative_name" : "Orthopedics"
+	},
+	{
+		"subject_id" : 1177,
+		"subject_code" : "30215",
+		"default_name" : "Psykiatri",
+		"alternative_name" : "Psychiatry"
+	},
+	{
+		"subject_id" : 1181,
+		"subject_code" : "30219",
+		"default_name" : "Lungmedicin och allergi",
+		"alternative_name" : "Respiratory Medicine and Allergy"
+	},
+	{
+		"subject_id" : 1185,
+		"subject_code" : "30223",
+		"default_name" : "Klinisk laboratoriemedicin",
+		"alternative_name" : "Clinical Laboratory Medicine"
+	},
+	{
+		"subject_id" : 1189,
+		"subject_code" : "30301",
+		"default_name" : "Hälso- och sjukvårdsorganisation, hälsopolitik och hälsoekonomi",
+		"alternative_name" : "Health Care Service and Management, Health Policy and Services and Health Economy"
+	},
+	{
+		"subject_id" : 1193,
+		"subject_code" : "30305",
+		"default_name" : "Omvårdnad",
+		"alternative_name" : "Nursing"
+	},
+	{
+		"subject_id" : 1197,
+		"subject_code" : "30309",
+		"default_name" : "Beroendelära",
+		"alternative_name" : "Substance Abuse"
+	},
+	{
+		"subject_id" : 1201,
+		"subject_code" : "30401",
+		"default_name" : "Medicinsk bioteknologi (med inriktning mot cellbiologi (inklusive stamcellsbiologi), molekylärbiologi, mikrobiologi, biokemi eller biofarmaci)",
+		"alternative_name" : "Medical Biotechnology (with a focus on Cell Biology (including Stem Cell Biology), Molecular Biology, Microbiology, Biochemistry or Biopharmacy)"
+	},
+	{
+		"subject_id" : 1205,
+		"subject_code" : "305",
+		"default_name" : "Annan medicin och hälsovetenskap",
+		"alternative_name" : "Other Medical Sciences"
+	},
+	{
+		"subject_id" : 1209,
+		"subject_code" : "4",
+		"default_name" : "Lantbruksvetenskaper",
+		"alternative_name" : "Agricultural Sciences"
+	},
+	{
+		"subject_id" : 1213,
+		"subject_code" : "40103",
+		"default_name" : "Livsmedelsvetenskap",
+		"alternative_name" : "Food Science"
+	},
+	{
+		"subject_id" : 1217,
+		"subject_code" : "40107",
+		"default_name" : "Fisk- och akvakulturforskning",
+		"alternative_name" : "Fish and Aquacultural Science"
+	},
+	{
+		"subject_id" : 1221,
+		"subject_code" : "40301",
+		"default_name" : "Medicinsk biovetenskap",
+		"alternative_name" : "Medical Bioscience"
+	},
+	{
+		"subject_id" : 1225,
+		"subject_code" : "404",
+		"default_name" : "Bioteknologi med applikationer på växter och djur",
+		"alternative_name" : "Agricultural Biotechnology"
+	},
+	{
+		"subject_id" : 1229,
+		"subject_code" : "40501",
+		"default_name" : "Förnyelsebar bioenergi",
+		"alternative_name" : "Renewable Bioenergy Research"
+	},
+	{
+		"subject_id" : 1233,
+		"subject_code" : "40599",
+		"default_name" : "Övriga andra lantbruksrelaterade vetenskaper",
+		"alternative_name" : "Other Agricultural Sciences not elsewhere specified"
+	},
+	{
+		"subject_id" : 1237,
+		"subject_code" : "50102",
+		"default_name" : "Tillämpad psykologi",
+		"alternative_name" : "Applied Psychology"
+	},
+	{
+		"subject_id" : 1241,
+		"subject_code" : "50203",
+		"default_name" : "Ekonomisk historia",
+		"alternative_name" : "Economic History"
+	},
+	{
+		"subject_id" : 1245,
+		"subject_code" : "50303",
+		"default_name" : "Lärande",
+		"alternative_name" : "Learning"
+	},
+	{
+		"subject_id" : 1249,
+		"subject_code" : "50402",
+		"default_name" : "Socialt arbete",
+		"alternative_name" : "Social Work"
+	},
+	{
+		"subject_id" : 1253,
+		"subject_code" : "50501",
+		"default_name" : "Juridik (exklusive juridik och samhälle)",
+		"alternative_name" : "Law (excluding Law and Society)"
+	},
+	{
+		"subject_id" : 1257,
+		"subject_code" : "50602",
+		"default_name" : "Studier av offentlig förvaltning",
+		"alternative_name" : "Public Administration Studies"
+	},
+	{
+		"subject_id" : 1261,
+		"subject_code" : "50702",
+		"default_name" : "Ekonomisk geografi",
+		"alternative_name" : "Economic Geography"
+	},
+	{
+		"subject_id" : 1265,
+		"subject_code" : "50803",
+		"default_name" : "Mänsklig interaktion med IKT",
+		"alternative_name" : "Human Aspects of ICT"
+	},
+	{
+		"subject_id" : 1269,
+		"subject_code" : "50903",
+		"default_name" : "Arbetslivsstudier",
+		"alternative_name" : "Work Sciences"
+	},
+	{
+		"subject_id" : 1038,
+		"subject_code" : "10501",
+		"default_name" : "Klimatforskning",
+		"alternative_name" : "Climate Research"
+	},
+	{
+		"subject_id" : 1042,
+		"subject_code" : "10505",
+		"default_name" : "Geofysik",
+		"alternative_name" : "Geophysics"
+	},
+	{
+		"subject_id" : 1223,
+		"subject_code" : "40303",
+		"default_name" : "Klinisk vetenskap",
+		"alternative_name" : "Clinical Science"
+	},
+	{
+		"subject_id" : 1046,
+		"subject_code" : "10509",
+		"default_name" : "Oceanografi, hydrologi, vattenresurser",
+		"alternative_name" : "Oceanography, Hydrology, Water Resources"
+	},
+	{
+		"subject_id" : 1050,
+		"subject_code" : "10602",
+		"default_name" : "Biokemi och molekylärbiologi",
+		"alternative_name" : "Biochemistry and Molecular Biology"
+	},
+	{
+		"subject_id" : 1054,
+		"subject_code" : "10606",
+		"default_name" : "Mikrobiologi",
+		"alternative_name" : "Microbiology"
+	},
+	{
+		"subject_id" : 1058,
+		"subject_code" : "10610",
+		"default_name" : "Bioinformatik och systembiologi",
+		"alternative_name" : "Bioinformatics and Systems Biology"
+	},
+	{
+		"subject_id" : 1062,
+		"subject_code" : "10614",
+		"default_name" : "Utvecklingsbiologi",
+		"alternative_name" : "Developmental Biology"
+	},
+	{
+		"subject_id" : 1066,
+		"subject_code" : "2",
+		"default_name" : "Teknik och teknologier",
+		"alternative_name" : "Engineering and Technology"
+	},
+	{
+		"subject_id" : 1070,
+		"subject_code" : "20103",
+		"default_name" : "Husbyggnad",
+		"alternative_name" : "Building Technologies"
+	},
+	{
+		"subject_id" : 1074,
+		"subject_code" : "20107",
+		"default_name" : "Vattenteknik",
+		"alternative_name" : "Water Engineering"
+	},
+	{
+		"subject_id" : 1078,
+		"subject_code" : "20201",
+		"default_name" : "Robotteknik och automation",
+		"alternative_name" : "Robotics"
+	},
+	{
+		"subject_id" : 1082,
+		"subject_code" : "20205",
+		"default_name" : "Signalbehandling",
+		"alternative_name" : "Signal Processing"
+	},
+	{
+		"subject_id" : 1086,
+		"subject_code" : "203",
+		"default_name" : "Maskinteknik",
+		"alternative_name" : "Mechanical Engineering"
+	},
+	{
+		"subject_id" : 1090,
+		"subject_code" : "20304",
+		"default_name" : "Energiteknik",
+		"alternative_name" : "Energy Engineering"
+	},
+	{
+		"subject_id" : 1094,
+		"subject_code" : "20308",
+		"default_name" : "Tribologi",
+		"alternative_name" : "Tribology"
+	},
+	{
+		"subject_id" : 1098,
+		"subject_code" : "20401",
+		"default_name" : "Kemiska processer",
+		"alternative_name" : "Chemical Process Engineering"
+	},
+	{
+		"subject_id" : 1102,
+		"subject_code" : "20499",
+		"default_name" : "Annan kemiteknik",
+		"alternative_name" : "Other Chemical Engineering"
+	},
+	{
+		"subject_id" : 1106,
+		"subject_code" : "20503",
+		"default_name" : "Pappers-, massa- och fiberteknik",
+		"alternative_name" : "Paper, Pulp and Fiber Technology"
+	},
+	{
+		"subject_id" : 1110,
+		"subject_code" : "20599",
+		"default_name" : "Annan materialteknik",
+		"alternative_name" : "Other Materials Engineering"
+	},
+	{
+		"subject_id" : 1114,
+		"subject_code" : "20603",
+		"default_name" : "Medicinsk bildbehandling",
+		"alternative_name" : "Medical Image Processing"
+	},
+	{
+		"subject_id" : 1118,
+		"subject_code" : "207",
+		"default_name" : "Naturresursteknik",
+		"alternative_name" : "Environmental Engineering"
+	},
+	{
+		"subject_id" : 1122,
+		"subject_code" : "20704",
+		"default_name" : "Mineral- och gruvteknik",
+		"alternative_name" : "Mineral and Mine Engineering"
+	},
+	{
+		"subject_id" : 1126,
+		"subject_code" : "20799",
+		"default_name" : "Annan naturresursteknik",
+		"alternative_name" : "Other Environmental Engineering"
+	},
+	{
+		"subject_id" : 1130,
+		"subject_code" : "20803",
+		"default_name" : "Vattenbehandling",
+		"alternative_name" : "Water Treatment"
+	},
+	{
+		"subject_id" : 1134,
+		"subject_code" : "20901",
+		"default_name" : "Bioprocessteknik",
+		"alternative_name" : "Bioprocess Technology"
+	},
+	{
+		"subject_id" : 1138,
+		"subject_code" : "20905",
+		"default_name" : "Läkemedelsbioteknik",
+		"alternative_name" : "Pharmaceutical Biotechnology"
+	},
+	{
+		"subject_id" : 1142,
+		"subject_code" : "20999",
+		"default_name" : "Annan industriell bioteknik",
+		"alternative_name" : "Other Industrial Biotechnology"
+	},
+	{
+		"subject_id" : 1146,
+		"subject_code" : "21102",
+		"default_name" : "Mediateknik",
+		"alternative_name" : "Media Engineering"
+	},
+	{
+		"subject_id" : 1150,
+		"subject_code" : "301",
+		"default_name" : "Medicinska grundvetenskaper",
+		"alternative_name" : "Basic Medicine"
+	},
+	{
+		"subject_id" : 1154,
+		"subject_code" : "30104",
+		"default_name" : "Samhällsfarmaci och klinisk farmaci",
+		"alternative_name" : "Social and Clinical Pharmacy"
+	},
+	{
+		"subject_id" : 1158,
+		"subject_code" : "30108",
+		"default_name" : "Cell- och molekylärbiologi",
+		"alternative_name" : "Cell and Molecular Biology"
+	},
+	{
+		"subject_id" : 1162,
+		"subject_code" : "302",
+		"default_name" : "Klinisk medicin",
+		"alternative_name" : "Clinical Medicine"
+	},
+	{
+		"subject_id" : 1166,
+		"subject_code" : "30204",
+		"default_name" : "Dermatologi och venereologi",
+		"alternative_name" : "Dermatology and Venereal Diseases"
+	},
+	{
+		"subject_id" : 1170,
+		"subject_code" : "30208",
+		"default_name" : "Radiologi och bildbehandling",
+		"alternative_name" : "Radiology, Nuclear Medicine and Medical Imaging"
+	},
+	{
+		"subject_id" : 1174,
+		"subject_code" : "30212",
+		"default_name" : "Kirurgi",
+		"alternative_name" : "Surgery"
+	},
+	{
+		"subject_id" : 1178,
+		"subject_code" : "30216",
+		"default_name" : "Odontologi",
+		"alternative_name" : "Dentistry"
+	},
+	{
+		"subject_id" : 1182,
+		"subject_code" : "30220",
+		"default_name" : "Reproduktionsmedicin och gynekologi",
+		"alternative_name" : "Obstetrics, Gynecology and Reproductive Medicine"
+	},
+	{
+		"subject_id" : 1186,
+		"subject_code" : "30224",
+		"default_name" : "Allmän medicin",
+		"alternative_name" : "Family Medicine"
+	},
+	{
+		"subject_id" : 1190,
+		"subject_code" : "30302",
+		"default_name" : "Folkhälsovetenskap, global hälsa, socialmedicin och epidemiologi",
+		"alternative_name" : "Public Health, Global Health, Social Medicine and Epidemiology"
+	},
+	{
+		"subject_id" : 1194,
+		"subject_code" : "30306",
+		"default_name" : "Arbetsterapi",
+		"alternative_name" : "Occupational Therapy"
+	},
+	{
+		"subject_id" : 1198,
+		"subject_code" : "30310",
+		"default_name" : "Medicinsk etik",
+		"alternative_name" : "Medical Ethics"
+	},
+	{
+		"subject_id" : 1202,
+		"subject_code" : "30402",
+		"default_name" : "Biomedicinsk laboratorievetenskap\/teknologi",
+		"alternative_name" : "Biomedical Laboratory Science\/Technology"
+	},
+	{
+		"subject_id" : 1206,
+		"subject_code" : "30501",
+		"default_name" : "Rättsmedicin",
+		"alternative_name" : "Forensic Science"
+	},
+	{
+		"subject_id" : 1210,
+		"subject_code" : "401",
+		"default_name" : "Lantbruksvetenskap, skogsbruk och fiske",
+		"alternative_name" : "Agricultural Science, Forestry and Fisheries"
+	},
+	{
+		"subject_id" : 1214,
+		"subject_code" : "40104",
+		"default_name" : "Skogsvetenskap",
+		"alternative_name" : "Forest Science"
+	},
+	{
+		"subject_id" : 1218,
+		"subject_code" : "40108",
+		"default_name" : "Landskapsarkitetktur",
+		"alternative_name" : "Landscape Architecture"
+	},
+	{
+		"subject_id" : 1222,
+		"subject_code" : "40302",
+		"default_name" : "Patobiologi",
+		"alternative_name" : "Pathobiology"
+	},
+	{
+		"subject_id" : 1226,
+		"subject_code" : "40401",
+		"default_name" : "Växtbioteknologi",
+		"alternative_name" : "Plant Biotechnology"
+	},
+	{
+		"subject_id" : 1230,
+		"subject_code" : "40502",
+		"default_name" : "Vilt- och fiskeförvaltning",
+		"alternative_name" : "Fish and Wildlife Management"
+	},
+	{
+		"subject_id" : 1234,
+		"subject_code" : "5",
+		"default_name" : "Samhällsvetenskap",
+		"alternative_name" : "Social Sciences"
+	},
+	{
+		"subject_id" : 1238,
+		"subject_code" : "502",
+		"default_name" : "Ekonomi och näringsliv",
+		"alternative_name" : "Economics and Business"
+	},
+	{
+		"subject_id" : 1242,
+		"subject_code" : "503",
+		"default_name" : "Utbildningsvetenskap",
+		"alternative_name" : "Educational Sciences"
+	},
+	{
+		"subject_id" : 1246,
+		"subject_code" : "50304",
+		"default_name" : "Pedagogiskt arbete",
+		"alternative_name" : "Pedagogical Work"
+	},
+	{
+		"subject_id" : 1250,
+		"subject_code" : "50403",
+		"default_name" : "Socialpsykologi",
+		"alternative_name" : "Social Psychology"
+	},
+	{
+		"subject_id" : 1254,
+		"subject_code" : "50502",
+		"default_name" : "Juridik och samhälle",
+		"alternative_name" : "Law and Society"
+	},
+	{
+		"subject_id" : 1258,
+		"subject_code" : "50603",
+		"default_name" : "Globaliseringsstudier",
+		"alternative_name" : "Globalization Studies"
+	},
+	{
+		"subject_id" : 1262,
+		"subject_code" : "508",
+		"default_name" : "Medie- och kommunikationsvetenskap",
+		"alternative_name" : "Media and Communications"
+	},
+	{
+		"subject_id" : 1266,
+		"subject_code" : "509",
+		"default_name" : "Annan samhällsvetenskap",
+		"alternative_name" : "Other Social Sciences"
+	},
+	{
+		"subject_id" : 1270,
+		"subject_code" : "50904",
+		"default_name" : "Internationell Migration och Etniska Relationer (IMER)",
+		"alternative_name" : "International Migration and Ethnic Relations"
+	},
+	{
+		"subject_id" : 1274,
+		"subject_code" : "60101",
+		"default_name" : "Historia",
+		"alternative_name" : "History"
+	},
+	{
+		"subject_id" : 1278,
+		"subject_code" : "60201",
+		"default_name" : "Jämförande språkvetenskap och lingvistik",
+		"alternative_name" : "General Language Studies and Linguistics"
+	},
+	{
+		"subject_id" : 1039,
+		"subject_code" : "10502",
+		"default_name" : "Miljövetenskap",
+		"alternative_name" : "Environmental Sciences"
+	},
+	{
+		"subject_id" : 1043,
+		"subject_code" : "10506",
+		"default_name" : "Geokemi",
+		"alternative_name" : "Geochemistry"
+	},
+	{
+		"subject_id" : 1047,
+		"subject_code" : "10599",
+		"default_name" : "Annan geovetenskap och miljövetenskap",
+		"alternative_name" : "Other Earth and Related Environmental Sciences"
+	},
+	{
+		"subject_id" : 1051,
+		"subject_code" : "10603",
+		"default_name" : "Biofysik",
+		"alternative_name" : "Biophysics"
+	},
+	{
+		"subject_id" : 1055,
+		"subject_code" : "10607",
+		"default_name" : "Botanik",
+		"alternative_name" : "Botany"
+	},
+	{
+		"subject_id" : 1059,
+		"subject_code" : "10611",
+		"default_name" : "Ekologi",
+		"alternative_name" : "Ecology"
+	},
+	{
+		"subject_id" : 1063,
+		"subject_code" : "10615",
+		"default_name" : "Evolutionsbiologi",
+		"alternative_name" : "Evolutionary Biology"
+	},
+	{
+		"subject_id" : 1067,
+		"subject_code" : "201",
+		"default_name" : "Samhällsbyggnadsteknik",
+		"alternative_name" : "Civil Engineering"
+	},
+	{
+		"subject_id" : 1071,
+		"subject_code" : "20104",
+		"default_name" : "Infrastrukturteknik",
+		"alternative_name" : "Infrastructure Engineering"
+	},
+	{
+		"subject_id" : 1075,
+		"subject_code" : "20108",
+		"default_name" : "Miljöanalys och bygginformationsteknik",
+		"alternative_name" : "Environmental Analysis and Construction Information Technology"
+	},
+	{
+		"subject_id" : 1079,
+		"subject_code" : "20202",
+		"default_name" : "Reglerteknik",
+		"alternative_name" : "Control Engineering"
+	},
+	{
+		"subject_id" : 1083,
+		"subject_code" : "20206",
+		"default_name" : "Datorsystem",
+		"alternative_name" : "Computer Systems"
+	},
+	{
+		"subject_id" : 1087,
+		"subject_code" : "20301",
+		"default_name" : "Teknisk mekanik",
+		"alternative_name" : "Applied Mechanics"
+	},
+	{
+		"subject_id" : 1091,
+		"subject_code" : "20305",
+		"default_name" : "Tillförlitlighets- och kvalitetsteknik",
+		"alternative_name" : "Reliability and Maintenance"
+	},
+	{
+		"subject_id" : 1095,
+		"subject_code" : "20309",
+		"default_name" : "Arbetsmiljö",
+		"alternative_name" : "Human Working Science"
+	},
+	{
+		"subject_id" : 1099,
+		"subject_code" : "20402",
+		"default_name" : "Korrosionsteknik",
+		"alternative_name" : "Corrosion Engineering"
+	},
+	{
+		"subject_id" : 1103,
+		"subject_code" : "205",
+		"default_name" : "Materialteknik",
+		"alternative_name" : "Materials Engineering"
+	},
+	{
+		"subject_id" : 1107,
+		"subject_code" : "20504",
+		"default_name" : "Textil-, gummi- och polymermaterial",
+		"alternative_name" : "Textile, Rubber and Polymeric Materials"
+	},
+	{
+		"subject_id" : 1111,
+		"subject_code" : "206",
+		"default_name" : "Medicinteknik",
+		"alternative_name" : "Medical Engineering"
+	},
+	{
+		"subject_id" : 1115,
+		"subject_code" : "20604",
+		"default_name" : "Medicinsk apparatteknik",
+		"alternative_name" : "Medical Equipment Engineering"
+	},
+	{
+		"subject_id" : 1119,
+		"subject_code" : "20701",
+		"default_name" : "Geofysisk teknik",
+		"alternative_name" : "Geophysical Engineering"
+	},
+	{
+		"subject_id" : 1123,
+		"subject_code" : "20705",
+		"default_name" : "Marin teknik",
+		"alternative_name" : "Marine Engineering"
+	},
+	{
+		"subject_id" : 1127,
+		"subject_code" : "208",
+		"default_name" : "Miljöbioteknik",
+		"alternative_name" : "Environmental Biotechnology"
+	},
+	{
+		"subject_id" : 1131,
+		"subject_code" : "20804",
+		"default_name" : "Bioteknisk etik",
+		"alternative_name" : "Bioethics"
+	},
+	{
+		"subject_id" : 1135,
+		"subject_code" : "20902",
+		"default_name" : "Biokemikalier",
+		"alternative_name" : "Biochemicals"
+	},
+	{
+		"subject_id" : 1139,
+		"subject_code" : "20906",
+		"default_name" : "Biokatalys och enzymteknik",
+		"alternative_name" : "Biocatalysis and Enzyme Technology"
+	},
+	{
+		"subject_id" : 1143,
+		"subject_code" : "210",
+		"default_name" : "Nanoteknik",
+		"alternative_name" : "Nano Technology"
+	},
+	{
+		"subject_id" : 1147,
+		"subject_code" : "21103",
+		"default_name" : "Interaktionsteknik",
+		"alternative_name" : "Interaction Technologies"
+	},
+	{
+		"subject_id" : 1151,
+		"subject_code" : "30101",
+		"default_name" : "Farmaceutisk vetenskap",
+		"alternative_name" : "Pharmaceutical Sciences"
+	},
+	{
+		"subject_id" : 1155,
+		"subject_code" : "30105",
+		"default_name" : "Neurovetenskaper",
+		"alternative_name" : "Neurosciences"
+	},
+	{
+		"subject_id" : 1159,
+		"subject_code" : "30109",
+		"default_name" : "Mikrobiologi inom det medicinska området",
+		"alternative_name" : "Microbiology in the medical area"
+	},
+	{
+		"subject_id" : 1163,
+		"subject_code" : "30201",
+		"default_name" : "Anestesi och intensivvård",
+		"alternative_name" : "Anesthesiology and Intensive Care"
+	},
+	{
+		"subject_id" : 1167,
+		"subject_code" : "30205",
+		"default_name" : "Endokrinologi och diabetes",
+		"alternative_name" : "Endocrinology and Diabetes"
+	},
+	{
+		"subject_id" : 1171,
+		"subject_code" : "30209",
+		"default_name" : "Infektionsmedicin",
+		"alternative_name" : "Infectious Medicine"
+	},
+	{
+		"subject_id" : 1175,
+		"subject_code" : "30213",
+		"default_name" : "Gastroenterologi",
+		"alternative_name" : "Gastroenterology and Hepatology"
+	},
+	{
+		"subject_id" : 1179,
+		"subject_code" : "30217",
+		"default_name" : "Oftalmologi",
+		"alternative_name" : "Ophthalmology"
+	},
+	{
+		"subject_id" : 1183,
+		"subject_code" : "30221",
+		"default_name" : "Pediatrik",
+		"alternative_name" : "Pediatrics"
+	},
+	{
+		"subject_id" : 1187,
+		"subject_code" : "30299",
+		"default_name" : "Annan klinisk medicin",
+		"alternative_name" : "Other Clinical Medicine"
+	},
+	{
+		"subject_id" : 1191,
+		"subject_code" : "30303",
+		"default_name" : "Miljömedicin och yrkesmedicin",
+		"alternative_name" : "Environmental Health and Occupational Health"
+	},
+	{
+		"subject_id" : 1195,
+		"subject_code" : "30307",
+		"default_name" : "Sjukgymnastik",
+		"alternative_name" : "Physiotherapy"
+	},
+	{
+		"subject_id" : 1199,
+		"subject_code" : "30399",
+		"default_name" : "Annan hälsovetenskap",
+		"alternative_name" : "Other Health Sciences"
+	},
+	{
+		"subject_id" : 1203,
+		"subject_code" : "30403",
+		"default_name" : "Biomaterialvetenskap",
+		"alternative_name" : "Biomaterials Science"
+	},
+	{
+		"subject_id" : 1207,
+		"subject_code" : "30502",
+		"default_name" : "Gerontologi, medicinsk\/hälsovetenskaplig inriktning",
+		"alternative_name" : "Gerontology, specialising in Medical and Health Sciences"
+	},
+	{
+		"subject_id" : 1211,
+		"subject_code" : "40101",
+		"default_name" : "Jordbruksvetenskap",
+		"alternative_name" : "Agricultural Science"
+	},
+	{
+		"subject_id" : 1215,
+		"subject_code" : "40105",
+		"default_name" : "Trävetenskap",
+		"alternative_name" : "Wood Science"
+	},
+	{
+		"subject_id" : 1219,
+		"subject_code" : "402",
+		"default_name" : "Husdjursvetenskap",
+		"alternative_name" : "Animal and Dairy Sience"
+	},
+	{
+		"subject_id" : 1227,
+		"subject_code" : "40402",
+		"default_name" : "Genetik och förädling",
+		"alternative_name" : "Genetics and Breeding"
+	},
+	{
+		"subject_id" : 1231,
+		"subject_code" : "40503",
+		"default_name" : "Lantbrukets arbetsmiljö och säkerhet",
+		"alternative_name" : "Agricultural Occupational Health and Safety"
+	},
+	{
+		"subject_id" : 1235,
+		"subject_code" : "501",
+		"default_name" : "Psykologi",
+		"alternative_name" : "Psychology"
+	},
+	{
+		"subject_id" : 1239,
+		"subject_code" : "50201",
+		"default_name" : "Nationalekonomi",
+		"alternative_name" : "Economics"
+	},
+	{
+		"subject_id" : 1243,
+		"subject_code" : "50301",
+		"default_name" : "Pedagogik",
+		"alternative_name" : "Pedagogy"
+	},
+	{
+		"subject_id" : 1247,
+		"subject_code" : "504",
+		"default_name" : "Sociologi",
+		"alternative_name" : "Sociology"
+	},
+	{
+		"subject_id" : 1251,
+		"subject_code" : "50404",
+		"default_name" : "Socialantropologi",
+		"alternative_name" : "Social Anthropology"
+	},
+	{
+		"subject_id" : 1255,
+		"subject_code" : "506",
+		"default_name" : "Statsvetenskap",
+		"alternative_name" : "Political Science"
+	},
+	{
+		"subject_id" : 1259,
+		"subject_code" : "507",
+		"default_name" : "Social och ekonomisk geografi",
+		"alternative_name" : "Social and Economic Geography"
+	},
+	{
+		"subject_id" : 1263,
+		"subject_code" : "50801",
+		"default_name" : "Medievetenskap",
+		"alternative_name" : "Media Studies"
+	},
+	{
+		"subject_id" : 1267,
+		"subject_code" : "50901",
+		"default_name" : "Tvärvetenskapliga studier",
+		"alternative_name" : "Social Sciences Interdisciplinary"
+	},
+	{
+		"subject_id" : 1271,
+		"subject_code" : "50999",
+		"default_name" : "Övrig annan samhällsvetenskap",
+		"alternative_name" : "Other Social Sciences not elsewhere specified"
+	},
+	{
+		"subject_id" : 1275,
+		"subject_code" : "60102",
+		"default_name" : "Teknikhistoria",
+		"alternative_name" : "History of Technology"
+	},
+	{
+		"subject_id" : 1279,
+		"subject_code" : "60202",
+		"default_name" : "Språkstudier",
+		"alternative_name" : "Specific Languages"
+	},
+	{
+		"subject_id" : 1283,
+		"subject_code" : "60301",
+		"default_name" : "Filosofi",
+		"alternative_name" : "Philosophy"
+	},
+	{
+		"subject_id" : 1287,
+		"subject_code" : "60305",
+		"default_name" : "Idé- och lärdomshistoria",
+		"alternative_name" : "History of Ideas"
+	},
+	{
+		"subject_id" : 1303,
+		"subject_code" : "60599",
+		"default_name" : "Övrig annan humaniora",
+		"alternative_name" : "Other Humanities not elsewhere specified"
+	}
+]

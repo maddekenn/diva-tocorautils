@@ -30,14 +30,10 @@ import org.testng.annotations.Test;
 import se.uu.ub.cora.clientdata.ClientDataGroup;
 import se.uu.ub.cora.diva.tocorautils.NotImplementedException;
 import se.uu.ub.cora.diva.tocorautils.doubles.CoraClientSpy;
-import se.uu.ub.cora.json.builder.JsonBuilderFactory;
-import se.uu.ub.cora.json.builder.org.OrgJsonBuilderFactoryAdapter;
 
 public class FromDbToCoraSubjectCategoryConverterTest {
 	se.uu.ub.cora.diva.tocorautils.doubles.CoraClientSpy coraClient;
-	private JsonBuilderFactory jsonFactory;
 	private FromDbToCoraSubjectCategoryConverter subjectCategoryConverter;
-	private DataToJsonConverterFactorySpy dataToJsonConverterFactory;
 
 	private Map<String, Object> rowFromDb = new HashMap<>();
 
@@ -49,10 +45,7 @@ public class FromDbToCoraSubjectCategoryConverterTest {
 		rowFromDb.put("alternative_name", "Some alternative name");
 
 		coraClient = new CoraClientSpy();
-		jsonFactory = new OrgJsonBuilderFactoryAdapter();
-		dataToJsonConverterFactory = new DataToJsonConverterFactorySpy();
-		subjectCategoryConverter = FromDbToCoraSubjectCategoryConverter
-				.usingJsonFactoryAndConverterFactory(jsonFactory, dataToJsonConverterFactory);
+		subjectCategoryConverter = new FromDbToCoraSubjectCategoryConverter();
 
 	}
 
@@ -92,4 +85,14 @@ public class FromDbToCoraSubjectCategoryConverterTest {
 				name);
 		assertEquals(nameGroup.getFirstAtomicValueWithNameInData("language"), locale);
 	}
+
+	// create view swedishsubjectview as
+	// select s.subject_id, s.subject_code, sn.subject_name as default_name from (subject s left
+	// join subject_name sn on s.subject_id =sn.subject_id) where sn.locale ='sv' and
+	// s.subject_type_id =57;
+	//
+	// select s2.*, sn.subject_name as alternative_name from swedishsubjectview s2 left join
+	// subject_name sn on s2.subject_id = sn.subject_id where sn.locale='en';
+	//
+	// drop view swedishsubjectview;
 }

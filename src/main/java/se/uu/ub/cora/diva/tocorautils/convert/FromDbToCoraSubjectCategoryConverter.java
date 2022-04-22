@@ -18,34 +18,15 @@
  */
 package se.uu.ub.cora.diva.tocorautils.convert;
 
-import java.util.List;
 import java.util.Map;
 
 import se.uu.ub.cora.clientdata.ClientDataAtomic;
 import se.uu.ub.cora.clientdata.ClientDataGroup;
-import se.uu.ub.cora.clientdata.RecordIdentifier;
-import se.uu.ub.cora.clientdata.converter.javatojson.DataToJsonConverterFactory;
 import se.uu.ub.cora.diva.tocorautils.CoraJsonRecord;
 import se.uu.ub.cora.diva.tocorautils.NotImplementedException;
-import se.uu.ub.cora.json.builder.JsonBuilderFactory;
 
 public class FromDbToCoraSubjectCategoryConverter implements FromDbToCoraConverter {
-
 	private static final String NATIONAL_SUBJECT_CATEGORY = "nationalSubjectCategory";
-	protected JsonBuilderFactory jsonFactory;
-	protected DataToJsonConverterFactory dataToJsonConverterFactory;
-	protected List<RecordIdentifier> collectionItems;
-
-	protected FromDbToCoraSubjectCategoryConverter(JsonBuilderFactory jsonFactory,
-			DataToJsonConverterFactory dataToJsonConverterFactory) {
-		this.jsonFactory = jsonFactory;
-		this.dataToJsonConverterFactory = dataToJsonConverterFactory;
-	}
-
-	public static FromDbToCoraSubjectCategoryConverter usingJsonFactoryAndConverterFactory(
-			JsonBuilderFactory jsonFactory, DataToJsonConverterFactory dataToJsonConverterFactory) {
-		return new FromDbToCoraSubjectCategoryConverter(jsonFactory, dataToJsonConverterFactory);
-	}
 
 	@Override
 	public ClientDataGroup convertToClientDataGroupFromRowFromDb(Map<String, Object> row) {
@@ -112,15 +93,6 @@ public class FromDbToCoraSubjectCategoryConverter implements FromDbToCoraConvert
 	private ClientDataAtomic createSubjectCodeChild(Map<String, Object> rowFromDb) {
 		return ClientDataAtomic.withNameInDataAndValue("subjectCode",
 				(String) rowFromDb.get("subject_code"));
-	}
-
-	public DataToJsonConverterFactory getDataToJsonConverterFactory() {
-		return dataToJsonConverterFactory;
-	}
-
-	public JsonBuilderFactory getJsonBuilderFactory() {
-		// needed for tests
-		return jsonFactory;
 	}
 
 }

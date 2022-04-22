@@ -21,6 +21,7 @@ package se.uu.ub.cora.diva.tocorautils.doubles;
 import java.util.ArrayList;
 import java.util.List;
 
+import se.uu.ub.cora.clientdata.ClientDataAtomic;
 import se.uu.ub.cora.clientdata.ClientDataGroup;
 import se.uu.ub.cora.clientdata.ClientDataRecord;
 import se.uu.ub.cora.javaclient.cora.CoraClient;
@@ -36,6 +37,10 @@ public class CoraClientSpy implements CoraClient {
 	public List<ClientDataGroup> dataGroupsSentToUpdate = new ArrayList<>();
 	public List<ClientDataGroup> dataGroupsSentToCreate = new ArrayList<>();
 	public String jsonToReturn;
+	public String recordTypeToList;
+	public List<ClientDataRecord> listToReturn;
+	public List<String> deletedRecordTypes = new ArrayList<>();
+	public List<String> deletedRecordIds = new ArrayList<>();
 
 	@Override
 	public String create(String recordType, String json) {
@@ -65,8 +70,9 @@ public class CoraClientSpy implements CoraClient {
 
 	@Override
 	public String delete(String recordType, String recordId) {
-		// TODO Auto-generated method stub
-		return null;
+		deletedRecordTypes.add(recordType);
+		deletedRecordIds.add(recordId);
+		return "delete response from spy, recordType: " + recordType + " recordId: " + recordId;
 	}
 
 	@Override
@@ -117,9 +123,24 @@ public class CoraClientSpy implements CoraClient {
 	}
 
 	@Override
-	public List<ClientDataRecord> readListAsDataRecords(String arg0) {
-		// TODO Auto-generated method stub
-		return null;
+	public List<ClientDataRecord> readListAsDataRecords(String recordType) {
+		recordTypeToList = recordType;
+		listToReturn = new ArrayList<>();
+		for (int i = 0; i < 5; i++) {
+			ClientDataRecord dataRecord = createDataRecord(i);
+			listToReturn.add(dataRecord);
+		}
+
+		return listToReturn;
+	}
+
+	private ClientDataRecord createDataRecord(int index) {
+		ClientDataGroup dataGroup = ClientDataGroup.withNameInData("someType");
+		ClientDataGroup recordInfo = ClientDataGroup.withNameInData("recordInfo");
+		recordInfo.addChild(ClientDataAtomic.withNameInDataAndValue("id", "someId" + index));
+		dataGroup.addChild(recordInfo);
+		ClientDataRecord dataRecord = ClientDataRecord.withClientDataGroup(dataGroup);
+		return dataRecord;
 	}
 
 	@Override

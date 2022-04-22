@@ -27,6 +27,9 @@ public class FromDbToCoraConverterFactoryImp implements FromDbToCoraConverterFac
 		if ("funder".equals(type)) {
 			return new FromDbToCoraFunderConverter();
 		}
+		if ("nationalSubjectCategory".equals(type)) {
+			return new FromDbToCoraSubjectCategoryConverter();
+		}
 		throw NotImplementedException.withMessage("Converter not implemented for " + type);
 	}
 
