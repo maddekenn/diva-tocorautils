@@ -53,16 +53,21 @@ public class FromDbToCoraSubjectCategoryConverter implements FromDbToCoraConvert
 
 	private ClientDataGroup createRecordInfo(Map<String, Object> rowFromDb) {
 		ClientDataGroup recordInfo = ClientDataGroup.withNameInData("recordInfo");
-		ClientDataGroup dataDivider = createDataDivider();
-		recordInfo.addChild(dataDivider);
+		addRecordId(rowFromDb, recordInfo);
+		createandAddDataDivider(recordInfo);
 		return recordInfo;
 	}
 
-	protected ClientDataGroup createDataDivider() {
+	private void addRecordId(Map<String, Object> rowFromDb, ClientDataGroup recordInfo) {
+		Integer id = (Integer) rowFromDb.get("subject_id");
+		recordInfo.addChild(ClientDataAtomic.withNameInDataAndValue("id", String.valueOf(id)));
+	}
+
+	protected void createandAddDataDivider(ClientDataGroup recordInfo) {
 		ClientDataGroup dataDivider = ClientDataGroup.withNameInData("dataDivider");
 		dataDivider.addChild(ClientDataAtomic.withNameInDataAndValue("linkedRecordType", "system"));
 		dataDivider.addChild(ClientDataAtomic.withNameInDataAndValue("linkedRecordId", "diva"));
-		return dataDivider;
+		recordInfo.addChild(dataDivider);
 	}
 
 	private void addMandatoryChildren(Map<String, Object> rowFromDb,

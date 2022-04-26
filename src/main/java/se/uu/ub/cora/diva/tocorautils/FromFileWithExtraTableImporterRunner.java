@@ -3,6 +3,7 @@ package se.uu.ub.cora.diva.tocorautils;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.util.ArrayList;
 import java.util.List;
 
 import se.uu.ub.cora.clientdata.ClientDataGroup;
@@ -40,8 +41,9 @@ public class FromFileWithExtraTableImporterRunner {
 
 	private static void createRecords(List<ClientDataGroup> converted, CoraClient coraClient,
 			String[] args) {
-		int counter = 0;
 		String recordType = args[9];
+		List<String> recordIds = new ArrayList<>();
+		int counter = 0;
 		for (ClientDataGroup dataGroup : converted) {
 			coraClient.create(recordType, dataGroup);
 			counter++;
@@ -49,6 +51,7 @@ public class FromFileWithExtraTableImporterRunner {
 		}
 
 		System.out.println("Finished creating records: " + counter);
+		// return recordIds;
 	}
 
 	private static void constructCoraTransformer(String[] args)
@@ -112,6 +115,7 @@ public class FromFileWithExtraTableImporterRunner {
 		for (ClientDataGroup clientDataGroup : completedGroups) {
 			String recordId = extractRecordId(clientDataGroup);
 			coraClient.update(recordType, recordId, clientDataGroup);
+			counter++;
 			System.out.println("Number of records updated: " + counter);
 		}
 	}

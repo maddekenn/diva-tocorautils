@@ -72,10 +72,11 @@ public class FromDbToCoraSubjectCategoryConverterTest {
 
 	private void assertCorrectRecordInfo(ClientDataGroup subjectCategory) {
 		ClientDataGroup recordInfo = subjectCategory.getFirstGroupWithNameInData("recordInfo");
-		assertFalse(recordInfo.containsChildWithNameInData("id"));
+		assertEquals(recordInfo.getFirstAtomicValueWithNameInData("id"), "406");
 		ClientDataGroup dataDivider = recordInfo.getFirstGroupWithNameInData("dataDivider");
 		assertEquals(dataDivider.getFirstAtomicValueWithNameInData("linkedRecordType"), "system");
 		assertEquals(dataDivider.getFirstAtomicValueWithNameInData("linkedRecordId"), "diva");
+
 	}
 
 	private void assertCorrectName(ClientDataGroup subjectCategory, String nameInData, String name,

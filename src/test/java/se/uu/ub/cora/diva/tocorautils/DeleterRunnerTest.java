@@ -66,7 +66,6 @@ public class DeleterRunnerTest {
 		assertEquals(coraClient.deletedRecordIds.get(3), extractId(returnedList, 3));
 		assertEquals(coraClient.deletedRecordIds.get(4), extractId(returnedList, 4));
 		assertEquals(coraClient.deletedRecordTypes.size(), 5);
-
 	}
 
 	private String extractId(List<ClientDataRecord> returnedList, int index) {

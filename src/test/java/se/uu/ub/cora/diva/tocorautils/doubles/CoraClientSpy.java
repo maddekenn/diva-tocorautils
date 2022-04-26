@@ -41,6 +41,7 @@ public class CoraClientSpy implements CoraClient {
 	public List<ClientDataRecord> listToReturn;
 	public List<String> deletedRecordTypes = new ArrayList<>();
 	public List<String> deletedRecordIds = new ArrayList<>();
+	public List<String> createdIds = new ArrayList<>();
 
 	@Override
 	public String create(String recordType, String json) {
@@ -160,5 +161,15 @@ public class CoraClientSpy implements CoraClient {
 		// TODO Auto-generated method stub
 		return null;
 	}
+
+	// @Override
+	// public ExtendedRestResponse createGetResponse(String recordType, ClientDataGroup dataGroup) {
+	// createdRecordTypes.add(recordType);
+	// dataGroupsSentToCreate.add(dataGroup);
+	//
+	// String createdId = "createdId" + dataGroupsSentToCreate.size();
+	// createdIds.add(createdId);
+	// return new ExtendedRestResponse(new RestResponse(201, "responsetext from spy"), createdId);
+	// }
 
 }

@@ -87,6 +87,7 @@ public class RecordCompleterSubjectCategory implements RecordCompleter {
 		String id = extractId(dataGroup);
 		if (sortedParents.containsKey(id)) {
 			addParents(sortedParents, dataGroup, id);
+			addTypeToEnableUpdate(dataGroup);
 		}
 	}
 
@@ -95,14 +96,23 @@ public class RecordCompleterSubjectCategory implements RecordCompleter {
 		return recordInfo.getFirstAtomicValueWithNameInData("id");
 	}
 
-	private void addParents(Map<String, List<String>> sortedParents,
-			ClientDataGroup dataGroup, String id) {
+	private void addParents(Map<String, List<String>> sortedParents, ClientDataGroup dataGroup,
+			String id) {
 		List<String> list = sortedParents.get(id);
 		for (String parentId : list) {
 			createParent(dataGroup, parentId);
 		}
 		setRepeatIds(dataGroup);
 		completedGroups.add(dataGroup);
+	}
+
+	private void createParent(ClientDataGroup dataGroup, String parentId) {
+		ClientDataGroup outerParent = ClientDataGroup
+				.withNameInData(NATIONAL_SUBJECT_CATEGORY_PARENT);
+		ClientDataGroup parentLink = ClientDataGroup.asLinkWithNameInDataAndTypeAndId(
+				NATIONAL_SUBJECT_CATEGORY, NATIONAL_SUBJECT_CATEGORY, parentId);
+		outerParent.addChild(parentLink);
+		dataGroup.addChild(outerParent);
 	}
 
 	private void setRepeatIds(ClientDataGroup dataGroup) {
@@ -115,13 +125,11 @@ public class RecordCompleterSubjectCategory implements RecordCompleter {
 		}
 	}
 
-	private void createParent(ClientDataGroup dataGroup, String parentId) {
-		ClientDataGroup outerParent = ClientDataGroup
-				.withNameInData(NATIONAL_SUBJECT_CATEGORY_PARENT);
-		ClientDataGroup parentLink = ClientDataGroup.asLinkWithNameInDataAndTypeAndId(
-				NATIONAL_SUBJECT_CATEGORY, NATIONAL_SUBJECT_CATEGORY, parentId);
-		outerParent.addChild(parentLink);
-		dataGroup.addChild(outerParent);
+	private void addTypeToEnableUpdate(ClientDataGroup dataGroup) {
+		ClientDataGroup recordInfo = dataGroup.getFirstGroupWithNameInData("recordInfo");
+		ClientDataGroup type = ClientDataGroup.asLinkWithNameInDataAndTypeAndId("type",
+				"recordType", NATIONAL_SUBJECT_CATEGORY);
+		recordInfo.addChild(type);
 	}
 
 }
