@@ -1,54 +1,1412 @@
 [
-	{
-		"parent_subject_id" : 251,
-		"subject_id" : 250
-	},
-	{
-		"parent_subject_id" : 58,
-		"subject_id" : 59
-	},
-	{
-		"parent_subject_id" : 61,
-		"subject_id" : 59
-	},
-	{
-		"parent_subject_id" : 62,
-		"subject_id" : 58
-	},
-	{
-		"parent_subject_id" : 500,
-		"subject_id" : 62
-	},
-	{
-		"parent_subject_id" : 551,
-		"subject_id" : 550
-	},
-	{
+    {
 		"parent_subject_id" : 1001,
-		"subject_id" : 1000
+		"subject_id" : 1000,
+		"subject_code" : "1"
 	},
 	{
 		"parent_subject_id" : 1002,
-		"subject_id" : 1001
+		"subject_id" : 1001,
+		"subject_code" : "101"
 	},
 	{
 		"parent_subject_id" : 1003,
-		"subject_id" : 1001
+		"subject_id" : 1001,
+		"subject_code" : "101"
 	},
 	{
 		"parent_subject_id" : 1004,
-		"subject_id" : 1001
+		"subject_id" : 1001,
+		"subject_code" : "101"
 	},
 	{
 		"parent_subject_id" : 1005,
-		"subject_id" : 1001
-	},
-	{
-		"parent_subject_id" : 1009,
-		"subject_id" : 1000
+		"subject_id" : 1001,
+		"subject_code" : "101"
 	},
 	{
 		"parent_subject_id" : 1010,
-		"subject_id" : 1009
+		"subject_id" : 1009,
+		"subject_code" : "102"
+	},
+	{
+		"parent_subject_id" : 1020,
+		"subject_id" : 1000,
+		"subject_code" : "1"
+	},
+	{
+		"parent_subject_id" : 1021,
+		"subject_id" : 1020,
+		"subject_code" : "103"
+	},
+	{
+		"parent_subject_id" : 1022,
+		"subject_id" : 1020,
+		"subject_code" : "103"
+	},
+	{
+		"parent_subject_id" : 1023,
+		"subject_id" : 1020,
+		"subject_code" : "103"
+	},
+	{
+		"parent_subject_id" : 1024,
+		"subject_id" : 1020,
+		"subject_code" : "103"
+	},
+	{
+		"parent_subject_id" : 1025,
+		"subject_id" : 1020,
+		"subject_code" : "103"
+	},
+	{
+		"parent_subject_id" : 1026,
+		"subject_id" : 1020,
+		"subject_code" : "103"
+	},
+	{
+		"parent_subject_id" : 1027,
+		"subject_id" : 1020,
+		"subject_code" : "103"
+	},
+	{
+		"parent_subject_id" : 1028,
+		"subject_id" : 1000,
+		"subject_code" : "1"
+	},
+	{
+		"parent_subject_id" : 1029,
+		"subject_id" : 1028,
+		"subject_code" : "104"
+	},
+	{
+		"parent_subject_id" : 1030,
+		"subject_id" : 1028,
+		"subject_code" : "104"
+	},
+	{
+		"parent_subject_id" : 1031,
+		"subject_id" : 1028,
+		"subject_code" : "104"
+	},
+	{
+		"parent_subject_id" : 1032,
+		"subject_id" : 1028,
+		"subject_code" : "104"
+	},
+	{
+		"parent_subject_id" : 1033,
+		"subject_id" : 1028,
+		"subject_code" : "104"
+	},
+	{
+		"parent_subject_id" : 1034,
+		"subject_id" : 1028,
+		"subject_code" : "104"
+	},
+	{
+		"parent_subject_id" : 1035,
+		"subject_id" : 1028,
+		"subject_code" : "104"
+	},
+	{
+		"parent_subject_id" : 1036,
+		"subject_id" : 1028,
+		"subject_code" : "104"
+	},
+	{
+		"parent_subject_id" : 1037,
+		"subject_id" : 1000,
+		"subject_code" : "1"
+	},
+	{
+		"parent_subject_id" : 1038,
+		"subject_id" : 1037,
+		"subject_code" : "105"
+	},
+	{
+		"parent_subject_id" : 1039,
+		"subject_id" : 1037,
+		"subject_code" : "105"
+	},
+	{
+		"parent_subject_id" : 1040,
+		"subject_id" : 1037,
+		"subject_code" : "105"
+	},
+	{
+		"parent_subject_id" : 1041,
+		"subject_id" : 1037,
+		"subject_code" : "105"
+	},
+	{
+		"parent_subject_id" : 1042,
+		"subject_id" : 1037,
+		"subject_code" : "105"
+	},
+	{
+		"parent_subject_id" : 1043,
+		"subject_id" : 1037,
+		"subject_code" : "105"
+	},
+	{
+		"parent_subject_id" : 1044,
+		"subject_id" : 1037,
+		"subject_code" : "105"
+	},
+	{
+		"parent_subject_id" : 1045,
+		"subject_id" : 1037,
+		"subject_code" : "105"
+	},
+	{
+		"parent_subject_id" : 1046,
+		"subject_id" : 1037,
+		"subject_code" : "105"
+	},
+	{
+		"parent_subject_id" : 1047,
+		"subject_id" : 1037,
+		"subject_code" : "105"
+	},
+	{
+		"parent_subject_id" : 1048,
+		"subject_id" : 1000,
+		"subject_code" : "1"
+	},
+	{
+		"parent_subject_id" : 1049,
+		"subject_id" : 1048,
+		"subject_code" : "106"
+	},
+	{
+		"parent_subject_id" : 1050,
+		"subject_id" : 1048,
+		"subject_code" : "106"
+	},
+	{
+		"parent_subject_id" : 1051,
+		"subject_id" : 1048,
+		"subject_code" : "106"
+	},
+	{
+		"parent_subject_id" : 1052,
+		"subject_id" : 1048,
+		"subject_code" : "106"
+	},
+	{
+		"parent_subject_id" : 1053,
+		"subject_id" : 1048,
+		"subject_code" : "106"
+	},
+	{
+		"parent_subject_id" : 1054,
+		"subject_id" : 1048,
+		"subject_code" : "106"
+	},
+	{
+		"parent_subject_id" : 1055,
+		"subject_id" : 1048,
+		"subject_code" : "106"
+	},
+	{
+		"parent_subject_id" : 1056,
+		"subject_id" : 1048,
+		"subject_code" : "106"
+	},
+	{
+		"parent_subject_id" : 1057,
+		"subject_id" : 1048,
+		"subject_code" : "106"
+	},
+	{
+		"parent_subject_id" : 1058,
+		"subject_id" : 1048,
+		"subject_code" : "106"
+	},
+	{
+		"parent_subject_id" : 1059,
+		"subject_id" : 1048,
+		"subject_code" : "106"
+	},
+	{
+		"parent_subject_id" : 1060,
+		"subject_id" : 1048,
+		"subject_code" : "106"
+	},
+	{
+		"parent_subject_id" : 1061,
+		"subject_id" : 1048,
+		"subject_code" : "106"
+	},
+	{
+		"parent_subject_id" : 1062,
+		"subject_id" : 1048,
+		"subject_code" : "106"
+	},
+	{
+		"parent_subject_id" : 1063,
+		"subject_id" : 1048,
+		"subject_code" : "106"
+	},
+	{
+		"parent_subject_id" : 1064,
+		"subject_id" : 1048,
+		"subject_code" : "106"
+	},
+	{
+		"parent_subject_id" : 1065,
+		"subject_id" : 1000,
+		"subject_code" : "1"
+	},
+	{
+		"parent_subject_id" : 1067,
+		"subject_id" : 1066,
+		"subject_code" : "2"
+	},
+	{
+		"parent_subject_id" : 1068,
+		"subject_id" : 1067,
+		"subject_code" : "201"
+	},
+	{
+		"parent_subject_id" : 1069,
+		"subject_id" : 1067,
+		"subject_code" : "201"
+	},
+	{
+		"parent_subject_id" : 1070,
+		"subject_id" : 1067,
+		"subject_code" : "201"
+	},
+	{
+		"parent_subject_id" : 1071,
+		"subject_id" : 1067,
+		"subject_code" : "201"
+	},
+	{
+		"parent_subject_id" : 1072,
+		"subject_id" : 1067,
+		"subject_code" : "201"
+	},
+	{
+		"parent_subject_id" : 1073,
+		"subject_id" : 1067,
+		"subject_code" : "201"
+	},
+	{
+		"parent_subject_id" : 1074,
+		"subject_id" : 1067,
+		"subject_code" : "201"
+	},
+	{
+		"parent_subject_id" : 1075,
+		"subject_id" : 1067,
+		"subject_code" : "201"
+	},
+	{
+		"parent_subject_id" : 1076,
+		"subject_id" : 1067,
+		"subject_code" : "201"
+	},
+	{
+		"parent_subject_id" : 1077,
+		"subject_id" : 1066,
+		"subject_code" : "2"
+	},
+	{
+		"parent_subject_id" : 1078,
+		"subject_id" : 1077,
+		"subject_code" : "202"
+	},
+	{
+		"parent_subject_id" : 1079,
+		"subject_id" : 1077,
+		"subject_code" : "202"
+	},
+	{
+		"parent_subject_id" : 1080,
+		"subject_id" : 1077,
+		"subject_code" : "202"
+	},
+	{
+		"parent_subject_id" : 1081,
+		"subject_id" : 1077,
+		"subject_code" : "202"
+	},
+	{
+		"parent_subject_id" : 1082,
+		"subject_id" : 1077,
+		"subject_code" : "202"
+	},
+	{
+		"parent_subject_id" : 1083,
+		"subject_id" : 1077,
+		"subject_code" : "202"
+	},
+	{
+		"parent_subject_id" : 1084,
+		"subject_id" : 1077,
+		"subject_code" : "202"
+	},
+	{
+		"parent_subject_id" : 1085,
+		"subject_id" : 1077,
+		"subject_code" : "202"
+	},
+	{
+		"parent_subject_id" : 1086,
+		"subject_id" : 1066,
+		"subject_code" : "2"
+	},
+	{
+		"parent_subject_id" : 1087,
+		"subject_id" : 1086,
+		"subject_code" : "203"
+	},
+	{
+		"parent_subject_id" : 1088,
+		"subject_id" : 1086,
+		"subject_code" : "203"
+	},
+	{
+		"parent_subject_id" : 1089,
+		"subject_id" : 1086,
+		"subject_code" : "203"
+	},
+	{
+		"parent_subject_id" : 1090,
+		"subject_id" : 1086,
+		"subject_code" : "203"
+	},
+	{
+		"parent_subject_id" : 1091,
+		"subject_id" : 1086,
+		"subject_code" : "203"
+	},
+	{
+		"parent_subject_id" : 1092,
+		"subject_id" : 1086,
+		"subject_code" : "203"
+	},
+	{
+		"parent_subject_id" : 1093,
+		"subject_id" : 1086,
+		"subject_code" : "203"
+	},
+	{
+		"parent_subject_id" : 1094,
+		"subject_id" : 1086,
+		"subject_code" : "203"
+	},
+	{
+		"parent_subject_id" : 1095,
+		"subject_id" : 1086,
+		"subject_code" : "203"
+	},
+	{
+		"parent_subject_id" : 1096,
+		"subject_id" : 1086,
+		"subject_code" : "203"
+	},
+	{
+		"parent_subject_id" : 1097,
+		"subject_id" : 1066,
+		"subject_code" : "2"
+	},
+	{
+		"parent_subject_id" : 1098,
+		"subject_id" : 1097,
+		"subject_code" : "204"
+	},
+	{
+		"parent_subject_id" : 1099,
+		"subject_id" : 1097,
+		"subject_code" : "204"
+	},
+	{
+		"parent_subject_id" : 1100,
+		"subject_id" : 1097,
+		"subject_code" : "204"
+	},
+	{
+		"parent_subject_id" : 1101,
+		"subject_id" : 1097,
+		"subject_code" : "204"
+	},
+	{
+		"parent_subject_id" : 1102,
+		"subject_id" : 1097,
+		"subject_code" : "204"
+	},
+	{
+		"parent_subject_id" : 1103,
+		"subject_id" : 1066,
+		"subject_code" : "2"
+	},
+	{
+		"parent_subject_id" : 1104,
+		"subject_id" : 1103,
+		"subject_code" : "205"
+	},
+	{
+		"parent_subject_id" : 1105,
+		"subject_id" : 1103,
+		"subject_code" : "205"
+	},
+	{
+		"parent_subject_id" : 1106,
+		"subject_id" : 1103,
+		"subject_code" : "205"
+	},
+	{
+		"parent_subject_id" : 1107,
+		"subject_id" : 1103,
+		"subject_code" : "205"
+	},
+	{
+		"parent_subject_id" : 1108,
+		"subject_id" : 1103,
+		"subject_code" : "205"
+	},
+	{
+		"parent_subject_id" : 1109,
+		"subject_id" : 1103,
+		"subject_code" : "205"
+	},
+	{
+		"parent_subject_id" : 1110,
+		"subject_id" : 1103,
+		"subject_code" : "205"
+	},
+	{
+		"parent_subject_id" : 1111,
+		"subject_id" : 1066,
+		"subject_code" : "2"
+	},
+	{
+		"parent_subject_id" : 1112,
+		"subject_id" : 1111,
+		"subject_code" : "206"
+	},
+	{
+		"parent_subject_id" : 1113,
+		"subject_id" : 1111,
+		"subject_code" : "206"
+	},
+	{
+		"parent_subject_id" : 1114,
+		"subject_id" : 1111,
+		"subject_code" : "206"
+	},
+	{
+		"parent_subject_id" : 1115,
+		"subject_id" : 1111,
+		"subject_code" : "206"
+	},
+	{
+		"parent_subject_id" : 1116,
+		"subject_id" : 1111,
+		"subject_code" : "206"
+	},
+	{
+		"parent_subject_id" : 1117,
+		"subject_id" : 1111,
+		"subject_code" : "206"
+	},
+	{
+		"parent_subject_id" : 1118,
+		"subject_id" : 1066,
+		"subject_code" : "2"
+	},
+	{
+		"parent_subject_id" : 1119,
+		"subject_id" : 1118,
+		"subject_code" : "207"
+	},
+	{
+		"parent_subject_id" : 1120,
+		"subject_id" : 1118,
+		"subject_code" : "207"
+	},
+	{
+		"parent_subject_id" : 1121,
+		"subject_id" : 1118,
+		"subject_code" : "207"
+	},
+	{
+		"parent_subject_id" : 1122,
+		"subject_id" : 1118,
+		"subject_code" : "207"
+	},
+	{
+		"parent_subject_id" : 1123,
+		"subject_id" : 1118,
+		"subject_code" : "207"
+	},
+	{
+		"parent_subject_id" : 1124,
+		"subject_id" : 1118,
+		"subject_code" : "207"
+	},
+	{
+		"parent_subject_id" : 1125,
+		"subject_id" : 1118,
+		"subject_code" : "207"
+	},
+	{
+		"parent_subject_id" : 1126,
+		"subject_id" : 1118,
+		"subject_code" : "207"
+	},
+	{
+		"parent_subject_id" : 1127,
+		"subject_id" : 1066,
+		"subject_code" : "2"
+	},
+	{
+		"parent_subject_id" : 1128,
+		"subject_id" : 1127,
+		"subject_code" : "208"
+	},
+	{
+		"parent_subject_id" : 1129,
+		"subject_id" : 1127,
+		"subject_code" : "208"
+	},
+	{
+		"parent_subject_id" : 1130,
+		"subject_id" : 1127,
+		"subject_code" : "208"
+	},
+	{
+		"parent_subject_id" : 1131,
+		"subject_id" : 1127,
+		"subject_code" : "208"
+	},
+	{
+		"parent_subject_id" : 1132,
+		"subject_id" : 1127,
+		"subject_code" : "208"
+	},
+	{
+		"parent_subject_id" : 1133,
+		"subject_id" : 1066,
+		"subject_code" : "2"
+	},
+	{
+		"parent_subject_id" : 1134,
+		"subject_id" : 1133,
+		"subject_code" : "209"
+	},
+	{
+		"parent_subject_id" : 1135,
+		"subject_id" : 1133,
+		"subject_code" : "209"
+	},
+	{
+		"parent_subject_id" : 1136,
+		"subject_id" : 1133,
+		"subject_code" : "209"
+	},
+	{
+		"parent_subject_id" : 1137,
+		"subject_id" : 1133,
+		"subject_code" : "209"
+	},
+	{
+		"parent_subject_id" : 1138,
+		"subject_id" : 1133,
+		"subject_code" : "209"
+	},
+	{
+		"parent_subject_id" : 1139,
+		"subject_id" : 1133,
+		"subject_code" : "209"
+	},
+	{
+		"parent_subject_id" : 1140,
+		"subject_id" : 1133,
+		"subject_code" : "209"
+	},
+	{
+		"parent_subject_id" : 1141,
+		"subject_id" : 1133,
+		"subject_code" : "209"
+	},
+	{
+		"parent_subject_id" : 1142,
+		"subject_id" : 1133,
+		"subject_code" : "209"
+	},
+	{
+		"parent_subject_id" : 1143,
+		"subject_id" : 1066,
+		"subject_code" : "2"
+	},
+	{
+		"parent_subject_id" : 1144,
+		"subject_id" : 1066,
+		"subject_code" : "2"
+	},
+	{
+		"parent_subject_id" : 1145,
+		"subject_id" : 1144,
+		"subject_code" : "211"
+	},
+	{
+		"parent_subject_id" : 1146,
+		"subject_id" : 1144,
+		"subject_code" : "211"
+	},
+	{
+		"parent_subject_id" : 1147,
+		"subject_id" : 1144,
+		"subject_code" : "211"
+	},
+	{
+		"parent_subject_id" : 1148,
+		"subject_id" : 1144,
+		"subject_code" : "211"
+	},
+	{
+		"parent_subject_id" : 1150,
+		"subject_id" : 1149,
+		"subject_code" : "3"
+	},
+	{
+		"parent_subject_id" : 1151,
+		"subject_id" : 1150,
+		"subject_code" : "301"
+	},
+	{
+		"parent_subject_id" : 1152,
+		"subject_id" : 1150,
+		"subject_code" : "301"
+	},
+	{
+		"parent_subject_id" : 1153,
+		"subject_id" : 1150,
+		"subject_code" : "301"
+	},
+	{
+		"parent_subject_id" : 1154,
+		"subject_id" : 1150,
+		"subject_code" : "301"
+	},
+	{
+		"parent_subject_id" : 1155,
+		"subject_id" : 1150,
+		"subject_code" : "301"
+	},
+	{
+		"parent_subject_id" : 1156,
+		"subject_id" : 1150,
+		"subject_code" : "301"
+	},
+	{
+		"parent_subject_id" : 1157,
+		"subject_id" : 1150,
+		"subject_code" : "301"
+	},
+	{
+		"parent_subject_id" : 1158,
+		"subject_id" : 1150,
+		"subject_code" : "301"
+	},
+	{
+		"parent_subject_id" : 1159,
+		"subject_id" : 1150,
+		"subject_code" : "301"
+	},
+	{
+		"parent_subject_id" : 1160,
+		"subject_id" : 1150,
+		"subject_code" : "301"
+	},
+	{
+		"parent_subject_id" : 1161,
+		"subject_id" : 1150,
+		"subject_code" : "301"
+	},
+	{
+		"parent_subject_id" : 1162,
+		"subject_id" : 1149,
+		"subject_code" : "3"
+	},
+	{
+		"parent_subject_id" : 1163,
+		"subject_id" : 1162,
+		"subject_code" : "302"
+	},
+	{
+		"parent_subject_id" : 1164,
+		"subject_id" : 1162,
+		"subject_code" : "302"
+	},
+	{
+		"parent_subject_id" : 1165,
+		"subject_id" : 1162,
+		"subject_code" : "302"
+	},
+	{
+		"parent_subject_id" : 1166,
+		"subject_id" : 1162,
+		"subject_code" : "302"
+	},
+	{
+		"parent_subject_id" : 1167,
+		"subject_id" : 1162,
+		"subject_code" : "302"
+	},
+	{
+		"parent_subject_id" : 1168,
+		"subject_id" : 1162,
+		"subject_code" : "302"
+	},
+	{
+		"parent_subject_id" : 1169,
+		"subject_id" : 1162,
+		"subject_code" : "302"
+	},
+	{
+		"parent_subject_id" : 1170,
+		"subject_id" : 1162,
+		"subject_code" : "302"
+	},
+	{
+		"parent_subject_id" : 1171,
+		"subject_id" : 1162,
+		"subject_code" : "302"
+	},
+	{
+		"parent_subject_id" : 1172,
+		"subject_id" : 1162,
+		"subject_code" : "302"
+	},
+	{
+		"parent_subject_id" : 1173,
+		"subject_id" : 1162,
+		"subject_code" : "302"
+	},
+	{
+		"parent_subject_id" : 1174,
+		"subject_id" : 1162,
+		"subject_code" : "302"
+	},
+	{
+		"parent_subject_id" : 1175,
+		"subject_id" : 1162,
+		"subject_code" : "302"
+	},
+	{
+		"parent_subject_id" : 1176,
+		"subject_id" : 1162,
+		"subject_code" : "302"
+	},
+	{
+		"parent_subject_id" : 1177,
+		"subject_id" : 1162,
+		"subject_code" : "302"
+	},
+	{
+		"parent_subject_id" : 1178,
+		"subject_id" : 1162,
+		"subject_code" : "302"
+	},
+	{
+		"parent_subject_id" : 1179,
+		"subject_id" : 1162,
+		"subject_code" : "302"
+	},
+	{
+		"parent_subject_id" : 1180,
+		"subject_id" : 1162,
+		"subject_code" : "302"
+	},
+	{
+		"parent_subject_id" : 1181,
+		"subject_id" : 1162,
+		"subject_code" : "302"
+	},
+	{
+		"parent_subject_id" : 1182,
+		"subject_id" : 1162,
+		"subject_code" : "302"
+	},
+	{
+		"parent_subject_id" : 1183,
+		"subject_id" : 1162,
+		"subject_code" : "302"
+	},
+	{
+		"parent_subject_id" : 1184,
+		"subject_id" : 1162,
+		"subject_code" : "302"
+	},
+	{
+		"parent_subject_id" : 1185,
+		"subject_id" : 1162,
+		"subject_code" : "302"
+	},
+	{
+		"parent_subject_id" : 1186,
+		"subject_id" : 1162,
+		"subject_code" : "302"
+	},
+	{
+		"parent_subject_id" : 1187,
+		"subject_id" : 1162,
+		"subject_code" : "302"
+	},
+	{
+		"parent_subject_id" : 1188,
+		"subject_id" : 1149,
+		"subject_code" : "3"
+	},
+	{
+		"parent_subject_id" : 1189,
+		"subject_id" : 1188,
+		"subject_code" : "303"
+	},
+	{
+		"parent_subject_id" : 1190,
+		"subject_id" : 1188,
+		"subject_code" : "303"
+	},
+	{
+		"parent_subject_id" : 1191,
+		"subject_id" : 1188,
+		"subject_code" : "303"
+	},
+	{
+		"parent_subject_id" : 1192,
+		"subject_id" : 1188,
+		"subject_code" : "303"
+	},
+	{
+		"parent_subject_id" : 1193,
+		"subject_id" : 1188,
+		"subject_code" : "303"
+	},
+	{
+		"parent_subject_id" : 1194,
+		"subject_id" : 1188,
+		"subject_code" : "303"
+	},
+	{
+		"parent_subject_id" : 1195,
+		"subject_id" : 1188,
+		"subject_code" : "303"
+	},
+	{
+		"parent_subject_id" : 1196,
+		"subject_id" : 1188,
+		"subject_code" : "303"
+	},
+	{
+		"parent_subject_id" : 1197,
+		"subject_id" : 1188,
+		"subject_code" : "303"
+	},
+	{
+		"parent_subject_id" : 1198,
+		"subject_id" : 1188,
+		"subject_code" : "303"
+	},
+	{
+		"parent_subject_id" : 1199,
+		"subject_id" : 1188,
+		"subject_code" : "303"
+	},
+	{
+		"parent_subject_id" : 1200,
+		"subject_id" : 1149,
+		"subject_code" : "3"
+	},
+	{
+		"parent_subject_id" : 1201,
+		"subject_id" : 1200,
+		"subject_code" : "304"
+	},
+	{
+		"parent_subject_id" : 1202,
+		"subject_id" : 1200,
+		"subject_code" : "304"
+	},
+	{
+		"parent_subject_id" : 1203,
+		"subject_id" : 1200,
+		"subject_code" : "304"
+	},
+	{
+		"parent_subject_id" : 1204,
+		"subject_id" : 1200,
+		"subject_code" : "304"
+	},
+	{
+		"parent_subject_id" : 1205,
+		"subject_id" : 1149,
+		"subject_code" : "3"
+	},
+	{
+		"parent_subject_id" : 1206,
+		"subject_id" : 1205,
+		"subject_code" : "305"
+	},
+	{
+		"parent_subject_id" : 1207,
+		"subject_id" : 1205,
+		"subject_code" : "305"
+	},
+	{
+		"parent_subject_id" : 1208,
+		"subject_id" : 1205,
+		"subject_code" : "305"
+	},
+	{
+		"parent_subject_id" : 1210,
+		"subject_id" : 1209,
+		"subject_code" : "4"
+	},
+	{
+		"parent_subject_id" : 1211,
+		"subject_id" : 1210,
+		"subject_code" : "401"
+	},
+	{
+		"parent_subject_id" : 1212,
+		"subject_id" : 1210,
+		"subject_code" : "401"
+	},
+	{
+		"parent_subject_id" : 1213,
+		"subject_id" : 1210,
+		"subject_code" : "401"
+	},
+	{
+		"parent_subject_id" : 1214,
+		"subject_id" : 1210,
+		"subject_code" : "401"
+	},
+	{
+		"parent_subject_id" : 1215,
+		"subject_id" : 1210,
+		"subject_code" : "401"
+	},
+	{
+		"parent_subject_id" : 1216,
+		"subject_id" : 1210,
+		"subject_code" : "401"
+	},
+	{
+		"parent_subject_id" : 1217,
+		"subject_id" : 1210,
+		"subject_code" : "401"
+	},
+	{
+		"parent_subject_id" : 1218,
+		"subject_id" : 1210,
+		"subject_code" : "401"
+	},
+	{
+		"parent_subject_id" : 1219,
+		"subject_id" : 1209,
+		"subject_code" : "4"
+	},
+	{
+		"parent_subject_id" : 1220,
+		"subject_id" : 1209,
+		"subject_code" : "4"
+	},
+	{
+		"parent_subject_id" : 1221,
+		"subject_id" : 1220,
+		"subject_code" : "403"
+	},
+	{
+		"parent_subject_id" : 1222,
+		"subject_id" : 1220,
+		"subject_code" : "403"
+	},
+	{
+		"parent_subject_id" : 1223,
+		"subject_id" : 1220,
+		"subject_code" : "403"
+	},
+	{
+		"parent_subject_id" : 1224,
+		"subject_id" : 1220,
+		"subject_code" : "403"
+	},
+	{
+		"parent_subject_id" : 1225,
+		"subject_id" : 1209,
+		"subject_code" : "4"
+	},
+	{
+		"parent_subject_id" : 1226,
+		"subject_id" : 1225,
+		"subject_code" : "404"
+	},
+	{
+		"parent_subject_id" : 1227,
+		"subject_id" : 1225,
+		"subject_code" : "404"
+	},
+	{
+		"parent_subject_id" : 1228,
+		"subject_id" : 1209,
+		"subject_code" : "4"
+	},
+	{
+		"parent_subject_id" : 1229,
+		"subject_id" : 1228,
+		"subject_code" : "405"
+	},
+	{
+		"parent_subject_id" : 1230,
+		"subject_id" : 1228,
+		"subject_code" : "405"
+	},
+	{
+		"parent_subject_id" : 1231,
+		"subject_id" : 1228,
+		"subject_code" : "405"
+	},
+	{
+		"parent_subject_id" : 1232,
+		"subject_id" : 1228,
+		"subject_code" : "405"
+	},
+	{
+		"parent_subject_id" : 1233,
+		"subject_id" : 1228,
+		"subject_code" : "405"
+	},
+	{
+		"parent_subject_id" : 1235,
+		"subject_id" : 1234,
+		"subject_code" : "5"
+	},
+	{
+		"parent_subject_id" : 1236,
+		"subject_id" : 1235,
+		"subject_code" : "501"
+	},
+	{
+		"parent_subject_id" : 1237,
+		"subject_id" : 1235,
+		"subject_code" : "501"
+	},
+	{
+		"parent_subject_id" : 1238,
+		"subject_id" : 1234,
+		"subject_code" : "5"
+	},
+	{
+		"parent_subject_id" : 1239,
+		"subject_id" : 1238,
+		"subject_code" : "502"
+	},
+	{
+		"parent_subject_id" : 1240,
+		"subject_id" : 1238,
+		"subject_code" : "502"
+	},
+	{
+		"parent_subject_id" : 1241,
+		"subject_id" : 1238,
+		"subject_code" : "502"
+	},
+	{
+		"parent_subject_id" : 1242,
+		"subject_id" : 1234,
+		"subject_code" : "5"
+	},
+	{
+		"parent_subject_id" : 1243,
+		"subject_id" : 1242,
+		"subject_code" : "503"
+	},
+	{
+		"parent_subject_id" : 1244,
+		"subject_id" : 1242,
+		"subject_code" : "503"
+	},
+	{
+		"parent_subject_id" : 1245,
+		"subject_id" : 1242,
+		"subject_code" : "503"
+	},
+	{
+		"parent_subject_id" : 1246,
+		"subject_id" : 1242,
+		"subject_code" : "503"
+	},
+	{
+		"parent_subject_id" : 1247,
+		"subject_id" : 1234,
+		"subject_code" : "5"
+	},
+	{
+		"parent_subject_id" : 1248,
+		"subject_id" : 1247,
+		"subject_code" : "504"
+	},
+	{
+		"parent_subject_id" : 1249,
+		"subject_id" : 1247,
+		"subject_code" : "504"
+	},
+	{
+		"parent_subject_id" : 1250,
+		"subject_id" : 1247,
+		"subject_code" : "504"
+	},
+	{
+		"parent_subject_id" : 1251,
+		"subject_id" : 1247,
+		"subject_code" : "504"
+	},
+	{
+		"parent_subject_id" : 1252,
+		"subject_id" : 1234,
+		"subject_code" : "5"
+	},
+	{
+		"parent_subject_id" : 1253,
+		"subject_id" : 1252,
+		"subject_code" : "505"
+	},
+	{
+		"parent_subject_id" : 1254,
+		"subject_id" : 1252,
+		"subject_code" : "505"
+	},
+	{
+		"parent_subject_id" : 1255,
+		"subject_id" : 1234,
+		"subject_code" : "5"
+	},
+	{
+		"parent_subject_id" : 1256,
+		"subject_id" : 1255,
+		"subject_code" : "506"
+	},
+	{
+		"parent_subject_id" : 1257,
+		"subject_id" : 1255,
+		"subject_code" : "506"
+	},
+	{
+		"parent_subject_id" : 1258,
+		"subject_id" : 1255,
+		"subject_code" : "506"
+	},
+	{
+		"parent_subject_id" : 1259,
+		"subject_id" : 1234,
+		"subject_code" : "5"
+	},
+	{
+		"parent_subject_id" : 1260,
+		"subject_id" : 1259,
+		"subject_code" : "507"
+	},
+	{
+		"parent_subject_id" : 1261,
+		"subject_id" : 1259,
+		"subject_code" : "507"
+	},
+	{
+		"parent_subject_id" : 1262,
+		"subject_id" : 1234,
+		"subject_code" : "5"
+	},
+	{
+		"parent_subject_id" : 1263,
+		"subject_id" : 1262,
+		"subject_code" : "508"
+	},
+	{
+		"parent_subject_id" : 1264,
+		"subject_id" : 1262,
+		"subject_code" : "508"
+	},
+	{
+		"parent_subject_id" : 1265,
+		"subject_id" : 1262,
+		"subject_code" : "508"
+	},
+	{
+		"parent_subject_id" : 1266,
+		"subject_id" : 1234,
+		"subject_code" : "5"
+	},
+	{
+		"parent_subject_id" : 1267,
+		"subject_id" : 1266,
+		"subject_code" : "509"
+	},
+	{
+		"parent_subject_id" : 1268,
+		"subject_id" : 1266,
+		"subject_code" : "509"
+	},
+	{
+		"parent_subject_id" : 1269,
+		"subject_id" : 1266,
+		"subject_code" : "509"
+	},
+	{
+		"parent_subject_id" : 1270,
+		"subject_id" : 1266,
+		"subject_code" : "509"
+	},
+	{
+		"parent_subject_id" : 1271,
+		"subject_id" : 1266,
+		"subject_code" : "509"
+	},
+	{
+		"parent_subject_id" : 1274,
+		"subject_id" : 1273,
+		"subject_code" : "601"
+	},
+	{
+		"parent_subject_id" : 1275,
+		"subject_id" : 1273,
+		"subject_code" : "601"
+	},
+	{
+		"parent_subject_id" : 1276,
+		"subject_id" : 1273,
+		"subject_code" : "601"
+	},
+	{
+		"parent_subject_id" : 1277,
+		"subject_id" : 1272,
+		"subject_code" : "6"
+	},
+	{
+		"parent_subject_id" : 1278,
+		"subject_id" : 1277,
+		"subject_code" : "602"
+	},
+	{
+		"parent_subject_id" : 1279,
+		"subject_id" : 1277,
+		"subject_code" : "602"
+	},
+	{
+		"parent_subject_id" : 1280,
+		"subject_id" : 1277,
+		"subject_code" : "602"
+	},
+	{
+		"parent_subject_id" : 1281,
+		"subject_id" : 1277,
+		"subject_code" : "602"
+	},
+	{
+		"parent_subject_id" : 1283,
+		"subject_id" : 1282,
+		"subject_code" : "603"
+	},
+	{
+		"parent_subject_id" : 1284,
+		"subject_id" : 1282,
+		"subject_code" : "603"
+	},
+	{
+		"parent_subject_id" : 1285,
+		"subject_id" : 1282,
+		"subject_code" : "603"
+	},
+	{
+		"parent_subject_id" : 1286,
+		"subject_id" : 1282,
+		"subject_code" : "603"
+	},
+	{
+		"parent_subject_id" : 1287,
+		"subject_id" : 1282,
+		"subject_code" : "603"
+	},
+	{
+		"parent_subject_id" : 1289,
+		"subject_id" : 1288,
+		"subject_code" : "604"
+	},
+	{
+		"parent_subject_id" : 1290,
+		"subject_id" : 1288,
+		"subject_code" : "604"
+	},
+	{
+		"parent_subject_id" : 1291,
+		"subject_id" : 1288,
+		"subject_code" : "604"
+	},
+	{
+		"parent_subject_id" : 1292,
+		"subject_id" : 1288,
+		"subject_code" : "604"
+	},
+	{
+		"parent_subject_id" : 1293,
+		"subject_id" : 1288,
+		"subject_code" : "604"
+	},
+	{
+		"parent_subject_id" : 1294,
+		"subject_id" : 1288,
+		"subject_code" : "604"
+	},
+	{
+		"parent_subject_id" : 1295,
+		"subject_id" : 1288,
+		"subject_code" : "604"
+	},
+	{
+		"parent_subject_id" : 1296,
+		"subject_id" : 1288,
+		"subject_code" : "604"
+	},
+	{
+		"parent_subject_id" : 1297,
+		"subject_id" : 1288,
+		"subject_code" : "604"
+	},
+	{
+		"parent_subject_id" : 1298,
+		"subject_id" : 1288,
+		"subject_code" : "604"
+	},
+	{
+		"parent_subject_id" : 1299,
+		"subject_id" : 1272,
+		"subject_code" : "6"
+	},
+	{
+		"parent_subject_id" : 1300,
+		"subject_id" : 1299,
+		"subject_code" : "605"
+	},
+	{
+		"parent_subject_id" : 1301,
+		"subject_id" : 1299,
+		"subject_code" : "605"
+	},
+	{
+		"parent_subject_id" : 1302,
+		"subject_id" : 1299,
+		"subject_code" : "605"
+	},
+	{
+		"parent_subject_id" : 1303,
+		"subject_id" : 1299,
+		"subject_code" : "605"
 	}
 ]

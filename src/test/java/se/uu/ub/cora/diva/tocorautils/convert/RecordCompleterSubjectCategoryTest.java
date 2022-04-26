@@ -25,7 +25,7 @@ public class RecordCompleterSubjectCategoryTest {
 	@Test
 	public void testNoParent() {
 		List<ClientDataGroup> dataGroups = new ArrayList<>();
-		ClientDataGroup dataGroup = createClientDataGroupWithRecordId("10011");
+		ClientDataGroup dataGroup = createClientDataGroupWithRecordId("10011", "100");
 		dataGroups.add(dataGroup);
 
 		List<ClientDataGroup> completedMetadata = recordCompleter.completeMetadata(dataGroups);
@@ -37,8 +37,8 @@ public class RecordCompleterSubjectCategoryTest {
 	@Test
 	public void testMultipleParentsForOneSubject() {
 		List<ClientDataGroup> dataGroups = new ArrayList<>();
-		dataGroups.add(createClientDataGroupWithRecordId("10011"));
-		dataGroups.add(createClientDataGroupWithRecordId("1001"));
+		dataGroups.add(createClientDataGroupWithRecordId("10011", "100"));
+		dataGroups.add(createClientDataGroupWithRecordId("1001", "101"));
 
 		List<ClientDataGroup> completedMetadata = recordCompleter.completeMetadata(dataGroups);
 		assertEquals(completedMetadata.size(), 1);
@@ -67,18 +67,18 @@ public class RecordCompleterSubjectCategoryTest {
 	@Test
 	public void testMultipleParentsForMultipleSubjects() {
 		List<ClientDataGroup> dataGroups = new ArrayList<>();
-		dataGroups.add(createClientDataGroupWithRecordId("59"));
-		dataGroups.add(createClientDataGroupWithRecordId("1001"));
-		dataGroups.add(createClientDataGroupWithRecordId("550"));
-		dataGroups.add(createClientDataGroupWithRecordId("55000000"));
+		dataGroups.add(createClientDataGroupWithRecordId("1272", "6"));
+		dataGroups.add(createClientDataGroupWithRecordId("1001", "101"));
+		dataGroups.add(createClientDataGroupWithRecordId("1009", "102"));
+		dataGroups.add(createClientDataGroupWithRecordId("55000000", ""));
 
 		List<ClientDataGroup> completedDataGroups = recordCompleter.completeMetadata(dataGroups);
 		assertEquals(completedDataGroups.size(), 3);
 
 		List<ClientDataGroup> parents = extractParentsUsingIndex(completedDataGroups, 0);
 		assertEquals(parents.size(), 2);
-		assertCorrectParent(parents, 0, "58");
-		assertCorrectParent(parents, 1, "61");
+		assertCorrectParent(parents, 0, "1277");
+		assertCorrectParent(parents, 1, "1299");
 
 		List<ClientDataGroup> parents2 = extractParentsUsingIndex(completedDataGroups, 1);
 		assertEquals(parents2.size(), 4);
@@ -89,7 +89,7 @@ public class RecordCompleterSubjectCategoryTest {
 
 		List<ClientDataGroup> parents3 = extractParentsUsingIndex(completedDataGroups, 2);
 		assertEquals(parents3.size(), 1);
-		assertCorrectParent(parents3, 0, "551");
+		assertCorrectParent(parents3, 0, "1010");
 	}
 
 	private List<ClientDataGroup> extractParentsUsingIndex(
@@ -100,12 +100,16 @@ public class RecordCompleterSubjectCategoryTest {
 		return parents;
 	}
 
-	private ClientDataGroup createClientDataGroupWithRecordId(String id) {
+	private ClientDataGroup createClientDataGroupWithRecordId(String id, String code) {
 		ClientDataGroup dataGroup = ClientDataGroup.withNameInData("nationalSubjectCategory");
 		ClientDataGroup recordInfo = ClientDataGroup.withNameInData("recordInfo");
 		recordInfo.addChild(ClientDataAtomic.withNameInDataAndValue("id", id));
 		dataGroup.addChild(recordInfo);
+		dataGroup.addChild(ClientDataAtomic.withNameInDataAndValue("subjectCode", code));
 		return dataGroup;
 	}
+
+	// select sp.parent_subject_id, sp.subject_id, s.subject_code from subject_parent sp left join
+	// subject s on sp.subject_id = s.subject_id where s.subject_type_id =57;
 
 }

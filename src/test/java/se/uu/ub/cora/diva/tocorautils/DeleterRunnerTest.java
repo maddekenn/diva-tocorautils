@@ -62,7 +62,6 @@ public class DeleterRunnerTest {
 
 		assertSame(coraClient.deletedRecordTypes.get(0), "someRecordType");
 		assertSame(coraClient.deletedRecordIds.get(0), id);
-		// assertEquals(coraClient.createdRecordTypes.get(0), "funder");
 	}
 
 	private String extractId(List<ClientDataRecord> returnedList, int index) {

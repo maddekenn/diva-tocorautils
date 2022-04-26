@@ -31,7 +31,7 @@ public class RecordCompleterSubjectCategory implements RecordCompleter {
 	public List<ClientDataGroup> completeMetadata(List<ClientDataGroup> dataGroups) {
 		completedGroups = new ArrayList<>();
 		JSONArray parents = extractParentsFromFile();
-		Map<String, List<String>> sortedParents = sortParentsToSubjectId(parents);
+		Map<String, List<String>> sortedParents = sortParentsToSubjectCode(parents);
 
 		for (ClientDataGroup dataGroup : dataGroups) {
 			possiblyAddParents(sortedParents, dataGroup);
@@ -52,51 +52,41 @@ public class RecordCompleterSubjectCategory implements RecordCompleter {
 		}
 	}
 
-	private Map<String, List<String>> sortParentsToSubjectId(JSONArray parents) {
+	private Map<String, List<String>> sortParentsToSubjectCode(JSONArray parents) {
 		Map<String, List<String>> sortedParents = new HashMap<>();
 		for (Object parent : parents) {
 			JSONObject jsonRow = (JSONObject) parent;
-			String subjectId = getSubjectIdAsString(jsonRow);
-			ensureListExistsForSubjectId(sortedParents, subjectId);
+			String subjectCode = (String) jsonRow.get("subject_code");
+			ensureListExistsForSubjectCode(sortedParents, subjectCode);
 
-			addParentIdToListForSubject(sortedParents, jsonRow, subjectId);
+			addParentIdToListForSubject(sortedParents, jsonRow, subjectCode);
 		}
 		return sortedParents;
 	}
 
-	private String getSubjectIdAsString(JSONObject jsonRow) {
-		Integer subjectId = (Integer) jsonRow.get("subject_id");
-		return String.valueOf(subjectId);
-	}
-
-	private void ensureListExistsForSubjectId(Map<String, List<String>> sortedParents,
-			String subjectIdString) {
-		if (!sortedParents.containsKey(subjectIdString)) {
-			sortedParents.put(String.valueOf(subjectIdString), new ArrayList<>());
+	private void ensureListExistsForSubjectCode(Map<String, List<String>> sortedParents,
+			String subjectCode) {
+		if (!sortedParents.containsKey(subjectCode)) {
+			sortedParents.put(String.valueOf(subjectCode), new ArrayList<>());
 		}
 	}
 
 	private void addParentIdToListForSubject(Map<String, List<String>> sortedParents,
-			JSONObject jsonRow, String subjectId) {
+			JSONObject jsonRow, String subjectCode) {
 		Integer parentId = (Integer) jsonRow.get("parent_subject_id");
-		sortedParents.get(subjectId).add(String.valueOf(parentId));
+		sortedParents.get(subjectCode).add(String.valueOf(parentId));
 	}
 
 	private void possiblyAddParents(Map<String, List<String>> sortedParents,
 			ClientDataGroup dataGroup) {
-		String id = extractId(dataGroup);
-		if (sortedParents.containsKey(id)) {
-			addParents(sortedParents, dataGroup, id);
+		String code = dataGroup.getFirstAtomicValueWithNameInData("subjectCode");
+		if (sortedParents.containsKey(code)) {
+			addParents(sortedParents, dataGroup, code);
 		}
 	}
 
-	private String extractId(ClientDataGroup dataGroup) {
-		ClientDataGroup recordInfo = dataGroup.getFirstGroupWithNameInData("recordInfo");
-		return recordInfo.getFirstAtomicValueWithNameInData("id");
-	}
-
-	private void addParents(Map<String, List<String>> sortedParents,
-			ClientDataGroup dataGroup, String id) {
+	private void addParents(Map<String, List<String>> sortedParents, ClientDataGroup dataGroup,
+			String id) {
 		List<String> list = sortedParents.get(id);
 		for (String parentId : list) {
 			createParent(dataGroup, parentId);
