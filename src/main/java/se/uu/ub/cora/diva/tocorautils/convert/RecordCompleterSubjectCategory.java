@@ -65,7 +65,7 @@ public class RecordCompleterSubjectCategory implements RecordCompleter {
 	}
 
 	private String getSubjectIdAsString(JSONObject jsonRow) {
-		Integer subjectId = (Integer) jsonRow.get("subject_id");
+		Integer subjectId = (Integer) jsonRow.get("parent_subject_id");
 		return String.valueOf(subjectId);
 	}
 
@@ -78,7 +78,7 @@ public class RecordCompleterSubjectCategory implements RecordCompleter {
 
 	private void addParentIdToListForSubject(Map<String, List<String>> sortedParents,
 			JSONObject jsonRow, String subjectId) {
-		Integer parentId = (Integer) jsonRow.get("parent_subject_id");
+		Integer parentId = (Integer) jsonRow.get("subject_id");
 		sortedParents.get(subjectId).add(String.valueOf(parentId));
 	}
 
